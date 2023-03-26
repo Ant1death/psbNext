@@ -1,22 +1,18 @@
-html,
-body {
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: '__Rubik_0c75c8', '__Rubik_Fallback_0c75c8';
+  font-size: 16px;
+  color: #444;
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 
@@ -35,4 +31,25 @@ ul {
 button {
   padding: 0.5rem 1rem;
   font-weight: bold;
+}
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+.h2-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.h3-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.h4-title {
+  font-size: 1.2rem;
+}
+section {
+  padding: 2rem 0;
 }

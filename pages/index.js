@@ -1,115 +1,180 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import style from '../styles/Main.module.scss'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+    <>
+      <section className={style.hero}>
+          <div className={style.hero__info}>
+            <h2 className={`${['h2-title']} ${style.hero__title}`}>PSB HOSTING</h2>
+            <p className={style.hero__text}>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
             </p>
-          </a>
+            <p className={style.hero__text}>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
+            </p>
+            <p className={style.hero__text}>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
+            </p>
+            <button className={style.hero__btn}>
+              <a href="/company">О компании</a>
+            </button>
+          </div>
+          <div className={style.hero__img}>
+            <img src="/astronaut.jpg" alt="astronaut" />
+          </div>
+      </section>
+      <section className={style.country}>
+          <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
+          <p className={style.country__title}>
+            PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
+          </p>
+          <div className={style.country__wrapper}>
+            <div className={style.country__item}>
+                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
+                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
+                <div className={style['country__item-info']}>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                </div>
+                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+            </div>
+            <div className={style.country__item}>
+                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
+                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
+                <div className={style['country__item-info']}>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                </div>
+                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+            </div>
+            <div className={style.country__item}>
+                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
+                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
+                <div className={style['country__item-info']}>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                </div>
+                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+            </div>
+            <div className={style.country__item}>
+                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
+                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
+                <div className={style['country__item-info']}>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                  <p>DMCA 100% ignored</p>
+                </div>
+                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+            </div>
+          </div>
+      </section>
+      <section className={style['about']}>
+        <div className={style['about__wrapper']}>
+          <div className={style['about__wrapper-text']}>
+            <h2 className={`${['h2-title']}`}>Приватный VPN с быстрой настройкой WireGuard</h2>
+            <p className={style['about__wrapper-info']}>
+              Современный и не требовательный к ресурсам протокол VPN-туннелей, использующий надёжные алгоритмы шифрования. WireGuard VPN предназначен для создания защищенных соединений и ориентирован на высокую производительность, безопасность и простоту в настройке.
+            </p>
+            <ul className={style['about__wrapper-icons']}>
+              <li className={style['about__wrapper-icon']}>
+                <a href="#">
+                  <img src="/android.svg" alt="icon" />
+                </a>
+              </li>
+              <li className={style['about__wrapper-icon']}>
+                <a href="#">
+                  <img src="/android.svg" alt="icon" />
+                </a>
+              </li>
+              <li className={style['about__wrapper-icon']}>
+                <a href="#">
+                  <img src="/android.svg" alt="icon" />
+                </a>
+              </li>
+              <li className={style['about__wrapper-icon']}>
+                <a href="#">
+                  <img src="/android.svg" alt="icon" />
+                </a>
+              </li>
+            </ul>
+            <button className={style['about__wrapper-btn']}>
+              <a href="#">Купить VPN</a>
+            </button>
+          </div>
+          <div className={style['about__wrapper-img']}>
+            <img src="/phone2.png" alt="phone" />
+          </div>
         </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+      </section>
+      <section className={style["map"]}>
+        <h3 className={`${['h3-title']} ${style.map__title}`}>Наша сеть и центры обработки данных</h3>
+        <h4 className={`${['h4-title']} ${style.map__subtitle}`}> Сервера нашей компании находятся по всему миру</h4>
+        <div className={style["map-wrapper"]}>
+          <ul>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+            <li>Netherlands</li>
+          </ul>
+        </div>
+        <div className={style["map-img"]}>
+          <img src="/map.jpg" alt="map" />
+        </div>
+      </section>
+      <section className="payment">
+        <h3 className={`${['h3-title']} ${style.payment__title}`}>Способы оплаты</h3>
+        <div className={style.payment__wrapper}>
+          <div className={style['payment__wrapper-item']}>
+            <div className={style["payment__wrapper-img"]}>
+              <img src="/Bitcoin.png" alt="bitcoin" />
+            </div>
+            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+          </div>
+          <div className={style['payment__wrapper-item']}>
+            <div className={style["payment__wrapper-img"]}>
+              <img src="/Bitcoin.png" alt="bitcoin" />
+            </div>
+            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+          </div>
+          <div className={style['payment__wrapper-item']}>
+            <div className={style["payment__wrapper-img"]}>
+              <img src="/Bitcoin.png" alt="bitcoin" />
+            </div>
+            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+          </div>
+          <div className={style['payment__wrapper-item']}>
+            <div className={style["payment__wrapper-img"]}>
+              <img src="/Bitcoin.png" alt="bitcoin" />
+            </div>
+            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+          </div>
+          <div className={style['payment__wrapper-item']}>
+            <div className={style["payment__wrapper-img"]}>
+              <img src="/Bitcoin.png" alt="bitcoin" />
+            </div>
+            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
+
