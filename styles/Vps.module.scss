@@ -153,3 +153,37 @@
   margin-bottom: 10px;
   max-width: 100px;
 }
+
+.services {
+  &__wrapper {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__wrap {
+    width: 20%;
+    display: block;
+    text-align: center;
+
+    iconify-icon {
+      margin-bottom: 20px;
+      color: #4e9aa5;
+      height: 100px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__description {
+    text-align: center;
+  }
+}
+
+.section-title {
+  margin-bottom: 20px;
+}

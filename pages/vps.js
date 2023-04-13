@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import 'iconify-icon';
 import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../data/vpsCountries';
@@ -79,6 +80,51 @@ export default function Vps() {
             <p className={style['card-instruction__title']}>Windows</p>
           </li>
         </ul>
+      </section>
+      <section className={style['services']}>
+      <div className={style['section-title']}>
+        <h2 className={`${['h2-title']}`}>Преимущества</h2>
+        <p>Преимущества нашего хостинга</p>
+      </div>
+      <ul className={style['services__wrapper']}>
+        <li className={style['services__wrap']}>
+          <iconify-icon icon="mdi:shield-alert" height="100"></iconify-icon>
+          <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            Конфиденциальность данных (no logs)
+          </h4>
+          <p className={style['services__description']}>
+            Мы не храним IP адреса подключений к серверу и сохраняем полную анонимность вашего проекта.
+          </p>
+        </li>
+        <li className={style['services__wrap']}>
+          <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
+          <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            Оффшорные юрисдикции серверов
+          </h4>
+          <p className={style['services__description']}>
+            Наши сервера находятся в странах с гибким законодательством. Вы получаете конфиденциальность
+            данных и возможность размещать широкий спектр контента по сравнению с другими юрисдикциями.
+          </p>
+        </li>
+        <li className={style['services__wrap']}>
+          <iconify-icon icon="teenyicons:contract-outline" height="100"></iconify-icon>
+          <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            DMCA 100% ignored
+          </h4>
+          <p className={style['services__description']}>
+            Мы полностью игнорируем запросы DMCA.
+          </p>
+        </li>
+        <li className={style['services__wrap']}>
+          <iconify-icon icon="bx:support" height="100"></iconify-icon>
+          <h4 class={`${['h4-title']} ${style['services__title']}`}>
+            Техническая поддержка
+          </h4>
+          <p className={style['services__description']}>
+            Наша техническая поддержка работает круглосуточно и поможет вам с любыми вопросами.
+          </p>
+        </li>
+      </ul>
       </section>
     </>
   );
