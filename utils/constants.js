@@ -1,4 +1,4 @@
-export const FAQ_LIST = [
+export const FAQ_LIST_VPS = [
   {
     id: 0,
     question: 'Что такое оффшорный веб хостинг?',

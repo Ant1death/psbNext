@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import 'iconify-icon';
 import FaqItem from '../compontens/FaqItem/FaqItem';
-import { FAQ_LIST } from '../utils/constants';
+import { FAQ_LIST_VPS } from '../utils/constants';
 import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../utils/data/vpsCountries';
@@ -131,7 +131,7 @@ export default function Vps() {
       <section className={style['faq']}>
       <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
       <ul className={style['faq__items']}>
-        {FAQ_LIST.map(el => {
+        {FAQ_LIST_VPS.map(el => {
           return (
             <FaqItem
               key={el.id}
