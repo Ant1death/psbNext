@@ -53,3 +53,22 @@ button {
 section {
   padding: 2rem 0;
 }
+
+@media screen and (max-width: 1320px) {
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    max-width: 700px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .container {
+    padding: 0 5%;
+    max-width: 100%;
+  }
+}
