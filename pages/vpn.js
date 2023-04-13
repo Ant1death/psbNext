@@ -1,6 +1,6 @@
-import '../styles/Vps.module.scss';
+import '../styles/Vpn.module.scss';
 
-export default function Vps() {
+export default function Vpn() {
   return (
     <>
       <div className="darova"></div>
