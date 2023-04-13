@@ -1,27 +1,31 @@
-import style from '../styles/Main.module.scss'
+import Link from 'next/link';
+import style from '../styles/Main.module.scss';
 
 export default function Home() {
   return (
     <>
       <section className={style.hero}>
-          <div className={style.hero__info}>
-            <h2 className={`${['h2-title']} ${style.hero__title}`}>PSB HOSTING</h2>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <button className={style.hero__btn}>
-              <a href="/company">О компании</a>
-            </button>
-          </div>
-          <div className={style.hero__img}>
-            <img src="/astronaut.jpg" alt="astronaut" />
-          </div>
+        <div className={style.hero__info}>
+          <h2 className={`${['h2-title']} ${style.hero__title}`}>PSB HOSTING</h2>
+          <p className={style.hero__text}>
+            Наш хостинг провайдер предоставляет анонимные VPS/VDS.
+          </p>
+          <p className={style.hero__text}>
+            Благодаря серверам, расположенным в оффшорных юрисдикциях, всем нашим международным клиентам гарантируется полная конфиденциальность данных и широкий спектр приемлемого контента.
+          </p>
+          <p className={style.hero__text}>
+            Наша основная задача это анонимность и стабильная работа вашего бизнеса.
+          </p>
+          <p className={style.hero__text}>
+            Расположение наших серверов позволяет игнорировать запросы DCMA. Мы не храним логи и предоставляем качественную техническую поддержку 24/7.
+          </p>
+          <button className={style.hero__btn}>
+            <Link href="/company">О компании</Link>
+          </button>
+        </div>
+        <div className={style.hero__img}>
+          <img src="/astronaut.jpg" alt="astronaut" />
+        </div>
       </section>
       <section className={style.country}>
           <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
