@@ -28,52 +28,50 @@ export default function Home() {
         </div>
       </section>
       <section className={style.country}>
-          <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
-          <p className={style.country__title}>
-            PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
-          </p>
-          <div className={style.country__wrapper}>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+        <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
+        <p className={style.country__title}>
+          PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
+        </p>
+        <div className={style.country__wrapper}>
+          <div className={style.country__item}>
+            <img src="/nl.svg" alt="Netherlands" className={style['country__item-img']}/>
+            <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
+            <div className={style['country__item-info']}>
+              <p>DMCA 100% ignored</p>
+              <p>Offshore hosting</p>
+              <p>Linux & Windows</p>
             </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
+            <Link href="/vds" className={style['country__item-btn']}>Show Plans</Link>
           </div>
+          <div className={style.country__item}>
+            <img src="/md.svg" alt="Moldowa" className={style['country__item-img']}/>
+            <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Moldowa</h4>
+            <div className={style['country__item-info']}>
+              <p>DMCA 100% ignored</p>
+              <p>Offshore hosting</p>
+              <p>Linux & Windows</p>
+            </div>
+            <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+          </div>
+          <div className={style.country__item}>
+            <img src="/us.svg" alt="USA" className={style['country__item-img']}/>
+            <h4 className={`${['h4-title']} ${style['country__item-title']}`}>USA</h4>
+            <div className={style['country__item-info']}>
+              <p>Offshore hosting</p>
+              <p>Linux & Windows</p>
+            </div>
+            <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+          </div>
+          <div className={style.country__item}>
+            <img src="/nl.svg" alt="Hong Kong" className={style['country__item-img']}/>
+            <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Hong Kong</h4>
+            <div className={style['country__item-info']}>
+              <p>Offshore hosting</p>
+              <p>Linux & Windows</p>
+            </div>
+            <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
+          </div>
+        </div>
       </section>
       <section className={style['about']}>
         <div className={style['about__wrapper']}>
