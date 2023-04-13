@@ -82,28 +82,28 @@ export default function Home() {
             </p>
             <ul className={style['about__wrapper-icons']}>
               <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
+                <Link href="#">
+                  <img src="/windows-icon.svg" alt="icon" />
+                </Link>
               </li>
               <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
+                <Link href="#">
+                  <img src="/linux-icon.svg" alt="icon" />
+                </Link>
               </li>
               <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
+                <Link href="#">
+                  <img src="/apple-icon.svg" alt="icon" />
+                </Link>
               </li>
               <li className={style['about__wrapper-icon']}>
-                <a href="#">
+                <Link href="#">
                   <img src="/android.svg" alt="icon" />
-                </a>
+                </Link>
               </li>
             </ul>
             <button className={style['about__wrapper-btn']}>
-              <a href="#">Купить VPN</a>
+              <Link href="/accounts/vpn">Купить VPN</Link>
             </button>
           </div>
           <div className={style['about__wrapper-img']}>
