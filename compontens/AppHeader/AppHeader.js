@@ -1,8 +1,31 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import 'iconify-icon';
 import style from '../../styles/AppHeader.module.scss';
 
+
 function appHeader() {
-  return(
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleHamburgerClick = () => {
+    isMobileMenuOpen ? setIsMobileMenuOpen(false) : setIsMobileMenuOpen(true);
+  }
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router])
+
+  return (
     <header className={style.header}>
       <div className={style.logo}>
         <Link href="/" className={style.header__logo}>
@@ -10,7 +33,7 @@ function appHeader() {
         </Link>
       </div>
       <nav className={style.navbar}>
-        <ul>
+        <ul className={`${style['navbar__list']} ${isMobileMenuOpen ? style.navbar__list_show : ''}`}>
           <li>
             <Link href="/" className={style.navbar__link}>Главная</Link>
           </li>
@@ -46,7 +69,9 @@ function appHeader() {
           </li>
         </ul>
       </nav>
-      <div className={style.hamburger}></div>
+      <div className={style.hamburger} onClick={handleHamburgerClick}>
+        <iconify-icon icon="charm:menu-hamburger" width="40"></iconify-icon>
+      </div>
     </header>
   )
 }
