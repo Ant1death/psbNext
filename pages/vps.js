@@ -53,6 +53,33 @@ export default function Vps() {
           })}
         </ul>
       </section>
+      <section className={style['about']}>
+        <h2 className={`${['h2-title']} ${style['card-title-main']}`}>
+          Доступные операционные системы
+        </h2>
+        <ul className={style['cards-instructions']}>
+          <li className={style['card-instruction']}>
+            <img className={style['system-image']} src='/centos.png' alt='centos' />
+            <p className={style['card-instruction__title']}>Centos</p>
+          </li>
+          <li className={style['card-instruction']}>
+            <img className={style['system-image']} src='/cpanel.png' alt='cPanel' />
+            <p className={style['card-instruction__title']}>cPanel</p>
+          </li>
+          <li className={style['card-instruction']}>
+            <img className={style['system-image']} src='/debian.png' alt='Debian' />
+            <p className={style['card-instruction__title']}>Debian</p>
+          </li>
+          <li className={style['card-instruction']}>
+            <img className={style['system-image']} src='/ubuntu.png' alt='ubuntu' />
+            <p className={style['card-instruction__title']}>Ubuntu</p>
+          </li>
+          <li className={style['card-instruction']}>
+            <img className={style['system-image']} src='/windows.png' alt='windows' />
+            <p className={style['card-instruction__title']}>Windows</p>
+          </li>
+        </ul>
+      </section>
     </>
   );
 }
