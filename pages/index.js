@@ -117,24 +117,29 @@ export default function Home() {
         <div className={style["map-wrapper"]}>
           <ul>
             <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
+            <li>UK</li>
+            <li>Germany</li>
+            <li>Hong Kong</li>
+            <li>Israel</li>
+            <li>Canada</li>
+            <li>Latvia</li>
+            <li>Slovakia</li>
+            <li>USA</li>
+            <li>Czech</li>
+            <li>Turkey</li>
+            <li>Poland</li>
+            <li>Bulgaria</li>
+            <li>Romania</li>
+            <li>Italy</li>
+            <li>Finland</li>
+            <li>Hungary</li>
+            <li>Portugal</li>
+            <li>Sweden</li>
+            <li>Switzerland</li>
+            <li>Serbia</li>
+            <li>Irish</li>
+            <li>France</li>
+            <li>Spain</li>
           </ul>
         </div>
         <div className={style["map-img"]}>
