@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import 'iconify-icon';
+import FaqItem from '../compontens/FaqItem/FaqItem';
+import { FAQ_LIST } from '../utils/constants';
 import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
-import { vpsCountries } from '../data/vpsCountries';
+import { vpsCountries } from '../utils/data/vpsCountries';
 
 export default function Vps() {
   return (
@@ -117,13 +119,27 @@ export default function Vps() {
         </li>
         <li className={style['services__wrap']}>
           <iconify-icon icon="bx:support" height="100"></iconify-icon>
-          <h4 class={`${['h4-title']} ${style['services__title']}`}>
+          <h4 className={`${['h4-title']} ${style['services__title']}`}>
             Техническая поддержка
           </h4>
           <p className={style['services__description']}>
             Наша техническая поддержка работает круглосуточно и поможет вам с любыми вопросами.
           </p>
         </li>
+      </ul>
+      </section>
+      <section className={style['faq']}>
+      <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
+      <ul className={style['faq__items']}>
+        {FAQ_LIST.map(el => {
+          return (
+            <FaqItem
+              key={el.id}
+              question={el.question}
+              answer={el.answer}
+            />
+          );
+        })}
       </ul>
       </section>
     </>

@@ -155,6 +155,10 @@
 }
 
 .services {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+
   &__wrapper {
     padding-top: 30px;
     display: flex;
@@ -186,4 +190,10 @@
 
 .section-title {
   margin-bottom: 20px;
+}
+
+.faq {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
 }

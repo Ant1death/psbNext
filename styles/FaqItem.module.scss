@@ -1,0 +1,38 @@
+.faq {
+  &__item {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  &__question {
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+
+    iconify-icon {
+      color: #4e9aa5;
+    }
+
+    &:hover iconify-icon {
+      color: #6cd3e3;
+    }
+
+    &:hover .faq__title {
+      color: #6cd3e3;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    color: #4e9aa5;
+  }
+
+  &__answer {
+    display: none;
+
+    &_active {
+      display: block;
+    }
+  }
+}
