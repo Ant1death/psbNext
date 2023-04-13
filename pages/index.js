@@ -157,31 +157,31 @@ export default function Home() {
           </div>
           <div className={style['payment__wrapper-item']}>
             <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
+              <img src="/ethereum.png" alt="Ethereum" />
             </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+            <div className={style["payment__wrapper-text"]}>Ethereum</div>
           </div>
           <div className={style['payment__wrapper-item']}>
             <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
+              <img src="/litecoin.svg" alt="Litecoin" />
             </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+            <div className={style["payment__wrapper-text"]}>Litecoin</div>
           </div>
           <div className={style['payment__wrapper-item']}>
             <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
+              <img src="/usdt.svg" alt="USDT" />
             </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+            <div className={style["payment__wrapper-text"]}>USDT</div>
           </div>
           <div className={style['payment__wrapper-item']}>
             <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
+              <img src="/qiwi.png" alt="Qiwi" />
             </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
+            <div className={style["payment__wrapper-text"]}>Qiwi</div>
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }
 
