@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import style from '../../styles/VpsCard.module.scss';
+import style from '../../styles/ItemCard.module.scss';
 
 const VpsCard = ({ vpsItem }) => {
   return (
-    <li className={style['vps-card']} key={vpsItem.id}>
-      <div className={style['vps-card__title']}>
-        <h3 className={style['vps-card__h3-title']}>{vpsItem.title}</h3>
-        <p className={style['vps-card__price']}>
+    <li className={style['card']} key={vpsItem.id}>
+      <div className={style['card__title']}>
+        <h3 className={style['card__h3-title']}>{vpsItem.title}</h3>
+        <p className={style['card__price']}>
           {vpsItem.price}
         </p>
       </div>
-      <ul className={style['vps-card__list']}>
+      <ul className={style['card__list']}>
         <li>{vpsItem.DMCA}</li>
         <li>{vpsItem.vCPU}</li>
         <li>{vpsItem.RAM}</li>

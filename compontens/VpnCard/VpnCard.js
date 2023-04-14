@@ -1,19 +1,19 @@
 import Link from 'next/link';
-import style from '../../styles/VpnCard.module.scss';
+import style from '../../styles/ItemCard.module.scss';
 
 const VpnCard = ({ vpnItem }) => {
   return (
-    <li className={style['vpn-card']}>
-      <div className={style['vpn-card__title']}>
-        <h3 className={style['vpn-card__h3-title']}>
-          <img src={vpnItem.img} alt={vpnItem.country} className={style['vpn-card__img']} />
+    <li className={style['card']}>
+      <div className={style['card__title']}>
+        <h3 className={style['card__h3-title']}>
+          <img src={vpnItem.img} alt={vpnItem.country} className={style['card__img']} />
           {vpnItem.country}
         </h3>
-        <p className={style['vpn-card__price']}>
+        <p className={style['card__price']}>
           {vpnItem.price}
         </p>
       </div>
-      <ul className={style['vpn-card__list']}>
+      <ul className={style['card__list']}>
         <li>{vpnItem.port}</li>
         <li>{vpnItem.encryption}</li>
         <li>{vpnItem.support}</li>

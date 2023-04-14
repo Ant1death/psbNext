@@ -1,4 +1,4 @@
-.abuse-card {
+.card {
   display: flex;
   flex-direction: column;
   border: 1px solid #ddd;
@@ -19,6 +19,15 @@
     margin-bottom: 0;
   }
 
+  &__img {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    height: 30px;
+    aspect-ratio: 1;
+    margin-right: 10px;
+    width: 30px;
+  }
+
   &__price {
     border-radius: 6px;
     padding: 6px 10px;
@@ -35,6 +44,24 @@
 
     li:nth-child(2n-1) {
       background: #eee;
+    }
+  }
+
+  a {
+    justify-self: flex-end;
+    margin-top: auto;
+    display: block;
+    border-radius: 10px;
+    padding: 8px 20px;
+    background: #4e9aa5;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: .2s ease-in-out;
+
+    &:hover {
+      background: #6cd3e3;
+      color: #fff;
     }
   }
 }
