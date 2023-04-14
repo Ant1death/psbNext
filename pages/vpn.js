@@ -4,6 +4,7 @@ import VpnCard from '../compontens/VpnCard/VpnCard';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import { FAQ_LIST_VPN } from '../utils/constants';
 import style from '../styles/Vpn.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
 import { vpnCountries } from '../utils/data/vpnCountries';
 
@@ -71,44 +72,44 @@ export default function Vpn() {
           </li>
         </ul>
       </section>
-      <section className={style['advantages']}>
+      <section className={styleAdvantages['advantages']}>
         <h2 className={style['main-title']}>
           Преимущества
         </h2>
-        <ul className={style['advantages__list']}>
-          <li className={style['advantages__list-item']}>
+        <ul className={styleAdvantages['advantages__list']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Высокая скорость
             </h3>
-            <p className={style['advantages__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Быстрые сервера с высокой производительностью.
             </p>
           </li>
-          <li className={style['advantages__list-item']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Удобная настройка
             </h3>
-            <p className={style['advantages__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               WireGuard поддерживает платформы Windows, macOS, Android, iOS, Linux.
             </p>
           </li>
-          <li className={style['advantages__list-item']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Защищенное соединение
             </h3>
-            <p className={style['advantages__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Надежные алгоритмы шифрования, которые гарантируют вам анонимность.
             </p>
           </li>
-          <li className={style['advantages__list-item']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Большой выбор стран
             </h3>
-            <p className={style['advantages__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Наши сервера находятся по всему миру, более чем в 20 странах.
             </p>
           </li>

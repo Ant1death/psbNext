@@ -3,6 +3,7 @@ import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import { FAQ_LIST_VPS } from '../utils/constants';
 import style from '../styles/Vps.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../utils/data/vpsCountries';
 import VpsCard from '../compontens/VpsCard/VpsCard';
@@ -42,46 +43,46 @@ function Vps() {
         </ul>
       </section>
       <AvailableSystems />
-      <section className={style['services']}>
+      <section className={styleAdvantages['advantages']}>
         <div className={style['section-title']}>
           <h2 className={`${['h2-title']}`}>Преимущества</h2>
           <p>Преимущества нашего хостинга</p>
         </div>
-        <ul className={style['services__wrapper']}>
-          <li className={style['services__wrap']}>
+        <ul className={styleAdvantages['advantages__list']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="mdi:shield-alert" height="100"></iconify-icon>
-            <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Конфиденциальность данных (no logs)
             </h4>
-            <p className={style['services__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Мы не храним IP адреса подключений к серверу и сохраняем полную анонимность вашего проекта.
             </p>
           </li>
-          <li className={style['services__wrap']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
-            <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Оффшорные юрисдикции серверов
             </h4>
-            <p className={style['services__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Наши сервера находятся в странах с гибким законодательством. Вы получаете конфиденциальность
               данных и возможность размещать широкий спектр контента по сравнению с другими юрисдикциями.
             </p>
           </li>
-          <li className={style['services__wrap']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="teenyicons:contract-outline" height="100"></iconify-icon>
-            <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               DMCA 100% ignored
             </h4>
-            <p className={style['services__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Мы полностью игнорируем запросы DMCA.
             </p>
           </li>
-          <li className={style['services__wrap']}>
+          <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="bx:support" height="100"></iconify-icon>
-            <h4 className={`${['h4-title']} ${style['services__title']}`}>
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Техническая поддержка
             </h4>
-            <p className={style['services__description']}>
+            <p className={styleAdvantages['advantages__description']}>
               Наша техническая поддержка работает круглосуточно и поможет вам с любыми вопросами.
             </p>
           </li>

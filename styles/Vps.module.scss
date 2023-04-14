@@ -92,65 +92,6 @@
   }
 }
 
-.services {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-
-  @media screen and (max-width: 720px) {
-    & {
-      padding: 0 5%;
-    }
-  }
-
-  &__wrapper {
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-
-    @media screen and (max-width: 1024px) {
-      & {
-        flex-wrap: wrap;
-      }
-    }
-  }
-
-  &__wrap {
-    width: 20%;
-    display: block;
-    text-align: center;
-
-    @media screen and (max-width: 1024px) {
-      & {
-        width: 40%;
-        margin-bottom: 40px;
-      }
-    }
-
-    @media screen and (max-width: 640px) {
-      & {
-        width: 100%;
-      }
-    }
-
-    iconify-icon {
-      margin-bottom: 20px;
-      color: #4e9aa5;
-      height: 100px;
-    }
-  }
-
-  &__title {
-    margin-bottom: 10px;
-    font-weight: 700;
-    text-align: center;
-  }
-
-  &__description {
-    text-align: center;
-  }
-}
-
 .section-title {
   margin-bottom: 20px;
 }
