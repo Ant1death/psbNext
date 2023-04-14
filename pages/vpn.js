@@ -1,5 +1,8 @@
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
+import VpnCard from '../compontens/VpnCard/VpnCard';
 import style from '../styles/Vpn.module.scss';
+// ToDo: delete after connecting with API
+import { vpnCountries } from '../utils/data/vpnCountries';
 
 export default function Vpn() {
   return (
@@ -9,7 +12,7 @@ export default function Vpn() {
           <img src='/vpn.jpg' alt='vpn' className={style['about__img']} />
         </div>
         <div className={style['about__wrap']}>
-          <h2 className={style['about__main-title']}>
+          <h2 className={style['main-title']}>
             Приватный VPN WireGuard
           </h2>
           <p>
@@ -21,6 +24,21 @@ export default function Vpn() {
             page='vpn'
           />
         </div>
+      </section>
+      <section className={style.vpn}>
+        <h2 className={style['main-title']}>
+          Выберете страну VPN
+        </h2>
+        <ul className={style['vpn__wrapper']}>
+          {vpnCountries.map(el => {
+            return (
+              <VpnCard
+                key={el.id}
+                vpnItem={el}
+              />
+            );
+          })}
+        </ul>
       </section>
     </>
   );

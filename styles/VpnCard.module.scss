@@ -1,0 +1,61 @@
+.vpn-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__h3-title {
+    font-size: 1.5rem;
+    display: flex;
+    margin-bottom: 0;
+  }
+
+  &__img {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    height: 30px;
+    aspect-ratio: 1;
+    margin-right: 10px;
+    width: 30px;
+  }
+
+  &__price {
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: #4e9aa5;
+    color: #fff;
+  }
+
+  &__list {
+    margin-bottom: 20px;
+
+    li {
+      padding: 6px 10px;
+    }
+
+    li:nth-child(2n-1) {
+      background: #eee;
+    }
+  }
+
+  a {
+    justify-self: flex-end;
+    margin-top: auto;
+    display: block;
+    border-radius: 10px;
+    padding: 8px 20px;
+    background: #4e9aa5;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
