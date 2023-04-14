@@ -1,6 +1,15 @@
 import Link from 'next/link';
+import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import style from '../styles/Main.module.scss';
+
+Home.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
 
 export default function Home() {
   return (

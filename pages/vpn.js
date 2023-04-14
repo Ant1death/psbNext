@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
 import FaqItem from '../compontens/FaqItem/FaqItem';
@@ -7,6 +8,14 @@ import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
 import { vpnCountries } from '../utils/data/vpnCountries';
+
+Vpn.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
 
 export default function Vpn() {
   return (

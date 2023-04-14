@@ -1,3 +1,4 @@
+import Layout from '../compontens/Layout/Layout';
 import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import FaqItem from '../compontens/FaqItem/FaqItem';
@@ -6,6 +7,14 @@ import style from '../styles/Abuse.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
 import { abuseList } from '../utils/data/abuseList';
+
+Abuse.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
 
 export default function Abuse() {
   return (

@@ -1,12 +1,21 @@
 import 'iconify-icon';
+import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
+import VpsCard from '../compontens/VpsCard/VpsCard';
 import { FAQ_LIST_VPS } from '../utils/constants';
 import style from '../styles/Vps.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../utils/data/vpsCountries';
-import VpsCard from '../compontens/VpsCard/VpsCard';
+
+Vps.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
 
 function Vps() {
   return (
