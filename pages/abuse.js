@@ -12,7 +12,7 @@ export default function Abuse() {
     <>
       <section className={style.abuse}>
       <div>
-        <h2 className={`${['h2-title']}`}>
+        <h2 className={`${['h2-title']} ${style['abuse__title']}`}>
           Абузоустойчивые VPS/VDS
         </h2>
         <p>Список услуг выделенных серверов</p>
