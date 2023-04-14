@@ -68,49 +68,49 @@ export default function Vpn() {
             </p>
           </li>
         </ul>
-        <section className={style['advantages']}>
-          <h2 className={style['main-title']}>
-            Преимущества
-          </h2>
-          <ul className={style['advantages__list']}>
-            <li className={style['advantages__list-item']}>
-              <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
-              <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
-                Высокая скорость
-              </h3>
-              <p className={style['advantages__description']}>
-                Быстрые сервера с высокой производительностью.
-              </p>
-            </li>
-            <li className={style['advantages__list-item']}>
-              <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
-              <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
-                Удобная настройка
-              </h3>
-              <p className={style['advantages__description']}>
-                WireGuard поддерживает платформы Windows, macOS, Android, iOS, Linux.
-              </p>
-            </li>
-            <li className={style['advantages__list-item']}>
-              <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
-              <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
-                Защищенное соединение
-              </h3>
-              <p className={style['advantages__description']}>
-                Надежные алгоритмы шифрования, которые гарантируют вам анонимность.
-              </p>
-            </li>
-            <li className={style['advantages__list-item']}>
-              <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
-              <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
-                Большой выбор стран
-              </h3>
-              <p className={style['advantages__description']}>
-                Наши сервера находятся по всему миру, более чем в 20 странах.
-              </p>
-            </li>
-          </ul>
-        </section>
+      </section>
+      <section className={style['advantages']}>
+        <h2 className={style['main-title']}>
+          Преимущества
+        </h2>
+        <ul className={style['advantages__list']}>
+          <li className={style['advantages__list-item']}>
+            <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
+            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+              Высокая скорость
+            </h3>
+            <p className={style['advantages__description']}>
+              Быстрые сервера с высокой производительностью.
+            </p>
+          </li>
+          <li className={style['advantages__list-item']}>
+            <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
+            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+              Удобная настройка
+            </h3>
+            <p className={style['advantages__description']}>
+              WireGuard поддерживает платформы Windows, macOS, Android, iOS, Linux.
+            </p>
+          </li>
+          <li className={style['advantages__list-item']}>
+            <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
+            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+              Защищенное соединение
+            </h3>
+            <p className={style['advantages__description']}>
+              Надежные алгоритмы шифрования, которые гарантируют вам анонимность.
+            </p>
+          </li>
+          <li className={style['advantages__list-item']}>
+            <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
+            <h3 className={`${['h4-title']} ${style['advantages__title']}`}>
+              Большой выбор стран
+            </h3>
+            <p className={style['advantages__description']}>
+              Наши сервера находятся по всему миру, более чем в 20 странах.
+            </p>
+          </li>
+        </ul>
       </section>
     </>
   );
