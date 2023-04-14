@@ -5,8 +5,9 @@ import { FAQ_LIST_VPS } from '../utils/constants';
 import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../utils/data/vpsCountries';
+import VpsCard from '../compontens/VpsCard/VpsCard';
 
-export default function Vps() {
+function Vps() {
   return (
     <>
       <section className={style.vps}>
@@ -32,26 +33,10 @@ export default function Vps() {
           {/* ToDo: fix with API */}
           {vpsCountries.map(el => {
             return (
-              <li className={style['offer__wrap']} key={el.id}>
-                <div className={style['offer__title']}>
-                  <h3 className={style['offer__h3-title']}>{el.title}</h3>
-                  <div className={style['offer__price']}>
-                    <p>{el.price}</p>
-                  </div>
-                </div>
-                <ul className={style['offer__list']}>
-                  <li>{el.DMCA}</li>
-                  <li>{el.vCPU}</li>
-                  <li>{el.RAM}</li>
-                  <li>{el.SSD}</li>
-                  <li>{el.KVM}</li>
-                  <li>{el.Gbps}</li>
-                  <li>{el.bandwidth}</li>
-                </ul>
-                <Link href={`/accounts/shop/new/${el.id}`}>
-                  Купить
-                </Link>
-              </li>
+              <VpsCard
+                key={el.id}
+                vpsItem={el}
+              />
             );
           })}
         </ul>
@@ -145,3 +130,5 @@ export default function Vps() {
     </>
   );
 }
+
+export default Vps;
