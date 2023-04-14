@@ -9,6 +9,11 @@ const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref }) => {
       <p className={style['form__title']}>
         {title}
       </p>
+      {button === 'Восстановить' &&
+        <p className={style['form__message']}>
+          Если вы забыли данные для доступа в личный кабинет, укажите почту и мы вышлем вам доступ.
+        </p>
+      }
       {children}
       <button type='submit' className={style['form__button-submit']}>
         {button}
