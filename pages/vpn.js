@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
 import style from '../styles/Vpn.module.scss';
@@ -38,6 +39,34 @@ export default function Vpn() {
               />
             );
           })}
+        </ul>
+      </section>
+      <section className={style['instructions']}>
+        <h2 className={`${style['main-title']} ${style['instructions__title']}`}>
+          Инструкция по использованию VPN
+        </h2>
+        <ul className={style['instructions__list']}>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-one.png' className={style['instructions__icon']} />
+            <p className={style['instructions__text']}>
+              Оплатите тариф
+            </p>
+          </li>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-two.png' className={style['instructions__icon']} />
+            <p className={style['instructions__text']}>
+              Загрузите приложения для вашего устройства&nbsp;
+              <Link href='https://www.wireguard.com/install/'>
+                Wireguard
+              </Link>
+            </p>
+          </li>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-three.png' className={style['instructions__icon']} />
+            <p className={style['instructions__text']}>
+              Используйте данные для подключения, которые мы предоставили вам при покупке тарифного плана
+            </p>
+          </li>
         </ul>
       </section>
     </>
