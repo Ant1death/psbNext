@@ -4,7 +4,7 @@ import style from '../../styles/LinkToBuyVpn.module.scss';
 const LinkToBuyVpn = ({ page }) => {
   return (
     <>
-      <ul className={style['about__wrapper-icons']}>
+      <ul className={`${style['about__wrapper-icons']} ${page === 'vpn' ? style['about__wrapper-icons-hidden'] : ''}`}>
         <li className={`${style['about__wrapper-icon']} ${page === 'vpn' ? style['about__wrapper-icon_vpn'] : ''}`}>
           <Link href="#">
             <img src="/windows-icon.svg" alt="icon" />
@@ -26,7 +26,7 @@ const LinkToBuyVpn = ({ page }) => {
           </Link>
         </li>
       </ul>
-      <button className={style['about__wrapper-btn']}>
+      <button className={`${style['about__wrapper-btn']} ${page === 'vpn' ? style['about__wrapper-btn-vpn'] : ''}`}>
         <Link href="/accounts/vpn">Купить VPN</Link>
       </button>
     </>

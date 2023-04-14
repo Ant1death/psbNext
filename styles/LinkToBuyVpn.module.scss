@@ -3,6 +3,12 @@
     padding: 20px 0;
     gap: 10px;
     display: flex;
+
+    &-hidden {
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
+    }
   }
 
   &-icon {
@@ -44,6 +50,16 @@
       font-weight: 400;
       font-size: 19.2px;
       line-height: normal;
+
+      &:hover {
+        background: #6cd3e3;
+      }
+    }
+
+    &-vpn {
+      @media screen and (max-width: 1024px) {
+        margin-top: 32px;
+      }
     }
   }
 }
