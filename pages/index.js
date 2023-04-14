@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import style from '../styles/Main.module.scss';
 
 export default function Home() {
@@ -80,31 +81,9 @@ export default function Home() {
             <p className={style['about__wrapper-info']}>
               Современный и не требовательный к ресурсам протокол VPN-туннелей, использующий надёжные алгоритмы шифрования. WireGuard VPN предназначен для создания защищенных соединений и ориентирован на высокую производительность, безопасность и простоту в настройке.
             </p>
-            <ul className={style['about__wrapper-icons']}>
-              <li className={style['about__wrapper-icon']}>
-                <Link href="#">
-                  <img src="/windows-icon.svg" alt="icon" />
-                </Link>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <Link href="#">
-                  <img src="/linux-icon.svg" alt="icon" />
-                </Link>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <Link href="#">
-                  <img src="/apple-icon.svg" alt="icon" />
-                </Link>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <Link href="#">
-                  <img src="/android.svg" alt="icon" />
-                </Link>
-              </li>
-            </ul>
-            <button className={style['about__wrapper-btn']}>
-              <Link href="/accounts/vpn">Купить VPN</Link>
-            </button>
+            <LinkToBuyVpn
+              page='home'
+            />
           </div>
           <div className={style['about__wrapper-img']}>
             <img src="/phone2.png" alt="phone" />
