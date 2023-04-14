@@ -57,5 +57,11 @@
     color: #fff;
     text-align: center;
     font-size: 1.2rem;
+    transition: .2s ease-in-out;
+
+    &:hover {
+      background: #6cd3e3;
+      color: #fff;
+    }
   }
 }
