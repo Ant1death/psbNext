@@ -80,11 +80,6 @@
   }
 }
 
-.about {
-  padding: 0;
-  display: grid;
-}
-
 .card-title-main {
   text-align: center;
 
@@ -95,29 +90,6 @@
       justify-self: center;
     }
   }
-}
-
-.cards-instructions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 30px;
-  margin: 40px 0;
-}
-
-.card-instruction {
-  display: block;
-
-  &__title {
-    text-align: center;
-  }
-}
-
-.system-image {
-  aspect-ratio: 1;
-  width: 80px;
-  margin-bottom: 10px;
-  max-width: 100px;
 }
 
 .services {

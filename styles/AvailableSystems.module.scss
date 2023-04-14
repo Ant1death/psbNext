@@ -1,0 +1,39 @@
+.systems {
+  padding: 0;
+  display: grid;
+
+  &-title {
+    text-align: center;
+
+    @media screen and (max-width: 1024px) {
+      & {
+        max-width: 635px;
+        width: 100%;
+        justify-self: center;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin: 40px 0;
+  }
+
+  &__item {
+    display: block;
+
+    &-title {
+      text-align: center;
+    }
+  }
+
+  &__image {
+    aspect-ratio: 1;
+    width: 80px;
+    margin-bottom: 10px;
+    max-width: 100px;
+  }
+}

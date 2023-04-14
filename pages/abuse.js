@@ -1,4 +1,5 @@
 import AbuseCard from '../compontens/AbuseCard/AbuseCard';
+import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import style from '../styles/Abuse.module.scss';
 // ToDo: delete after connecting with API
 import { abuseList } from '../utils/data/abuseList';
@@ -24,6 +25,7 @@ export default function Abuse() {
         })}
       </ul>
       </section>
+      <AvailableSystems />
     </>
   );
 }
