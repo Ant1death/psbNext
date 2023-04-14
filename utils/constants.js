@@ -30,3 +30,36 @@ export const FAQ_LIST_VPS = [
     answer: 'Да, мы предоставляем защиту от DDOS атак',
   },
 ];
+
+export const FAQ_LIST_VPN = [
+  {
+    id: 0,
+    question: 'На каких устройствах можно использовать VPN?',
+    answer: 'Windows, macOS, Android, iOS, Linux.',
+  },
+  {
+    id: 1,
+    question: 'Чем WireGuard лучше OpenVPN?',
+    answer: 'WireGuard не использует большой объем кода, поэтому работает быстрее.',
+  },
+  {
+    id: 2,
+    question: 'Какие способы оплаты вы принимаете?',
+    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    id: 3,
+    question: 'У вас есть скидки за аренду VPN на длительный срок?',
+    answer: 'Да, 3 месяца -5%, 6 месяцев -10%, 12 месяцев -15%',
+  },
+  {
+    id: 4,
+    question: 'Ваш VPN анонимный?',
+    answer: 'Да, мы не храним логи и используем современные протоколы шифрования.',
+  },
+  {
+    id: 5,
+    question: 'Где мне скачать клиент для моего устройства?',
+    answer: 'На официальном сайте https://www.wireguard.com/install/.',
+  },
+];

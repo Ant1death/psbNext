@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
+import FaqItem from '../compontens/FaqItem/FaqItem';
+import { FAQ_LIST_VPN } from '../utils/constants';
 import style from '../styles/Vpn.module.scss';
 // ToDo: delete after connecting with API
 import { vpnCountries } from '../utils/data/vpnCountries';
@@ -110,6 +112,22 @@ export default function Vpn() {
               Наши сервера находятся по всему миру, более чем в 20 странах.
             </p>
           </li>
+        </ul>
+      </section>
+      <section className={style['faq']}>
+        <h2 className={style['main-title']}>
+          Частые вопросы
+        </h2>
+        <ul className={style['faq__list']}>
+          {FAQ_LIST_VPN.map(el => {
+            return (
+              <FaqItem
+                key={el.id}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
         </ul>
       </section>
     </>

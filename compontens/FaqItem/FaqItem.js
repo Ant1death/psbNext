@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import style from '../../styles/FaqItem.module.scss';
 
 const FaqItem = ({ question, answer }) => {
@@ -17,7 +18,15 @@ const FaqItem = ({ question, answer }) => {
         <iconify-icon icon="material-symbols:keyboard-arrow-down-rounded"></iconify-icon>
       </div>
       <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
-        {answer}
+        {answer.includes('https') &&
+          <>
+            На официальном сайте&nbsp;
+            <Link href="https://www.wireguard.com/install/">https://www.wireguard.com/install/</Link>.
+          </>
+        }
+        {!answer.includes('https') &&
+          answer
+        }
       </p>
     </li>
   );
