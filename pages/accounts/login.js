@@ -1,13 +1,24 @@
-import AuthForm from '../../compontens/AuthForm/AuthForm';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
+import AuthForm from '../../compontens/AuthForm/AuthForm';
 import style from '../../styles/Auth.module.scss';
 
 export default function Login() {
+  const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
+
   return (
     <main className={style['container']}>
       <section className={style['content']}>
-        <img className={style['content__logo']} alt='logo' src='/logo.png' />
+        <div
+          className={style['content__block-logo']}
+          ref={block}
+          onMouseMove={transformBlock}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <img className={style['content__logo']} alt='logo' src='/logo.png' />
+        </div>
         <AuthForm
           title='Авторизация'
           button='Вход'

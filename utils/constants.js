@@ -1,3 +1,5 @@
+export const TRANSFORM_AMOUNT = 10;
+
 export const FAQ_LIST_VPS = [
   {
     id: 0,
