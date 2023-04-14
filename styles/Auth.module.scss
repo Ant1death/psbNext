@@ -1,3 +1,10 @@
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0 0 70px 25px;
+    opacity: 0;
+  }
+}
+
 .container {
   width: 100%;
   min-height: 100vh;
@@ -108,13 +115,14 @@
 }
 
 .input {
-  display: block;
-  position: relative;
   width: 100%;
+  position: relative;
+  z-index: 1;
   margin-bottom: 10px;
+  display: block;
 
   &__field {
-    font-family: inter,sans-serif;
+    font-family: inter, sans-serif;
     font-size: 15px;
     line-height: 1.5;
     color: #666;
@@ -126,10 +134,22 @@
     border: none;
     outline: none;
     box-sizing: border-box;
-    z-index: 1;
+    overflow: visible;
 
     &:focus {
       border-color: transparent;
+    }
+
+    &:focus + &-focus {
+      animation: anim-shadow .5s ease-in-out forwards;
+    }
+
+    &:focus ~ &-icon {
+      margin-left: 28px;
+    }
+
+    &:focus ~ &-icon path {
+      fill: #57b846;
     }
 
     &-focus {
@@ -156,6 +176,7 @@
       margin-left: 35px;
       pointer-events: none;
       transition: all .4s;
+      display: flex;
 
       & path {
         fill: #666;
