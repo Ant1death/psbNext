@@ -1,5 +1,7 @@
 import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
+import FaqItem from '../compontens/FaqItem/FaqItem';
+import { FAQ_LIST_ABUSE } from '../utils/constants';
 import style from '../styles/Abuse.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
@@ -70,6 +72,20 @@ export default function Abuse() {
               Наша техническая поддержка работает круглосуточно и поможет вам с любыми вопросами.
             </p>
           </li>
+        </ul>
+      </section>
+      <section className={style['faq']}>
+        <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
+        <ul>
+          {FAQ_LIST_ABUSE.map(el => {
+            return (
+              <FaqItem
+                key={el.id}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
         </ul>
       </section>
     </>
