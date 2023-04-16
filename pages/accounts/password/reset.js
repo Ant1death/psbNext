@@ -23,7 +23,7 @@ export default function ResetPassword() {
           title='Восстановление аккаунта'
           button='Восстановить'
           bottomLink='Вспомнили? Войдите'
-          bottomLinkHref='/accounts/login/'
+          bottomLinkHref='/account/login/'
         >
           <label className={style['input']} htmlFor='email'>
             <input

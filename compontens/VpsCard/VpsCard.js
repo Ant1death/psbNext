@@ -19,7 +19,7 @@ const VpsCard = ({ vpsItem }) => {
         <li>{vpsItem.Gbps}</li>
         <li>{vpsItem.bandwidth}</li>
       </ul>
-      <Link href={`/accounts/shop/new/${vpsItem.id}`}>
+      <Link href={`/account/shop/new/${vpsItem.id}`}>
         Купить
       </Link>
     </li>

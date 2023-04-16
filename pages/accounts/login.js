@@ -23,7 +23,7 @@ export default function Login() {
           title='Авторизация'
           button='Вход'
           bottomLink='Создать аккаунт'
-          bottomLinkHref='/accounts/signup/'
+          bottomLinkHref='/account/signup/'
         >
           <label className={style['input']} htmlFor='name'>
             <input

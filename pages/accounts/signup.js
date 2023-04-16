@@ -23,7 +23,7 @@ export default function SignUp() {
           title='Регистрация'
           button='Создать аккаунт'
           bottomLink='Уже зарегистрированы? войдите'
-          bottomLinkHref='/accounts/login/'
+          bottomLinkHref='/account/login/'
         >
           <label className={style['input']} htmlFor='name'>
             <input

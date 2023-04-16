@@ -65,7 +65,7 @@ function appHeader() {
             </div>
           </li>
           <li>
-            <Link href="/accounts" className={style.header__login}>Личный кабинет</Link>
+            <Link href="/account" className={style.header__login}>Личный кабинет</Link>
           </li>
         </ul>
       </nav>
