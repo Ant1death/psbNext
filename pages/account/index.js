@@ -1,7 +1,7 @@
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
-import style from '../styles/Account.module.scss';
+import style from '../../styles/Account.module.scss';
 
-Dashboard.getLayout = function getLayout(page) {
+Account.getLayout = function getLayout(page) {
   return (
     <LayoutAccount>
       {page}
