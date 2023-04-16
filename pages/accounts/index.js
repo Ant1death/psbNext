@@ -1,9 +1,16 @@
-import '../../styles/Accounts.module.scss';
+import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
+import style from '../styles/Account.module.scss';
 
-export default function Accounts() {
+Dashboard.getLayout = function getLayout(page) {
   return (
-    <>
-      <div className=""></div>
-    </>
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default function Account() {
+  return (
+    <div></div>
   );
 }
