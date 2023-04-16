@@ -1,0 +1,1 @@
+import style from '../../../styles/AccountVps.module.scss';

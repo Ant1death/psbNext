@@ -55,8 +55,20 @@
     font-size: 18px;
     line-height: 30px;
     text-align: center;
-    vertical-align: middle;
     margin-right: 8px;
     color: #79c8c2;
   }
+
+  &__item a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    transition: border-left-color 0.3s ease, background-color 0.3s ease;
+    margin: 2px 0px;
+    white-space: nowrap;
+    line-height: 2;
+  }
+
 }
