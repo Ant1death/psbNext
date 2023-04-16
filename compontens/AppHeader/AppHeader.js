@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import 'iconify-icon';
+import { Icon } from '@iconify/react';
 import style from '../../styles/AppHeader.module.scss';
 
 
@@ -70,7 +70,7 @@ function appHeader() {
         </ul>
       </nav>
       <div className={style.hamburger} onClick={handleHamburgerClick}>
-        <iconify-icon icon="charm:menu-hamburger" width="40"></iconify-icon>
+        <Icon icon="charm:menu-hamburger" className={style['hamburger__icon']} />
       </div>
     </header>
   )

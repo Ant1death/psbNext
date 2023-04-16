@@ -124,6 +124,11 @@
 .hamburger {
   display: none;
 
+  &__icon {
+    width: 40px;
+    height: 40px;
+  }
+
   @media screen and (max-width: 1100px) {
     & {
       display: block;

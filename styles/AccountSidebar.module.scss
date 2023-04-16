@@ -50,4 +50,13 @@
     padding: 0 30px 2px 20px;
     white-space: nowrap;
   }
+
+  &__icon {
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 8px;
+    color: #79c8c2;
+  }
 }

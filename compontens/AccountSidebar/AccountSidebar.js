@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Icon } from '@iconify/react';
 import style from '../../styles/AccountSidebar.module.scss';
 
 const AccountSidebar = () => {
@@ -11,12 +12,12 @@ const AccountSidebar = () => {
       </div>
       <nav className={style['sidebar__nav-menu']}>
         <ul className={style['sidebar__nav-menu-list']}>
-          <li>
+          <li className={style['sidebar__item']} >
             <h3 className={style['sidebar__subtitle']}>
               Главная страница
             </h3>
             <Link href='/account'>
-
+              <Icon icon="mi:grid" className={style['sidebar__icon']} />
               Панель управления
             </Link>
           </li>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Icon } from '@iconify/react';
 import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
@@ -87,7 +88,7 @@ export default function Vpn() {
         </h2>
         <ul className={styleAdvantages['advantages__list']}>
           <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
+            <Icon icon="icon-park-twotone:speed-one" className={styleAdvantages['advantages__icon']} />
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Высокая скорость
             </h3>
@@ -96,7 +97,7 @@ export default function Vpn() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
+            <Icon icon="uiw:setting-o" className={styleAdvantages['advantages__icon']} />
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Удобная настройка
             </h3>
@@ -105,7 +106,7 @@ export default function Vpn() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
+            <Icon icon="mdi:shield-account" className={styleAdvantages['advantages__icon']} />
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Защищенное соединение
             </h3>
@@ -114,7 +115,7 @@ export default function Vpn() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
+            <Icon icon="ph:globe-hemisphere-west-fill" className={styleAdvantages['advantages__icon']} />
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Большой выбор стран
             </h3>

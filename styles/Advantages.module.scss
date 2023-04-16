@@ -28,11 +28,6 @@
           width: 100%;
         }
       }
-
-      iconify-icon {
-        margin-bottom: 20px;
-        color: #4e9aa5;
-      }
     }
   }
 
@@ -44,5 +39,12 @@
 
   &__description {
     text-align: center;
+  }
+
+  &__icon {
+    margin-bottom: 20px;
+    height: 100px;
+    width: 100px;
+    color: #4e9aa5;
   }
 }
