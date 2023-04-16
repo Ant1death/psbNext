@@ -54,6 +54,12 @@ section {
   padding: 2rem 0;
 }
 
+.page-account {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 @media screen and (max-width: 1320px) {
   .container {
     max-width: 1000px;
