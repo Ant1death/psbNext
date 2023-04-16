@@ -25,6 +25,9 @@ export default function ResetPassword() {
           bottomLink='Вспомнили? Войдите'
           bottomLinkHref='/account/login/'
         >
+          <p className={style['form__message']}>
+            Если вы забыли данные для доступа в личный кабинет, укажите почту и мы вышлем вам доступ.
+          </p>
           <label className={style['input']} htmlFor='email'>
             <input
               type='text'
