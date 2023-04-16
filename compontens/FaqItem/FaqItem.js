@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { Icon } from '@iconify/react';
+import 'iconify-icon';
 import style from '../../styles/FaqItem.module.scss';
 
 const FaqItem = ({ question, answer }) => {
@@ -16,7 +16,7 @@ const FaqItem = ({ question, answer }) => {
         <h4 className={`${['h4-title']} ${style['faq__title']}`}>
           {question}
         </h4>
-        <Icon icon="material-symbols:keyboard-arrow-down-rounded" className={style['faq__icon']} />
+        <iconify-icon icon="material-symbols:keyboard-arrow-down-rounded"></iconify-icon>
       </div>
       <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
         {answer.includes('https') &&

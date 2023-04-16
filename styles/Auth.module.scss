@@ -138,7 +138,7 @@
       align-items: center;
       justify-content: center;
 
-      &-icon {
+      iconify-icon {
         width: 13px;
       }
     }
@@ -147,8 +147,8 @@
       color: #57b846;
     }
 
-    &:hover .form__bottom-link-icon path {
-      fill: #57b846;
+    &:hover iconify-icon {
+      color: #57b846;
     }
   }
 }
@@ -183,12 +183,12 @@
       animation: anim-shadow .5s ease-in-out forwards;
     }
 
-    &:focus ~ &-icon {
+    &:focus ~ iconify-icon {
       margin-left: 28px;
     }
 
-    &:focus ~ &-icon path {
-      fill: #57b846;
+    &:focus ~ iconify-icon{
+      color: #57b846;
     }
 
     &-focus {
@@ -203,23 +203,20 @@
       box-shadow: 0 0;
       color: rgba(87,184,70,.8);
     }
+  }
 
-    &-icon {
-      font-size: 15px;
-      position: absolute;
-      border-radius: 25px;
-      bottom: calc((100% - 15px) / 2);
-      left: 0;
-      width: 15px;
-      height: 15px;
-      margin-left: 35px;
-      pointer-events: none;
-      transition: all .4s;
-      display: flex;
-
-      & path {
-        fill: #666;
-      }
-    }
+  iconify-icon {
+    font-size: 15px;
+    position: absolute;
+    border-radius: 25px;
+    bottom: calc((100% - 15px) / 2);
+    left: 0;
+    width: 15px;
+    height: 15px;
+    margin-left: 35px;
+    pointer-events: none;
+    transition: all .4s;
+    display: flex;
+    color: #666;
   }
 }

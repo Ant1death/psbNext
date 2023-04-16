@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import 'iconify-icon';
 import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
@@ -59,7 +59,7 @@ function Vps() {
         </div>
         <ul className={styleAdvantages['advantages__list']}>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="mdi:shield-alert" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="mdi:shield-alert" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Конфиденциальность данных (no logs)
             </h4>
@@ -68,7 +68,7 @@ function Vps() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="ph:globe-hemisphere-west-fill" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Оффшорные юрисдикции серверов
             </h4>
@@ -78,7 +78,7 @@ function Vps() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="teenyicons:contract-outline" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="teenyicons:contract-outline" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               DMCA 100% ignored
             </h4>
@@ -87,7 +87,7 @@ function Vps() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="bx:support" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="bx:support" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Техническая поддержка
             </h4>

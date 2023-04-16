@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react';
+import 'iconify-icon';
 import Layout from '../compontens/Layout/Layout';
 import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
@@ -46,7 +46,7 @@ export default function Abuse() {
         </div>
         <ul className={styleAdvantages['advantages__list']}>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="mdi:shield-alert" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="mdi:shield-alert" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Конфиденциальность данных (no logs)
             </h4>
@@ -55,7 +55,7 @@ export default function Abuse() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="ph:globe-hemisphere-west-fill" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Оффшорные юрисдикции серверов
             </h4>
@@ -65,7 +65,7 @@ export default function Abuse() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="teenyicons:contract-outline" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="teenyicons:contract-outline" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Абузоустойчевые VPS/VDS
             </h4>
@@ -74,7 +74,7 @@ export default function Abuse() {
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
-            <Icon icon="bx:support" className={styleAdvantages['advantages__icon']} />
+            <iconify-icon icon="bx:support" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               Техническая поддержка
             </h4>

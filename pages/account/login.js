@@ -1,5 +1,4 @@
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'iconify-icon';
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
 import style from '../../styles/Auth.module.scss';
@@ -35,10 +34,7 @@ export default function Login() {
               placeholder='Имя пользователя'
             />
             <span className={style['input__field-focus']}></span>
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className={style['input__field-icon']}
-            />
+            <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
           </label>
           <label className={style['input']} htmlFor='password'>
             <input
@@ -50,10 +46,7 @@ export default function Login() {
               placeholder='Пароль'
             />
             <span className={style['input__field-focus']}></span>
-            <FontAwesomeIcon
-              icon={faLock}
-              className={style['input__field-icon']}
-             />
+            <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
         </AuthForm>
       </section>

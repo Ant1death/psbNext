@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import { Icon } from '@iconify/react';
-import { faBold, faRocket } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'iconify-icon';
 import style from '../../styles/AccountSidebar.module.scss';
 
 const AccountSidebar = () => {
@@ -19,7 +17,7 @@ const AccountSidebar = () => {
               Главная страница
             </h3>
             <Link href='/account'>
-              <Icon icon="mi:grid" className={style['sidebar__icon']} />
+              <iconify-icon icon="mi:grid"></iconify-icon>
               Панель управления
             </Link>
           </li>
@@ -30,19 +28,19 @@ const AccountSidebar = () => {
             <ul>
               <li>
                 <Link href='/account/shop'>
-                  <Icon icon="lucide:server" className={style['sidebar__icon']} />
+                  <iconify-icon icon="lucide:server"></iconify-icon>
                   Купить VPS/VDS
                 </Link>
               </li>
               <li>
                 <Link href='/account/shop/bulletproof'>
-                  <FontAwesomeIcon icon={faBold} className={style['sidebar__icon']} />
+                  <iconify-icon icon="ph:text-b-bold"></iconify-icon>
                   Купить Bulletproof VPS/VDS
                 </Link>
               </li>
               <li>
                 <Link href='/account/vpn'>
-                  <FontAwesomeIcon icon={faRocket} className={style['sidebar__icon']} />
+                  <iconify-icon icon="fa6-solid:rocket"></iconify-icon>
                   Купить VPN
                 </Link>
               </li>
@@ -53,7 +51,7 @@ const AccountSidebar = () => {
               Личные финансы
             </h3>
             <Link href='/account/balance'>
-              <Icon icon="lucide:credit-card" className={style['sidebar__icon']} />
+              <iconify-icon icon="lucide:credit-card"></iconify-icon>
               Ваш кошелек
             </Link>
           </li>
@@ -64,13 +62,13 @@ const AccountSidebar = () => {
             <ul>
               <li>
                 <Link href='https://psb-hosting-pro.gitbook.io/documentations/'>
-                  <Icon icon="ci:book-open" className={style['sidebar__icon']} />
+                  <iconify-icon icon="ci:book-open"></iconify-icon>
                   Документация
                 </Link>
               </li>
               <li>
                 <Link href='/account/rules'>
-                  <Icon icon="ci:circle-help" className={style['sidebar__icon']} />
+                  <iconify-icon icon="ci:book-open"></iconify-icon>
                   Правила сервиса
                 </Link>
               </li>

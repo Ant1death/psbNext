@@ -1,5 +1,4 @@
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'iconify-icon';
 import useParralaxOnBlock from '../../../hooks/useParralaxOnBlock';
 import AuthForm from '../../../compontens/AuthForm/AuthForm';
 import style from '../../../styles/Auth.module.scss';
@@ -38,10 +37,7 @@ export default function ResetPassword() {
               placeholder='Электронная почта'
             />
             <span className={style['input__field-focus']}></span>
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className={style['input__field-icon']}
-            />
+            <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
           </label>
         </AuthForm>
       </section>

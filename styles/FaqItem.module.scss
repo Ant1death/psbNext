@@ -10,17 +10,17 @@
     display: flex;
     align-items: center;
 
-    &:hover .faq__icon {
+    & iconify-icon {
+      color: #4e9aa5;
+    }
+
+    &:hover iconify-icon {
       color: #6cd3e3;
     }
 
     &:hover .faq__title {
       color: #6cd3e3;
     }
-  }
-
-  &__icon {
-    color: #4e9aa5;
   }
 
   &__title {

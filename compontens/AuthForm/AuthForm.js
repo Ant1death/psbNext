@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import 'iconify-icon';
 import style from '../../styles/Auth.module.scss';
 
 const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref }) => {
@@ -23,10 +22,7 @@ const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref }) => {
       }
       <Link href={bottomLinkHref} className={`${style['form__link']} ${style['form__link-bottom']}`}>
         {bottomLink}
-        <FontAwesomeIcon
-          icon={faArrowRightLong}
-          className={style['form__bottom-link-icon']}
-        />
+        <iconify-icon icon="material-symbols:arrow-right-alt-rounded"></iconify-icon>
       </Link>
     </form>
   );
