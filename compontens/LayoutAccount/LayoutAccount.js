@@ -32,8 +32,7 @@ const LayoutAccount = ({ children }) => {
       || evt.target.classList.value.toString().includes('popup__notification-title')
       || evt.target.classList.value.toString().includes('popup__notification-nemu')
     ) {
-      closePopupLanguage();
-      closePopupNotification();
+      closeAllPopup();
     }
   }
 
@@ -46,10 +45,15 @@ const LayoutAccount = ({ children }) => {
     setIsOpenPopupNotification(false);
   }
 
+  const closeAllPopup = () => {
+    closePopupLanguage();
+    closePopupNotification();
+  }
+
   useEffect(() => {
     const handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
-        closePopupLanguage();
+        closeAllPopup();
       }
     };
     document.addEventListener('keydown', handleEscClose);
