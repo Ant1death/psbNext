@@ -9,6 +9,8 @@ const AccountHeader = ({
   windowWidth,
   openPopupProfile,
   setXCoordPopupProfile,
+  toggleSidebar,
+  isButtonSidebarMiniHidden,
 }) => {
   const buttonBell = useRef();
   const account = useRef();
@@ -42,8 +44,13 @@ const AccountHeader = ({
   }, [windowWidth]);
 
   return (
-    <header className={style['header']}>
-      <button className={style['header__toggle-sidebar']} type='button' aria-label='button toggle sidebar'></button>
+    <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>
+      <button
+        className={style['header__toggle-sidebar']}
+        type='button'
+        aria-label='button toggle sidebar'
+        onClick={toggleSidebar}
+      ></button>
       <ul className={style['header__navbar']}>
         <li className={style['header__navbar-item']}>
           <button className={style['header__country']} type='button' onClick={chooseLanquage}>

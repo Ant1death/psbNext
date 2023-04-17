@@ -9,6 +9,11 @@
   box-shadow: 0 8px 24px rgba(168, 180, 208, 0.1);
   transition: left 450ms ease, width 450ms ease;
   border-right: 1px solid #e9edf4;
+  z-index: 100;
+
+  &_mini {
+    width: 80px;
+  }
 
   &__header {
     display: flex;
@@ -23,7 +28,7 @@
       height: 100%;
       line-height: 2rem;
       vertical-align: middle;
-      width: auto;
+      width: 100%;
       max-height: 40px;
       object-fit: contain;
     }
@@ -33,10 +38,35 @@
     margin-top: 12px;
     padding: 0 10px;
 
+    &_mini {
+      margin-top: 0;
+    }
+
     &-list {
       display: flex;
       flex-direction: column;
       row-gap: .75rem;
+
+      &_hidden {
+        display: none;
+      }
+    }
+
+    &-mini {
+      display: none;
+      flex-direction: column;
+
+      &_show {
+        display: flex;
+      }
+
+      & .sidebar__item {
+        height: 50px;
+
+        & iconify-icon {
+          color: #282f53;
+        }
+      }
     }
   }
 

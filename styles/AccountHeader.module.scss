@@ -26,19 +26,21 @@
   left: 0;
   right: 0;
   top: 0;
-  width: calc(100% - 270px);
+  width: 100%;
   display: flex;
   border-bottom: 1px solid #e9edf4;
   background: #ffffff;
   transition: padding-left 0.3s ease;
-  padding-left: calc(0.75rem + 10px);
+  padding-left: 280px;
   padding-right: calc(0.75rem + 10px);
-  background-repeat: 10px;
-  margin-left: 270px;
   display: flex;
   height: 75px;
   justify-content: space-between;
   align-items: center;
+
+  &_mini {
+    padding-left: 100px;
+  }
 
   &__toggle-sidebar {
     background-color: transparent;

@@ -19,6 +19,8 @@ const LayoutAccount = ({ children }) => {
   const [isOpenPopupProfile, setIsOpenPopupProfile] = useState(false);
   const [xCoordPopupNotification, setXCoordPopupNotification] = useState(0);
   const [xCoordPopupProfile, setXCoordPopupProfile] = useState(0);
+  const [isButtonSidebarMiniHidden, setIsButtonSidebarMiniHidden] = useState(false);
+  const [isSidebarMini, setIsSideBarMini] = useState(false);
   const windowWidth = useWindowWidth();
 
   const chooseLanquage = () => {
@@ -66,6 +68,24 @@ const LayoutAccount = ({ children }) => {
     closePopupProfile();
   }
 
+  const toggleSidebar = () => {
+    if (isSidebarMini) {
+      setIsSideBarMini(false);
+      setIsButtonSidebarMiniHidden(false);
+    } else {
+      setIsSideBarMini(true);
+      setIsButtonSidebarMiniHidden(true);
+    }
+  }
+
+  const mouseEnterSidebar = () => {
+    if (isSidebarMini) setIsSideBarMini(false);
+  }
+
+  const mouseLeaveSidebar = () => {
+    if (!isSidebarMini && isButtonSidebarMiniHidden) setIsSideBarMini(true);
+  }
+
   useEffect(() => {
     const handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
@@ -88,7 +108,11 @@ const LayoutAccount = ({ children }) => {
       <div className='page-account'
         onClick={handleBackgroundClose}
       >
-        <AccountSidebar />
+        <AccountSidebar
+          isSidebarMini={isSidebarMini}
+          mouseEnterSidebar={mouseEnterSidebar}
+          mouseLeaveSidebar={mouseLeaveSidebar}
+        />
         <AccountHeader
           chooseLanquage={chooseLanquage}
           openPopupNotification={openPopupNotification}
@@ -96,6 +120,8 @@ const LayoutAccount = ({ children }) => {
           openPopupProfile={openPopupProfile}
           setXCoordPopupProfile={setXCoordPopupProfile}
           windowWidth={windowWidth}
+          toggleSidebar={toggleSidebar}
+          isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
         />
           { children }
         <AccountFooter />
