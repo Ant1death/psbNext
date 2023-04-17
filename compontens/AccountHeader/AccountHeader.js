@@ -2,9 +2,16 @@ import 'iconify-icon';
 import { useRef, useEffect } from 'react';
 import style from '../../styles/AccountHeader.module.scss';
 
-const AccountHeader = ({ chooseLanquage, openPopupNotification, setXCoordPopupNotification, windowWidth }) => {
+const AccountHeader = ({
+  chooseLanquage,
+  openPopupNotification,
+  setXCoordPopupNotification,
+  windowWidth,
+  openPopupProfile,
+  setXCoordPopupProfile,
+}) => {
   const buttonBell = useRef();
-
+  const account = useRef();
 
   const sendCoordinates = (evt) => {
     if (windowWidth > 991) {
@@ -13,13 +20,24 @@ const AccountHeader = ({ chooseLanquage, openPopupNotification, setXCoordPopupNo
     } else {
       openPopupNotification(0);
     }
+  }
 
+  const sendCoordinatesProfile = (evt) => {
+    if (windowWidth > 991) {
+      const right = evt.target.getBoundingClientRect().right;
+      openPopupProfile(right);
+    } else {
+      openPopupProfile(0);
+    }
   }
 
   useEffect(() => {
     if (windowWidth > 991) {
       const x = buttonBell.current.getBoundingClientRect().right;
       setXCoordPopupNotification(x);
+
+      const xAccount = account.current.getBoundingClientRect().right;
+      setXCoordPopupProfile(xAccount);
     }
   }, [windowWidth]);
 
@@ -40,7 +58,7 @@ const AccountHeader = ({ chooseLanquage, openPopupNotification, setXCoordPopupNo
           </button>
         </li>
         <li className={`${style['header__navbar-item']} ${style['header__navbar-item_avatar']}`}>
-          <div className={style['header__avatar']}>H</div>
+          <div ref={account} className={style['header__avatar']} onClick={sendCoordinatesProfile}>H</div>
         </li>
       </ul>
     </header>

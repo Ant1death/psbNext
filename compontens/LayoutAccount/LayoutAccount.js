@@ -6,6 +6,7 @@ import AccountFooter from '../AccountFooter/AccountFooter';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import PopupLanguage from '../PopupLanguage/PopupLanguage';
 import PopupNotification from '../PopupNotification/PopupNotification';
+import PopupProfile from '../PopupProfile/PopupProfile';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -15,7 +16,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 const LayoutAccount = ({ children }) => {
   const [isOpenPopupLanguage, setIsOpenPopupLanguage] = useState(false);
   const [isOpenPopupNotification, setIsOpenPopupNotification] = useState(false);
+  const [isOpenPopupProfile, setIsOpenPopupProfile] = useState(false);
   const [xCoordPopupNotification, setXCoordPopupNotification] = useState(0);
+  const [xCoordPopupProfile, setXCoordPopupProfile] = useState(0);
   const windowWidth = useWindowWidth();
 
   const chooseLanquage = () => {
@@ -31,6 +34,9 @@ const LayoutAccount = ({ children }) => {
       || evt.target.classList.value.toString().includes('popup__container')
       || evt.target.classList.value.toString().includes('popup__notification-title')
       || evt.target.classList.value.toString().includes('popup__notification-nemu')
+      || evt.target.classList.value.toString().includes('popup__profile-heading')
+      || evt.target.classList.value.toString().includes('popup__profile-link')
+      || evt.target.classList.value.toString().includes('popup__profile-button-exit')
     ) {
       closeAllPopup();
     }
@@ -41,13 +47,23 @@ const LayoutAccount = ({ children }) => {
     setIsOpenPopupNotification(true);
   }
 
+  const openPopupProfile = (right) => {
+    setXCoordPopupProfile(right);
+    setIsOpenPopupProfile(true);
+  }
+
   const closePopupNotification = () => {
     setIsOpenPopupNotification(false);
+  }
+
+  const closePopupProfile = () => {
+    setIsOpenPopupProfile(false);
   }
 
   const closeAllPopup = () => {
     closePopupLanguage();
     closePopupNotification();
+    closePopupProfile();
   }
 
   useEffect(() => {
@@ -77,6 +93,8 @@ const LayoutAccount = ({ children }) => {
           chooseLanquage={chooseLanquage}
           openPopupNotification={openPopupNotification}
           setXCoordPopupNotification={setXCoordPopupNotification}
+          openPopupProfile={openPopupProfile}
+          setXCoordPopupProfile={setXCoordPopupProfile}
           windowWidth={windowWidth}
         />
           { children }
@@ -88,6 +106,11 @@ const LayoutAccount = ({ children }) => {
         <PopupNotification
           isOpen={isOpenPopupNotification}
           right={xCoordPopupNotification}
+          windowWidth={windowWidth}
+        />
+        <PopupProfile
+          isOpen={isOpenPopupProfile}
+          right={xCoordPopupProfile}
           windowWidth={windowWidth}
         />
       </div>
