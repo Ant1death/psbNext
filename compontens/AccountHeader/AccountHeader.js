@@ -1,14 +1,13 @@
-import Link from 'next/link';
 import 'iconify-icon';
 import style from '../../styles/AccountHeader.module.scss';
 
-const AccountHeader = () => {
+const AccountHeader = ({ chooseLanquage }) => {
   return (
     <header className={style['header']}>
       <button className={style['header__toggle-sidebar']} type='button' aria-label='button toggle sidebar'></button>
       <ul className={style['header__navbar']}>
         <li className={style['header__navbar-item']}>
-          <button className={style['header__country']} type='button'>
+          <button className={style['header__country']} type='button' onClick={chooseLanquage}>
             <iconify-icon icon="ph:globe-light"></iconify-icon>
             <span>Язык</span>
           </button>
