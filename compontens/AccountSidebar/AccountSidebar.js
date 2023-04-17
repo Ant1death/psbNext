@@ -2,10 +2,16 @@ import Link from 'next/link';
 import 'iconify-icon';
 import style from '../../styles/AccountSidebar.module.scss';
 
-const AccountSidebar = ({ isSidebarMini, mouseEnterSidebar, mouseLeaveSidebar }) => {
+const AccountSidebar = ({
+  isSidebarMini,
+  mouseEnterSidebar,
+  mouseLeaveSidebar,
+  isSidebarVisible,
+  windowWidth,
+}) => {
   return (
     <aside
-      className={`${style['sidebar']} ${isSidebarMini ? style['sidebar_mini'] : ''}`}
+      className={`${style['sidebar']} ${isSidebarMini ? style['sidebar_mini'] : ''} ${(isSidebarVisible && windowWidth <= 991) ? style['sidebar_visible'] : ''}`}
       onMouseEnter={mouseEnterSidebar}
       onMouseLeave={mouseLeaveSidebar}
     >

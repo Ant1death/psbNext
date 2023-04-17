@@ -10,9 +10,19 @@
   transition: left 450ms ease, width 450ms ease;
   border-right: 1px solid #e9edf4;
   z-index: 100;
+  overflow: hidden;
 
   &_mini {
     width: 80px;
+  }
+
+  @media screen and (max-width: 991px) {
+    z-index: 10;
+    width: 0;
+  }
+
+  &_visible {
+    width: 270px;
   }
 
   &__header {

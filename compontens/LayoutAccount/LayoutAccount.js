@@ -21,6 +21,7 @@ const LayoutAccount = ({ children }) => {
   const [xCoordPopupProfile, setXCoordPopupProfile] = useState(0);
   const [isButtonSidebarMiniHidden, setIsButtonSidebarMiniHidden] = useState(false);
   const [isSidebarMini, setIsSideBarMini] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const windowWidth = useWindowWidth();
 
   const chooseLanquage = () => {
@@ -69,12 +70,18 @@ const LayoutAccount = ({ children }) => {
   }
 
   const toggleSidebar = () => {
-    if (isSidebarMini) {
+    if (windowWidth > 991) {
+      if (isSidebarMini) {
+        setIsSideBarMini(false);
+        setIsButtonSidebarMiniHidden(false);
+      } else {
+        setIsSideBarMini(true);
+        setIsButtonSidebarMiniHidden(true);
+      }
+    } else {
       setIsSideBarMini(false);
       setIsButtonSidebarMiniHidden(false);
-    } else {
-      setIsSideBarMini(true);
-      setIsButtonSidebarMiniHidden(true);
+      isSidebarVisible ? setIsSidebarVisible(false) : setIsSidebarVisible(true);
     }
   }
 
@@ -112,6 +119,8 @@ const LayoutAccount = ({ children }) => {
           isSidebarMini={isSidebarMini}
           mouseEnterSidebar={mouseEnterSidebar}
           mouseLeaveSidebar={mouseLeaveSidebar}
+          isSidebarVisible={isSidebarVisible}
+          windowWidth={windowWidth}
         />
         <AccountHeader
           chooseLanquage={chooseLanquage}
