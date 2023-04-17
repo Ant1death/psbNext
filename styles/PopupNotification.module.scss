@@ -36,6 +36,7 @@
       width: 90%;
       left: 5%;
       right: 5%;
+      top: 135px;
 
       &::before {
         display: none;
@@ -52,6 +53,7 @@
       border-bottom: 1px solid #e9edf4;
       padding: 1rem 1rem;
       color: #8f9daf;
+      font-weight: 500;
     }
 
     &-nemu {

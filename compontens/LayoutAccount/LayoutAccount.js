@@ -22,6 +22,7 @@ const LayoutAccount = ({ children }) => {
   const [isButtonSidebarMiniHidden, setIsButtonSidebarMiniHidden] = useState(false);
   const [isSidebarMini, setIsSideBarMini] = useState(false);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [isHeaderNamenuVisible, setIsHeaderNamenuVisible] = useState(false);
   const windowWidth = useWindowWidth();
 
   const chooseLanquage = () => {
@@ -93,6 +94,10 @@ const LayoutAccount = ({ children }) => {
     if (!isSidebarMini && isButtonSidebarMiniHidden) setIsSideBarMini(true);
   }
 
+  const toggleHeaderNavmenu = () => {
+    isHeaderNamenuVisible ? setIsHeaderNamenuVisible(false) : setIsHeaderNamenuVisible(true);
+  }
+
   useEffect(() => {
     const handleEscClose = (evt) => {
       if (evt.key === 'Escape') {
@@ -131,6 +136,8 @@ const LayoutAccount = ({ children }) => {
           windowWidth={windowWidth}
           toggleSidebar={toggleSidebar}
           isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
+          isHeaderNamenuVisible={isHeaderNamenuVisible}
+          toggleHeaderNavmenu={toggleHeaderNavmenu}
         />
           { children }
         <AccountFooter />

@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import 'iconify-icon';
-import { useRef, useEffect } from 'react';
+import AccountHeaderNavmenu from '../AccountHeaderNavmenu/AccountHeaderNavmenu';
 import style from '../../styles/AccountHeader.module.scss';
 
 const AccountHeader = ({
@@ -11,37 +12,10 @@ const AccountHeader = ({
   setXCoordPopupProfile,
   toggleSidebar,
   isButtonSidebarMiniHidden,
+  isHeaderNamenuVisible,
+  toggleHeaderNavmenu,
 }) => {
-  const buttonBell = useRef();
-  const account = useRef();
 
-  const sendCoordinates = (evt) => {
-    if (windowWidth > 991) {
-      const right = evt.target.getBoundingClientRect().right;
-      openPopupNotification(right);
-    } else {
-      openPopupNotification(0);
-    }
-  }
-
-  const sendCoordinatesProfile = (evt) => {
-    if (windowWidth > 991) {
-      const right = evt.target.getBoundingClientRect().right;
-      openPopupProfile(right);
-    } else {
-      openPopupProfile(0);
-    }
-  }
-
-  useEffect(() => {
-    if (windowWidth > 991) {
-      const x = buttonBell.current.getBoundingClientRect().right;
-      setXCoordPopupNotification(x);
-
-      const xAccount = account.current.getBoundingClientRect().right;
-      setXCoordPopupProfile(xAccount);
-    }
-  }, [windowWidth]);
 
   return (
     <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>
@@ -51,23 +25,42 @@ const AccountHeader = ({
         aria-label='button toggle sidebar'
         onClick={toggleSidebar}
       ></button>
-      <ul className={style['header__navbar']}>
-        <li className={style['header__navbar-item']}>
-          <button className={style['header__country']} type='button' onClick={chooseLanquage}>
-            <iconify-icon icon="ph:globe-light"></iconify-icon>
-            <span>Язык</span>
-          </button>
-        </li>
-        <li className={style['header__navbar-item']}>
-          <button ref={buttonBell} className={style['header__notifications']} type='button' onClick={sendCoordinates}>
-            <iconify-icon icon="lucide:bell"></iconify-icon>
-            <span className={style['header__pulse']}></span>
-          </button>
-        </li>
-        <li className={`${style['header__navbar-item']} ${style['header__navbar-item_avatar']}`}>
-          <div ref={account} className={style['header__avatar']} onClick={sendCoordinatesProfile}>H</div>
-        </li>
-      </ul>
+      <Link className={style['header__link-logo']} href='/account'>
+        <img src='/logo.png' alt='logo' />
+      </Link>
+      <nav className={style['header__navbar-desktop']}>
+        <AccountHeaderNavmenu
+          chooseLanquage={chooseLanquage}
+          openPopupNotification={openPopupNotification}
+          setXCoordPopupNotification={setXCoordPopupNotification}
+          windowWidth={windowWidth}
+          openPopupProfile={openPopupProfile}
+          setXCoordPopupProfile={setXCoordPopupProfile}
+        />
+      </nav>
+      <button className={style['header__toggler-menu']} type='button' onClick={toggleHeaderNavmenu}>
+        <iconify-icon icon="fluent:more-vertical-24-filled"></iconify-icon>
+      </button>
+      <nav className={`${style['header__mobile-menu']} ${isHeaderNamenuVisible ? style['header__mobile-menu_show'] : ''}`}>
+        <AccountHeaderNavmenu
+          chooseLanquage={chooseLanquage}
+          openPopupNotification={openPopupNotification}
+          setXCoordPopupNotification={setXCoordPopupNotification}
+          windowWidth={windowWidth}
+          openPopupProfile={openPopupProfile}
+          setXCoordPopupProfile={setXCoordPopupProfile}
+        >
+          {/* ToDo: fix search */}
+          <li className={style['header__navbar-item']}>
+            <button
+              className={`${style['header__button']} ${style['header__button_shearch']}`}
+              type='button'
+            >
+              <iconify-icon icon="ion:search"></iconify-icon>
+            </button>
+          </li>
+        </AccountHeaderNavmenu>
+      </nav>
     </header>
   );
 }
