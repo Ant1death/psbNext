@@ -1,4 +1,5 @@
 export const TRANSFORM_AMOUNT = 10;
+export const INDENT_POPUP_NOTIFICATION = 25;
 
 export const FAQ_LIST_VPS = [
   {
