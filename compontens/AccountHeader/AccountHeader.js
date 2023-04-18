@@ -16,7 +16,6 @@ const AccountHeader = ({
   toggleHeaderNavmenu,
 }) => {
 
-
   return (
     <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>
       <button
