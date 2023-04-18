@@ -40,8 +40,8 @@
 
   @media screen and (max-width: 991px) {
     z-index: 100;
-    padding-left: .75rem;
-    padding-right: .75rem;
+    padding-left: calc(15px + .75rem);
+    padding-right: calc(15px + .75rem);
   }
 
   &_mini {
