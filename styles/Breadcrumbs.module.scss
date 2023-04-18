@@ -16,7 +16,6 @@
   }
 
   &__list {
-    font-size: 13px;
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
@@ -24,10 +23,17 @@
 
   &__link {
     color: #76839a;
+    display: flex;
+    align-items: center;
+
+    & a {
+      font-size: 13px;
+    }
   }
 
   &__item {
     color: #79c8c2;
+    font-size: 13px;
 
     &::before {
       display: inline-block;

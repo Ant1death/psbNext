@@ -7,7 +7,7 @@ export const PATH_LIST = {
   shop: 'Магазин услуг',
   bulletproof: 'Магазин услуг',
   vpn: 'Магазин услуг',
-  balanse: 'Ваш кошелек',
+  balance: 'Ваш кошелек',
   rules: 'Правила сервиса',
   new: 'Новая услуга',
 }
