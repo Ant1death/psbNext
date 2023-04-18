@@ -65,6 +65,12 @@ section {
 
 .account-main {
   flex: 1 0 auto;
+  padding: 75px calc(20px + .75rem) 0 calc(290px + .75rem);
+  color: #282f53;
+}
+
+.account-main_sidebar-mini {
+  padding: 75px calc(15px + .75rem) 0 calc(90px + .75rem);
 }
 
 @media screen and (max-width: 1320px) {
@@ -76,6 +82,12 @@ section {
 @media screen and (max-width: 1024px) {
   .container {
     max-width: 700px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .account-main {
+    padding: 75px calc(15px + .75rem) 0 calc(15px + .75rem);
   }
 }
 

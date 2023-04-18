@@ -1,0 +1,40 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0rem 1.5rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  position: relative;
+  min-height: 50px;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+  }
+
+  &__list {
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+  }
+
+  &__link {
+    color: #76839a;
+  }
+
+  &__item {
+    color: #79c8c2;
+
+    &::before {
+      display: inline-block;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      color: rgba(110, 126, 150, 0.4);
+      content: "/";
+    }
+  }
+}

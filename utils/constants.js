@@ -2,6 +2,16 @@ export const TRANSFORM_AMOUNT = 10;
 export const INDENT_POPUP_NOTIFICATION = 25;
 export const INDENT_POPUP_PROFILE = 20;
 
+export const PATH_LIST = {
+  account: 'Панель управления',
+  shop: 'Магазин услуг',
+  bulletproof: 'Магазин услуг',
+  vpn: 'Магазин услуг',
+  balanse: 'Ваш кошелек',
+  rules: 'Правила сервиса',
+  new: 'Новая услуга',
+}
+
 export const FAQ_LIST_VPS = [
   {
     id: 0,

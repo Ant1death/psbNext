@@ -7,6 +7,7 @@ import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import PopupLanguage from '../PopupLanguage/PopupLanguage';
 import PopupNotification from '../PopupNotification/PopupNotification';
 import PopupProfile from '../PopupProfile/PopupProfile';
+import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -139,7 +140,8 @@ const LayoutAccount = ({ children }) => {
           isHeaderNamenuVisible={isHeaderNamenuVisible}
           toggleHeaderNavmenu={toggleHeaderNavmenu}
         />
-          <main className='account-main'>
+          <main className={`account-main ${isSidebarMini ? 'account-main_sidebar-mini' : ''}`}>
+            <Breadcrumbs />
             { children }
           </main>
         <AccountFooter

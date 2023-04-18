@@ -1,4 +1,5 @@
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../styles/Account.module.scss';
 
 Account.getLayout = function getLayout(page) {
@@ -11,6 +12,8 @@ Account.getLayout = function getLayout(page) {
 
 export default function Account() {
   return (
-    <div></div>
+    <>
+
+    </>
   );
 }
