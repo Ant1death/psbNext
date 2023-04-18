@@ -84,7 +84,6 @@
     background-color: transparent;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-    /* transition: box-shadow .15s ease-in-out; */
 
     @media screen and (max-width: 991px) {
       display: block;
@@ -203,7 +202,6 @@
     cursor: pointer;
   }
 
-  // ToDo: fix animation
   &__mobile-menu {
     visibility: hidden;
     overflow: hidden;
@@ -218,11 +216,11 @@
     left: 0;
     right: 0;
     top: 0;
+    transition: height .3s ease-in-out, visibility .3s ease-in-out;
 
     &_show {
       visibility: visible;
       height: 62px;
-      transition: height .3s ease-in-out;
     }
   }
 }
