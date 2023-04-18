@@ -139,8 +139,13 @@ const LayoutAccount = ({ children }) => {
           isHeaderNamenuVisible={isHeaderNamenuVisible}
           toggleHeaderNavmenu={toggleHeaderNavmenu}
         />
-          { children }
-        <AccountFooter />
+          <main className='account-main'>
+            { children }
+          </main>
+        <AccountFooter
+          isSidebarMini={isSidebarMini}
+          windowWidth={windowWidth}
+        />
         <PopupLanguage
           isOpen={isOpenPopupLanguage}
           closePopup={closePopupLanguage}
