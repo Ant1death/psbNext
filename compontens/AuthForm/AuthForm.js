@@ -2,9 +2,9 @@ import Link from 'next/link';
 import 'iconify-icon';
 import style from '../../styles/Auth.module.scss';
 
-const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref }) => {
+const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref, handleSubmitForm }) => {
   return (
-    <form className={style['form']}>
+    <form className={style['form']} onSubmit={handleSubmitForm}>
       <p className={style['form__title']}>
         {title}
       </p>
@@ -20,10 +20,12 @@ const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref }) => {
           </Link>
         </p>
       }
-      <Link href={bottomLinkHref} className={`${style['form__link']} ${style['form__link-bottom']}`}>
-        {bottomLink}
-        <iconify-icon icon="material-symbols:arrow-right-alt-rounded"></iconify-icon>
-      </Link>
+      {bottomLinkHref &&
+        <Link href={bottomLinkHref} className={`${style['form__link']} ${style['form__link-bottom']}`}>
+          {bottomLink}
+          <iconify-icon icon="material-symbols:arrow-right-alt-rounded"></iconify-icon>
+        </Link>
+      }
     </form>
   );
 }

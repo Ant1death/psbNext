@@ -65,6 +65,7 @@
 .form {
   width: 290px;
 
+
   @media (max-width: 992px) {
     width: 50%;
   }
@@ -86,10 +87,15 @@
 
   &__message {
     text-align: center;
-    font-family: inter,sans-serif;
+    font-family: inter, sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #666;
+
+    &_logout {
+      margin-bottom: 48px;
+      align-self: center;
+    }
   }
 
   &__button-submit {

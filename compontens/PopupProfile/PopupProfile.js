@@ -32,10 +32,10 @@ const PopupProfile = ({ isOpen, right, windowWidth }) => {
             </Link>
           </li>
           <li>
-            <button type='button' className={style['popup__profile-button-exit']}>
+            <Link className={style['popup__profile-link']} href='/account/logout'>
               <iconify-icon icon="mdi:alert-circle-outline"></iconify-icon>
               Выйти
-            </button>
+            </Link>
           </li>
         </ul>
       </div>
