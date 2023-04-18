@@ -31,7 +31,7 @@
   border-bottom: 1px solid #e9edf4;
   background: #ffffff;
   transition: padding-left 0.3s ease;
-  padding-left: 280px;
+  padding-left: calc(270px + 0.75rem + 10px);
   padding-right: calc(0.75rem + 10px);
   display: flex;
   height: 75px;
