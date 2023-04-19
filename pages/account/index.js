@@ -60,6 +60,7 @@ export default function Account() {
             if (el.status === 'Заказ в обработке') {
               return (
                 <OrderCardPending
+                  key={el.id}
                   status={el.status}
                   number={el.number}
                   name={el.name}
@@ -70,6 +71,7 @@ export default function Account() {
             if (el.status === 'Запущен') {
               return (
                 <OrderCardSuccess
+                  key={el.id}
                   status={el.status}
                   price={el.price}
                   name={el.name}
