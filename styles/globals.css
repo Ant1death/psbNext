@@ -73,6 +73,29 @@ section {
   padding: 75px calc(15px + .75rem) 0 calc(90px + .75rem);
 }
 
+.section-account {
+  padding: 0;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  background-clip: border-box;
+  border-radius: 7px;
+  box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);
+}
+
+.section-account-title {
+  border-radius: 7px 7px 0 0;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e9edf4;
+  letter-spacing: 0.2px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 @media screen and (max-width: 1320px) {
   .container {
     max-width: 1000px;

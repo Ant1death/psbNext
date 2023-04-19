@@ -16,8 +16,8 @@ Balance.getLayout = function getLayout(page) {
 export default function Balance() {
   return (
     <>
-      <section className={style['section']}>
-        <h3 className={style['section__title']}>
+      <section className='section-account'>
+        <h3 className='section-account-title'>
           Пополнение баланса
         </h3>
         <div className={style['section__body']}>
@@ -42,8 +42,8 @@ export default function Balance() {
           </form>
         </div>
       </section>
-      <section className={style['section']}>
-        <h3 className={style['section__title']}>
+      <section className='section-account'>
+        <h3 className='section-account-title'>
           История платежей
         </h3>
         <div className={style['section__table-wrap']}>
