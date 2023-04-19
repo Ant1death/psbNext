@@ -1,6 +1,10 @@
 import 'iconify-icon';
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
+import OrderCardPending from '../../compontens/OrderCardPending/OrderCardPending';
+import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess';
 import style from '../../styles/Account.module.scss';
+// ToDo: delete after connecting API
+import { orders } from '../../utils/data/orders';
 
 Account.getLayout = function getLayout(page) {
   return (
@@ -51,6 +55,31 @@ export default function Account() {
         <h2 className={style['goods__title']}>
           Активные товары
         </h2>
+        <ul className={style['goods__list']}>
+          {orders.map(el => {
+            if (el.status === 'Заказ в обработке') {
+              return (
+                <OrderCardPending
+                  status={el.status}
+                  number={el.number}
+                  name={el.name}
+                  autoRenewal={el.autoRenewal}
+                />
+              );
+            }
+            if (el.status === 'Запущен') {
+              return (
+                <OrderCardSuccess
+                  status={el.status}
+                  price={el.price}
+                  name={el.name}
+                  autoRenewal={el.autoRenewal}
+                  deadline={el.deadline}
+                />
+              );
+            }
+          })}
+        </ul>
       </section>
     </>
   );
