@@ -16,20 +16,12 @@ const Breadcrumbs = () => {
 
   useEffect(() => {
     const pathWithoutQuery = router.pathname.split('?')[0];
-
-    if (pathWithoutQuery.includes('[')) {
-      const firstInd = pathWithoutQuery.indexOf('[') + 1;
-      const lastInd = pathWithoutQuery.indexOf(']');
-
-      setLastCrumb('Магазин услуг');
-      setPageTitle(`Заказ новой услуги ${pathWithoutQuery.slice(firstInd, lastInd)}`);
-    } else {
-      const pathList = pathWithoutQuery.split('/').filter(el => el.length > 0);
-      const path = replasePath(pathList[pathList.length - 1], PATH_LIST);
+    const pathList = pathWithoutQuery.split('/').filter(el => el.length > 0);
+    const path = pathList.length > 1
+      ? replasePath(pathList[1], PATH_LIST) : replasePath(pathList[0], PATH_LIST);
 
       setLastCrumb(path);
       setPageTitle(path);
-    }
   }, [router]);
 
   return (
