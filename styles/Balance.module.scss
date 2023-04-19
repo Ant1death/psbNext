@@ -86,11 +86,9 @@
       padding: 25px;
     }
 
-    &-result {
+    &-responsive {
       display: block;
       width: 100%;
-      white-space: nowrap;
-      color: #212529;
       overflow-x: auto;
 
       &::-webkit-scrollbar {
@@ -101,10 +99,12 @@
       &::-webkit-scrollbar-thumb {
         background: #f6f6fb;
       }
+    }
 
-      & :not(:last-child)> :last-child>* {
-        border-bottom-color: #e9edf4;
-      }
+    &-result {
+      width: 100%;
+      white-space: nowrap;
+      color: #212529;
 
       & thead {
         vertical-align: bottom;
@@ -115,7 +115,6 @@
           transition: all 0.3s ease;
           vertical-align: bottom;
           border-bottom: 1px solid #e9edf4;
-          border-bottom-width: 1px;
           padding-top: 0.5rem;
           padding-bottom: 0.5rem;
           border-top: 0;
@@ -126,6 +125,35 @@
           text-align: left;
         }
       }
+
+      & tbody {
+        td {
+          border-bottom: 1px solid #e9edf4;
+          padding: 0.73rem;
+          vertical-align: top;
+          border-top: 0;
+          border-bottom-width: 1px;
+          font-size: 14px;
+        }
+
+        .section__table_success {
+          color: #495057;
+          padding: 3px 8px 5px 8px;
+          margin: .25rem .25rem .25rem 0;
+          background: linear-gradient(to bottom right, #1ea38f 0%, #5cf9e2 100%);
+          line-height: 1;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: baseline;
+          border-radius: 50rem;
+          font-size: 0.75em;
+          font-weight: 500;
+        }
+      }
+    }
+
+    &-sum {
+      color: #e82646;
     }
   }
 }

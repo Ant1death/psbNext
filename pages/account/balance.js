@@ -1,6 +1,9 @@
-import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import 'iconify-icon';
+import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
+import RowTableHistory from '../../compontens/RowTableHistory/RowTableHistory';
 import style from '../../styles/Balance.module.scss';
+// ToDo: delete after connecting API
+import { payments } from '../../utils/data/paymentHistory';
 
 Balance.getLayout = function getLayout(page) {
   return (
@@ -44,17 +47,33 @@ export default function Balance() {
           История платежей
         </h3>
         <div className={style['section__table-wrap']}>
-          <table className={style['section__table-result']}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Тип</th>
-                <th>Дата</th>
-                <th>Сумма</th>
-                <th>Статус</th>
-              </tr>
-            </thead>
-          </table>
+          <div className={style['section__table-responsive']}>
+            <table className={style['section__table-result']}>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Тип</th>
+                  <th>Дата</th>
+                  <th>Сумма</th>
+                  <th>Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                {payments.map(el => {
+                  return (
+                    <RowTableHistory
+                      id={el.id}
+                      type={el.type}
+                      date={el.date}
+                      sum={el.sum}
+                      status={el.status}
+                      key={el.id}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </>
