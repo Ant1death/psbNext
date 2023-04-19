@@ -10,6 +10,7 @@ export const PATH_LIST = {
   balance: 'Ваш кошелек',
   rules: 'Правила сервиса',
   new: 'Новая услуга',
+  profile: 'Ваш профиль',
 }
 
 export const FAQ_LIST_VPS = [
