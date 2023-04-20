@@ -17,6 +17,7 @@ AccountVps.getLayout = function getLayout(page) {
 export default function AccountVps() {
   const [amountContry, setAmountContry] = useState([]);
   const [currentCountry, setCurrentCountry] = useState([]);
+  const [selectedSystem, setSelectedSystem] = useState('');
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
 
@@ -34,6 +35,10 @@ export default function AccountVps() {
     }
   }
 
+  const handleChangeSelect = (evt) => {
+    setSelectedSystem(evt.target.value);
+  }
+
   useEffect(() => {
     const map = new Map();
     vpsCountries.forEach(el => {
@@ -45,6 +50,15 @@ export default function AccountVps() {
   useEffect(() => {
     setCurrentCountry(vpsCountries);
   }, []);
+
+  useEffect(() => {
+    if (selectedSystem === '') {
+      setCurrentCountry(vpsCountries);
+    } else {
+      const items = vpsCountries.filter(el => el.systems.includes(selectedSystem));
+      setCurrentCountry(items);
+    }
+  }, [selectedSystem]);
 
   return (
     <section className={style['shop']}>
@@ -63,7 +77,7 @@ export default function AccountVps() {
                 {vpsCountries.length}
               </span>
             </li>
-            {amountContry.map(el => {
+            {amountContry.length > 0 && amountContry.map(el => {
               return (
                 <li key={amountContry.indexOf(el)}>
                   <button className={style['shop__country-button']} onClick={handleCountryClick}>
@@ -82,7 +96,7 @@ export default function AccountVps() {
           <label className={style['shop__system-label']} htmlFor='system'>
             Операционная система
           </label>
-          <select className={style['shop__system-select']} name='system' id='system'>
+          <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
             <option value="Debian 11">Debian 11</option>
             <option value="Ubuntu 22.04">Ubuntu 22.04</option>

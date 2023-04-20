@@ -11,6 +11,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Netherlands',
+    systems: ['Debian 9'],
   },
   {
     id: 1,
@@ -24,6 +25,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Moldowa',
+    systems: ['Ubuntu 22.04'],
   },
   {
     id: 2,
@@ -36,7 +38,8 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
-    country: 'Hong Kong'
+    country: 'Hong Kong',
+    systems: ['Debian 9'],
   },
   {
     id: 3,
@@ -50,6 +53,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'USA',
+    systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
     id: 4,
@@ -63,6 +67,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Germany',
+    systems: ['Debian 9'],
   },
   {
     id: 5,
@@ -76,6 +81,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
     id: 6,
@@ -89,6 +95,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Debian 9'],
   },
   {
     id: 7,
@@ -102,6 +109,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Ubuntu 22.04'],
   },
   {
     id: 8,
@@ -115,6 +123,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Ubuntu 22.04'],
   },
   {
     id: 9,
@@ -128,6 +137,7 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
     id: 10,
@@ -141,5 +151,6 @@ export const vpsCountries = [
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
+    systems: ['Debian 9', 'Ubuntu 22.04'],
   },
 ]
