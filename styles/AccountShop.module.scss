@@ -117,6 +117,10 @@
     @media screen and (max-width: 991px) {
       width: 100%;
     }
+
+    &_vpn {
+      width: 100%;
+    }
   }
 
   &__search {
@@ -206,6 +210,32 @@
       width: 100%;
     }
 
+    &_vpn {
+      @media screen and (max-width: 1391px) {
+        width: calc(95% / 3);
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 48.75%;
+      }
+
+      @media screen and (max-width: 576px) {
+        width: 100%;
+      }
+    }
+
+    &-flag {
+      border-radius: 50%;
+      height: 25px;
+      width: 25px;
+      object-fit: cover;
+      margin-right: 5px;
+
+      &_vpn {
+        display: inline-block;
+      }
+    }
+
     &_list {
       width: 100%;
       flex-direction: row;
@@ -243,6 +273,9 @@
       margin: 0 25px 7px 25px;
       text-transform: capitalize;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &_list {
         margin-bottom: 0.75rem;

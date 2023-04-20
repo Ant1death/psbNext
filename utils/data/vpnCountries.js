@@ -9,6 +9,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 1,
@@ -20,6 +21,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 2,
@@ -31,6 +33,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 3,
@@ -42,6 +45,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 4,
@@ -53,6 +57,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 5,
@@ -64,6 +69,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 6,
@@ -75,6 +81,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 7,
@@ -86,6 +93,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 8,
@@ -97,6 +105,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 9,
@@ -108,6 +117,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 10,
@@ -119,6 +129,7 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
   {
     id: 11,
@@ -130,5 +141,6 @@ export const vpnCountries = [
     support: 'Поддержка 24/7',
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
+    title: 'Italy',
   },
 ];
