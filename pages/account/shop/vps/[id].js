@@ -1,4 +1,6 @@
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import NewServise from '../../../../compontens/NewService/NewServise';
+import style from '../../../../styles/NewServise.module.scss';
 
 VpsItem.getLayout = function getLayout(page) {
   return (
@@ -10,6 +12,8 @@ VpsItem.getLayout = function getLayout(page) {
 
 export default function VpsItem() {
   return (
-    <div></div>
+    <NewServise>
+
+    </NewServise>
   );
 }
