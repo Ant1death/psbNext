@@ -6,6 +6,12 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+      'Ubuntu 18.04',
+      'Ubuntu 20.04',
+    ],
   },
   {
     id: 1,
@@ -14,6 +20,12 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+      'Ubuntu 18.04',
+      'Ubuntu 20.04',
+    ],
   },
   {
     id: 2,
@@ -22,6 +34,11 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+      'Windows',
+    ],
   },
   {
     id: 3,
@@ -30,6 +47,10 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+    ],
   },
   {
     id: 4,
@@ -38,6 +59,10 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+    ],
   },
   {
     id: 5,
@@ -46,5 +71,11 @@ export const abuseList = [
     vCPU: 'vCPU 2x',
     RAM: 'RAM 4GB',
     SSD: 'SSD 20GB',
+    systems: [
+      'Centos 7',
+      'Centos 8 Stream',
+      'Debian 9',
+      'Debian 10',
+    ],
   },
 ]
