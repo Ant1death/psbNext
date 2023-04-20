@@ -18,6 +18,7 @@ export default function AccountVps() {
   const [amountContry, setAmountContry] = useState([]);
   const [currentCountry, setCurrentCountry] = useState([]);
   const [selectedSystem, setSelectedSystem] = useState('');
+  const [seachedItem, setSeachedItem] = useState('');
   const [systemList, setSystemList] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
@@ -38,6 +39,10 @@ export default function AccountVps() {
 
   const handleChangeSelect = (evt) => {
     setSelectedSystem(evt.target.value);
+  }
+
+  const handleSearchItem = (evt) => {
+    setSeachedItem(evt.target.value);
   }
 
   useEffect(() => {
@@ -68,6 +73,18 @@ export default function AccountVps() {
       setCurrentCountry(items);
     }
   }, [selectedSystem]);
+
+  useEffect(() => {
+    if (seachedItem === '') {
+      setCurrentCountry(vpsCountries);
+    } else {
+      const search = seachedItem.toLowerCase();
+      const items = vpsCountries.filter(el =>
+        el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
+      );
+      setCurrentCountry(items);
+    }
+  }, [seachedItem]);
 
   return (
     <section className={style['shop']}>
@@ -123,7 +140,9 @@ export default function AccountVps() {
               placeholder='Введите название'
               className={style['shop__search-input']}
               name='search'
+              onChange={handleSearchItem}
             />
+            {/* ToDo: is it necessary? */}
             <button type='submit' className={style['shop__search-button']}>
               <iconify-icon icon="ion:search"></iconify-icon>
             </button>

@@ -135,6 +135,10 @@
       border: 1px solid #e9edf4;
       border-radius: 7px;
       width: 192px;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     &-button {
