@@ -150,4 +150,28 @@
       opacity: .8;
     }
   }
+
+  &__title-item {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__flag {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    margin-right: 5px;
+  }
+
+  &__price {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+    font-weight: 500;
+    font-size: 1.125rem;
+  }
 }

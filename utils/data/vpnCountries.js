@@ -10,6 +10,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 1,
@@ -22,6 +28,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 2,
@@ -34,6 +46,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 3,
@@ -46,6 +64,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 4,
@@ -58,6 +82,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 5,
@@ -70,6 +100,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 6,
@@ -82,6 +118,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 7,
@@ -94,6 +136,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 8,
@@ -106,6 +154,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 9,
@@ -118,6 +172,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 10,
@@ -130,6 +190,12 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
   {
     id: 11,
@@ -142,5 +208,11 @@ export const vpnCountries = [
     traffic: 'Безлимитный трафик',
     device: '1 активное устройство',
     country: 'Italy',
+    subscription: [
+      '1 месяц',
+      '3 месяца - 5 %',
+      '6 месяцев - 10 %',
+      '12 месяцев - 15 %',
+    ],
   },
 ];
