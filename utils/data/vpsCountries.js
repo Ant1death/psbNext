@@ -10,6 +10,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Netherlands',
   },
   {
     id: 1,
@@ -22,6 +23,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Moldowa',
   },
   {
     id: 2,
@@ -34,6 +36,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Hong Kong'
   },
   {
     id: 3,
@@ -46,6 +49,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'USA',
   },
   {
     id: 4,
@@ -58,6 +62,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Germany',
   },
   {
     id: 5,
@@ -70,6 +75,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
   {
     id: 6,
@@ -82,6 +88,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
   {
     id: 7,
@@ -94,6 +101,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
   {
     id: 8,
@@ -106,6 +114,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
   {
     id: 9,
@@ -118,6 +127,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
   {
     id: 10,
@@ -130,5 +140,6 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
+    country: 'Canada',
   },
 ]
