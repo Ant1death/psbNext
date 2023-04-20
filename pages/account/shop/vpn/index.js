@@ -24,7 +24,7 @@ export default function AccountVpn() {
   const classItemTitle = `${style['shop__item-title']}`;
   const classPriceWrapItem = `${style['shop__item-price-wrap']}`;
   const classPriceItem = `${style['shop__item-price']}`;
-  const flagCountryClass = `${style['shop__item-flag']} ${style['shop__item-flag_vpn']}`;
+  const flagCountryClass = `${style['shop__item-flag']}`;
 
   const handleSearchItem = (evt) => {
     setSeachedItem(evt.target.value);
