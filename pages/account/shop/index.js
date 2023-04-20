@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'iconify-icon';
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 import style from '../../../styles/AccountShop.module.scss';
@@ -15,11 +15,36 @@ AccountVps.getLayout = function getLayout(page) {
 }
 
 export default function AccountVps() {
+  const [amountContry, setAmountContry] = useState([]);
+  const [currentCountry, setCurrentCountry] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
 
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
+
+  const handleCountryClick = (evt) => {
+    const country = evt.target.textContent;
+
+    if (country === 'Все страны') {
+      setCurrentCountry(vpsCountries);
+    } else {
+      const items = vpsCountries.filter(el => el.country === country);
+      setCurrentCountry(items);
+    }
+  }
+
+  useEffect(() => {
+    const map = new Map();
+    vpsCountries.forEach(el => {
+      map.has(el.country) ? map.set(el.country, map.get(el.country) + 1) : map.set(el.country, 1);
+    });
+    setAmountContry(Array.from(map));
+  }, []);
+
+  useEffect(() => {
+    setCurrentCountry(vpsCountries);
+  }, []);
 
   return (
     <section className={style['shop']}>
@@ -30,68 +55,27 @@ export default function AccountVps() {
           </h2>
           <ul className={style['shop__country-list']}>
             <li>
-              <button className={style['shop__country-button']}>
+              <button className={style['shop__country-button']} onClick={handleCountryClick}>
                 <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
                 Все страны
               </button>
               <span className={style['shop__country-amount']}>
-                66
+                {vpsCountries.length}
               </span>
             </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Netherlands
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Moldowa
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Hong Kong
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                USA
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Germany
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
-            <li>
-              <button className={style['shop__country-button']}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Canada
-              </button>
-              <span className={style['shop__country-amount']}>
-                66
-              </span>
-            </li>
+            {amountContry.map(el => {
+              return (
+                <li key={amountContry.indexOf(el)}>
+                  <button className={style['shop__country-button']} onClick={handleCountryClick}>
+                    <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
+                    {el[0]}
+                  </button>
+                  <span className={style['shop__country-amount']}>
+                    {el[1]}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <form className={`${style['shop__system']} ${style['card']}`}>
@@ -157,7 +141,7 @@ export default function AccountVps() {
           </ul>
         </div>
         <ul className={style['shop__card-list']}>
-          {vpsCountries.map(el => {
+          {currentCountry.map(el => {
             return (
               <li key={el.id} className={`${style['card']} ${style['shop__item']}`}>
                 <h2 className={style['shop__item-title']}>
