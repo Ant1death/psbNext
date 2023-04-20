@@ -12,6 +12,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Netherlands',
     systems: ['Debian 9'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 111,
@@ -26,6 +32,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Moldowa',
     systems: ['Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 112,
@@ -40,6 +52,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Hong Kong',
     systems: ['Debian 9'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 113,
@@ -54,6 +72,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'USA',
     systems: ['Debian 9', 'Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 114,
@@ -68,6 +92,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Germany',
     systems: ['Debian 9'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 115,
@@ -82,6 +112,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
     systems: ['Debian 9', 'Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 116,
@@ -96,6 +132,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
     systems: ['Debian 9'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 117,
@@ -110,6 +152,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
     systems: ['Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 118,
@@ -124,6 +172,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
     systems: ['Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 119,
@@ -138,6 +192,12 @@ export const vpsCountries = [
     bandwidth: 'Unmetered bandwidth',
     country: 'Canada',
     systems: ['Debian 9', 'Ubuntu 22.04'],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
+    ],
   },
   {
     id: 1910,
@@ -175,6 +235,12 @@ export const vpsCountries = [
       'Windows Server 2019 RUS',
       'Windows Server 2019',
       'Windows Server 2022',
+    ],
+    panel: [
+      'Без панели управления - 0$',
+      'ISPmanager 6 Lite - 7$',
+      'ISPmanager 6 Lite - 8$',
+      'ISPmanager 6 Lite - 9$',
     ],
   },
 ]
