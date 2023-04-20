@@ -3,6 +3,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { PATH_LIST } from '../../utils/constants';
 import style from '../../styles/Breadcrumbs.module.scss';
+// ToDo: delete after connecting API
+import { vpnCountries } from '../../utils/data/vpnCountries';
+import { vpsCountries } from '../../utils/data/vpsCountries';
+import { abuseList } from '../../utils/data/abuseList';
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -14,14 +18,39 @@ const Breadcrumbs = () => {
     return crumb;
   }
 
-  useEffect(() => {
-    const pathWithoutQuery = router.pathname.split('?')[0];
-    const pathList = pathWithoutQuery.split('/').filter(el => el.length > 0);
-    const path = pathList.length > 1
-      ? replasePath(pathList[1], PATH_LIST) : replasePath(pathList[0], PATH_LIST);
+  const findNameItemWhithId = (itemList, id) => {
+    const item = itemList.find(el => el.id === id);
 
+    return item.title;
+  }
+
+  useEffect(() => {
+    const pathWithoutQuery = router.asPath.split('?')[0];
+    const asPath = pathWithoutQuery.split('/').filter(el => el.length > 0);
+
+    if (asPath.length === 1) {
+      const path = replasePath(asPath[0], PATH_LIST);
       setLastCrumb(path);
       setPageTitle(path);
+    } else if (asPath.length === 4 && (asPath.includes('shop'))) {
+      let name = '';
+
+      if (asPath[2] === 'vps') {
+        name = findNameItemWhithId(vpsCountries, +asPath[3]);
+      } if (asPath[2] === 'vpn') {
+        name = findNameItemWhithId(vpnCountries, +asPath[3]);
+      } if (asPath[2] === 'bulletproof') {
+        name = findNameItemWhithId(abuseList, +asPath[3]);
+      }
+
+      const title = `Заказ новой услуги ${name}`;
+      setPageTitle(title);
+      setLastCrumb('Магазин услуг');
+    } else {
+      const path = replasePath(asPath[1], PATH_LIST);
+      setLastCrumb(path);
+      setPageTitle(path);
+    }
   }, [router]);
 
   return (

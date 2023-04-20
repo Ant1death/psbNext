@@ -80,7 +80,7 @@ export default function AccountVpn() {
                       className={flagCountryClass}
                     />
                     <Link href={`/account/shop/vpn/${el.id}`}>
-                      {`${el.country} - ${el.title}`}
+                      {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
                   <ul className={style['shop__item-list']}>

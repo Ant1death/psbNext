@@ -6,8 +6,8 @@ const VpnCard = ({ vpnItem }) => {
     <li className={style['card']}>
       <div className={style['card__title']}>
         <h3 className={style['card__h3-title']}>
-          <img src={vpnItem.img} alt={vpnItem.country} className={style['card__img']} />
-          {vpnItem.country}
+          <img src={vpnItem.img} alt={vpnItem.title} className={style['card__img']} />
+          {vpnItem.title}
         </h3>
         <p className={style['card__price']}>
           {vpnItem.price}
