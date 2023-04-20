@@ -27,7 +27,7 @@ const LinkToBuyVpn = ({ page }) => {
         </li>
       </ul>
       <button className={`${style['about__wrapper-btn']} ${page === 'vpn' ? style['about__wrapper-btn-vpn'] : ''}`}>
-        <Link href="/account/vpn">Купить VPN</Link>
+        <Link href="/account/shop/vpn">Купить VPN</Link>
       </button>
     </>
   );

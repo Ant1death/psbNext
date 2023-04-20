@@ -1,6 +1,6 @@
 export const vpsCountries = [
   {
-    id: 0,
+    id: 110,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -14,7 +14,7 @@ export const vpsCountries = [
     systems: ['Debian 9'],
   },
   {
-    id: 1,
+    id: 111,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -28,7 +28,7 @@ export const vpsCountries = [
     systems: ['Ubuntu 22.04'],
   },
   {
-    id: 2,
+    id: 112,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -42,7 +42,7 @@ export const vpsCountries = [
     systems: ['Debian 9'],
   },
   {
-    id: 3,
+    id: 113,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -56,7 +56,7 @@ export const vpsCountries = [
     systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
-    id: 4,
+    id: 114,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -70,7 +70,7 @@ export const vpsCountries = [
     systems: ['Debian 9'],
   },
   {
-    id: 5,
+    id: 115,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -84,7 +84,7 @@ export const vpsCountries = [
     systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
-    id: 6,
+    id: 116,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -98,7 +98,7 @@ export const vpsCountries = [
     systems: ['Debian 9'],
   },
   {
-    id: 7,
+    id: 117,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -112,7 +112,7 @@ export const vpsCountries = [
     systems: ['Ubuntu 22.04'],
   },
   {
-    id: 8,
+    id: 118,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -126,7 +126,7 @@ export const vpsCountries = [
     systems: ['Ubuntu 22.04'],
   },
   {
-    id: 9,
+    id: 119,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',
@@ -140,7 +140,7 @@ export const vpsCountries = [
     systems: ['Debian 9', 'Ubuntu 22.04'],
   },
   {
-    id: 10,
+    id: 1910,
     title: 'NL-1',
     price: '$8/мес.',
     DMCA: 'DMCA 100% ignored',

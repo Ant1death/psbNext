@@ -49,7 +49,7 @@ const AccountSidebar = ({
                 </Link>
               </li>
               <li>
-                <Link href='/account/vpn'>
+                <Link href='/account/shop/vpn'>
                   <iconify-icon icon="fa6-solid:rocket"></iconify-icon>
                   Купить VPN
                 </Link>

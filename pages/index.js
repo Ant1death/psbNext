@@ -61,7 +61,7 @@ export default function Home() {
               <p>Offshore hosting</p>
               <p>Linux & Windows</p>
             </div>
-            <a href="/vps" className={style['country__item-btn']}>Show Plans</a>
+            <Link href="/vps" className={style['country__item-btn']}>Show Plans</Link>
           </div>
           <div className={style.country__item}>
             <img src="/us.svg" alt="USA" className={style['country__item-img']}/>
@@ -70,7 +70,7 @@ export default function Home() {
               <p>Offshore hosting</p>
               <p>Linux & Windows</p>
             </div>
-            <a href="/vps" className={style['country__item-btn']}>Show Plans</a>
+            <Link href="/vps" className={style['country__item-btn']}>Show Plans</Link>
           </div>
           <div className={style.country__item}>
             <img src="/nl.svg" alt="Hong Kong" className={style['country__item-img']}/>
@@ -79,7 +79,7 @@ export default function Home() {
               <p>Offshore hosting</p>
               <p>Linux & Windows</p>
             </div>
-            <a href="/vps" className={style['country__item-btn']}>Show Plans</a>
+            <Link href="/vps" className={style['country__item-btn']}>Show Plans</Link>
           </div>
         </div>
       </section>
