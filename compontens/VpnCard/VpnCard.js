@@ -20,7 +20,7 @@ const VpnCard = ({ vpnItem }) => {
         <li>{vpnItem.traffic}</li>
         <li>{vpnItem.device}</li>
       </ul>
-      <Link href={`/account/shop/new/${vpnItem.id}`}>
+      <Link href={`/account/shop/vpn/${vpnItem.id}`}>
         Заказать VPN
       </Link>
     </li>

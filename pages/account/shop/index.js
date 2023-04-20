@@ -186,12 +186,12 @@ export default function AccountVps() {
           {currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/new/${el.id}`} className={imgItemClass}>
+                <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
                   <img src='/server.png' alt='icon server' />
                 </Link>
                 <div className={classWrapTitle}>
                   <h2 className={classItemTitle}>
-                    <Link href={`/account/shop/new/${el.id}`}>
+                    <Link href={`/account/shop/vps/${el.id}`}>
                       {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
@@ -209,7 +209,7 @@ export default function AccountVps() {
                   <p className={classPriceItem}>
                     {isListActive ? el.price.split('/')[0] : el.price}
                   </p>
-                  <Link href={`/account/shop/new/${el.id}`} className={style['shop__button-cta']}>
+                  <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
                     &nbsp;Мгновенная покупка
                   </Link>

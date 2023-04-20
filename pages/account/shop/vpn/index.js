@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import 'iconify-icon';
-import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
-import style from '../../../styles/AccountShop.module.scss';
+import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import style from '../../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
-import { vpnCountries } from '../../../utils/data/vpnCountries';
+import { vpnCountries } from '../../../../utils/data/vpnCountries';
 
 AccountVpn.getLayout = function getLayout(page) {
   return (
@@ -24,6 +24,7 @@ export default function AccountVpn() {
   const classItemTitle = `${style['shop__item-title']}`;
   const classPriceWrapItem = `${style['shop__item-price-wrap']}`;
   const classPriceItem = `${style['shop__item-price']}`;
+  const flagCountryClass = `${style['shop__item-flag']} ${style['shop__item-flag_vpn']}`;
 
   const handleSearchItem = (evt) => {
     setSeachedItem(evt.target.value);
@@ -68,7 +69,7 @@ export default function AccountVpn() {
           {currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/new/${el.id}`} className={imgItemClass}>
+                <Link href={`/account/shop/vpn/${el.id}`} className={imgItemClass}>
                   <img src='/server.png' alt='icon server' />
                 </Link>
                 <div className={classWrapTitle}>
@@ -76,9 +77,9 @@ export default function AccountVpn() {
                     <img
                       src={el.img}
                       alt={`icon ${el.title}`}
-                      className={`${style['shop__item-flag']} ${style['shop__item-flag_vpn']}`}
+                      className={flagCountryClass}
                     />
-                    <Link href={`/account/shop/new/${el.id}`}>
+                    <Link href={`/account/shop/vpn/${el.id}`}>
                       {`${el.country} - ${el.title}`}
                     </Link>
                   </h2>
@@ -93,7 +94,7 @@ export default function AccountVpn() {
                   <p className={classPriceItem}>
                     {el.price.split('/')[0]}
                   </p>
-                  <Link href={`/account/shop/new/${el.id}`} className={style['shop__button-cta']}>
+                  <Link href={`/account/shop/vpn/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
                     &nbsp;Мгновенная покупка
                   </Link>

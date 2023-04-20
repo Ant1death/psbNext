@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import 'iconify-icon';
-import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
-import style from '../../../styles/AccountShop.module.scss';
+import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import style from '../../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
-import { abuseList } from '../../../utils/data/abuseList';
+import { abuseList } from '../../../../utils/data/abuseList';
 
 Bulletproof.getLayout = function getLayout(page) {
   return (
@@ -159,13 +159,13 @@ export default function Bulletproof() {
           {currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/new/${el.id}`} className={imgItemClass}>
+                <Link href={`/account/shop/bulletproof/${el.id}`} className={imgItemClass}>
                   <img src='/server.png' alt='icon server' />
                 </Link>
                 <div className={classWrapTitle}>
                   <h2 className={classItemTitle}>
-                    <Link href={`/account/shop/new/${el.id}`}>
-                      {`${el.title} - ${el.country}`}
+                    <Link href={`/account/shop/bulletproof/${el.id}`}>
+                      {el.title}
                     </Link>
                   </h2>
                   <ul className={style['shop__item-list']}>
@@ -178,7 +178,7 @@ export default function Bulletproof() {
                   <p className={classPriceItem}>
                     {el.price.split('/')[0]}
                   </p>
-                  <Link href={`/account/shop/new/${el.id}`} className={style['shop__button-cta']}>
+                  <Link href={`/account/shop/bulletproof/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
                     &nbsp;Мгновенная покупка
                   </Link>
