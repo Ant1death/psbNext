@@ -21,7 +21,7 @@ const Breadcrumbs = () => {
   const findNameItemWhithId = (itemList, id) => {
     const item = itemList.find(el => el.id === id);
 
-    return item.title;
+    if (item) return item.title;
   }
 
   useEffect(() => {
