@@ -18,6 +18,7 @@ export default function AccountVps() {
   const [amountContry, setAmountContry] = useState([]);
   const [currentCountry, setCurrentCountry] = useState([]);
   const [selectedSystem, setSelectedSystem] = useState('');
+  const [systemList, setSystemList] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
 
@@ -49,6 +50,14 @@ export default function AccountVps() {
 
   useEffect(() => {
     setCurrentCountry(vpsCountries);
+  }, []);
+
+  useEffect(() => {
+    const set = new Set();
+    vpsCountries.forEach(el => {
+      el.systems.forEach(system => set.add(system));
+    });
+    setSystemList(Array.from(set));
   }, []);
 
   useEffect(() => {
@@ -98,30 +107,11 @@ export default function AccountVps() {
           </label>
           <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
-            <option value="Debian 11">Debian 11</option>
-            <option value="Ubuntu 22.04">Ubuntu 22.04</option>
-            <option value="Centos 7">Centos 7</option>
-            <option value="Windows 10">Windows 10</option>
-            <option value="Centos 8 Stream">Centos 8 Stream</option>
-            <option value="Centos 9 Stream">Centos 9 Stream</option>
-            <option value="Alma Linux 8">Alma Linux 8</option>
-            <option value="Rocky Linux 8">Rocky Linux 8</option>
-            <option value="VzLinux 8">VzLinux 8</option>
-            <option value="Debian 9">Debian 9</option>
-            <option value="Debian 10">Debian 10</option>
-            <option value="Oracle Linux 8">Oracle Linux 8</option>
-            <option value="Ubuntu 16.04">Ubuntu 16.04</option>
-            <option value="Ubuntu 18.04">Ubuntu 18.04</option>
-            <option value="Ubuntu 20.04">Ubuntu 20.04</option>
-            <option value="FreeBSD 12">FreeBSD 12</option>
-            <option value="FreeBSD 13">FreeBSD 13</option>
-            <option value="Astra Linux CE">Astra Linux CE</option>
-            <option value="Windows Server 2012">Windows Server 2012</option>
-            <option value="Windows Server 2016">Windows Server 2016</option>
-            <option value="Windows Server 2019 Datacenter">Windows Server 2019 Datacenter</option>
-            <option value="Windows Server 2019 RUS">Windows Server 2019 RUS</option>
-            <option value="Windows Server 2019">Windows Server 2019</option>
-            <option value="Windows Server 2022">Windows Server 2022</option>
+            {systemList.length > 0 && systemList.map(el => {
+              return (
+                <option key={systemList.indexOf(el)} value={el}>{el}</option>
+              );
+            })}
           </select>
         </form>
       </div>

@@ -95,6 +95,10 @@
       background-position: calc(100% - .5rem) center;
       background-size: 12.25px;
 
+      &:focus {
+        outline: none;
+      }
+
       & option {
         line-height: 1.5;
         color: #76839a;
