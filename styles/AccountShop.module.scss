@@ -95,6 +95,10 @@
       background-position: calc(100% - .5rem) center;
       background-size: 12.25px;
 
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
       &:focus {
         outline: none;
       }
