@@ -12,6 +12,9 @@ export const abuseList = [
       'Ubuntu 18.04',
       'Ubuntu 20.04',
     ],
+    panel: [
+      'Без лицензии - 0$',
+    ],
   },
   {
     id: 441,
@@ -26,6 +29,9 @@ export const abuseList = [
       'Ubuntu 18.04',
       'Ubuntu 20.04',
     ],
+    panel: [
+      'Без лицензии - 0$',
+    ],
   },
   {
     id: 442,
@@ -39,6 +45,9 @@ export const abuseList = [
       'Centos 8 Stream',
       'Windows',
     ],
+    panel: [
+      'Без лицензии - 0$',
+    ],
   },
   {
     id: 443,
@@ -51,6 +60,9 @@ export const abuseList = [
       'Centos 7',
       'Centos 8 Stream',
     ],
+    panel: [
+      'Без лицензии - 0$',
+    ],
   },
   {
     id: 444,
@@ -62,6 +74,9 @@ export const abuseList = [
     systems: [
       'Centos 7',
       'Centos 8 Stream',
+    ],
+    panel: [
+      'Без лицензии - 0$',
     ],
   },
   {
@@ -76,6 +91,9 @@ export const abuseList = [
       'Centos 8 Stream',
       'Debian 9',
       'Debian 10',
+    ],
+    panel: [
+      'Без лицензии - 0$',
     ],
   },
 ]
