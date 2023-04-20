@@ -1,6 +1,11 @@
 import style from '../../styles/NewServise.module.scss';
 
 const NewServise = ({ children }) => {
+
+  const handleChangePayment = () => {}
+
+  const handleChangeBalance = () => {}
+
   return (
     <section className={style['card']}>
       <h2 className={style['card__title']}>
@@ -20,6 +25,7 @@ const NewServise = ({ children }) => {
               id='balance'
               value='balance'
               checked={true}
+              onChange={handleChangeBalance}
             />
             <span className={style['card__form-span']}>
               С баланса
@@ -32,6 +38,7 @@ const NewServise = ({ children }) => {
               name='bill'
               id='payment'
               value='payment'
+              onChange={handleChangePayment}
             />
             <span className={style['card__form-span']}>
               С платежной системы
