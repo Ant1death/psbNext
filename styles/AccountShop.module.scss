@@ -257,6 +257,11 @@
         margin-top: 25px;
         margin-left: 25px;
         width: calc(25% - 25px);
+
+        @media screen and (max-width: 1280px) {
+          align-self: center;
+          margin-left: 0;
+        }
       }
     }
 
