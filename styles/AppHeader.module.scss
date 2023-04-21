@@ -69,6 +69,13 @@
 
     &_show {
       @media screen and (max-width: 1100px) {
+        li {
+          .header__login {
+            width: 100%;
+          }
+        }
+
+
         & {
           display: flex;
           padding: 0 7px;

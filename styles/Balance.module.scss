@@ -39,9 +39,13 @@
       background-color: #fff;
       background-clip: padding-box;
       border: 1px solid #e9edf4;
-      border-radius: 7px;
+      border-radius: 7px 0 0 7px;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
       width: calc(100% - 107px);
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 
@@ -58,6 +62,7 @@
     border: 1px solid  #79c8c2;
     letter-spacing: 0.03em;
     border-radius: 0 5px 5px 0;
+    cursor: pointer;
   }
 
   &__table {

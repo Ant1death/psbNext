@@ -26,6 +26,10 @@
     border: 1px solid #e9edf4;
     border-radius: 7px;
     margin-top: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &__error {
