@@ -8,6 +8,7 @@ import PopupLanguage from '../PopupLanguage/PopupLanguage';
 import PopupNotification from '../PopupNotification/PopupNotification';
 import PopupProfile from '../PopupProfile/PopupProfile';
 import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
+import ButtonToTop from '../../compontens/ButtonToTop/ButtonToTop';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -162,6 +163,7 @@ const LayoutAccount = ({ children }) => {
           right={xCoordPopupProfile}
           windowWidth={windowWidth}
         />
+        <ButtonToTop />
       </div>
     </div>
   );

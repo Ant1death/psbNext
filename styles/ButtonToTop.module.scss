@@ -1,0 +1,23 @@
+.button {
+  background: #79c8c2;
+  border: 2px solid #79c8c2;
+  color: #fff;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  //display: none;
+  text-align: center;
+  z-index: 100000;
+  height: 50px;
+  width: 50px;
+  transition: background-color 0.1s linear;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 0;
+
+  &:hover {
+    background-color: #fff;
+    color: #79c8c2;
+  }
+}
