@@ -1,13 +1,16 @@
 import 'iconify-icon';
+import useScrollToTop from '../../hooks/useScrollToTop';
 import style from '../../styles/ButtonToTop.module.scss';
 
 const ButtonToTop = () => {
-  const goToTop = () => {
-
-  }
+  const { scroll, goToTop } = useScrollToTop();
 
   return (
-    <button type='buuton' onClick={goToTop} className={style.button}>
+    <button
+      type='buuton'
+      onClick={goToTop}
+      className={`${style.button} ${scroll > 20 ? style['button_visible'] : ''}`}
+    >
       <iconify-icon icon="mdi:chevron-up"></iconify-icon>
     </button>
   );
