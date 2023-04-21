@@ -56,13 +56,6 @@ export default function AccountVpn() {
               name='search'
               onChange={handleSearchItem}
             />
-            {/* ToDo: is it necessary? */}
-            <button type='submit' className={style['shop__search-button']}>
-              <iconify-icon icon="ion:search"></iconify-icon>
-            </button>
-            <button type='button' className={style['shop__search-button']}>
-              <iconify-icon icon="ion:chevron-back-outline"></iconify-icon>
-            </button>
           </form>
         </div>
         <ul className={style['shop__card-list']}>

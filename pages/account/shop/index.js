@@ -153,13 +153,6 @@ export default function AccountVps() {
               name='search'
               onChange={handleSearchItem}
             />
-            {/* ToDo: is it necessary? */}
-            <button type='submit' className={style['shop__search-button']}>
-              <iconify-icon icon="ion:search"></iconify-icon>
-            </button>
-            <button type='button' className={style['shop__search-button']}>
-              <iconify-icon icon="ion:chevron-back-outline"></iconify-icon>
-            </button>
           </form>
           <ul className={style['shop__display']}>
             <li>

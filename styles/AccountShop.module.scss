@@ -128,6 +128,27 @@
     align-items: center;
     flex-wrap: wrap;
 
+    @media screen and (max-width: 410px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &-form {
+      position: relative;
+
+      &::after {
+        content: '';
+        background-image: url(../public/icon-search.svg);
+        position: absolute;
+        top: 10px;
+        right: 13px;
+        width: 20px;
+        height: 20px;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+
     &-input {
       padding: 0.475rem 0.75rem;
       font-size: 0.875rem;
@@ -138,7 +159,11 @@
       background-clip: padding-box;
       border: 1px solid #e9edf4;
       border-radius: 7px;
-      width: 192px;
+      width: 280px;
+
+      @media screen and (max-width: 576px) {
+        width: 190px;
+      }
 
       &:focus {
         outline: none;
