@@ -15,7 +15,7 @@ const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref, handleS
       {button === 'Вход' &&
         <p className={style['form__link-reset-password']}>
           Забыли&nbsp;
-          <Link href='/account/password/reset/' className={style['form__link']}>
+          <Link href='/account/password/' className={style['form__link']}>
             имя пользователя / пароль?
           </Link>
         </p>
