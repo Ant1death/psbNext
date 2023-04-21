@@ -9,6 +9,7 @@ import PopupNotification from '../PopupNotification/PopupNotification';
 import PopupProfile from '../PopupProfile/PopupProfile';
 import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
 import ButtonToTop from '../../compontens/ButtonToTop/ButtonToTop';
+import ButtonTelegram from '../../compontens/ButtonTelegram/ButtonTelegram';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -164,6 +165,7 @@ const LayoutAccount = ({ children }) => {
           windowWidth={windowWidth}
         />
         <ButtonToTop />
+        <ButtonTelegram />
       </div>
     </div>
   );
