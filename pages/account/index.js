@@ -77,6 +77,7 @@ export default function Account() {
                   name={el.name}
                   autoRenewal={el.autoRenewal}
                   deadline={el.deadline}
+                  id={el.id}
                 />
               );
             }

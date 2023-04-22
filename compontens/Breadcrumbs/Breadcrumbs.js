@@ -7,6 +7,7 @@ import style from '../../styles/Breadcrumbs.module.scss';
 import { vpnCountries } from '../../utils/data/vpnCountries';
 import { vpsCountries } from '../../utils/data/vpsCountries';
 import { abuseList } from '../../utils/data/abuseList';
+import { orders } from '../../utils/data/orders';
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -24,6 +25,12 @@ const Breadcrumbs = () => {
     if (item) return item.title;
   }
 
+  const findOrderWhithId = (itemList, id) => {
+    const item = itemList.find(el => el.id === id);
+
+    if (item) return item.number;
+  }
+
   useEffect(() => {
     const pathWithoutQuery = router.asPath.split('?')[0];
     const asPath = pathWithoutQuery.split('/').filter(el => el.length > 0);
@@ -32,7 +39,7 @@ const Breadcrumbs = () => {
       const path = replasePath(asPath[0], PATH_LIST);
       setLastCrumb(path);
       setPageTitle(path);
-    } else if (asPath.length === 4 && (asPath.includes('shop'))) {
+    } else if (asPath.length === 4 && asPath.includes('shop')) {
       let name = '';
 
       if (asPath[2] === 'vps') {
@@ -46,6 +53,10 @@ const Breadcrumbs = () => {
       const title = `Заказ новой услуги ${name}`;
       setPageTitle(title);
       setLastCrumb('Магазин услуг');
+    } else if (asPath.length === 4 && (asPath.includes('profile'))) {
+        const name = findOrderWhithId(orders, +asPath[3]);
+        setPageTitle(`Просмотр заказа #${name}`);
+        setLastCrumb('Просмотр заказа');
     } else {
       const path = replasePath(asPath[1], PATH_LIST);
       setLastCrumb(path);

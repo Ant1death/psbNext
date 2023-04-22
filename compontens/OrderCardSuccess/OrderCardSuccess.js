@@ -2,7 +2,7 @@ import Link from 'next/link';
 import 'iconify-icon';
 import style from '../../styles/OrderCard.module.scss';
 
-const OrderCardPending = ({ status, price, name, autoRenewal, deadline }) => {
+const OrderCardSuccess = ({ status, price, name, autoRenewal, deadline, id }) => {
   return (
     <li className={style['card']}>
       {/* ToDo: fix link */}
@@ -37,7 +37,7 @@ const OrderCardPending = ({ status, price, name, autoRenewal, deadline }) => {
         </ul>
       </div>
       <div className={style['card__footer']}>
-        <Link className={style['card__button-link']} href='/account/profile/order/[id]'>
+        <Link className={style['card__button-link']} href={`/account/profile/order/${id}`}>
           <iconify-icon icon="simple-line-icons:key"></iconify-icon>
           &nbsp;Перейти в заказ
         </Link>
@@ -50,4 +50,4 @@ const OrderCardPending = ({ status, price, name, autoRenewal, deadline }) => {
   );
 }
 
-export default OrderCardPending;
+export default OrderCardSuccess;
