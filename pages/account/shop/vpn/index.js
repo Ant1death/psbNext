@@ -19,12 +19,6 @@ export default function AccountVpn() {
   const [currentCountry, setCurrentCountry] = useState([]);
 
   const classItem = `${style['card']} ${style['shop__item']} ${style['shop__item_vpn']}`;
-  const imgItemClass = `${style['shop__item-img']}`;
-  const classWrapTitle = `${style['shop__item-wrap-title']}`;
-  const classItemTitle = `${style['shop__item-title']}`;
-  const classPriceWrapItem = `${style['shop__item-price-wrap']}`;
-  const classPriceItem = `${style['shop__item-price']}`;
-  const flagCountryClass = `${style['shop__item-flag']}`;
 
   const handleSearchItem = (evt) => {
     setSeachedItem(evt.target.value);
@@ -62,29 +56,29 @@ export default function AccountVpn() {
           {currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/vpn/${el.id}`} className={imgItemClass}>
+                <Link href={`/account/shop/vpn/${el.id}`} className={style['shop__item-img']}>
                   <img src='/server.png' alt='icon server' />
                 </Link>
-                <div className={classWrapTitle}>
-                  <h2 className={classItemTitle}>
+                <div className={style['shop__item-wrap-title']}>
+                  <h2 className={style['shop__item-title']}>
                     <img
                       src={el.img}
                       alt={`icon ${el.title}`}
-                      className={flagCountryClass}
+                      className={style['shop__item-flag']}
                     />
                     <Link href={`/account/shop/vpn/${el.id}`}>
                       {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
-                  <ul className={style['shop__item-list']}>
+                  <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
                     <li>{el.encryption}</li>
                     <li>{el.traffic}</li>
                     <li>{el.support}</li>
                     <li>{el.device}</li>
                   </ul>
                 </div>
-                <div className={classPriceWrapItem}>
-                  <p className={classPriceItem}>
+                <div className={style['shop__item-price-wrap']}>
+                  <p className={style['shop__item-price']}>
                     {el.price.split('/')[0]}
                   </p>
                   <Link href={`/account/shop/vpn/${el.id}`} className={style['shop__button-cta']}>
