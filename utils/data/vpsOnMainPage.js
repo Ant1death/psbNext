@@ -65,7 +65,7 @@ export const vpsCountriesList = [
     ],
   },
   {
-    id: 0,
+    id: 7,
     country: 'Turkey',
     flag: '/tr.svg',
     description: [
