@@ -84,7 +84,7 @@ const AccountSidebar = ({
               </li>
               <li>
                 <Link href='/account/rules'>
-                  <iconify-icon icon="ci:book-open"></iconify-icon>
+                  <iconify-icon icon="material-symbols:help-outline-rounded"></iconify-icon>
                   Правила сервиса
                 </Link>
               </li>
@@ -108,6 +108,11 @@ const AccountSidebar = ({
             </Link>
           </li>
           <li className={style['sidebar__item']}>
+            <Link href='/account/shop/hosting'>
+              <iconify-icon icon="fa:plug"></iconify-icon>
+            </Link>
+          </li>
+          <li className={style['sidebar__item']}>
             <Link href='/account/vpn'>
               <iconify-icon icon="fa6-solid:rocket"></iconify-icon>
             </Link>
@@ -124,7 +129,7 @@ const AccountSidebar = ({
           </li>
           <li className={style['sidebar__item']}>
             <Link href='/account/rules'>
-              <iconify-icon icon="ci:book-open"></iconify-icon>
+              <iconify-icon icon="material-symbols:help-outline-rounded"></iconify-icon>
             </Link>
           </li>
         </ul>
