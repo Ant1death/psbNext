@@ -1,29 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Link from 'next/link';
 import 'iconify-icon';
 import style from '../../styles/AppHeader.module.scss';
 
-
 function appHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const router = useRouter();
 
   const handleHamburgerClick = () => {
     isMobileMenuOpen ? setIsMobileMenuOpen(false) : setIsMobileMenuOpen(true);
   }
 
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (isMobileMenuOpen) setIsMobileMenuOpen(false);
-    }
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router])
+  const handleClickLink = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+  }
 
   return (
     <header className={style.header}>
@@ -35,19 +24,29 @@ function appHeader() {
       <nav className={style.navbar}>
         <ul className={`${style['navbar__list']} ${isMobileMenuOpen ? style.navbar__list_show : ''}`}>
           <li>
-            <Link href="/" className={style.navbar__link}>Главная</Link>
+            <Link href="/" className={style.navbar__link} onClick={handleClickLink}>
+              Главная
+            </Link>
           </li>
           <li>
-            <Link href="/vps" className={style.navbar__link}>VPS/VDS</Link>
+            <Link href="/vps" className={style.navbar__link} onClick={handleClickLink}>
+              VPS/VDS
+            </Link>
           </li>
           <li>
-            <Link href="/vpn" className={style.navbar__link}>VPN</Link>
+            <Link href="/vpn" className={style.navbar__link} onClick={handleClickLink}>
+              VPN
+            </Link>
           </li>
           <li>
-            <Link href="/abuse" className={style.navbar__link}>Bulletproof VPS</Link>
+            <Link href="/abuse" className={style.navbar__link} onClick={handleClickLink}>
+              Bulletproof VPS
+            </Link>
           </li>
           <li>
-            <Link href="/company" className={style.navbar__link}>О компании</Link>
+            <Link href="/company" className={style.navbar__link} onClick={handleClickLink}>
+              О компании
+            </Link>
           </li>
           <li>
             <div className={style['language-wrapper']}>
