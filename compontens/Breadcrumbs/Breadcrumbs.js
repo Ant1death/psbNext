@@ -8,6 +8,7 @@ import { vpnCountries } from '../../utils/data/vpnCountries';
 import { vpsCountries } from '../../utils/data/vpsCountries';
 import { abuseList } from '../../utils/data/abuseList';
 import { orders } from '../../utils/data/orders';
+import { hostings } from '../../utils/data/hostings';
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -44,10 +45,12 @@ const Breadcrumbs = () => {
 
       if (asPath[2] === 'vps') {
         name = findNameItemWhithId(vpsCountries, +asPath[3]);
-      } if (asPath[2] === 'vpn') {
+      } else if (asPath[2] === 'vpn') {
         name = findNameItemWhithId(vpnCountries, +asPath[3]);
-      } if (asPath[2] === 'bulletproof') {
+      } else if (asPath[2] === 'bulletproof') {
         name = findNameItemWhithId(abuseList, +asPath[3]);
+      } else if (asPath[2] === 'hosting') {
+        name = findNameItemWhithId(hostings, +asPath[3]);
       }
 
       const title = `Заказ новой услуги ${name}`;

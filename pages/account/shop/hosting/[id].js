@@ -1,4 +1,5 @@
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import NewServise from '../../../../compontens/NewService/NewServise';
 
 HostingItem.getLayout = function getLayout(page) {
   return (
@@ -9,5 +10,7 @@ HostingItem.getLayout = function getLayout(page) {
 }
 
 export default function HostingItem() {
-
+  return (
+    <NewServise />
+  );
 }
