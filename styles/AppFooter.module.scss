@@ -1,11 +1,4 @@
 .footer {
-  @media screen and (max-width: 720px) {
-    & {
-      gap: 20px;
-      flex-direction: column;
-    }
-  }
-
   &__copyright {
     text-align: center;
     margin-bottom: 20px;
@@ -14,11 +7,17 @@
 
   &__wrapper {
     justify-content: space-between;
-    padding-bottom: 4rem;
+    margin-bottom: 20px;
     display: flex;
-    position: sticky;
 
-    nav {
+    @media screen and (min-width: 720px) {
+      & {
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+    }
+
+    ul {
       position: static;
       text-align: center;
       flex-wrap: wrap;
@@ -28,6 +27,18 @@
       a {
         transition: .2s ease-in-out;
       }
+    }
+  }
+
+  &__reviews {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 4rem;
+    width: 100%;
+    max-width: 600px;
+
+    li {
+      width: 20%;
     }
   }
 }
