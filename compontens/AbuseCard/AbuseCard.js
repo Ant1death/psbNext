@@ -18,7 +18,7 @@ const AbuseCard = ({ abuseItem }) => {
         <li>{abuseItem.SSD}</li>
       </ul>
       <Link href={`/account/shop/bulletproof/${abuseItem.id}`}>
-        Заказать VPN
+        Купить
       </Link>
     </li>
   );
