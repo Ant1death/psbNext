@@ -1,0 +1,38 @@
+export const hostings = [
+  {
+    id: 0,
+    title: 'host-1',
+    price: '$85/мес.',
+    size: '20 GB',
+    websites: 'До 5 Сайтов',
+    license: 'Лицензия ISPmanager',
+    protection: 'Защита от DDos',
+  },
+  {
+    id: 1,
+    title: 'host-1',
+    price: '$85/мес.',
+    size: '20 GB',
+    websites: 'До 5 Сайтов',
+    license: 'Лицензия ISPmanager',
+    protection: 'Защита от DDos',
+  },
+  {
+    id: 2,
+    title: 'host-1',
+    price: '$85/мес.',
+    size: '20 GB',
+    websites: 'До 5 Сайтов',
+    license: 'Лицензия ISPmanager',
+    protection: 'Защита от DDos',
+  },
+  {
+    id: 3,
+    title: 'host-1',
+    price: '$85/мес.',
+    size: '20 GB',
+    websites: 'До 5 Сайтов',
+    license: 'Лицензия ISPmanager',
+    protection: 'Защита от DDos',
+  },
+];
