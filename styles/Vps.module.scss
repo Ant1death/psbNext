@@ -57,6 +57,22 @@
     &_USA::before {
       background-image: url(/us.svg);
     }
+
+    &_Germany::before {
+      background-image: url(/de.svg);
+    }
+
+    &_Canada::before {
+      background-image: url(/ca.svg);
+    }
+
+    &_Great-Britain::before {
+      background-image: url(/gb.svg);
+    }
+
+    &_Turkey::before {
+      background-image: url(/tr.svg);
+    }
   }
 
   &__wrapper {

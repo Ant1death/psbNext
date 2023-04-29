@@ -25,6 +25,7 @@ function Vps() {
           <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
           <p>Список услуг выделенных серверов</p>
         </div>
+        {/* ToDo: fix with API */}
         <ul className={style['offer__list-country']}>
           <li className={`${style['offer__country']} ${style['offer__country_Netherlands']} ${style['offer__country_active']}`}>
             Netherlands
@@ -37,6 +38,18 @@ function Vps() {
           </li>
           <li className={`${style['offer__country']} ${style['offer__country_USA']}`}>
             USA
+          </li>
+          <li className={`${style['offer__country']} ${style['offer__country_Germany']}`}>
+            Germany
+          </li>
+          <li className={`${style['offer__country']} ${style['offer__country_Canada']}`}>
+            Canada
+          </li>
+          <li className={`${style['offer__country']} ${style['offer__country_Great-Britain']}`}>
+            Great Britain
+          </li>
+          <li className={`${style['offer__country']} ${style['offer__country_Turkey']}`}>
+            Turkey
           </li>
         </ul>
         <ul className={style['offer__wrapper']}>
