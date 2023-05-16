@@ -91,6 +91,138 @@
   }
 }
 
+.ads {
+  &__list {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    list-style-type: none;
+
+    @media screen and (max-width: 1380px) {
+      grid-template-columns: 1fr;
+    }
+
+    @media screen and (max-width: 1280px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 1180px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    padding: 87px 0 0 40px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    border: 1px solid #ccc;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    position: relative;
+
+    @media screen and (max-width: 1380px) {
+      width: 60%;
+    }
+
+    @media screen and (max-width: 1280px) {
+      padding-top: 55px;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 560px) {
+      padding-left: 20px;
+    }
+
+    &:first-child {
+      background-image: url(../public/vps.png);
+      background-position: 508% 800%;
+
+      @media screen and (max-width: 1380px) {
+        background-position: 227% 635%;
+      }
+
+      @media screen and (max-width: 1280px) {
+        background-image: url(../public/vps_1024.png);
+        background-position: 97% 23px;
+        background-size: 30% auto;
+      }
+
+      @media screen and (max-width: 560px) {
+        background-position-y: 185px;
+      }
+    }
+
+    &:last-child {
+      background-image: url(../public/hosting.png);
+      background-position: 130% -374%;
+
+      @media screen and (max-width: 1380px) {
+        background-position: 115% -374%;
+      }
+
+      @media screen and (max-width: 1280px) {
+        background-image: url(../public/hosting_1024.jpg);
+        background-position: 97% 23px;
+        background-size: 25% auto;
+      }
+
+      @media screen and (max-width: 560px) {
+        background-position-y: 200px;
+        background-size: 20% auto;
+      }
+    }
+  }
+
+  &__card-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+
+    @media screen and (max-width: 560px) {
+      font-size: 1.7rem;
+    }
+  }
+
+  &__card-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: '— ';
+    padding: 10px;
+    list-style-position: inside;
+
+    @media screen and (max-width: 560px) {
+      padding-left: 0;
+    }
+  }
+
+  &__link {
+    margin: 13px 13px 106px 13px;
+    cursor: pointer;
+    display: block;
+    border: 2px solid #4e9aa5;
+    color: #4e9aa5;
+    width: max-content;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 28px;
+    font-weight: 700;
+
+    @media screen and (max-width: 1280px) {
+      margin-bottom: 60px;
+    }
+
+    @media screen and (max-width: 560px) {
+      margin-left: 0;
+    }
+
+    &:hover {
+      background-color: #4e9aa5;
+      color: #fff;
+    }
+  }
+}
+
 .about {
   margin: 0 auto;
 
