@@ -12,8 +12,8 @@ const AvailableSystems = () => {
             <p className={style['systems__item-title']}>Centos</p>
           </li>
           <li className={style['systems__item']}>
-            <img className={style['systems__image']} src='/cpanel.png' alt='cPanel' />
-            <p className={style['systems__item-title']}>cPanel</p>
+            <img className={style['systems__image']} src='/freebsd.svg' alt='FreeBSD' />
+            <p className={style['systems__item-title']}>FreeBSD</p>
           </li>
           <li className={style['systems__item']}>
             <img className={style['systems__image']} src='/debian.png' alt='Debian' />
