@@ -29,7 +29,7 @@ function appHeader() {
             </Link>
           </li>
           <li>
-            <Link href="/vps" className={style.navbar__link} onClick={handleClickLink}>
+            <Link href="/vds" className={style.navbar__link} onClick={handleClickLink}>
               VPS/VDS
             </Link>
           </li>
