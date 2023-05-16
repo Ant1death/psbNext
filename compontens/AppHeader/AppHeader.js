@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import 'iconify-icon';
+import { useTranslation } from 'react-i18next';
+
 import Language from '../../compontens/Language/Language';
+
 import style from '../../styles/AppHeader.module.scss';
 
 function appHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { t } = useTranslation();
 
   const handleHamburgerClick = () => {
     isMobileMenuOpen ? setIsMobileMenuOpen(false) : setIsMobileMenuOpen(true);
@@ -26,7 +31,7 @@ function appHeader() {
         <ul className={`${style['navbar__list']} ${isMobileMenuOpen ? style.navbar__list_show : ''}`}>
           <li>
             <Link href="/" className={style.navbar__link} onClick={handleClickLink}>
-              Главная
+              {t('home')}
             </Link>
           </li>
           <li>
@@ -46,14 +51,16 @@ function appHeader() {
           </li>
           <li>
             <Link href="/company" className={style.navbar__link} onClick={handleClickLink}>
-              О компании
+              {t('company')}
             </Link>
           </li>
           <li>
             <Language />
           </li>
           <li>
-            <Link href="/account" className={style.header__login}>Личный кабинет</Link>
+            <Link href="/account" className={style.header__login}>
+              {t('account')}
+            </Link>
           </li>
         </ul>
       </nav>

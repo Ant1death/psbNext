@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/Language.module.scss';
 
 const Language = () => {
   const [language, setLanguage] = useState({ lang: 'Русский', img: '/ru.svg' });
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const { i18n } = useTranslation();
 
   const openLanguageMenu = () => {
     isLanguageMenuOpen ? setIsLanguageMenuOpen(false) : setIsLanguageMenuOpen(true);
@@ -17,7 +19,9 @@ const Language = () => {
     } else if (el.id = 'en') {
       setLanguage({ lang: 'English', img: '/us.svg' });
     }
+    window.localStorage.setItem('MY_LANGUAGE', el.id);
     setIsLanguageMenuOpen(false);
+    i18n.changeLanguage(el.id)
   }
 
   return (
