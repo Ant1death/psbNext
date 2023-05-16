@@ -5,9 +5,7 @@
     justify-content: space-between;
 
     @media screen and (max-width: 1024px) {
-      & {
-        flex-wrap: wrap;
-      }
+      flex-wrap: wrap;
     }
 
     &-item {
@@ -22,16 +20,12 @@
       }
 
       @media screen and (max-width: 1024px) {
-        & {
-          width: 40%;
-          margin-bottom: 40px;
-        }
+        width: 40%;
+        margin-bottom: 40px;
       }
 
       @media screen and (max-width: 640px) {
-        & {
-          width: 100%;
-        }
+        width: 100%;
       }
     }
   }
