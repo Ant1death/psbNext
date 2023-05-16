@@ -103,9 +103,7 @@ export default function Home() {
               page='home'
             />
           </div>
-          <div className={style['about__wrapper-img']}>
-            <img src="/phone2.png" alt="phone" />
-          </div>
+          <img className={style['about__img']} src="/about_main.jpg" alt="picture about vpn" />
         </div>
       </section>
       <section className={style["map"]}>
