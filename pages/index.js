@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </section>
       <section className={style.country}>
-        <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
+        <h2 className={`${['h2-title']} ${style.country__title}`}>Аренда сервера</h2>
         <p className={style.country__title}>
           PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
         </p>
@@ -56,6 +56,42 @@ export default function Home() {
           })}
         </ul>
       </section>
+      <section className={style['ads']}>
+        <h2 className={`${['h2-title']}`}>Абузоустойчивые сервера</h2>
+        <p className={style['ads__subtitle']}>
+          Bulletproof VPS и Hosting по лучшим ценам
+        </p>
+        <ul className={style['ads__list']}>
+          <li className={style['ads__item']}>
+            <h3 className={style['ads__card-title']}>
+              Bulletproof VPS
+            </h3>
+            <ul className={style['ads__card-list']}>
+              <li>100% абузоустойчевые VPS</li>
+              <li>Процессор Xeon Ryzen 9 и Intel i7</li>
+              <li>NVMe диски</li>
+              <li>Linux &amp; Windows</li>
+            </ul>
+            <Link href='/abuse' className={style['ads__link']}>
+              Подробнее
+            </Link>
+          </li>
+          <li className={style['ads__item']}>
+            <h3 className={style['ads__card-title']}>
+              Bulletproof hosting
+            </h3>
+            <ul className={style['ads__card-list']}>
+              <li>100% абузоустойчевые VPS</li>
+              <li>Защита от DDos атак</li>
+              <li>Панель IPSmanagerr</li>
+              <li>До 50 сайтов на одном хостинге</li>
+            </ul>
+            <Link href='/abuse' className={style['ads__link']}>
+              Подробнее
+            </Link>
+          </li>
+        </ul>
+      </section>
       <section className={style['about']}>
         <div className={style['about__wrapper']}>
           <div className={style['about__wrapper-text']}>
@@ -67,9 +103,7 @@ export default function Home() {
               page='home'
             />
           </div>
-          <div className={style['about__wrapper-img']}>
-            <img src="/phone2.png" alt="phone" />
-          </div>
+          <img className={style['about__img']} src="/about_main.jpg" alt="picture about vpn" />
         </div>
       </section>
       <section className={style["map"]}>

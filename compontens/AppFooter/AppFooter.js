@@ -11,7 +11,7 @@ function appFooter() {
             <Link href='/company' className={style.navbar__link}>О компании</Link>
           </li>
           <li>
-            <Link href='/vps' className={style.navbar__link}>VPS</Link>
+            <Link href='/vds' className={style.navbar__link}>VPS</Link>
           </li>
           <li>
             <Link href='/abuse' className={style.navbar__link}>Bulletproof VPS</Link>

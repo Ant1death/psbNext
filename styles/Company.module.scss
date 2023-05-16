@@ -4,16 +4,12 @@
   align-items: center;
 
   @media screen and (max-width: 1024px) {
-    & {
-      flex-direction: column;
-    }
+    flex-direction: column;
   }
 
   @media screen and (max-width: 720px) {
-    & {
-      padding-left: 5%;
-      padding-right: 5%;
-    }
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   &__img {
@@ -21,9 +17,7 @@
     width: 50%;
 
     @media screen and (max-width: 1024px) {
-      & {
-        display: none;
-      }
+      display: none;
     }
   }
 
