@@ -1,0 +1,74 @@
+.language {
+  &-wrapper {
+    width: 150px;
+    position: relative;
+    padding: 7px 7px 13px;
+  }
+
+  &__list {
+    display: none;
+    flex-direction: column;
+    row-gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 7%;
+    padding: 7px 7px 13px;
+    font-size: 1rem;
+    background-color: #fff;
+
+    &_visible {
+      display: flex;
+    }
+
+    &_reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__input {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    gap: 7px;
+    width: max-content;
+
+    span {
+      font-size: 1.2rem;
+    }
+
+    >img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+    }
+  }
+
+  &-caret {
+    z-index: 100;
+    transition: .5s;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-image: url(../public/caret.svg);
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    top: 14px;
+    right: 6px;
+    background-size: contain;
+
+    &_open {
+      background-image: url(../public/exit-icon.svg);
+    }
+  }
+}
