@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../../../styles/Order.module.scss';
 // ToDo: delete after connecting API
 import { orders } from '../../../../utils/data/orders';
@@ -17,6 +20,8 @@ Order.getLayout = function getLayout(page) {
 
 export default function Order() {
   const [order, setOrder] = useState({});
+
+  const { t } = useTranslation();
   const router = useRouter();
 
   const getItemWithId = () => {
@@ -34,47 +39,47 @@ export default function Order() {
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
-              {`Заказ на аренду сервера ${order.name}`}
+              {`${t('profile-order')} на аренду сервера ${order.name}`}
             </h2>
             <h3 className={style['order__section-title']}>
-              Данные к заказу
+              {t('profile-order-info')}
             </h3>
             <ul className={style['order__details-list']}>
               <li className={style['order__details-item']}>
-                {`Номер заказа: ${order.number}`}
+                {`${t('profile-order-number')} ${order.number}`}
               </li>
               <li className={style['order__details-item']}>
                 {`IP: ${order.ip}`}
               </li>
               <li className={style['order__details-item']}>
-                {`Пользователь: ${order.user}`}
+                {`${t('profile-order-user')} ${order.user}`}
               </li>
               <li className={style['order__details-item']}>
-                {`Пароль: ${order.password}`}
+                {`${t('profile-order-password')} ${order.password}`}
               </li>
               <li className={style['order__details-item']}>
-                {`Порт: ${order.port}`}
+                {`${t('profile-order-port')} ${order.port}`}
               </li>
               <li className={style['order__details-item']}>
-                {`Тип соединения: ${order.type}`}
+                {`${t('profile-order-type')} ${order.type}`}
               </li>
               <li className={style['order__details-item']}>
                 {`OS: ${order.os}`}
               </li>
               <li className={style['order__details-item']}>
-                Команда на подключение:&nbsp;
+                {t('profile-order-command')}&nbsp;
                 <span className={style['order__span_red']}>
                   {`${order.instruction}`}
                 </span>
               </li>
               <li className={style['order__details-item']}>
-                Авто-продление:&nbsp;
+                {t('profile-order-renewal')}&nbsp;
                 <span className={`${order.autoRenewal === 'Отключено' ? style['order__span_red'] : ''}`}>
                   {`${order.autoRenewal}`}
                 </span>
               </li>
               <li className={style['order__details-item']}>
-                Цена:&nbsp;
+                {t('profile-order-price')}&nbsp;
                 <span className={style['order__span_dark']}>
                   {`${order.price}`}
                 </span>
@@ -82,24 +87,23 @@ export default function Order() {
             </ul>
             {order.name.includes('RDP') &&
               <p className={style['order__message']}>
-                Если не удается подключиться по имени пользователя Admin,
-                попробуйте Administrator
+                {t('profile-order-rdp')}
               </p>
             }
           </section>
           <section className={`${style['order__settings']} ${style['card']}`}>
             <h3 className={style['order__section-title']}>
-              Настройки
+              {t('profile-order-settings')}
             </h3>
             <p className={style['order__message']}>
-              Если вы сменили ОС, то воспользуйтесь инструкцией:&nbsp;
+              {t('profile-order-os')}&nbsp;
               <Link href='https://psb-hosting-pro.gitbook.io/documentations/obnovlenie-os-kak-vybrat-i-ustanovit-novuyu-operacionnuyu-sistemu'>
-                Инструкция
+                {t('profile-order-instruction')}
               </Link>
             </p>
             <form className={style['order__form']}>
               <label htmlFor='system'>
-                Операционная система
+               {t('profile-order-system')}
               </label>
               <select id='system' className={style['order__select']}>
                 <option value={order.os}>
@@ -115,50 +119,50 @@ export default function Order() {
               </select>
               <button type='submit' className={style['order__button']}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
-                Поменять Операционную Систему
+                {t('profile-order-change-system')}
               </button>
             </form>
             <form className={style['order__form']}>
               <input
-                placeholder='Новый пароль'
+                placeholder={t('profile-order-new-password')}
                 type='password'
                 name='password'
                 className={style['order__input']}
               />
               <button type='submit' className={style['order__button']}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
-                Сменить пароль
+                {t('profile-order-button')}
               </button>
             </form>
           </section>
           <section className={`${style['order__options']} ${style['card']}`}>
             <h3 className={style['order__section-title']}>
-              Опции
+              {t('profile-order-options')}
             </h3>
             <ul className={style['order__options-list']}>
               <li>
                 <button className={`${style['order__options-button']} ${style['order__options-button_green']}`}>
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
                 </button>
-                Включить авто-продление
+                {t('profile-order-option-one')}
               </li>
               <li>
                 <button className={`${style['order__options-button']} ${style['order__options-button_green']}`}>
                   <iconify-icon icon="material-symbols:power-rounded"></iconify-icon>
                 </button>
-                Включить сервер
+                {t('profile-order-option-two')}
               </li>
               <li>
                 <button className={`${style['order__options-button']} ${style['order__options-button_orange']}`}>
                   <iconify-icon icon="zondicons:reload"></iconify-icon>
                 </button>
-                Перезагрузить сервер
+                {t('profile-order-option-three')}
               </li>
               <li>
                 <button className={`${style['order__options-button']} ${style['order__options-button_red']}`}>
                   <iconify-icon icon="lucide:power-off"></iconify-icon>
                 </button>
-                Выключить сервер
+                {t('profile-order-option-four')}
               </li>
             </ul>
           </section>

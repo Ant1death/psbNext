@@ -1,8 +1,12 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import style from '../../styles/OrderCard.module.scss';
 
 const OrderCardPending = ({ status, number, name, autoRenewal }) => {
+  const { t } = useTranslation();
+
   return (
     <li className={style['card']}>
       {/* ToDo: fix link */}
@@ -15,20 +19,17 @@ const OrderCardPending = ({ status, number, name, autoRenewal }) => {
         </h3>
         <ul className={style['card__list']}>
           <li className={style['card__item']}>
-            Статус:&nbsp;
+            {t('order-status')}&nbsp;
             <span className={`${style['card__status']} ${style['card__status_orange']}`}>{status}</span>
           </li>
           <li className={style['card__item']}>
-            {`Номер заказа: ${number}`}
+            {`${t('order-number')} ${number}`}
           </li>
           <li className={style['card__item']}>
-            {`Статус: ${status}`}
+            {`${t('order-name')} ${name}`}
           </li>
           <li className={style['card__item']}>
-            {`Наименование услуги: ${name}`}
-          </li>
-          <li className={style['card__item']}>
-            Авто-продление:&nbsp;
+            {t('order-renewal')}&nbsp;
             <span className={style['card__text-denger']}>{autoRenewal}</span>
           </li>
         </ul>
@@ -36,11 +37,10 @@ const OrderCardPending = ({ status, number, name, autoRenewal }) => {
       <div className={style['card__footer']}>
         <Link className={style['card__button-link']} href='https://t.me/psbhosting'>
           <iconify-icon icon="ion:rocket-outline"></iconify-icon>
-          &nbsp;Тех-поддержка
+          &nbsp;{t('order-support')}
         </Link>
         <p className={style['card__message']}>
-          Заказ обрабатывается до 24-х часов, в случае возникновения
-          вопросов просим Вас, обратится в тех-поддержку
+          {t('order-pending-text')}
         </p>
       </div>
     </li>

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
 import { abuseList } from '../../../../utils/data/abuseList';
@@ -22,6 +25,8 @@ export default function Bulletproof() {
   const [isListActive, setIsListActive] = useState(false);
   const [currentCountry, setCurrentCountry] = useState([]);
 
+  const { t } = useTranslation();
+
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
   const classItem = `${style['card']} ${style['shop__item']} ${isListActive ? style['shop__item_list'] : ''}`;
@@ -34,7 +39,7 @@ export default function Bulletproof() {
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
 
-    if (country === 'Все страны') {
+    if (country === t('card-all-countries')) {
       setCurrentCountry(abuseList);
     }
   }
@@ -88,13 +93,13 @@ export default function Bulletproof() {
       <div className={style['shop__filters']}>
         <div className={`${style['shop__country']} ${style['card']}`}>
           <h2 className={style['shop__country-title']}>
-            Страны
+            {t('card-countries')}
           </h2>
           <ul className={style['shop__country-list']}>
             <li>
               <button className={style['shop__country-button']} onClick={handleCountryClick}>
                 <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Все страны
+                {t('card-all-countries')}
               </button>
               <span className={style['shop__country-amount']}>
                 {abuseList.length}
@@ -104,7 +109,7 @@ export default function Bulletproof() {
         </div>
         <form className={`${style['shop__system']} ${style['card']}`}>
           <label className={style['shop__system-label']} htmlFor='system'>
-            Операционная система
+            {t('card-system')}
           </label>
           <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
@@ -121,7 +126,7 @@ export default function Bulletproof() {
           <form className={style['shop__search-form']}>
             <input
               type='search'
-              placeholder='Введите название'
+              placeholder={t('card-search')}
               className={style['shop__search-input']}
               name='search'
               onChange={handleSearchItem}
@@ -173,7 +178,7 @@ export default function Bulletproof() {
                   </p>
                   <Link href={`/account/shop/bulletproof/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;Мгновенная покупка
+                    &nbsp;{t('card-button')}
                   </Link>
                 </div>
               </li>

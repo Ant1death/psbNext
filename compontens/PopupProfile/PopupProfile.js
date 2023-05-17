@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import { INDENT_POPUP_PROFILE } from '../../utils/constants';
+
 import style from '../../styles/PopupProfile.module.scss';
 
 const PopupProfile = ({ isOpen, right, windowWidth }) => {
   const popup = useRef();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (right !== 0) {
@@ -22,19 +26,19 @@ const PopupProfile = ({ isOpen, right, windowWidth }) => {
           <li>
           <Link className={style['popup__profile-link']} href='/account/profile'>
             <iconify-icon icon="mingcute:user-1-line"></iconify-icon>
-            Изменить информацию
+            {t('popup-profile-info')}
           </Link>
           </li>
           <li>
             <Link className={style['popup__profile-link']} href='/account/profile/change-password'>
               <iconify-icon icon="fa:cogs"></iconify-icon>
-              Изменить пароль
+              {t('popup-profile-password')}
             </Link>
           </li>
           <li>
             <Link className={style['popup__profile-link']} href='/account/logout'>
               <iconify-icon icon="mdi:alert-circle-outline"></iconify-icon>
-              Выйти
+              {t('popup-profile-logout')}
             </Link>
           </li>
         </ul>

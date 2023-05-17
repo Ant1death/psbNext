@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
 import { hostings } from '../../../../utils/data/hostings';
@@ -14,6 +17,8 @@ AccountHosting.getLayout = function getLayout(page) {
 }
 
 export default function AccountHosting() {
+  const { t } = useTranslation();
+
   return (
     <section className={style['shop']}>
       <ul className={style['shop__card-list']}>
@@ -39,7 +44,7 @@ export default function AccountHosting() {
                 </p>
                 <Link href={`/account/shop/hosting/${el.id}`} className={style['shop__button-cta']}>
                   <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                  &nbsp;Мгновенная покупка
+                  &nbsp;{t('card-button')}
                 </Link>
               </div>
             </li>

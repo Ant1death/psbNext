@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/NewServise.module.scss';
 
 const NewServise = ({ children }) => {
+  const { t } = useTranslation();
 
   const handleChangePayment = () => {}
 
@@ -9,13 +12,13 @@ const NewServise = ({ children }) => {
   return (
     <section className={style['card']}>
       <h2 className={style['card__title']}>
-        Выберите конфигурации
+        {t('new-service-config')}
       </h2>
       <form className={style['card__form']}>
         {children}
         <fieldset className={style['card__form-fildset']}>
           <legend className={style['card__form-legend']}>
-            Способ оплаты
+            {t('new-service-payment')}
           </legend>
           <label htmlFor='balance' className={style['card__form-label-radio']}>
             <input
@@ -28,7 +31,7 @@ const NewServise = ({ children }) => {
               onChange={handleChangeBalance}
             />
             <span className={style['card__form-span']}>
-              С баланса
+              {t('new-service-balance')}
             </span>
           </label>
           <label htmlFor='payment' className={style['card__form-label-radio']}>
@@ -41,12 +44,12 @@ const NewServise = ({ children }) => {
               onChange={handleChangePayment}
             />
             <span className={style['card__form-span']}>
-              С платежной системы
+              {t('new-service-card')}
             </span>
           </label>
         </fieldset>
         <button type='submit' className={style['card__button-cta']}>
-          Создать заказ
+          {t('new-service-button')}
         </button>
       </form>
     </section>

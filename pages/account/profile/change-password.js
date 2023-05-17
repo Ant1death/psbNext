@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 import style from '../../../styles/Profile.module.scss';
 // Todo: delete after connecting API
@@ -12,13 +14,15 @@ FormPassword.getLayout = function getLayout(page) {
 }
 
 export default function FormPassword() {
+  const { t } = useTranslation();
+
   return (
     <form className={style['form']}>
       <h2 className={style['form__title']}>
-        {`Смена пароля пользователя ${user.name}`}
+        {`${t('profile-password')} ${user.name}`}
       </h2>
       <label htmlFor='oldPassword' className={style['form__label']}>
-      Старый пароль:
+        {t('profile-password-old')}
         <input
           type='password'
           name='oldPassword'
@@ -29,7 +33,7 @@ export default function FormPassword() {
         <span className={style['form__error']}></span>
       </label>
       <label htmlFor='newPassword' className={style['form__label']}>
-        Новый пароль:
+        {t('profile-password-new')}
         <input
           type='password'
           name='newPassword'
@@ -40,13 +44,13 @@ export default function FormPassword() {
         <span className={style['form__error']}></span>
       </label>
       <ul className={style['form__list']}>
-        <li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
-        <li>Ваш пароль должен содержать как минимум 8 символов.</li>
-        <li>Пароль не должен быть слишком простым и распространенным.</li>
-        <li>Пароль не может состоять только из цифр.</li>
+        <li>{t('profile-password-rule-one')}</li>
+        <li>{t('profile-password-rule-two')}</li>
+        <li>{t('profile-password-rule-three')}</li>
+        <li>{t('profile-password-rule-four')}</li>
       </ul>
       <label htmlFor='confirmPassword' className={style['form__label']}>
-        Подтверждение нового пароля:
+        {t('profile-password-new-repeat')}
         <input
           type='password'
           name='confirmPassword'
@@ -56,7 +60,9 @@ export default function FormPassword() {
         />
         <span className={style['form__error']}></span>
       </label>
-      <button type='submit' className={style['form__button']}>Изменить</button>
+      <button type='submit' className={style['form__button']}>
+        {t('profile-password-button')}
+      </button>
     </form>
   );
 }

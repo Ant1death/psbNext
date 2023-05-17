@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import 'iconify-icon';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
 import { vpnCountries } from '../../../../utils/data/vpnCountries';
@@ -17,6 +20,8 @@ AccountVpn.getLayout = function getLayout(page) {
 export default function AccountVpn() {
   const [seachedItem, setSeachedItem] = useState('');
   const [currentCountry, setCurrentCountry] = useState([]);
+
+  const { t } = useTranslation();
 
   const classItem = `${style['card']} ${style['shop__item']} ${style['shop__item_vpn']}`;
 
@@ -45,7 +50,7 @@ export default function AccountVpn() {
           <form className={style['shop__search-form']}>
             <input
               type='search'
-              placeholder='Введите название'
+              placeholder={t('card-search')}
               className={style['shop__search-input']}
               name='search'
               onChange={handleSearchItem}
@@ -83,7 +88,7 @@ export default function AccountVpn() {
                   </p>
                   <Link href={`/account/shop/vpn/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;Мгновенная покупка
+                    &nbsp;{t('card-button')}
                   </Link>
                 </div>
               </li>

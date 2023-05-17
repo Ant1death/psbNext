@@ -2,7 +2,7 @@ export const TRANSFORM_AMOUNT = 10;
 export const INDENT_POPUP_NOTIFICATION = 25;
 export const INDENT_POPUP_PROFILE = 20;
 
-export const PATH_LIST = {
+export const PATH_LIST_RU = {
   account: 'Панель управления',
   shop: 'Магазин услуг',
   bulletproof: 'Магазин услуг',
@@ -11,6 +11,17 @@ export const PATH_LIST = {
   rules: 'Правила сервиса',
   new: 'Новая услуга',
   profile: 'Ваш профиль',
+}
+
+export const PATH_LIST_EN = {
+  account: 'Control Panel',
+  shop: 'Service Store',
+  bulletproof: 'Service Store',
+  vpn: 'Service Store',
+  balance: 'Your Wallet',
+  rules: 'Terms of Service',
+  new: 'New Service',
+  profile: 'Your Account',
 }
 
 export const FAQ_LIST_VPS_RU = [

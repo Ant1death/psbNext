@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
+
 import style from '../../../styles/Profile.module.scss';
 // Todo: delete after connecting API
 import { user } from '../../../utils/data/user';
@@ -15,6 +18,7 @@ Profile.getLayout = function getLayout(page) {
 
 export default function Profile() {
   const { values, handleChange, errors, isValid, setValues } = useFormAndValidation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setValues({ ...values, name: user.name, email: user.email });
@@ -23,7 +27,7 @@ export default function Profile() {
   return (
     <form className={style['form']}>
       <h2 className={style['form__title']}>
-        Смена информации о пользователе
+        {t('profile')}
       </h2>
       <label htmlFor='name' className={style['form__label']}>
         Nickname:
@@ -51,7 +55,9 @@ export default function Profile() {
         />
         <span className={style['form__error']}></span>
       </label>
-      <button type='submit' className={style['form__button']}>Сохранить</button>
+      <button type='submit' className={style['form__button']}>
+        {t('profile-button')}
+      </button>
     </form>
   );
 }

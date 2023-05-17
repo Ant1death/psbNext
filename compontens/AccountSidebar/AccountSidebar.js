@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import style from '../../styles/AccountSidebar.module.scss';
 
 const AccountSidebar = ({
@@ -9,6 +11,8 @@ const AccountSidebar = ({
   isSidebarVisible,
   windowWidth,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <aside
       className={`${style['sidebar']} ${isSidebarMini ? style['sidebar_mini'] : ''} ${(isSidebarVisible && windowWidth <= 991) ? style['sidebar_visible'] : ''}`}
@@ -24,68 +28,68 @@ const AccountSidebar = ({
         <ul className={`${style['sidebar__nav-menu-list']} ${isSidebarMini ? style['sidebar__nav-menu-list_hidden'] : ''}`}>
           <li className={style['sidebar__item']} >
             <h3 className={style['sidebar__subtitle']}>
-              Главная страница
+              {t('home-page')}
             </h3>
             <Link href='/account'>
               <iconify-icon icon="mi:grid"></iconify-icon>
-              Панель управления
+              {t('account-page')}
             </Link>
           </li>
           <li className={style['sidebar__item']} >
             <h3 className={style['sidebar__subtitle']}>
-              Магазин услуг
+              {t('category-store')}
             </h3>
             <ul>
               <li>
                 <Link href='/account/shop'>
                   <iconify-icon icon="lucide:server"></iconify-icon>
-                  Купить VPS/VDS
+                  {t('link-vps')}
                 </Link>
               </li>
               <li>
                 <Link href='/account/shop/bulletproof'>
                   <iconify-icon icon="ph:text-b-bold"></iconify-icon>
-                  Купить Bulletproof VPS/VDS
+                  {t('link-abuse')}
                 </Link>
               </li>
               <li>
                 <Link href='/account/shop/hosting'>
                   <iconify-icon icon="fa:plug"></iconify-icon>
-                  Купить Bulletproof Hosting
+                  {t('link-hosting')}
                 </Link>
               </li>
               <li>
                 <Link href='/account/shop/vpn'>
                   <iconify-icon icon="fa6-solid:rocket"></iconify-icon>
-                  Купить VPN
+                  {t('link-vpn')}
                 </Link>
               </li>
             </ul>
           </li>
           <li className={style['sidebar__item']} >
             <h3 className={style['sidebar__subtitle']}>
-              Личные финансы
+              {t('category-finances')}
             </h3>
             <Link href='/account/balance'>
               <iconify-icon icon="lucide:credit-card"></iconify-icon>
-              Ваш кошелек
+              {t('link-wallet')}
             </Link>
           </li>
           <li className={style['sidebar__item']} >
             <h3 className={style['sidebar__subtitle']}>
-              Поддержка и документация
+              {t('category-support')}
             </h3>
             <ul>
               <li>
                 <Link href='https://psb-hosting-pro.gitbook.io/documentations/'>
                   <iconify-icon icon="ci:book-open"></iconify-icon>
-                  Документация
+                  {t('link-doc')}
                 </Link>
               </li>
               <li>
                 <Link href='/account/rules'>
                   <iconify-icon icon="material-symbols:help-outline-rounded"></iconify-icon>
-                  Правила сервиса
+                  {t('link-service')}
                 </Link>
               </li>
             </ul>

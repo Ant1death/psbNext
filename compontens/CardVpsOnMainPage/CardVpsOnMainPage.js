@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import style from '../../styles/Main.module.scss';
 
 const CardVpsOnMainPage = ({ country }) => {

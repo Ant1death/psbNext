@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 import 'iconify-icon';
+
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
+
 import style from '../../../styles/AccountShop.module.scss';
 // ToDo: delete after connecting API
 import { vpsCountries } from '../../../utils/data/vpsCountries';
-import Link from 'next/link';
 
 AccountVps.getLayout = function getLayout(page) {
   return (
@@ -23,6 +26,8 @@ export default function AccountVps() {
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
 
+  const { t } = useTranslation();
+
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
   const classItem = `${style['card']} ${style['shop__item']} ${isListActive ? style['shop__item_list'] : ''}`;
@@ -35,7 +40,7 @@ export default function AccountVps() {
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
 
-    if (country === 'Все страны') {
+    if (country === t('card-all-countries')) {
       setCurrentCountry(vpsCountries);
     } else {
       const items = vpsCountries.filter(el => el.country === country);
@@ -102,13 +107,13 @@ export default function AccountVps() {
       <div className={style['shop__filters']}>
         <div className={`${style['shop__country']} ${style['card']}`}>
           <h2 className={style['shop__country-title']}>
-            Страны
+            {t('card-countries')}
           </h2>
           <ul className={style['shop__country-list']}>
             <li>
               <button className={style['shop__country-button']} onClick={handleCountryClick}>
                 <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Все страны
+                {t('card-all-countries')}
               </button>
               <span className={style['shop__country-amount']}>
                 {vpsCountries.length}
@@ -131,7 +136,7 @@ export default function AccountVps() {
         </div>
         <form className={`${style['shop__system']} ${style['card']}`}>
           <label className={style['shop__system-label']} htmlFor='system'>
-            Операционная система
+            {t('card-system')}
           </label>
           <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
@@ -148,7 +153,7 @@ export default function AccountVps() {
           <form className={style['shop__search-form']}>
             <input
               type='search'
-              placeholder='Введите название'
+              placeholder={t('card-search')}
               className={style['shop__search-input']}
               name='search'
               onChange={handleSearchItem}
@@ -204,7 +209,7 @@ export default function AccountVps() {
                   </p>
                   <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;Мгновенная покупка
+                    &nbsp;{t('card-button')}
                   </Link>
                 </div>
               </li>

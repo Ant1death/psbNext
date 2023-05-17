@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+
 import style from '../../../../styles/NewServise.module.scss';
 // Todo: delete after connecting API
 import { vpsCountries } from '../../../../utils/data/vpsCountries.js';
@@ -16,7 +18,9 @@ VpsItem.getLayout = function getLayout(page) {
 
 export default function VpsItem() {
   const [item, setItem] = useState({});
+
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleChangeSystem = () => {}
 
@@ -34,7 +38,7 @@ export default function VpsItem() {
   return (
     <NewServise>
       <label className={style['card__form-legend']} htmlFor='system'>
-        Операционная система
+        {t('new-service-system')}
       </label>
       <select className={style['card__form-select']} name='system' id='system' onClick={handleChangeSystem}>
         {item && item.systems && item.systems.map(el => {
@@ -46,7 +50,7 @@ export default function VpsItem() {
         })}
       </select>
       <label className={style['card__form-legend']} htmlFor='system'>
-        Панель управления NL
+        {`${t('new-service-panel')} NL`}
       </label>
       <select className={style['card__form-select']} name='system' id='system' onClick={handleChangePanel}>
         {item && item.panel && item.panel.map(el => {

@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import 'iconify-icon';
+
 import style from '../../styles/AccountHeader.module.scss';
 
 const AccountHeaderNavmenu = ({

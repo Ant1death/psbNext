@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import { PATH_LIST } from '../../utils/constants';
+
+import { PATH_LIST_RU, PATH_LIST_EN } from '../../utils/constants';
+
 import style from '../../styles/Breadcrumbs.module.scss';
 // ToDo: delete after connecting API
 import { vpnCountries } from '../../utils/data/vpnCountries';
@@ -12,6 +15,8 @@ import { hostings } from '../../utils/data/hostings';
 
 const Breadcrumbs = () => {
   const router = useRouter();
+  const { t } = useTranslation();
+
   const [lastCrumb, setLastCrumb] = useState('');
   const [pageTitle, setPageTitle] = useState('');
 
@@ -37,7 +42,9 @@ const Breadcrumbs = () => {
     const asPath = pathWithoutQuery.split('/').filter(el => el.length > 0);
 
     if (asPath.length === 1) {
-      const path = replasePath(asPath[0], PATH_LIST);
+      const path = t('account-lang') === 'en'
+        ? replasePath(asPath[0], PATH_LIST_EN)
+        : replasePath(asPath[0], PATH_LIST_RU);
       setLastCrumb(path);
       setPageTitle(path);
     } else if (asPath.length === 4 && asPath.includes('shop')) {
@@ -53,19 +60,21 @@ const Breadcrumbs = () => {
         name = findNameItemWhithId(hostings, +asPath[3]);
       }
 
-      const title = `Заказ новой услуги ${name}`;
+      const title = `${t('path-new-service')} ${name}`;
       setPageTitle(title);
-      setLastCrumb('Магазин услуг');
+      setLastCrumb(t('category-store'));
     } else if (asPath.length === 4 && (asPath.includes('profile'))) {
         const name = findOrderWhithId(orders, +asPath[3]);
-        setPageTitle(`Просмотр заказа #${name}`);
-        setLastCrumb('Просмотр заказа');
+        setPageTitle(`${t('path-order')} #${name}`);
+        setLastCrumb(t('path-order'));
     } else {
-      const path = replasePath(asPath[1], PATH_LIST);
+      const path = t('account-lang') === 'en'
+        ? replasePath(asPath[1], PATH_LIST_EN)
+        : replasePath(asPath[1], PATH_LIST_RU);
       setLastCrumb(path);
       setPageTitle(path);
     }
-  }, [router]);
+  }, [router, t('account-lang')]);
 
   return (
     <section className={style['breadcrumbs']}>
@@ -75,7 +84,7 @@ const Breadcrumbs = () => {
       <ol className={style['breadcrumbs__list']}>
         <li className={style['breadcrumbs__link']}>
           <Link href='/account'>
-            {lastCrumb === 'Панель управления' ? 'Главная страница' : 'Панель управления'}
+            {lastCrumb === t('account-page') ? t('home-page') : t('account-page')}
           </Link>
         </li>
         <li className={style['breadcrumbs__item']}>
