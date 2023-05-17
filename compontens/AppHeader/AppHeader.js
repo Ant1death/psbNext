@@ -55,7 +55,9 @@ function appHeader() {
             </Link>
           </li>
           <li>
-            <Language />
+            <Language
+              isMobileMenuOpen={isMobileMenuOpen}
+            />
           </li>
           <li>
             <Link href="/account" className={style.header__login}>

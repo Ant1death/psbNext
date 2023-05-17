@@ -3,6 +3,10 @@
     width: 150px;
     position: relative;
     padding: 7px 7px 13px;
+
+    &_mobile {
+      width: 310px;
+    }
   }
 
   &__list {
@@ -26,6 +30,17 @@
     &_reverse {
       flex-direction: column-reverse;
     }
+
+    &_mobile {
+      flex-direction: row;
+      column-gap: 10px;
+      border-radius: 0;
+
+      &-reverse {
+        flex-direction: row-reverse;
+        border-radius: 0;
+      }
+    }
   }
 
   &__input {
@@ -33,7 +48,7 @@
     cursor: pointer;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-start;
     text-decoration: none;
     color: inherit;
     gap: 7px;
@@ -69,6 +84,15 @@
 
     &_open {
       background-image: url(../public/exit-icon.svg);
+      top: 19px;
+    }
+
+    &_mobile {
+      right: 150px;
+
+      &-open {
+        right: 8px;
+      }
     }
   }
 }
