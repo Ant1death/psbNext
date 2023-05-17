@@ -224,5 +224,7 @@
   "profile-order-option-two": "Turn on the server",
   "profile-order-option-three": "Reboot the server",
   "profile-order-option-four": "Shut down the server",
-  "profile-order-new-password": "New password"
+  "profile-order-new-password": "New password",
+
+  "lang": "Choose Country"
 }
