@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import 'iconify-icon';
 
@@ -17,6 +19,12 @@ const AccountHeader = ({
   isHeaderNamenuVisible,
   toggleHeaderNavmenu,
 }) => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const lang = localStorage.getItem('MY_LANGUAGE');
+    lang === 'en' ? i18n.changeLanguage('en') : i18n.changeLanguage('ru');
+  }, []);
 
   return (
     <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>
