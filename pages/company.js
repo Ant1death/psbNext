@@ -1,5 +1,8 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import Layout from '../compontens/Layout/Layout';
+
 import style from '../styles/Company.module.scss';
 
 Company.getLayout = function getLayout(page) {
@@ -11,34 +14,32 @@ Company.getLayout = function getLayout(page) {
 }
 
 export default function Company() {
+  const { t } = useTranslation();
+
   return (
     <section className={style['about']}>
       <img alt='picture company' src='/about.jpg' className={style['about__img']} />
       <div className={style['about__text']}>
-        <h2 className={`${['h2-title']}`}>О компании</h2>
-        <p>
-          Компания PSB была основана в 2019 году и с каждым годом стремительно развивает
-          спектр и качество предоставляемых услуг. Наша команда состоит из международных юристов,
-          айти специалистов и системных администраторов. Спектр предоставляемых услуг:
-        </p>
+        <h2 className={`${['h2-title']}`}>{t('company')}</h2>
+        <p>{t('company-about')}</p>
         <ul className={style['about__list']}>
-          <li>Анонимные оффшорные хостинги для вашего бизнеса</li>
-          <li>IT разработка</li>
-          <li>Администрирование ваших проектов</li>
-          <li>Регистрация оффшорных компаний</li>
-          <li>Открытие корпоративных банковских счетов в Европе</li>
-          <li>Бухгалтерские услуги в Европе и Азии</li>
-          <li>Лицензирование крипто проектов и онлайн казино</li>
-          <li>Верификации аккаунтов криптобирж и платежных систем</li>
+          <li>{t('company-one')}</li>
+          <li>{t('company-two')}</li>
+          <li>{t('company-three')}</li>
+          <li>{t('company-four')}</li>
+          <li>{t('company-five')}</li>
+          <li>{t('company-six')}</li>
+          <li>{t('company-seven')}</li>
+          <li>{t('company-eigth')}</li>
         </ul>
         <p className={style['about__telegram']}>
-          Более подробно с нашими услугами вы можете ознакомиться&nbsp;
+          {t('more')}&nbsp;
           <Link href='https://psb-offshore.pro/'>
-            на сайте
+            {t('site')}
           </Link>
-          &nbsp;и&nbsp;
+          &nbsp;{t('and')}&nbsp;
           <Link href='https://telegram.me/PSB_Wallet_Bot'>
-            в телеграмм боте
+            {t('tg')}
           </Link>
         </p>
       </div>

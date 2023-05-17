@@ -13,7 +13,7 @@ export const PATH_LIST = {
   profile: 'Ваш профиль',
 }
 
-export const FAQ_LIST_VPS = [
+export const FAQ_LIST_VPS_RU = [
   {
     id: 0,
     question: 'Что такое оффшорный веб хостинг?',
@@ -46,7 +46,40 @@ export const FAQ_LIST_VPS = [
   },
 ];
 
-export const FAQ_LIST_VPN = [
+export const FAQ_LIST_VPS_EN = [
+  {
+    id: 0,
+    question: 'What is offshore web hosting?',
+    answer: 'Offshore web hosting guarantees complete data privacy, anonymity and a wide range of acceptable content',
+  },
+  {
+    id: 1,
+    question: 'What is the DMCA?',
+    answer: 'The Digital Millenium Copyright Act is a law enforcing copyright law. It was passed in 1998 in the United States and is only valid in American jurisdiction',
+  },
+  {
+    id: 2,
+    question: 'What payment methods do you accept?',
+    answer: 'We accept payment BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    id: 3,
+    question: 'You want my personal information?',
+    answer: 'No, we do not ask for customer information, the entire process of buying and use of our services is anonymous',
+  },
+  {
+    id: 4,
+    question: 'Do you make backups?',
+    answer: 'Backups are disabled by default',
+  },
+  {
+    id: 5,
+    question: 'Do you have protection against DDOS attacks?',
+    answer: 'Yes, we provide protection from DDOS attacks',
+  },
+];
+
+export const FAQ_LIST_VPN_RU = [
   {
     id: 0,
     question: 'На каких устройствах можно использовать VPN?',
@@ -79,7 +112,40 @@ export const FAQ_LIST_VPN = [
   },
 ];
 
-export const FAQ_LIST_ABUSE = [
+export const FAQ_LIST_VPN_EN = [
+  {
+    id: 0,
+    question: 'On which devices you can use a VPN?',
+    answer: 'Windows, macOS, Android, iOS, Linux.',
+  },
+  {
+    id: 1,
+    question: 'How is WireGuard better than OpenVPN?',
+    answer: 'WireGuard does not use a large amount of code, so it works faster.',
+  },
+  {
+    id: 2,
+    question: 'What payment methods do you accept?',
+    answer: 'We accept BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    id: 3,
+    question: 'You have discounts for long term VPN rentals?',
+    answer: 'Yes, 3 months -5%, 6 months -10%, 12 months -15%',
+  },
+  {
+    id: 4,
+    question: 'Your VPN is anonymous?',
+    answer: 'Yes, we do not store logs and use modern encryption protocols.',
+  },
+  {
+    id: 5,
+    question: 'Where do I download the client for my device?',
+    answer: 'On the official website https://www.wireguard.com/install/.',
+  },
+];
+
+export const FAQ_LIST_ABUSE_RU = [
   {
     id: 0,
     question: 'Что такое Абузоустойчивые сервера?',
@@ -109,5 +175,38 @@ export const FAQ_LIST_ABUSE = [
     id: 5,
     question: 'Есть ли у вас защита от DDOS атак?',
     answer: 'Да, мы предоставляем защиту от DDOS атак',
+  },
+];
+
+export const FAQ_LIST_ABUSE_EN = [
+  {
+    id: 0,
+    question: 'What is a bulletproof server?',
+    answer: 'Bulletproof VPS/VDS allows to host any content',
+  },
+  {
+    id: 1,
+    question: 'For how long is the hosting given out?',
+    answer: 'Minimum period 30 days',
+  },
+  {
+    id: 2,
+    question: 'What payment methods do you accept?',
+    answer: 'We accept payment BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    id: 3,
+    question: 'How long does it take to activate an bulletproof server?',
+    answer: 'Up to 24 hours',
+  },
+  {
+    id: 4,
+    question: 'You want my personal information?',
+    answer: 'No, we do not ask for customer information, the entire process of buying and use of our services is anonymous',
+  },
+  {
+    id: 5,
+    question: 'Do you have protection against DDOS attacks?',
+    answer: 'Yes, we provide protection from DDOS attacks',
   },
 ];

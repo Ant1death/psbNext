@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/ItemCard.module.scss';
 
 const VpsCard = ({ vpsItem }) => {
+  const { t } = useTranslation();
+
   return (
     <li className={style['card']} key={vpsItem.id}>
       <div className={style['card__title']}>
@@ -20,7 +24,7 @@ const VpsCard = ({ vpsItem }) => {
         <li>{vpsItem.bandwidth}</li>
       </ul>
       <Link href={`/account/shop/vps/${vpsItem.id}`}>
-        Купить
+        {t('button-buy-item')}
       </Link>
     </li>
   );

@@ -1,5 +1,5 @@
 export const ni18nConfig = {
-  fallbackLng: ['ru', 'en'],
+  fallbackLng: ['ru'],
   supportedLngs: ['ru', 'en'],
   ns: ['translation'],
 };

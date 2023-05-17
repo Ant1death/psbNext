@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/ItemCard.module.scss';
 
 const HostingCard = ({ hostingItem }) => {
+  const { t } = useTranslation();
+
   return (
     <li className={style['card']}>
       <div className={style['card__title']}>
@@ -19,7 +23,7 @@ const HostingCard = ({ hostingItem }) => {
         <li>{hostingItem.protection}</li>
       </ul>
       <Link href={`/account/shop/hosting/${hostingItem.id}`}>
-        Купить
+        {t('button-buy-item')}
       </Link>
     </li>
   );

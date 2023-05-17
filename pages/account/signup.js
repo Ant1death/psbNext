@@ -1,9 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
+
 import style from '../../styles/Auth.module.scss';
 
 export default function SignUp() {
+  const { t } = useTranslation();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
 
   return (
@@ -19,9 +23,9 @@ export default function SignUp() {
           <img className={style['content__logo']} alt='logo' src='/logo.png' />
         </div>
         <AuthForm
-          title='Регистрация'
-          button='Создать аккаунт'
-          bottomLink='Уже зарегистрированы? войдите'
+          title={t('signup')}
+          button={t('signup-button')}
+          bottomLink={t('signup-link')}
           bottomLinkHref='/account/login/'
         >
           <label className={style['input']} htmlFor='name'>
@@ -31,7 +35,7 @@ export default function SignUp() {
               id='name'
               required
               className={style['input__field']}
-              placeholder='Имя пользователя'
+              placeholder={t('name')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="ri:user-fill"></iconify-icon>
@@ -43,7 +47,7 @@ export default function SignUp() {
               id='email'
               required
               className={style['input__field']}
-              placeholder='Электронная почта'
+              placeholder={t('email')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
@@ -55,7 +59,7 @@ export default function SignUp() {
               id='password'
               required
               className={style['input__field']}
-              placeholder='Пароль'
+              placeholder={t('password')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
@@ -67,7 +71,7 @@ export default function SignUp() {
               id='repeat-password'
               required
               className={style['input__field']}
-              placeholder='Повторите пароль'
+              placeholder={t('password-repeat')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>

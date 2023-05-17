@@ -1,10 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/AvailableSystems.module.scss'
 
 const AvailableSystems = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={style['systems']}>
         <h2 className={`${['h2-title']} ${style['systems-title']}`}>
-          Доступные операционные системы
+          {t('systems')}
         </h2>
         <ul className={style['systems__list']}>
           <li className={style['systems__item']}>

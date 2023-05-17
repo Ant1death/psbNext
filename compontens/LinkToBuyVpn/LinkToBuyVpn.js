@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/LinkToBuyVpn.module.scss';
 
 const LinkToBuyVpn = ({ page }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <ul className={`${style['about__wrapper-icons']} ${page === 'vpn' ? style['about__wrapper-icons-hidden'] : ''}`}>
@@ -27,7 +31,7 @@ const LinkToBuyVpn = ({ page }) => {
         </li>
       </ul>
       <button className={`${style['about__wrapper-btn']} ${page === 'vpn' ? style['about__wrapper-btn-vpn'] : ''}`}>
-        <Link href="/account/shop/vpn">Купить VPN</Link>
+        <Link href="/account/shop/vpn">{t('button-buy')}</Link>
       </button>
     </>
   );

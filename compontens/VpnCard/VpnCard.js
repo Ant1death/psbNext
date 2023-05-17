@@ -1,7 +1,11 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/ItemCard.module.scss';
 
 const VpnCard = ({ vpnItem }) => {
+  const { t } = useTranslation();
+
   return (
     <li className={style['card']}>
       <div className={style['card__title']}>
@@ -21,7 +25,7 @@ const VpnCard = ({ vpnItem }) => {
         <li>{vpnItem.device}</li>
       </ul>
       <Link href={`/account/shop/vpn/${vpnItem.id}`}>
-        Заказать VPN
+        {t('button-order-vpn')}
       </Link>
     </li>
   );

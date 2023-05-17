@@ -1,11 +1,14 @@
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
-import { FAQ_LIST_VPS } from '../utils/constants';
-import style from '../styles/Vps.module.scss';
+import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
+
+import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
 import { vpsCountries } from '../utils/data/vpsCountries';
 
@@ -18,12 +21,14 @@ Vps.getLayout = function getLayout(page) {
 }
 
 function Vps() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={style.vps}>
         <div>
           <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
-          <p>Список услуг выделенных серверов</p>
+          <p>{t('vds-list')}</p>
         </div>
         {/* ToDo: fix with API */}
         <ul className={style['offer__list-country']}>
@@ -67,9 +72,18 @@ function Vps() {
       <AvailableSystems />
       <Advantages />
       <section className={style['faq']}>
-      <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
+      <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
       <ul className={style['faq__items']}>
-        {FAQ_LIST_VPS.map(el => {
+        {t('faq-lang') === 'ru' && FAQ_LIST_VPS_RU.map(el => {
+          return (
+            <FaqItem
+              key={el.id}
+              question={el.question}
+              answer={el.answer}
+            />
+          );
+        })}
+        {t('faq-lang') === 'en' && FAQ_LIST_VPS_EN.map(el => {
           return (
             <FaqItem
               key={el.id}

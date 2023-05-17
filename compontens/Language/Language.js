@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/Language.module.scss';
@@ -14,15 +14,29 @@ const Language = () => {
 
   const changeLanguage = (evt) => {
     const el = evt.currentTarget;
+
     if (el.id === 'ru') {
       setLanguage({ lang: 'Русский', img: '/ru.svg' });
     } else if (el.id = 'en') {
       setLanguage({ lang: 'English', img: '/us.svg' });
     }
+
     window.localStorage.setItem('MY_LANGUAGE', el.id);
     setIsLanguageMenuOpen(false);
-    i18n.changeLanguage(el.id)
+    i18n.changeLanguage(el.id);
   }
+
+  useEffect(() => {
+    const lang = localStorage.getItem('MY_LANGUAGE');
+
+    if (lang === 'en') {
+      setLanguage({ lang: 'English', img: '/us.svg' });
+      i18n.changeLanguage('en');
+    } else {
+      setLanguage({ lang: 'Русский', img: '/ru.svg' });
+      i18n.changeLanguage('ru');
+    }
+  }, []);
 
   return (
     <div className={style['language-wrapper']}>

@@ -1,10 +1,13 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
 import FaqItem from '../compontens/FaqItem/FaqItem';
-import { FAQ_LIST_VPN } from '../utils/constants';
+import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants';
+
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 // ToDo: delete after connecting with API
@@ -19,6 +22,8 @@ Vpn.getLayout = function getLayout(page) {
 }
 
 export default function Vpn() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={style.about}>
@@ -27,13 +32,9 @@ export default function Vpn() {
         </div>
         <div className={style['about__wrap']}>
           <h2 className={style['main-title']}>
-            Приватный VPN WireGuard
+            {t('vpn-page')}
           </h2>
-          <p>
-            Современный протокол VPN, использующий надёжные алгоритмы шифрования.
-            Наш VPN предназначен для создания защищенных соединений и ориентирован
-            на высокую производительность, простоту настройки и безопасность ваших данных.
-          </p>
+          <p>{t('vpn-page-about')}</p>
           <LinkToBuyVpn
             page='vpn'
           />
@@ -41,7 +42,7 @@ export default function Vpn() {
       </section>
       <section className={style.vpn}>
         <h2 className={style['main-title']}>
-          Выберете страну VPN
+          {t('choose-country')}
         </h2>
         <ul className={style['vpn__wrapper']}>
           {vpnCountries.map(el => {
@@ -56,19 +57,19 @@ export default function Vpn() {
       </section>
       <section className={style['instructions']}>
         <h2 className={`${style['main-title']} ${style['instructions__title']}`}>
-          Инструкция по использованию VPN
+          {t('instructions')}
         </h2>
         <ul className={style['instructions__list']}>
           <li className={style['instructions__list-item']}>
             <img alt='icon' src='/icon-one.png' className={style['instructions__icon']} />
             <p className={style['instructions__text']}>
-              Оплатите тариф
+              {t('instruction-one')}
             </p>
           </li>
           <li className={style['instructions__list-item']}>
             <img alt='icon' src='/icon-two.png' className={style['instructions__icon']} />
             <p className={style['instructions__text']}>
-              Загрузите приложения для вашего устройства&nbsp;
+              {t('instruction-two')}&nbsp;
               <Link href='https://www.wireguard.com/install/'>
                 Wireguard
               </Link>
@@ -77,60 +78,69 @@ export default function Vpn() {
           <li className={style['instructions__list-item']}>
             <img alt='icon' src='/icon-three.png' className={style['instructions__icon']} />
             <p className={style['instructions__text']}>
-              Используйте данные для подключения, которые мы предоставили вам при покупке тарифного плана
+              {t('instructionn-three')}
             </p>
           </li>
         </ul>
       </section>
       <section className={styleAdvantages['advantages']}>
         <h2 className={style['main-title']}>
-          Преимущества
+          {t('advantages')}
         </h2>
         <ul className={styleAdvantages['advantages__list']}>
           <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
-              Высокая скорость
+              {t('advantages-vpn-one')}
             </h3>
             <p className={styleAdvantages['advantages__description']}>
-              Быстрые сервера с высокой производительностью.
+              {t('advantages-vpn-one-about')}
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
-              Удобная настройка
+              {t('advantages-vpn-two')}
             </h3>
             <p className={styleAdvantages['advantages__description']}>
-              WireGuard поддерживает платформы Windows, macOS, Android, iOS, Linux.
+              {t('advantages-vpn-two-about')}
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
-              Защищенное соединение
+              {t('advantages-vpn-three')}
             </h3>
             <p className={styleAdvantages['advantages__description']}>
-              Надежные алгоритмы шифрования, которые гарантируют вам анонимность.
+              {t('advantages-vpn-three-about')}
             </p>
           </li>
           <li className={styleAdvantages['advantages__list-item']}>
             <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
             <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
-              Большой выбор стран
+              {t('advantages-vpn-four')}
             </h3>
             <p className={styleAdvantages['advantages__description']}>
-              Наши сервера находятся по всему миру, более чем в 20 странах.
+              {t('advantages-vpn-four-about')}
             </p>
           </li>
         </ul>
       </section>
       <section className={style['faq']}>
         <h2 className={style['main-title']}>
-          Частые вопросы
+          {t('faq')}
         </h2>
         <ul className={style['faq__list']}>
-          {FAQ_LIST_VPN.map(el => {
+          {t('faq-lang') === 'ru' && FAQ_LIST_VPN_RU.map(el => {
+            return (
+              <FaqItem
+                key={el.id}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_VPN_EN.map(el => {
             return (
               <FaqItem
                 key={el.id}

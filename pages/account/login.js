@@ -1,9 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
+
 import style from '../../styles/Auth.module.scss';
 
 export default function Login() {
+  const { t } = useTranslation();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
 
   return (
@@ -19,9 +23,9 @@ export default function Login() {
           <img className={style['content__logo']} alt='logo' src='/logo.png' />
         </div>
         <AuthForm
-          title='Авторизация'
-          button='Вход'
-          bottomLink='Создать аккаунт'
+          title={t('login')}
+          button={t('login-button')}
+          bottomLink={t('login-link')}
           bottomLinkHref='/account/signup/'
         >
           <label className={style['input']} htmlFor='name'>
@@ -31,7 +35,7 @@ export default function Login() {
               id='name'
               required
               className={style['input__field']}
-              placeholder='Имя пользователя'
+              placeholder={t('name')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
@@ -43,7 +47,7 @@ export default function Login() {
               id='password'
               required
               className={style['input__field']}
-              placeholder='Пароль'
+              placeholder={t('password')}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>

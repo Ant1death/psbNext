@@ -1,86 +1,87 @@
+import { useTranslation } from 'react-i18next';
+
 import style from '../../styles/Advantages.module.scss';
 
 export const Advantages = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={style['advantages']}>
         <div className={style['section-title']}>
-          <h2 className={`${['h2-title']}`}>Преимущества</h2>
-          <p>Преимущества нашего хостинга</p>
+          <h2 className={`${['h2-title']}`}>{t('advantages')}</h2>
+          <p>{t('advantages-about')}</p>
         </div>
         <ul className={style['advantages__list']}>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="ic:twotone-shield" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Конфиденциальность данных
+              {t('advantages-one')}
             </h4>
             <p className={style['advantages__description']}>
-              Безопасность клиентов является нашим главным приоритетом. Мы храним все
-              конфиденциальные данные в зашифрованном виде и не предаем их третьим лицам.
+              {t('advantages-one-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="mdi:server-shield" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Абузоустойчевые сервера
+              {t('advantages-two')}
             </h4>
             <p className={style['advantages__description']}>
-              Мы предоставляем bulletproof VPS/Hosting по лучшим ценам.
+              {t('advantages-two-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="ion:document-lock" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              DMCA 100% ignored
+              {t('advantages-three')}
             </h4>
             <p className={style['advantages__description']}>
-              В Нидерландах и Молдавии запросы DMCA полностью игнорируются, что позволяет размещать
-              более широкий спектр приемлемого контента.
+              {t('advantages-three-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="streamline:money-currency-bitcoin-circle-1-crypto-circle-payment-blockchain-finance-bitcoin-currency-money" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Оплата криптовалютой
+              {t('advantages-four')}
             </h4>
             <p className={style['advantages__description']}>
-              Мы принимаем оплату: BTC, ETH, LTC, USDT. Доступные сети: ERC-20, TRC-20, BSC, MATIC.
+              {t('advantages-four-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="gis:search-country" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Большой выбор стран
+              {t('advantages-five')}
             </h4>
             <p className={style['advantages__description']}>
-              Наши сервера находятся в дата центрах по всему миру: Нидерланды, Молдавия, Гонконг, США,
-              Великобритания, Германия, Канада, Турция.
+              {t('advantages-five-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="clarity:ssd-line" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              SSD-накопители NVMe
+              {t('advantages-six')}
             </h4>
             <p className={style['advantages__description']}>
-              NVMe диски и собственное оборудование высокого качества.
+              {t('advantages-six-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="iconoir:private-wifi" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Приватный VPN сервис
+              {t('advantages-seven')}
             </h4>
             <p className={style['advantages__description']}>
-              Современный и не требовательный к ресурсам VPN WireGuard, более чем в 20 странах.
+              {t('advantages-seven-about')}
             </p>
           </li>
           <li className={style['advantages__list-item']}>
             <iconify-icon icon="bx:support" height="100"></iconify-icon>
             <h4 className={`${['h4-title']} ${style['advantages__title']}`}>
-              Техническая поддержка
+              {t('advantages-eight')}
             </h4>
             <p className={style['advantages__description']}>
-              Наша техническая поддержка работает круглосуточно и поможет вам с любыми вопросами.
+              {t('advantages-eight-about')}
             </p>
           </li>
         </ul>
