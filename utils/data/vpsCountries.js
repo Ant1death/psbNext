@@ -150,7 +150,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
-    country: 'Canada',
+    country: 'Turkey',
     systems: ['Ubuntu 22.04'],
     panel: [
       'Без панели управления - 0$',
@@ -170,7 +170,7 @@ export const vpsCountries = [
     KVM: 'KVM Virtualization',
     Gbps: '1 Gbps',
     bandwidth: 'Unmetered bandwidth',
-    country: 'Canada',
+    country: 'Great Britain',
     systems: ['Ubuntu 22.04'],
     panel: [
       'Без панели управления - 0$',

@@ -28,6 +28,7 @@ function Vps() {
   const router = useRouter();
 
   const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
+  const [currentVpsList, setCurrentVpsList] = useState([]);
 
   const handleCountryClick = (evt) => {
     const el = evt.currentTarget;
@@ -45,8 +46,12 @@ function Vps() {
     }
   }, []);
 
-/*   useEffect(() => {
-    getProducts().then(res => console.log(res))
+  useEffect(() => {
+    vpsCountries && setCurrentVpsList(vpsCountries.filter(el => el.country === activeCountry));
+  }, [activeCountry])
+
+  /* useEffect(() => {
+    getProducts('VPS').then(res => console.log(res))
   }, []) */
 
   return (
@@ -74,7 +79,7 @@ function Vps() {
         </ul>
         <ul className={style['offer__wrapper']}>
           {/* ToDo: fix with API */}
-          {vpsCountries.map(el => {
+          {currentVpsList && currentVpsList.map(el => {
             return (
               <VpsCard
                 key={el.id}
