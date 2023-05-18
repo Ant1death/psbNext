@@ -3,20 +3,20 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import { TVds } from '../../types';
 
-interface vdsState {
-  vds: TVds | null;
+interface vdsVpsState {
+  vdsVps: TVds | null;
 }
 
-const initialState: vdsState = {
-  vds: null,
+const initialState: vdsVpsState = {
+  vdsVps: null,
 }
 
-export const vdsSlice = createSlice({
-  name: 'vds',
+export const vdsVpsSlice = createSlice({
+  name: 'vdsVps',
   initialState,
   reducers: {
-    fetchVds(state, action: PayloadAction<any>) {
-      if (!action.payload.__ignoreStaticProps) state.vds = action.payload;
+    fetchVdsVps(state, action: PayloadAction<any>) {
+      if (!action.payload.__ignoreStaticProps) state.vdsVps = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -26,10 +26,10 @@ export const vdsSlice = createSlice({
       }
       return {
         ...state,
-        ...action.payload.vds,
+        ...action.payload.vdsVps,
       };
     });
   },
 });
 
-export const { fetchVds } = vdsSlice.actions;
+export const { fetchVdsVps } = vdsVpsSlice.actions;

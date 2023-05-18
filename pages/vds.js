@@ -10,8 +10,7 @@ import VpsCard from '../compontens/VpsCard/VpsCard';
 import { Advantages } from '../compontens/Advantages/Advantages';
 
 import { getProducts } from '../api/getProducts';
-import { fetchVps } from '../store/slices/vps';
-import { fetchVds } from '../store/slices/vds';
+import { fetchVdsVps } from '../store/slices/vdsVps';
 import { wrapper } from '../store/store';
 import { useAppSelector } from '../store/hooks';
 
@@ -31,11 +30,16 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const dispatch = store.dispatch;
 
   const { products } = await getProducts('VPS');
-  dispatch(fetchVps(products));
-
   const vdsData = await getProducts('VDS');
   const vds = vdsData.products;
-  dispatch(vds);
+
+  if (products && vds) {
+    dispatch(fetchVdsVps(vds.concat(products)));
+  } else if (!products && vds) {
+    dispatch(fetchVdsVps(vds));
+  } else if (products && !vds) {
+    dispatch(fetchVdsVps(products));
+  }
 
   return {
     props: { },
@@ -45,12 +49,10 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 function Vps() {
   const { t } = useTranslation();
   const router = useRouter();
-  const vps = useAppSelector(store => store.vps.vps);
-  const vds = useAppSelector(store => store.vds.vds);
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
 
   const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
   const [currentVpsList, setCurrentVpsList] = useState([]);
-  const [productList, setProductList] = useState([]);
 
   const handleCountryClick = (evt) => {
     const el = evt.currentTarget;
@@ -69,18 +71,8 @@ function Vps() {
   }, []);
 
   useEffect(() => {
-    if (vds && vps) {
-      setProductList(vds.concat(vps));
-    } else if (vds && !vps) {
-      setProductList(vds);
-    } else if (!vds && vps) {
-      setProductList(vps);
-    }
-  }, [vds, vps]);
-
-  useEffect(() => {
-    productList && setCurrentVpsList(productList.filter(el => el.country === activeCountry));
-  }, [activeCountry, productList])
+    vdsVps && setCurrentVpsList(vdsVps.filter(el => el.country === activeCountry));
+  }, [activeCountry, vdsVps])
 
   return (
     <>

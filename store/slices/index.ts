@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { vpsSlice } from './vps';
-import { vdsSlice } from './vds';
+import { vdsVpsSlice } from './vdsVps';
 import { vpnSlice } from './vpn';
 import { vdsVpsBulletproofSlice } from './vdsVpsBulletproof';
 
 export const rootReducer = combineReducers({
-  vps: vpsSlice.reducer,
-  vds: vdsSlice.reducer,
+  vdsVps: vdsVpsSlice.reducer,
   vpn: vpnSlice.reducer,
   vdsVpsBulletproof: vdsVpsBulletproofSlice.reducer,
 });
