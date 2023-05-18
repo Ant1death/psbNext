@@ -7,13 +7,17 @@ import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
-import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
+
 import { getProducts } from '../api/getProducts';
+import { fetchVps } from '../store/slices/vps';
+import { fetchVds } from '../store/slices/vds';
+import { wrapper } from '../store/store';
+import { useAppSelector } from '../store/hooks';
+
+import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants';
 
 import style from '../styles/Vps.module.scss';
-// ToDo: delete after connecting with API
-import { vpsCountries } from '../utils/data/vpsCountries';
 
 Vps.getLayout = function getLayout(page) {
   return (
@@ -23,12 +27,30 @@ Vps.getLayout = function getLayout(page) {
   );
 }
 
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+  const dispatch = store.dispatch;
+
+  const { products } = await getProducts('VPS');
+  dispatch(fetchVps(products));
+
+  const vdsData = await getProducts('VDS');
+  const vds = vdsData.products;
+  dispatch(fetchVds(vds.concat(products)));
+
+  return {
+    props: { },
+  }
+});
+
 function Vps() {
   const { t } = useTranslation();
   const router = useRouter();
+  const vps = useAppSelector(store => store.vps.vps);
+  const vds = useAppSelector(store => store.vds.vds);
 
   const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
   const [currentVpsList, setCurrentVpsList] = useState([]);
+  const [productList, setProductList] = useState([]);
 
   const handleCountryClick = (evt) => {
     const el = evt.currentTarget;
@@ -47,12 +69,18 @@ function Vps() {
   }, []);
 
   useEffect(() => {
-    vpsCountries && setCurrentVpsList(vpsCountries.filter(el => el.country === activeCountry));
-  }, [activeCountry])
+    if (vds && vps) {
+      setProductList(vds.concat(vps));
+    } else if (vds && !vps) {
+      setProductList(vds);
+    } else if (!vds && vps) {
+      setProductList(vps);
+    }
+  }, [vds, vps]);
 
-  /* useEffect(() => {
-    getProducts('VPS').then(res => console.log(res))
-  }, []) */
+  useEffect(() => {
+    productList && setCurrentVpsList(productList.filter(el => el.country === activeCountry));
+  }, [activeCountry, productList])
 
   return (
     <>
@@ -61,7 +89,6 @@ function Vps() {
           <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
           <p>{t('vds-list')}</p>
         </div>
-        {/* ToDo: fix with API */}
         <ul className={style['offer__list-country']}>
           {VPS_COUNTRY_LIST.map(el => {
             return (
@@ -78,11 +105,10 @@ function Vps() {
           })}
         </ul>
         <ul className={style['offer__wrapper']}>
-          {/* ToDo: fix with API */}
-          {currentVpsList && currentVpsList.map(el => {
+          {currentVpsList && currentVpsList.map((el, ind) => {
             return (
               <VpsCard
-                key={el.id}
+                key={ind}
                 vpsItem={el}
               />
             );
