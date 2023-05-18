@@ -16,18 +16,19 @@ export const hostingSlice = createSlice({
   initialState,
   reducers: {
     fetchHosting(state, action: PayloadAction<any>) {
-      if (!action.payload.__ignoreStaticProps) state.hosting = action.payload;
+      state.hosting = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
-      if (action.payload.__ignoreStaticProps) {
-        return state;
-      }
-      return {
+      const nextState = {
         ...state,
         ...action.payload.hosting,
-      };
+      }
+
+      if (state.hosting) nextState.hosting = state.hosting;
+
+      return nextState;
     });
   },
 });

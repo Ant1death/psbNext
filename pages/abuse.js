@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
@@ -17,19 +18,7 @@ import { useAppSelector } from '../store/hooks';
 
 import style from '../styles/Abuse.module.scss';
 
-// ToDo: delete after connecting with API
-import { abuseList } from '../utils/data/abuseList';
-import { hostings } from '../utils/data/hostings';
-
-Abuse.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
-
-export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
   const dispatch = store.dispatch;
 
   const { products } = await getProducts('Bulletproof VDS');
@@ -47,13 +36,9 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const hostings = await getProducts('Hosting');
   const hosting = hostings.products;
   dispatch(fetchHosting(hosting));
-
-  return {
-    props: { },
-  }
 });
 
-export default function Abuse() {
+const Abuse = () => {
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
   const hosting = useAppSelector(store => store.hosting.hosting);
@@ -124,3 +109,13 @@ export default function Abuse() {
     </>
   );
 }
+
+Abuse.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Abuse);

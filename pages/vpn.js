@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
@@ -17,26 +18,14 @@ import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants';
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
 
-Vpn.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
-
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
   const { products } = await getProducts('VPN');
   dispatch(fetchVpn(products));
-
-  return {
-    props: { },
-  }
 });
 
-export default function Vpn() {
+const Vpn = () => {
   const { t } = useTranslation();
   const vpnList = useAppSelector(store => store.vpn.vpn);
 
@@ -170,3 +159,13 @@ export default function Vpn() {
     </>
   );
 }
+
+Vpn.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Vpn);

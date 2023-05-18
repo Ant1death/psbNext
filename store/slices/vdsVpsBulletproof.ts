@@ -16,18 +16,19 @@ export const vdsVpsBulletproofSlice = createSlice({
   initialState,
   reducers: {
     fetchVdsVpsBulletproof(state, action: PayloadAction<any>) {
-      if (!action.payload.__ignoreStaticProps) state.vdsVpsBulletproof = action.payload;
+      state.vdsVpsBulletproof = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
-      if (action.payload.__ignoreStaticProps) {
-        return state;
-      }
-      return {
+      const nextState = {
         ...state,
         ...action.payload.vdsVpsBulletproof,
-      };
+      }
+
+      if (state.vdsVpsBulletproof) nextState.vdsVpsBulletproof = state.vdsVpsBulletproof;
+
+      return nextState;
     });
   },
 });

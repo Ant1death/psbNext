@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
@@ -18,14 +19,6 @@ import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/con
 
 import style from '../styles/Vps.module.scss';
 
-Vps.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
-
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
@@ -40,13 +33,9 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   } else if (products && !vds) {
     dispatch(fetchVdsVps(products));
   }
-
-  return {
-    props: { },
-  }
 });
 
-function Vps() {
+const Vds = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -136,4 +125,12 @@ function Vps() {
   );
 }
 
-export default Vps;
+Vds.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Vds);

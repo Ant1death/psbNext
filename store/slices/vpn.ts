@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { diff } from 'jsondiffpatch';
 
 import { TVpn } from '../../types';
 
@@ -16,20 +17,36 @@ export const vpnSlice = createSlice({
   initialState,
   reducers: {
     fetchVpn(state, action: PayloadAction<any>) {
-      if (!action.payload.__ignoreStaticProps) state.vpn = action.payload;
+      state.vpn = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
-      if (action.payload.__ignoreStaticProps) {
-        return state;
-      }
-      return {
+      const nextState = {
         ...state,
         ...action.payload.vpn,
-      };
+      }
+
+      if (state.vpn) nextState.vpn = state.vpn;
+
+      return nextState;
     });
   },
 });
+
+
+/* const stateDiff = diff(state, action.payload);
+      const isdiff1 = stateDiff?.server?.[0]?.test?.data?.[0];
+      // return {
+      //   ...state,
+      //   data: isdiff1 ? action.payload.server.test.data : state.data,
+      // };
+      state.data = isdiff1 ? action.payload.server.test.data : state.data;
+    },
+    [TestFetch.fulfilled]: (state, action) => {
+      state.data = action.payload;
+    }, */
+
+
 
 export const { fetchVpn } = vpnSlice.actions;

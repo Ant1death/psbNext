@@ -16,18 +16,19 @@ export const vdsVpsSlice = createSlice({
   initialState,
   reducers: {
     fetchVdsVps(state, action: PayloadAction<any>) {
-      if (!action.payload.__ignoreStaticProps) state.vdsVps = action.payload;
+      state.vdsVps = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
-      if (action.payload.__ignoreStaticProps) {
-        return state;
-      }
-      return {
+      const nextState = {
         ...state,
         ...action.payload.vdsVps,
-      };
+      }
+
+      if (state.vdsVps) nextState.vdsVps = state.vdsVps;
+
+      return nextState;
     });
   },
 });
