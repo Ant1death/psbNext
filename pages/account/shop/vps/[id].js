@@ -17,6 +17,8 @@ VpsItem.getLayout = function getLayout(page) {
   );
 }
 
+
+
 export default function VpsItem() {
   const [item, setItem] = useState({});
 

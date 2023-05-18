@@ -18,7 +18,7 @@ import { useAppSelector } from '../store/hooks';
 
 import style from '../styles/Abuse.module.scss';
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
   const { products } = await getProducts('Bulletproof VDS');
