@@ -73,7 +73,7 @@ export default function Home() {
               <li>{t('vps-three')}</li>
               <li>Linux &amp; Windows</li>
             </ul>
-            <Link href='/abuse' className={style['ads__link']}>
+            <Link href='/abuse/#servers' className={style['ads__link']}>
               {t('button-more')}
             </Link>
           </li>
@@ -87,7 +87,7 @@ export default function Home() {
               <li>{t('hosting-three')}</li>
               <li>{t('hosting-four')}</li>
             </ul>
-            <Link href='/abuse' className={style['ads__link']}>
+            <Link href='/abuse/#hosting' className={style['ads__link']}>
               {t('button-more')}
             </Link>
           </li>

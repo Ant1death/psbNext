@@ -30,7 +30,7 @@ export default function Abuse() {
     <>
       <section className={style['abuse']}>
         <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`}>
+          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='servers'>
             {t('abuse-page')}
           </h2>
           <p>{t('abuse-page-about')}</p>
@@ -48,7 +48,7 @@ export default function Abuse() {
       </section>
       <section className={style['abuse']}>
         <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`}>
+          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='hosting'>
             {t('abuse-hosting')}
           </h2>
           <p>{t('abuse-hosting-about')}</p>
