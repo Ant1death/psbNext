@@ -1,12 +1,15 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { fetchHosting } from '../../../../store/slices/hosting';
+import { getProducts } from '../../../../api/getProducts';
+
 import style from '../../../../styles/AccountShop.module.scss';
-// ToDo: delete after connecting API
-import { hostings } from '../../../../utils/data/hostings';
 
 AccountHosting.getLayout = function getLayout(page) {
   return (
@@ -18,11 +21,22 @@ AccountHosting.getLayout = function getLayout(page) {
 
 export default function AccountHosting() {
   const { t } = useTranslation();
+  const hosting = useAppSelector(store => store.hosting.hosting);
+  const dispatch = useAppDispatch();
+
+  const fetchData = async () => {
+    const { products } = await getProducts('Hosting');
+    dispatch(fetchHosting(products));
+  }
+
+  useEffect(() => {
+    if (!hosting) fetchData();
+  }, []);
 
   return (
     <section className={style['shop']}>
       <ul className={style['shop__card-list']}>
-        {hostings.map(el => {
+        {hosting && hosting.map(el => {
           return (
             <li key={el.id} className={`${style['card']} ${style['shop__item']}`}>
               <div className={style['shop__item-wrap-title']}>
@@ -32,15 +46,16 @@ export default function AccountHosting() {
                   </Link>
                 </h2>
                 <ul className={style['shop__item-list']}>
-                  <li>{el.size}</li>
-                  <li>{el.websites}</li>
-                  <li>{el.license}</li>
-                  <li>{el.protection}</li>
+                  {el.characters.map(item => {
+                    return (
+                      <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                    );
+                  })}
                 </ul>
               </div>
               <div className={style['shop__item-price-wrap']}>
                 <p className={style['shop__item-price']}>
-                  {el.price.split('/')[0]}
+                  {`$${el.price}`}
                 </p>
                 <Link href={`/account/shop/hosting/${el.id}`} className={style['shop__button-cta']}>
                   <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
