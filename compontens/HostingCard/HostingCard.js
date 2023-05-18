@@ -13,14 +13,15 @@ const HostingCard = ({ hostingItem }) => {
           {hostingItem.title}
         </h3>
         <p className={style['card__price']}>
-          {hostingItem.price}
+          {`$${hostingItem.price}/мес.`}
         </p>
       </div>
       <ul className={style['card__list']}>
-        <li>{hostingItem.size}</li>
-        <li>{hostingItem.websites}</li>
-        <li>{hostingItem.license}</li>
-        <li>{hostingItem.protection}</li>
+        {hostingItem.characters.map(el => {
+          return (
+            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+          );
+        })}
       </ul>
       <Link href={`/account/shop/hosting/${hostingItem.id}`}>
         {t('button-buy-item')}

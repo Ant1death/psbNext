@@ -11,6 +11,7 @@ import { Advantages } from '../compontens/Advantages/Advantages';
 
 import { getProducts } from '../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
+import { fetchHosting } from '../store/slices/hosting';
 import { wrapper } from '../store/store';
 import { useAppSelector } from '../store/hooks';
 
@@ -43,6 +44,10 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
     dispatch(fetchVdsVps(products));
   }
 
+  const hostings = await getProducts('Hosting');
+  const hosting = hostings.products;
+  dispatch(fetchHosting(hosting));
+
   return {
     props: { },
   }
@@ -51,6 +56,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 export default function Abuse() {
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const hosting = useAppSelector(store => store.hosting.hosting);
 
   return (
     <>
@@ -80,7 +86,7 @@ export default function Abuse() {
           <p>{t('abuse-hosting-about')}</p>
         </div>
         <ul className={style['abuse__list']}>
-          {hostings.map(el => {
+          {hosting && hosting.map(el => {
             return (
               <HostingCard
                 key={el.id}
