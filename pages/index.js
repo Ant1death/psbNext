@@ -4,10 +4,9 @@ import { useTranslation } from 'react-i18next';
 import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
+import { VPS_COUNTRY_LIST } from '../utils/constants';
 
 import style from '../styles/Main.module.scss';
-// ToDo: delete after connecting with API
-import { vpsCountriesList } from '../utils/data/vpsOnMainPage';
 
 Home.getLayout = function getLayout(page) {
   return (
@@ -46,7 +45,7 @@ export default function Home() {
           {t('rental-about')}
         </p>
         <ul className={style.country__wrapper}>
-          {vpsCountriesList && vpsCountriesList.map(el => {
+          {VPS_COUNTRY_LIST.map(el => {
             return (
               <CardVpsOnMainPage
                 key={el.id}

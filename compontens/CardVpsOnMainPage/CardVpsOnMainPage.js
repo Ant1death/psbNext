@@ -16,7 +16,7 @@ const CardVpsOnMainPage = ({ country }) => {
             )
           })}
         </ul>
-        <Link href='/vps' className={style['country__item-btn']}>Show Plans</Link>
+        <Link href={`/vds/#${country.country}`} className={style['country__item-btn']}>Show Plans</Link>
     </li>
   );
 }

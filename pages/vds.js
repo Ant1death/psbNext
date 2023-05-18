@@ -1,12 +1,15 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
-import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN } from '../utils/constants';
+import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
+import { getProducts } from '../api/getProducts';
 
 import style from '../styles/Vps.module.scss';
 // ToDo: delete after connecting with API
@@ -22,6 +25,29 @@ Vps.getLayout = function getLayout(page) {
 
 function Vps() {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
+
+  const handleCountryClick = (evt) => {
+    const el = evt.currentTarget;
+    setActiveCountry(el.id);
+  }
+
+  useEffect(() => {
+    const country = router.asPath.slice(router.asPath.indexOf('#') + 1);
+
+    for (let i = 0; i < VPS_COUNTRY_LIST.length; i++) {
+      if (country.includes(VPS_COUNTRY_LIST[i].country.slice(0, 4))) {
+        setActiveCountry(VPS_COUNTRY_LIST[i].country);
+        break;
+      }
+    }
+  }, []);
+
+/*   useEffect(() => {
+    getProducts().then(res => console.log(res))
+  }, []) */
 
   return (
     <>
@@ -32,30 +58,19 @@ function Vps() {
         </div>
         {/* ToDo: fix with API */}
         <ul className={style['offer__list-country']}>
-          <li className={`${style['offer__country']} ${style['offer__country_Netherlands']} ${style['offer__country_active']}`}>
-            Netherlands
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Moldowa']}`}>
-            Moldowa
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Hong-Kong']}`}>
-            Hong Kong
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_USA']}`}>
-            USA
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Germany']}`}>
-            Germany
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Canada']}`}>
-            Canada
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Great-Britain']}`}>
-            Great Britain
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Turkey']}`}>
-            Turkey
-          </li>
+          {VPS_COUNTRY_LIST.map(el => {
+            return (
+              <li
+                key={el.id}
+                className={`${style['offer__country']} ${activeCountry === el.country ? style['offer__country_active'] : ''}`}
+                onClick={handleCountryClick}
+                id={el.country}
+              >
+                <img src={el.flag} alt={el.country} className={style['offer__flag']} />
+                <span>{el.country}</span>
+              </li>
+            );
+          })}
         </ul>
         <ul className={style['offer__wrapper']}>
           {/* ToDo: fix with API */}
