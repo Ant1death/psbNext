@@ -34,7 +34,14 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const { products } = await getProducts('Bulletproof VDS');
   const vdsData = await getProducts('Bulletproof VPS');
   const vds = vdsData.products;
-  dispatch(fetchVdsVpsBulletproof(vds.concat(products)));
+
+  if (products && vds) {
+    dispatch(fetchVdsVpsBulletproof(vds.concat(products)));
+  } else if (!products && vds) {
+    dispatch(fetchVdsVps(vds));
+  } else if (products && !vds) {
+    dispatch(fetchVdsVps(products));
+  }
 
   return {
     props: { },
