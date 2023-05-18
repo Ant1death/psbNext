@@ -5,9 +5,11 @@ import 'iconify-icon';
 
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { fetchVdsVps } from '../../../store/slices/vdsVps';
+import { getProducts } from '../../../api/getProducts';
+
 import style from '../../../styles/AccountShop.module.scss';
-// ToDo: delete after connecting API
-import { vpsCountries } from '../../../utils/data/vpsCountries';
 
 AccountVps.getLayout = function getLayout(page) {
   return (
@@ -27,6 +29,8 @@ export default function AccountVps() {
   const [isListActive, setIsListActive] = useState(false);
 
   const { t } = useTranslation();
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+  const dispatch = useAppDispatch();
 
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
@@ -41,9 +45,9 @@ export default function AccountVps() {
     const country = evt.target.textContent;
 
     if (country === t('card-all-countries')) {
-      setCurrentCountry(vpsCountries);
+      setCurrentCountry(vdsVps);
     } else {
-      const items = vpsCountries.filter(el => el.country === country);
+      const items = vdsVps.filter(el => el.country === country);
       setCurrentCountry(items);
     }
   }
@@ -61,41 +65,59 @@ export default function AccountVps() {
     isListActive ? setIsListActive(false) : setIsListActive(true);
   }
 
+  const fetchData = async () => {
+    const { products } = await getProducts('VPS');
+    const vdsData = await getProducts('VDS');
+    const vds = vdsData.products;
+
+    if (products && vds) {
+      dispatch(fetchVdsVps(vds.concat(products)));
+    } else if (!products && vds) {
+      dispatch(fetchVdsVps(vds));
+    } else if (products && !vds) {
+      dispatch(fetchVdsVps(products));
+    }
+  }
+
+  useEffect(() => {
+    if (!vdsVps) fetchData();
+  }, []);
+
   useEffect(() => {
     const map = new Map();
-    vpsCountries.forEach(el => {
+    vdsVps && vdsVps.forEach(el => {
       map.has(el.country) ? map.set(el.country, map.get(el.country) + 1) : map.set(el.country, 1);
     });
     setAmountContry(Array.from(map));
-  }, []);
+  }, [vdsVps]);
 
   useEffect(() => {
-    setCurrentCountry(vpsCountries);
-  }, []);
+    setCurrentCountry(vdsVps);
+  }, [vdsVps]);
 
   useEffect(() => {
     const set = new Set();
-    vpsCountries.forEach(el => {
-      el.systems.forEach(system => set.add(system));
+    vdsVps && vdsVps.forEach(el => {
+      el.systems && el.systems.forEach(system => set.add(system));
     });
     setSystemList(Array.from(set));
-  }, []);
+  }, [vdsVps]);
 
   useEffect(() => {
     if (selectedSystem === '') {
-      setCurrentCountry(vpsCountries);
+      setCurrentCountry(vdsVps);
     } else {
-      const items = vpsCountries.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVps.filter(el => el.systems.includes(selectedSystem));
       setCurrentCountry(items);
     }
   }, [selectedSystem]);
 
   useEffect(() => {
     if (seachedItem === '') {
-      setCurrentCountry(vpsCountries);
+      setCurrentCountry(vdsVps);
     } else {
       const search = seachedItem.toLowerCase();
-      const items = vpsCountries.filter(el =>
+      const items = vdsVps.filter(el =>
         el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
       );
       setCurrentCountry(items);
@@ -116,7 +138,7 @@ export default function AccountVps() {
                 {t('card-all-countries')}
               </button>
               <span className={style['shop__country-amount']}>
-                {vpsCountries.length}
+                {vdsVps && vdsVps.length}
               </span>
             </li>
             {amountContry.length > 0 && amountContry.map(el => {
@@ -150,7 +172,7 @@ export default function AccountVps() {
       </div>
       <div className={style['shop__content']}>
         <div className={`${style['card']} ${style['shop__search']}`}>
-          <form className={style['shop__search-form']}>
+          <form className={`${style['shop__search-form']} ${seachedItem === '' ? '' : style['shop__search-form_active']}`}>
             <input
               type='search'
               placeholder={t('card-search')}
@@ -181,7 +203,7 @@ export default function AccountVps() {
           </ul>
         </div>
         <ul className={style['shop__card-list']}>
-          {currentCountry.map(el => {
+          {currentCountry && currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
                 <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
@@ -194,18 +216,16 @@ export default function AccountVps() {
                     </Link>
                   </h2>
                   <ul className={style['shop__item-list']}>
-                    <li>{el.DMCA}</li>
-                    <li>{el.vCPU}</li>
-                    <li>{el.RAM}</li>
-                    <li>{el.SSD}</li>
-                    <li>{el.KVM}</li>
-                    <li>{el.Gbps}</li>
-                    <li>{el.bandwidth}</li>
+                  {el.characters.map(item => {
+                    return (
+                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className={classPriceWrapItem}>
                   <p className={classPriceItem}>
-                    {isListActive ? el.price.split('/')[0] : el.price}
+                    {`$${el.price}`}
                   </p>
                   <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
