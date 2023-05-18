@@ -6,12 +6,16 @@ import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
 import FaqItem from '../compontens/FaqItem/FaqItem';
+
+import { wrapper } from '../store/store';
+import { getProducts } from '../api/getProducts';
+import { fetchVpn } from '../store/slices/vpn';
+import { useAppSelector } from '../store/hooks';
+
 import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants';
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
-// ToDo: delete after connecting with API
-import { vpnCountries } from '../utils/data/vpnCountries';
 
 Vpn.getLayout = function getLayout(page) {
   return (
@@ -21,8 +25,20 @@ Vpn.getLayout = function getLayout(page) {
   );
 }
 
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+  const dispatch = store.dispatch;
+
+  const { products } = await getProducts('VPN');
+  dispatch(fetchVpn(products));
+
+  return {
+    props: { },
+  }
+});
+
 export default function Vpn() {
   const { t } = useTranslation();
+  const vpnList = useAppSelector(store => store.vpn.vpn);
 
   return (
     <>
@@ -45,7 +61,7 @@ export default function Vpn() {
           {t('choose-country')}
         </h2>
         <ul className={style['vpn__wrapper']}>
-          {vpnCountries.map(el => {
+          {vpnList && vpnList.map(el => {
             return (
               <VpnCard
                 key={el.id}

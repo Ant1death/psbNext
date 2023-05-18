@@ -10,19 +10,19 @@ const VpnCard = ({ vpnItem }) => {
     <li className={style['card']}>
       <div className={style['card__title']}>
         <h3 className={style['card__h3-title']}>
-          <img src={vpnItem.img} alt={vpnItem.title} className={style['card__img']} />
+          <img src='./de.svg' alt={vpnItem.title} className={style['card__img']} />
           {vpnItem.title}
         </h3>
         <p className={style['card__price']}>
-          {vpnItem.price}
+          {`$${vpnItem.price}`}
         </p>
       </div>
       <ul className={style['card__list']}>
-        <li>{vpnItem.port}</li>
-        <li>{vpnItem.encryption}</li>
-        <li>{vpnItem.support}</li>
-        <li>{vpnItem.traffic}</li>
-        <li>{vpnItem.device}</li>
+        {vpnItem.characters.map(el => {
+          return (
+            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+          );
+        })}
       </ul>
       <Link href={`/account/shop/vpn/${vpnItem.id}`}>
         {t('button-order-vpn')}
