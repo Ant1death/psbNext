@@ -98,7 +98,7 @@ export default function AccountVps() {
   useEffect(() => {
     const set = new Set();
     vdsVps && vdsVps.forEach(el => {
-      el.systems && el.systems.forEach(system => set.add(system));
+      el.os && el.os.forEach(system => set.add(system.name));
     });
     setSystemList(Array.from(set));
   }, [vdsVps]);
