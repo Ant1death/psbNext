@@ -35,7 +35,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 
   const vdsData = await getProducts('VDS');
   const vds = vdsData.products;
-  dispatch(fetchVds(vds.concat(products)));
+  dispatch(vds);
 
   return {
     props: { },

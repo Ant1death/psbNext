@@ -1,4 +1,4 @@
-export const ignoreStaticProps = (store: any) => (next: (arg0: any) => void) => (action: { payload: { __ignoreStaticProps: any; }; }) => {
+/* export const ignoreStaticProps = (store: any) => (next: (arg0: any) => void) => (action: { payload: { __ignoreStaticProps: any; }; }) => {
   if (action.payload?.__ignoreStaticProps) {
     delete action.payload.__ignoreStaticProps;
   } else {
@@ -8,7 +8,7 @@ export const ignoreStaticProps = (store: any) => (next: (arg0: any) => void) => 
     }
     next(action);
   }
-};
+}; */
 
 
 /* export const ignoreStaticProps = (store: any) => (next: (arg0: any) => void) => (action: { payload: { __ignoreStaticProps: any; }; }) => {

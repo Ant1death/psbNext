@@ -2,14 +2,14 @@ import { configureStore, ThunkAction, Action, ActionCreator, AnyAction, ThunkDis
 import { createWrapper } from 'next-redux-wrapper';
 
 import { rootReducer } from './slices/index';
-import { ignoreStaticProps } from '../utils/ignoreStaticProps';
+/* import { ignoreStaticProps } from '../utils/ignoreStaticProps'; */
 
-const middleware = [ignoreStaticProps];
+/* const middleware = [ignoreStaticProps]; */
 
 const makeStore = () => configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(middleware),
+ /*  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware), */
 });
 
 export type AppStore = ReturnType<typeof makeStore>;

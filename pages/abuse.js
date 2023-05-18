@@ -9,6 +9,11 @@ import HostingCard from '../compontens/HostingCard/HostingCard';
 import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
 
+import { getProducts } from '../api/getProducts';
+import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
+import { wrapper } from '../store/store';
+import { useAppSelector } from '../store/hooks';
+
 import style from '../styles/Abuse.module.scss';
 
 // ToDo: delete after connecting with API
@@ -23,8 +28,22 @@ Abuse.getLayout = function getLayout(page) {
   );
 }
 
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+  const dispatch = store.dispatch;
+
+  const { products } = await getProducts('Bulletproof VDS');
+  const vdsData = await getProducts('Bulletproof VPS');
+  const vds = vdsData.products;
+  dispatch(fetchVdsVpsBulletproof(vds.concat(products)));
+
+  return {
+    props: { },
+  }
+});
+
 export default function Abuse() {
   const { t } = useTranslation();
+  const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
 
   return (
     <>
@@ -36,10 +55,10 @@ export default function Abuse() {
           <p>{t('abuse-page-about')}</p>
         </div>
         <ul className={style['abuse__list']}>
-          {abuseList.map(el => {
+          {vdsVpsBulletproof && vdsVpsBulletproof.map((el, ind) => {
             return (
               <AbuseCard
-                key={el.id}
+                key={ind}
                 abuseItem={el}
               />
             );

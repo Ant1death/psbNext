@@ -13,13 +13,15 @@ const AbuseCard = ({ abuseItem }) => {
           {abuseItem.title}
         </h3>
         <p className={style['card__price']}>
-          {abuseItem.price}
+          {`$${abuseItem.price}/мес.`}
         </p>
       </div>
       <ul className={style['card__list']}>
-        <li>{abuseItem.vCPU}</li>
-        <li>{abuseItem.RAM}</li>
-        <li>{abuseItem.SSD}</li>
+        {abuseItem.characters.map(el => {
+          return (
+            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+          );
+        })}
       </ul>
       <Link href={`/account/shop/bulletproof/${abuseItem.id}`}>
         {t('button-buy-item')}
