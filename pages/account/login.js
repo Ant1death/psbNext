@@ -5,10 +5,12 @@ import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
 
 import style from '../../styles/Auth.module.scss';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 export default function Login() {
   const { t } = useTranslation();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
+  const { handleChange, values, setValues } = useFormAndValidation();
 
   return (
     <main className={style['container']}>
@@ -36,6 +38,8 @@ export default function Login() {
               required
               className={style['input__field']}
               placeholder={t('name')}
+              value={values.name || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
@@ -48,6 +52,8 @@ export default function Login() {
               required
               className={style['input__field']}
               placeholder={t('password')}
+              value={values.password || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
