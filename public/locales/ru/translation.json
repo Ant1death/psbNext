@@ -226,5 +226,6 @@
   "profile-order-option-four": "Выключить сервер",
   "profile-order-new-password": "Новый пароль",
 
-  "lang": "Выберите язык"
+  "lang": "Выберите язык",
+  "language": "Язык"
 }

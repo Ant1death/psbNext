@@ -226,5 +226,6 @@
   "profile-order-option-four": "Shut down the server",
   "profile-order-new-password": "New password",
 
-  "lang": "Choose Country"
+  "lang": "Choose Country",
+  "language": "Language"
 }

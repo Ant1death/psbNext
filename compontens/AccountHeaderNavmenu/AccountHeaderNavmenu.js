@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
 
 import style from '../../styles/AccountHeader.module.scss';
@@ -14,6 +15,7 @@ const AccountHeaderNavmenu = ({
 }) => {
   const buttonBell = useRef();
   const account = useRef();
+  const { t } = useTranslation();
 
   const sendCoordinates = (evt) => {
     if (windowWidth > 991) {
@@ -53,7 +55,7 @@ const AccountHeaderNavmenu = ({
           onClick={chooseLanquage}
         >
           <iconify-icon icon="ph:globe"></iconify-icon>
-          <span>Язык</span>
+          <span>{t('language')}</span>
         </button>
       </li>
       <li className={style['header__navbar-item']}>
