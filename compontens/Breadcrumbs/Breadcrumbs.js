@@ -3,19 +3,20 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
+import { useAppSelector } from '../../store/hooks';
 import { PATH_LIST_RU, PATH_LIST_EN } from '../../utils/constants';
 
 import style from '../../styles/Breadcrumbs.module.scss';
 // ToDo: delete after connecting API
-import { vpnCountries } from '../../utils/data/vpnCountries';
-import { vpsCountries } from '../../utils/data/vpsCountries';
-import { abuseList } from '../../utils/data/abuseList';
 import { orders } from '../../utils/data/orders';
-import { hostings } from '../../utils/data/hostings';
 
 const Breadcrumbs = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+  const vpn = useAppSelector(store => store.vpn.vpn);
+  const vsdVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const hosting = useAppSelector(store => store.hosting.hosting);
 
   const [lastCrumb, setLastCrumb] = useState('');
   const [pageTitle, setPageTitle] = useState('');
@@ -50,14 +51,14 @@ const Breadcrumbs = () => {
     } else if (asPath.length === 4 && asPath.includes('shop')) {
       let name = '';
 
-      if (asPath[2] === 'vps') {
-        name = findNameItemWhithId(vpsCountries, +asPath[3]);
-      } else if (asPath[2] === 'vpn') {
-        name = findNameItemWhithId(vpnCountries, +asPath[3]);
-      } else if (asPath[2] === 'bulletproof') {
-        name = findNameItemWhithId(abuseList, +asPath[3]);
-      } else if (asPath[2] === 'hosting') {
-        name = findNameItemWhithId(hostings, +asPath[3]);
+      if (asPath[2] === 'vps' && vdsVps) {
+        name = findNameItemWhithId(vdsVps, +asPath[3]);
+      } else if (asPath[2] === 'vpn' && vpn) {
+        name = findNameItemWhithId(vpn, +asPath[3]);
+      } else if (asPath[2] === 'bulletproof' && vsdVpsBulletproof) {
+        name = findNameItemWhithId(vsdVpsBulletproof, +asPath[3]);
+      } else if (asPath[2] === 'hosting' && hosting) {
+        name = findNameItemWhithId(hosting, +asPath[3]);
       }
 
       const title = `${t('path-new-service')} ${name}`;
