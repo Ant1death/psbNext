@@ -1,40 +1,45 @@
-import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
 
+import { wrapper } from '../../../../store/store';
+import { useAppSelector } from '../../../../store/hooks';
+
 import style from '../../../../styles/NewServise.module.scss';
-// Todo: delete after connecting API
-import { abuseList } from '../../../../utils/data/abuseList.js';
 
-AbuseItem.getLayout = function getLayout(page) {
-  return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
-  );
-}
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
+  const id = params.id;
 
-export default function AbuseItem() {
+  return {
+    props: {
+      id,
+    }
+  }
+});
+
+const AbuseItem = (id) => {
   const [item, setItem] = useState({});
 
-  const router = useRouter();
   const { t } = useTranslation();
+  const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
 
   const handleChangeSystem = () => {}
 
   const handleChangePanel = () => {}
 
-  const getItemWithId = () => {
-    const { id } = router.query;
-    return abuseList.find(el => el.id === +id);
-  }
+  const fetchData = () => {}
 
   useEffect(() => {
-    setItem(getItemWithId());
-  }, [router]);
+    if (vdsVpsBulletproof) {
+      const product = vdsVpsBulletproof.find(el => el.id === Number(id.pageProps.id));
+      setItem(product);
+    } else {
+      fetchData();
+    }
+  }, []);
 
   return (
     <NewServise>
@@ -42,10 +47,10 @@ export default function AbuseItem() {
         {t('new-service-system')}
       </label>
       <select className={style['card__form-select']} name='system' id='system' onClick={handleChangeSystem}>
-        {item && item.systems && item.systems.map(el => {
+        {item && item.os && item.os.map(el => {
           return (
-            <option key={item.systems.indexOf(el)} value={el}>
-              {el}
+            <option key={el.id} value={el}>
+              {el.name}
             </option>
           );
         })}
@@ -65,3 +70,13 @@ export default function AbuseItem() {
     </NewServise>
   );
 }
+
+AbuseItem.getLayout = function getLayout(page) {
+  return (
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default connect(state => state)(AbuseItem);

@@ -1,50 +1,55 @@
-import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
 
+import { wrapper } from '../../../../store/store';
+import { useAppSelector } from '../../../../store/hooks';
+
 import style from '../../../../styles/NewServise.module.scss';
-// Todo: delete after connecting API
-import { vpnCountries } from '../../../../utils/data/vpnCountries.js';
 
-VpnItem.getLayout = function getLayout(page) {
-  return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
-  );
-}
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
+  const id = params.id;
 
-export default function VpnItem() {
+  return {
+    props: {
+      id,
+    }
+  }
+});
+
+const  VpnItem = (id) => {
   const [item, setItem] = useState({});
 
-  const router = useRouter();
   const { t } = useTranslation();
+  const vpn = useAppSelector(store => store.vpn.vpn)
 
   const handleChangeSubscription = () => {}
 
-  const getItemWithId = () => {
-    const { id } = router.query;
-    return vpnCountries.find(el => el.id === +id);
-  }
+  const fetchData = () => {}
 
   useEffect(() => {
-    setItem(getItemWithId());
-  }, [router]);
+    if (vpn) {
+      const product = vpn.find(el => el.id === Number(id.pageProps.id));
+      setItem(product);
+    } else {
+      fetchData();
+    }
+  }, []);
 
   return (
     <NewServise>
       {item &&
         <h3 className={style['card__title-item']}>
-          <img src={item.img} alt={`icon ${item.title}`} className={style['card__flag']} />
+          <img src='/de.svg' alt={`icon ${item.title}`} className={style['card__flag']} />
           {`${item.title} - ${item.country}`}
         </h3>
       }
       <p className={style['card__price']}>
         {item && item.price &&
-          `${t('new-service-price')}: ${item.price.split(' ')[1]} $`
+          `${t('new-service-price')}: ${item.price}$`
         }
       </p>
       <label className={style['card__form-legend']} htmlFor='system'>
@@ -62,3 +67,13 @@ export default function VpnItem() {
     </NewServise>
   );
 }
+
+VpnItem.getLayout = function getLayout(page) {
+  return (
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default connect(state => state)(VpnItem)
