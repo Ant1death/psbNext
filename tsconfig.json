@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/vds.js", "utils/ignoreStaticProps.js"  ],
+, "pages/vds.js", "utils/ignoreStaticProps.js", "pages/api/login.оs"  ],
   "exclude": [
     "node_modules"
   ]

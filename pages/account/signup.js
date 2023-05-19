@@ -70,6 +70,7 @@ export default function SignUp() {
           bottomLink={t('signup-link')}
           bottomLinkHref='/account/login/'
           handleSubmitForm={handleSubmitForm}
+          isValid={isValid}
         >
           <label className={style['input']} htmlFor='name'>
             <input
@@ -85,9 +86,9 @@ export default function SignUp() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="ri:user-fill"></iconify-icon>
           </label>
-          <span className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
             {!isValid && errors.name}
-          </span>
+          </p>
           <label className={style['input']} htmlFor='email'>
             <input
               type='email'
@@ -102,9 +103,9 @@ export default function SignUp() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
           </label>
-          <span className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
             {!isValid && errors.email}
-          </span>
+          </p>
           <label className={style['input']} htmlFor='password'>
             <input
               type='password'
@@ -119,9 +120,9 @@ export default function SignUp() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
-          <span className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
             {!isValid && errors.password}
-          </span>
+          </p>
           <label className={style['input']} htmlFor='repeat-password'>
             <input
               type='password'
@@ -136,9 +137,9 @@ export default function SignUp() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
-          <span className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
             {errorPasswordRepeat ? errorPasswordRepeat : (!isValid ? errors.repeatPassword : '')}
-          </span>
+          </p>
         </AuthForm>
       </section>
       <MessageError

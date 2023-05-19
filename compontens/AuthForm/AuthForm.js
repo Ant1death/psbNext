@@ -4,16 +4,32 @@ import 'iconify-icon';
 
 import style from '../../styles/Auth.module.scss';
 
-const AuthForm = ({ title, children, button, bottomLink, bottomLinkHref, handleSubmitForm }) => {
+const AuthForm = ({
+  title,
+  isValid,
+  children,
+  button,
+  bottomLink,
+  bottomLinkHref,
+  handleSubmitForm
+}) => {
   const { t } = useTranslation();
 
   return (
-    <form className={style['form']} onSubmit={handleSubmitForm} noValidate>
+    <form
+      className={style['form']}
+      onSubmit={handleSubmitForm}
+      noValidate
+    >
       <p className={style['form__title']}>
         {title}
       </p>
       {children}
-      <button type='submit' className={style['form__button-submit']}>
+      <button
+        type='submit'
+        className={style['form__button-submit']}
+        disabled={!isValid}
+      >
         {button}
       </button>
       {button === 'Вход' &&

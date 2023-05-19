@@ -1,16 +1,48 @@
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import 'iconify-icon';
 
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
+import MessageError from '../../compontens/MessageError/MessageError';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { login } from '../../api/login';
+import { getUser } from '../../api/getUser.js';
 
 import style from '../../styles/Auth.module.scss';
-import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 export default function Login() {
   const { t } = useTranslation();
+  const router = useRouter();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
-  const { handleChange, values, setValues } = useFormAndValidation();
+  const { handleChange, values, errors, isValid } = useFormAndValidation();
+
+  const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
+
+  const handleSubmitForm = async (evt) => {
+    evt.preventDefault();
+
+    const data = await login(values.name, values.password);
+
+    if (data) {
+      console.log(data)
+      /* router.push('/account'); */
+      const res = await getUser();
+
+      console.log(res)
+    } else {
+      setIsErrorMessageOpen(true);
+    }
+  }
+
+  useEffect(() => {
+    if (isErrorMessaggeOpen) {
+      setTimeout(() => {
+        setIsErrorMessageOpen(false);
+      }, 5000);
+    }
+  }, [isErrorMessaggeOpen]);
 
   return (
     <main className={style['container']}>
@@ -29,6 +61,8 @@ export default function Login() {
           button={t('login-button')}
           bottomLink={t('login-link')}
           bottomLinkHref='/account/signup/'
+          handleSubmitForm={handleSubmitForm}
+          isValid={isValid}
         >
           <label className={style['input']} htmlFor='name'>
             <input
@@ -44,6 +78,9 @@ export default function Login() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {!isValid && errors.name}
+          </p>
           <label className={style['input']} htmlFor='password'>
             <input
               type='password'
@@ -58,8 +95,15 @@ export default function Login() {
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {!isValid && errors.password}
+          </p>
         </AuthForm>
       </section>
+      <MessageError
+        isOpen={isErrorMessaggeOpen}
+        message='Неправильные почта или пароль'
+      />
     </main>
   );
 }
