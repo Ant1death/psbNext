@@ -14,7 +14,7 @@ export const login = async (name, password) => {
 
     const bodyLine = body.join('&');
 
-    const res = await fetch(`http://37.139.42.75:3001/auth/login`, {
+    const res = await fetch(`http://37.139.42.75:8000/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -25,8 +25,9 @@ export const login = async (name, password) => {
     if (!res.ok) throw new Error(`error: ${res.status}`);
 
 
+    const data = await res.json();
 
-    return res.ok
+    return data;
   } catch (err) {
     console.error(err);
   }

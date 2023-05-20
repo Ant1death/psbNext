@@ -18,6 +18,7 @@ export default function Login() {
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const { handleChange, values, errors, isValid } = useFormAndValidation();
 
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
 
   const handleSubmitForm = async (evt) => {
@@ -26,15 +27,16 @@ export default function Login() {
     const data = await login(values.name, values.password);
 
     if (data) {
-      console.log(data)
-      /* router.push('/account'); */
-      const res = await getUser();
-
-      console.log(res)
+      localStorage.setItem('username', values.name);
+      localStorage.setItem('token', data.access_token);
+      setLoggedIn(true);
+      router.push('/account');
     } else {
       setIsErrorMessageOpen(true);
     }
   }
+
+  const user = getUser();
 
   useEffect(() => {
     if (isErrorMessaggeOpen) {
