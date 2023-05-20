@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
+import { VPN_CHARACTERS_RU, VPN_CHARACTERS_EN } from '../../utils/constants';
+
 import style from '../../styles/ItemCard.module.scss';
 
 const VpnCard = ({ vpnItem }) => {
@@ -18,9 +20,14 @@ const VpnCard = ({ vpnItem }) => {
         </p>
       </div>
       <ul className={style['card__list']}>
-        {vpnItem.characters.map(el => {
+        {t('lang') === 'ru' && VPN_CHARACTERS_RU.map((el, ind) => {
           return (
-            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+            <li key={ind}>{el}</li>
+          );
+        })}
+        {t('lang') === 'en' && VPN_CHARACTERS_EN.map((el, ind) => {
+          return (
+            <li key={ind}>{el}</li>
           );
         })}
       </ul>

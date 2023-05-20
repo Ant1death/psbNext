@@ -299,3 +299,19 @@ export const VPS_COUNTRY_LIST = [
     ],
   },
 ];
+
+export const VPN_CHARACTERS_RU = [
+  'Порт: 1 Gbps',
+  'Безопасное шифрование',
+  'Поддержка 24/7',
+  'Безлимитный трафик',
+  '1 активное устройство',
+];
+
+export const VPN_CHARACTERS_EN = [
+  'Port: 1 Gbps',
+  'Secure encryption',
+  'Support 24/7',
+  'Unlimited traffic',
+  '1 active device',
+];
