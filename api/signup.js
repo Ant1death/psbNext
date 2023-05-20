@@ -1,6 +1,8 @@
+import { BASE_URL } from '../utils/constants';
+
 export const signup = async (name, email, password) => {
   try {
-    const res = await fetch(`http://37.139.42.75:8000/auth/register`, {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

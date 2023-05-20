@@ -1,3 +1,5 @@
+import { BASE_URL } from '../utils/constants';
+
 export const login = async (name, password) => {
   try {
     const params = {
@@ -14,7 +16,7 @@ export const login = async (name, password) => {
 
     const bodyLine = body.join('&');
 
-    const res = await fetch(`http://37.139.42.75:8000/auth/login`, {
+    const res = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',

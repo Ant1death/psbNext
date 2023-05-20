@@ -1,6 +1,7 @@
 export const TRANSFORM_AMOUNT = 10;
 export const INDENT_POPUP_NOTIFICATION = 25;
 export const INDENT_POPUP_PROFILE = 20;
+export const BASE_URL = 'http://37.139.42.75:8000';
 
 export const PATH_LIST_RU = {
   account: 'Панель управления',

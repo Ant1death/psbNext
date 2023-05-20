@@ -1,6 +1,8 @@
+import { BASE_URL } from '../utils/constants';
+
 export const getProducts = async (type) => {
   try {
-    const res = await fetch(`http://37.139.42.75:8000/products/all?types=${type}`);
+    const res = await fetch(`${BASE_URL}/products/all?types=${type}`);
 
     if (!res.ok) throw new Error(`error: ${res.status}`);
 
