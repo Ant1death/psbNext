@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
@@ -8,11 +9,10 @@ import AuthForm from '../../compontens/AuthForm/AuthForm';
 import MessageError from '../../compontens/MessageError/MessageError';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { login } from '../../api/login';
-import { getUser } from '../../api/getUser.js';
 
 import style from '../../styles/Auth.module.scss';
 
-export default function Login() {
+const Login = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
@@ -35,8 +35,6 @@ export default function Login() {
       setIsErrorMessageOpen(true);
     }
   }
-
-  const user = getUser();
 
   useEffect(() => {
     if (isErrorMessaggeOpen) {
@@ -109,3 +107,5 @@ export default function Login() {
     </main>
   );
 }
+
+export default connect(state => state)(Login);

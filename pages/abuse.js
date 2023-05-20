@@ -21,21 +21,20 @@ import style from '../styles/Abuse.module.scss';
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
-  const { products } = await getProducts('Bulletproof VDS');
+  const vpsData = await getProducts('Bulletproof VDS');
+  const vps = vpsData ? vpsData.products : [];
   const vdsData = await getProducts('Bulletproof VPS');
-  const vds = vdsData.products;
+  const vds = vdsData ? vdsData.products : [];
 
-  if (products && vds) {
-    dispatch(fetchVdsVpsBulletproof(vds.concat(products)));
-  } else if (!products && vds) {
-    dispatch(fetchVdsVps(vds));
-  } else if (products && !vds) {
-    dispatch(fetchVdsVps(products));
-  }
+  fetchVdsVpsBulletproof(vds.concat(vps))
 
   const hostings = await getProducts('Hosting');
   const hosting = hostings.products;
   dispatch(fetchHosting(hosting));
+
+  return {
+    props: { },
+  }
 });
 
 const Abuse = () => {

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
@@ -9,15 +10,7 @@ import style from '../../styles/Account.module.scss';
 // ToDo: delete after connecting API
 import { orders } from '../../utils/data/orders';
 
-Account.getLayout = function getLayout(page) {
-  return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
-  );
-}
-
-export default function Account() {
+const Account = () => {
   const { t } = useTranslation();
 
   return (
@@ -98,3 +91,13 @@ export default function Account() {
     </>
   );
 }
+
+Account.getLayout = function getLayout(page) {
+  return (
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default connect(state => state)(Account);
