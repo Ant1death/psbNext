@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
-import { VPN_CHARACTERS_RU, VPN_CHARACTERS_EN } from '../../utils/constants';
+import { VPN_CHARACTERS_RU, VPN_CHARACTERS_EN, VPN_COUNTRIES } from '../../utils/constants';
 
 import style from '../../styles/ItemCard.module.scss';
 
@@ -12,7 +12,10 @@ const VpnCard = ({ vpnItem }) => {
     <li className={style['card']}>
       <div className={style['card__title']}>
         <h3 className={style['card__h3-title']}>
-          <img src='./de.svg' alt={vpnItem.title} className={style['card__img']} />
+          {VPN_COUNTRIES.map(el => {
+            el.country === vpnItem.country &&
+              <img src={el.flag} alt={vpnItem.title} className={style['card__img']} />
+          })}
           {vpnItem.title}
         </h3>
         <p className={style['card__price']}>

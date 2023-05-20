@@ -315,3 +315,38 @@ export const VPN_CHARACTERS_EN = [
   'Unlimited traffic',
   '1 active device',
 ];
+
+export const VPN_COUNTRIES = [
+  {
+    country: 'Netherlands',
+    flag: './nl.svg',
+  },
+  {
+    country: 'Moldowa',
+    flag: './md.svg',
+  },
+  {
+    country: 'USA',
+    flag: './us.svg',
+  },
+  {
+    country: 'Hong Kong',
+    flag: './hk.svg',
+  },
+  {
+    country: 'Germany',
+    flag: './de.svg',
+  },
+  {
+    country: 'Canada',
+    flag: './ca.svg',
+  },
+  {
+    country: 'Great Britain',
+    flag: './gb.svg',
+  },
+  {
+    country: 'Turkey',
+    flag: './tr.svg',
+  },
+];
