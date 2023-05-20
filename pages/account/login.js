@@ -18,7 +18,6 @@ const Login = () => {
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const { handleChange, values, errors, isValid } = useFormAndValidation();
 
-  const [loggedIn, setLoggedIn] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
 
   const handleSubmitForm = async (evt) => {
@@ -29,7 +28,6 @@ const Login = () => {
     if (data) {
       localStorage.setItem('username', values.name);
       localStorage.setItem('token', data.access_token);
-      setLoggedIn(true);
       router.push('/account');
     } else {
       setIsErrorMessageOpen(true);
@@ -43,6 +41,10 @@ const Login = () => {
       }, 5000);
     }
   }, [isErrorMessaggeOpen]);
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <main className={style['container']}>

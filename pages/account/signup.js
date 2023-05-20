@@ -25,7 +25,7 @@ export default function SignUp() {
 
     const data = await signup(values.name, values.email, values.password);
 
-    if (data.id) {
+    if (data) {
       router.push('/account/login');
     } else {
       setIsErrorMessageOpen(true);

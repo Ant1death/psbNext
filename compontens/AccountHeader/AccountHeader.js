@@ -4,6 +4,7 @@ import Link from 'next/link';
 import 'iconify-icon';
 
 import AccountHeaderNavmenu from '../AccountHeaderNavmenu/AccountHeaderNavmenu';
+import { getUser } from '../../api/getUser';
 
 import style from '../../styles/AccountHeader.module.scss';
 
@@ -24,6 +25,15 @@ const AccountHeader = ({
   useEffect(() => {
     const lang = localStorage.getItem('MY_LANGUAGE');
     lang === 'en' ? i18n.changeLanguage('en') : i18n.changeLanguage('ru');
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const data = getUser(token);
+
+      console.log(data)
+    }
   }, []);
 
   return (
