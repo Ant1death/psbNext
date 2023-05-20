@@ -26,7 +26,6 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const vps = vpsData ? vpsData.products : [];
   const vdsData = await getProducts('VDS');
   const vds = vdsData ? vdsData.products : [];
-
   dispatch(fetchVdsVps(vds.concat(vps)));
 
   return {

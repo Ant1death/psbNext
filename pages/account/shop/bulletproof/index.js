@@ -62,21 +62,15 @@ export default function Bulletproof() {
   }
 
   const fetchData = async () => {
-    const { products } = await getProducts('Bulletproof VDS');
+    const vpsData = await getProducts('Bulletproof VDS');
+    const vps = vpsData ? vpsData.products : [];
     const vdsData = await getProducts('Bulletproof VPS');
-    const vds = vdsData.products;
-
-    if (products && vds) {
-      dispatch(fetchVdsVpsBulletproof(vds.concat(products)));
-    } else if (!products && vds) {
-      dispatch(fetchVdsVps(vds));
-    } else if (products && !vds) {
-      dispatch(fetchVdsVps(products));
-    }
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }
 
   useEffect(() => {
-    if (!vdsVpsBulletproof) fetchData();
+    if (!vdsVpsBulletproof || (vdsVpsBulletproof && vdsVpsBulletproof.length === 0)) fetchData();
   }, []);
 
   useEffect(() => {

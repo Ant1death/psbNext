@@ -34,12 +34,12 @@ export default function AccountVpn() {
   }
 
   const fetchData = async () => {
-    const { products } = await getProducts('VPN');
-    dispatch(fetchVpn(products));
+    const data = await getProducts('VPN');
+    if (data) dispatch(fetchVpn(data.products));
   }
 
   useEffect(() => {
-    if (!vpn) fetchData();
+    if (!vpn && (vpn && vpn.length === 0)) fetchData();
   }, []);
 
   useEffect(() => {

@@ -25,12 +25,13 @@ export default function AccountHosting() {
   const dispatch = useAppDispatch();
 
   const fetchData = async () => {
-    const { products } = await getProducts('Hosting');
-    dispatch(fetchHosting(products));
+    const hostings = await getProducts('Hosting');
+    const hosting = hostings ? hostings.products : [];
+    dispatch(fetchHosting(hosting));
   }
 
   useEffect(() => {
-    if (!hosting) fetchData();
+    if (!hosting || (hosting && hosting.length === 0)) fetchData();
   }, []);
 
   return (

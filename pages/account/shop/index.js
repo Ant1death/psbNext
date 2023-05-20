@@ -66,21 +66,15 @@ export default function AccountVps() {
   }
 
   const fetchData = async () => {
-    const { products } = await getProducts('VPS');
+    const vpsData = await getProducts('VPS');
+    const vps = vpsData ? vpsData.products : [];
     const vdsData = await getProducts('VDS');
-    const vds = vdsData.products;
-
-    if (products && vds) {
-      dispatch(fetchVdsVps(vds.concat(products)));
-    } else if (!products && vds) {
-      dispatch(fetchVdsVps(vds));
-    } else if (products && !vds) {
-      dispatch(fetchVdsVps(products));
-    }
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVps(vds.concat(vps)));
   }
 
   useEffect(() => {
-    if (!vdsVps) fetchData();
+    if (!vdsVps || (vdsVps && vdsVps.length === 0)) fetchData();
   }, []);
 
   useEffect(() => {
