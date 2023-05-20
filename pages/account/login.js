@@ -19,19 +19,27 @@ const Login = () => {
   const { handleChange, values, errors, isValid } = useFormAndValidation();
 
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = async (evt) => {
+  const handleSubmitForm = (evt) => {
     evt.preventDefault();
 
-    const data = await login(values.name, values.password);
-
-    if (data) {
-      localStorage.setItem('username', values.name);
-      localStorage.setItem('token', data.access_token);
-      router.push('/account');
-    } else {
-      setIsErrorMessageOpen(true);
-    }
+    login(values.name, values.password)
+      .then(res => {
+        if (res) {
+          localStorage.setItem('username', values.name);
+          localStorage.setItem('token', data.access_token);
+          router.push('/account');
+        }
+      })
+      .catch(err => {
+        if (err.slice(8) === '400' || err.slice(8) === '422') {
+          setErrorMessage('Неправильные почта или пароль');
+        } else if (err.slice(8) === '400') {
+          setErrorMessage('Ошибка на стороне сервера. Обратитесь в техподдержку');
+        }
+        setIsErrorMessageOpen(true);
+      });
   }
 
   useEffect(() => {
@@ -104,7 +112,7 @@ const Login = () => {
       </section>
       <MessageError
         isOpen={isErrorMessaggeOpen}
-        message='Неправильные почта или пароль'
+        message={errorMessage}
       />
     </main>
   );

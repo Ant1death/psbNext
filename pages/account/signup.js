@@ -19,17 +19,19 @@ export default function SignUp() {
 
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = async (evt) => {
+  const handleSubmitForm = (evt) => {
     evt.preventDefault();
 
-    const data = await signup(values.name, values.email, values.password);
-
-    if (data) {
-      router.push('/account/login');
-    } else {
+   signup(values.name, values.email, values.password)
+    .then (res => {
+      if (res) router.push('/account/login');
+    })
+    .catch(err => {
+      setErrorMessage(`Ошибка: ${err.message}`);
       setIsErrorMessageOpen(true);
-    }
+    });
   }
 
   useEffect(() => {
@@ -144,7 +146,7 @@ export default function SignUp() {
       </section>
       <MessageError
         isOpen={isErrorMessaggeOpen}
-        message='Что-то пошло не так...'
+        message={errorMessage}
       />
     </main>
   );
