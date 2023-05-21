@@ -4,7 +4,7 @@ export const getUser = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/auth/get_current_user`, {
       headers: {
-        authorization: token,
+        'Authorization' : `Bearer ${token}`,
       }
     });
 

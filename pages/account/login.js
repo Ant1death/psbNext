@@ -28,16 +28,12 @@ const Login = () => {
       .then(res => {
         if (res) {
           localStorage.setItem('username', values.name);
-          localStorage.setItem('token', data.access_token);
+          localStorage.setItem('token', res.access_token);
           router.push('/account');
         }
       })
       .catch(err => {
-        if (err.slice(8) === '400' || err.slice(8) === '422') {
-          setErrorMessage('Неправильные почта или пароль');
-        } else if (err.slice(8) === '400') {
-          setErrorMessage('Ошибка на стороне сервера. Обратитесь в техподдержку');
-        }
+        setErrorMessage(`Ошибка: ${err.message}`);
         setIsErrorMessageOpen(true);
       });
   }
