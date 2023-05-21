@@ -5,7 +5,7 @@ import 'iconify-icon';
 
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
-import MessageError from '../../compontens/MessageError/MessageError';
+import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { signup } from '../../api/signup';
 
@@ -33,14 +33,6 @@ export default function SignUp() {
       setIsErrorMessageOpen(true);
     });
   }
-
-  useEffect(() => {
-    if (isErrorMessaggeOpen) {
-      setTimeout(() => {
-        setIsErrorMessageOpen(false);
-      }, 5000);
-    }
-  }, [isErrorMessaggeOpen]);
 
   useEffect(() => {
     if (values.password !== values.repeatPassword) {
@@ -144,9 +136,10 @@ export default function SignUp() {
           </p>
         </AuthForm>
       </section>
-      <MessageError
+      <MessagePopup
         isOpen={isErrorMessaggeOpen}
         message={errorMessage}
+        setIsOpen={setIsErrorMessageOpen}
       />
     </main>
   );

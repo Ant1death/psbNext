@@ -6,7 +6,7 @@ import 'iconify-icon';
 
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
-import MessageError from '../../compontens/MessageError/MessageError';
+import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { login } from '../../api/login';
 
@@ -37,18 +37,6 @@ const Login = () => {
         setIsErrorMessageOpen(true);
       });
   }
-
-  useEffect(() => {
-    if (isErrorMessaggeOpen) {
-      setTimeout(() => {
-        setIsErrorMessageOpen(false);
-      }, 5000);
-    }
-  }, [isErrorMessaggeOpen]);
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <main className={style['container']}>
@@ -106,9 +94,10 @@ const Login = () => {
           </p>
         </AuthForm>
       </section>
-      <MessageError
+      <MessagePopup
         isOpen={isErrorMessaggeOpen}
         message={errorMessage}
+        setIsOpen={setIsErrorMessageOpen}
       />
     </main>
   );
