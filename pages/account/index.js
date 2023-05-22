@@ -11,8 +11,6 @@ import { getOrders } from '../../api/getOrders';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import style from '../../styles/Account.module.scss';
-// ToDo: delete after connecting API
-import { orders } from '../../utils/data/orders';
 
 const Account = () => {
   const { t } = useTranslation();
