@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -5,6 +6,9 @@ import 'iconify-icon';
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import OrderCardPending from '../../compontens/OrderCardPending/OrderCardPending';
 import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess';
+import { fetchOrders } from '../../store/slices/orders';
+import { getOrders } from '../../api/getOrders';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import style from '../../styles/Account.module.scss';
 // ToDo: delete after connecting API
@@ -12,6 +16,18 @@ import { orders } from '../../utils/data/orders';
 
 const Account = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const orders = useAppSelector(store => store.orders.orders);
+
+  const fetchData = async (token) => {
+    const data = await getOrders(token);
+    if (data) dispatch(fetchOrders(data));
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) fetchData(token);
+  }, []);
 
   return (
     <>
@@ -60,7 +76,7 @@ const Account = () => {
           {t('active-products')}
         </h2>
         <ul className={style['goods__list']}>
-          {orders.map(el => {
+          {orders && orders.map(el => {
             if (el.status === 'Заказ в обработке') {
               return (
                 <OrderCardPending
