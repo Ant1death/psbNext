@@ -41,7 +41,7 @@ const LayoutAccount = ({ children }) => {
 
     const name = await checkAuth(token);
 
-    if (name.username !== username) {
+    if (name.username !== username || !username) {
       router.push('/login');
     } else {
       setIsLoading(true);

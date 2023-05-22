@@ -31,7 +31,7 @@ const Login = () => {
 
     if (name.username === username) {
       router.push('/account');
-    } else {
+    } else if (name.username !== username || !username) {
       setIsLoading(true);
     }
   }
@@ -55,7 +55,7 @@ const Login = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    token ? checkName(token) : router.push('/login');
+    token ? checkName(token) : setIsLoading(true);
   }, []);
 
   return (
