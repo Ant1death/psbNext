@@ -6,7 +6,7 @@ import 'iconify-icon';
 import AccountHeaderNavmenu from '../AccountHeaderNavmenu/AccountHeaderNavmenu';
 import { getUser } from '../../api/getUser';
 import { fetchUser } from '../../store/slices/user';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import style from '../../styles/AccountHeader.module.scss';
 
@@ -24,6 +24,7 @@ const AccountHeader = ({
 }) => {
   const { i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(store => store.user.user);
 
   const fetchData = async (token) => {
     const data = await getUser(token);
@@ -37,8 +38,8 @@ const AccountHeader = ({
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) fetchData(token);
-  }, []);
+    if (token && !user) fetchData(token);
+  }, [user]);
 
   return (
     <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>

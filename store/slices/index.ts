@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { vdsVpsSlice } from './vdsVps';
 import { vpnSlice } from './vpn';
 import { vdsVpsBulletproofSlice } from './vdsVpsBulletproof';
-import { hostingSlice } from './hosting';
+import { hostingSlice } from '../../hosting';
 import { userSlice } from './user';
 import { ordersSlice } from './orders';
 

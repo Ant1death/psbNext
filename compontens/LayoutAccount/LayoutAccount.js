@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { IBM_Plex_Sans } from '@next/font/google';
+import { useRouter } from 'next/router';
+
 import useWindowWidth from '../../hooks/useWindowWidth';
 import AccountHeader from '../AccountHeader/AccountHeader';
 import AccountFooter from '../AccountFooter/AccountFooter';
@@ -10,6 +12,9 @@ import PopupProfile from '../PopupProfile/PopupProfile';
 import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
 import ButtonToTop from '../../compontens/ButtonToTop/ButtonToTop';
 import ButtonTelegram from '../../compontens/ButtonTelegram/ButtonTelegram';
+import Preloader from '../../compontens/Preloader/Preloader';
+
+import { checkAuth } from '../../api/checkAuth';
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
@@ -26,7 +31,29 @@ const LayoutAccount = ({ children }) => {
   const [isSidebarMini, setIsSideBarMini] = useState(false);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isHeaderNamenuVisible, setIsHeaderNamenuVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const windowWidth = useWindowWidth();
+  const router = useRouter();
+
+  const checkName = async (token) => {
+    const username = localStorage.getItem('username');
+
+    const name = await checkAuth(token);
+
+    if (name.username !== username) {
+      router.push('/login');
+    } else {
+      setIsLoading(true);
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) checkName(token);
+
+  }, []);
 
   const chooseLanquage = () => {
     setIsOpenPopupLanguage(true);
@@ -120,53 +147,56 @@ const LayoutAccount = ({ children }) => {
 
   return (
     <div className={ibmPlexSans.className}>
-      <div className='page-account'
-        onClick={handleBackgroundClose}
-      >
-        <AccountSidebar
-          isSidebarMini={isSidebarMini}
-          mouseEnterSidebar={mouseEnterSidebar}
-          mouseLeaveSidebar={mouseLeaveSidebar}
-          isSidebarVisible={isSidebarVisible}
-          windowWidth={windowWidth}
-        />
-        <AccountHeader
-          chooseLanquage={chooseLanquage}
-          openPopupNotification={openPopupNotification}
-          setXCoordPopupNotification={setXCoordPopupNotification}
-          openPopupProfile={openPopupProfile}
-          setXCoordPopupProfile={setXCoordPopupProfile}
-          windowWidth={windowWidth}
-          toggleSidebar={toggleSidebar}
-          isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
-          isHeaderNamenuVisible={isHeaderNamenuVisible}
-          toggleHeaderNavmenu={toggleHeaderNavmenu}
-        />
-          <main className={`account-main ${isSidebarMini ? 'account-main_sidebar-mini' : ''}`}>
-            <Breadcrumbs />
-            { children }
-          </main>
-        <AccountFooter
-          isSidebarMini={isSidebarMini}
-          windowWidth={windowWidth}
-        />
-        <PopupLanguage
-          isOpen={isOpenPopupLanguage}
-          closePopup={closePopupLanguage}
-        />
-        <PopupNotification
-          isOpen={isOpenPopupNotification}
-          right={xCoordPopupNotification}
-          windowWidth={windowWidth}
-        />
-        <PopupProfile
-          isOpen={isOpenPopupProfile}
-          right={xCoordPopupProfile}
-          windowWidth={windowWidth}
-        />
-        <ButtonToTop />
-        <ButtonTelegram />
-      </div>
+      {!isLoading && <Preloader />}
+      {isLoading &&
+        <div className='page-account'
+          onClick={handleBackgroundClose}
+        >
+          <AccountSidebar
+            isSidebarMini={isSidebarMini}
+            mouseEnterSidebar={mouseEnterSidebar}
+            mouseLeaveSidebar={mouseLeaveSidebar}
+            isSidebarVisible={isSidebarVisible}
+            windowWidth={windowWidth}
+          />
+          <AccountHeader
+            chooseLanquage={chooseLanquage}
+            openPopupNotification={openPopupNotification}
+            setXCoordPopupNotification={setXCoordPopupNotification}
+            openPopupProfile={openPopupProfile}
+            setXCoordPopupProfile={setXCoordPopupProfile}
+            windowWidth={windowWidth}
+            toggleSidebar={toggleSidebar}
+            isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
+            isHeaderNamenuVisible={isHeaderNamenuVisible}
+            toggleHeaderNavmenu={toggleHeaderNavmenu}
+          />
+            <main className={`account-main ${isSidebarMini ? 'account-main_sidebar-mini' : ''}`}>
+              <Breadcrumbs />
+              { children }
+            </main>
+          <AccountFooter
+            isSidebarMini={isSidebarMini}
+            windowWidth={windowWidth}
+          />
+          <PopupLanguage
+            isOpen={isOpenPopupLanguage}
+            closePopup={closePopupLanguage}
+          />
+          <PopupNotification
+            isOpen={isOpenPopupNotification}
+            right={xCoordPopupNotification}
+            windowWidth={windowWidth}
+          />
+          <PopupProfile
+            isOpen={isOpenPopupProfile}
+            right={xCoordPopupProfile}
+            windowWidth={windowWidth}
+          />
+          <ButtonToTop />
+          <ButtonTelegram />
+        </div>
+      }
     </div>
   );
 }

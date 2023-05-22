@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/NewServise.module.scss';
 
-const NewServise = ({ children }) => {
+const NewServise = ({ children, handleFormSubmit }) => {
   const { t } = useTranslation();
 
   const handleChangePayment = () => {}
@@ -14,7 +14,7 @@ const NewServise = ({ children }) => {
       <h2 className={style['card__title']}>
         {t('new-service-config')}
       </h2>
-      <form className={style['card__form']}>
+      <form className={style['card__form']} onSubmit={handleFormSubmit}>
         {children}
         <fieldset className={style['card__form-fildset']}>
           <legend className={style['card__form-legend']}>

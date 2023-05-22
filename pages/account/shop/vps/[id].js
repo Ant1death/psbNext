@@ -7,6 +7,7 @@ import NewServise from '../../../../compontens/NewService/NewServise';
 
 import { wrapper } from '../../../../store/store';
 import { useAppSelector } from '../../../../store/hooks';
+import { createNewOrder } from '../../../../api/createNewOrder';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -41,8 +42,23 @@ const VpsItem = (id) => {
     }
   }, []);
 
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+
+    const token = localStorage.getItem('token');
+    const body = {
+      product_id: item.id,
+      payment_type: 'balance',
+      os: '',
+      control_panel: '',
+      period: '',
+    }
+
+    createNewOrder(token, body);
+  }
+
   return (
-    <NewServise>
+    <NewServise handleFormSubmit={handleFormSubmit}>
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-system')}
       </label>

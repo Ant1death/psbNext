@@ -25,7 +25,7 @@ const Account = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) fetchDataOrders(token);
+    if (token && !orders) fetchDataOrders(token);
   }, []);
 
   return (
