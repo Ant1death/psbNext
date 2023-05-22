@@ -35,7 +35,7 @@ const AuthForm = ({
       {button === 'Вход' &&
         <p className={style['form__link-reset-password']}>
           Забыли&nbsp;
-          <Link href='/account/password/' className={style['form__link']}>
+          <Link href='/password' className={style['form__link']}>
             имя пользователя / пароль?
           </Link>
         </p>
@@ -43,7 +43,7 @@ const AuthForm = ({
       {button === 'Log in' &&
         <p className={style['form__link-reset-password']}>
           Forgot&nbsp;
-          <Link href='/account/password/' className={style['form__link']}>
+          <Link href='/password' className={style['form__link']}>
             user name / password?
           </Link>
         </p>

@@ -50,9 +50,7 @@ const LayoutAccount = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
-    if (token) checkName(token);
-
+    token ? checkName(token) : router.push('/login');
   }, []);
 
   const chooseLanquage = () => {
