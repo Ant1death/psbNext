@@ -23,13 +23,19 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 
 const VpsItem = (id) => {
   const [item, setItem] = useState({});
+  const [system, setSystem] = useState('');
+  const [controlPanel, setControlPanel] = useState('');
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps)
   const { t } = useTranslation();
 
-  const handleChangeSystem = () => {}
+  const handleChangeSystem = (evt) => {
+    setSystem(evt.target.value);
+  }
 
-  const handleChangePanel = () => {}
+  const handleChangePanel = (evt) => {
+    setControlPanel(evt.target.value);
+  }
 
   const fetchData = () => {}
 
@@ -42,30 +48,42 @@ const VpsItem = (id) => {
     }
   }, []);
 
-  const handleFormSubmit = (evt) => {
-    evt.preventDefault();
+  useEffect(() => {
+    if (item) {
+      item.os && setSystem(item.os[0].content);
+      item.control_panel && setControlPanel(item.control_panel[0].content);
+    }
+  }, [item]);
 
-    const token = localStorage.getItem('token');
+  const sentDataToOrder = (payment) => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+
     const body = {
       product_id: item.id,
-      payment_type: 'balance',
-      os: '',
-      control_panel: '',
-      period: '',
+      payment_type: Number(payment),
+      os: system,
+      control_panel: controlPanel,
     }
 
     createNewOrder(token, body);
   }
 
   return (
-    <NewServise handleFormSubmit={handleFormSubmit}>
+    <NewServise
+      sentDataToOrder={sentDataToOrder}
+    >
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-system')}
       </label>
-      <select className={style['card__form-select']} name='system' id='system' onClick={handleChangeSystem}>
+      <select
+        className={style['card__form-select']}
+        name='system'
+        id='system'
+        onClick={handleChangeSystem}
+      >
         {item && item.os && item.os.map(el => {
           return (
-            <option key={el.id} value={el.name}>
+            <option key={el.id} value={el.content}>
               {el.name}
             </option>
           );
@@ -74,11 +92,16 @@ const VpsItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {`${t('new-service-panel')} NL`}
       </label>
-      <select className={style['card__form-select']} name='system' id='system' onClick={handleChangePanel}>
-        {item && item.panel && item.panel.map(el => {
+      <select
+        className={style['card__form-select']}
+        name='system'
+        id='system'
+        onClick={handleChangePanel}
+      >
+        {item && item.control_panel && item.control_panel.map(el => {
           return (
-            <option key={item.panel.indexOf(el)} value={el}>
-              {el}
+            <option key={el.id} value={el.content}>
+              {`${el.name} - ${el.price}$`}
             </option>
           );
         })}

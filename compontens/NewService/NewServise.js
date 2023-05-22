@@ -1,13 +1,21 @@
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
 
 import style from '../../styles/NewServise.module.scss';
 
-const NewServise = ({ children, handleFormSubmit }) => {
+const NewServise = ({ children, sentDataToOrder }) => {
   const { t } = useTranslation();
 
-  const handleChangePayment = () => {}
+  const [payment, setPayment] = useState('0');
 
-  const handleChangeBalance = () => {}
+  const handleChoosePayment = (evt) => {
+    setPayment(evt.target.value);
+  }
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+    sentDataToOrder(payment);
+  }
 
   return (
     <section className={style['card']}>
@@ -24,24 +32,25 @@ const NewServise = ({ children, handleFormSubmit }) => {
             <input
               type='radio'
               className={style['card__form-input-radio']}
-              name='bill'
+              name='payment'
               id='balance'
-              value='balance'
-              checked={true}
-              onChange={handleChangeBalance}
+              value='0'
+              checked={payment === '0' && true}
+              onChange={handleChoosePayment}
             />
             <span className={style['card__form-span']}>
               {t('new-service-balance')}
             </span>
           </label>
-          <label htmlFor='payment' className={style['card__form-label-radio']}>
+          <label htmlFor='card' className={style['card__form-label-radio']}>
             <input
               type='radio'
               className={style['card__form-input-radio']}
-              name='bill'
-              id='payment'
-              value='payment'
-              onChange={handleChangePayment}
+              name='payment'
+              id='card'
+              value='1'
+              onChange={handleChoosePayment}
+              checked={payment === '1' && true}
             />
             <span className={style['card__form-span']}>
               {t('new-service-card')}

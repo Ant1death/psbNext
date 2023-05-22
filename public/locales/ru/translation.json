@@ -181,8 +181,8 @@
   "rules-admin": "Администрация сервиса",
 
   "new-service-config": "Выберите конфигурации",
-  "new-service-system": "Operating system",
-  "new-service-panel": "Control panel",
+  "new-service-system": "Операционная система",
+  "new-service-panel": "Панель управления",
   "new-service-payment": "Способ оплаты",
   "new-service-balance": "С баланса",
   "new-service-card": "С платежной системы",
