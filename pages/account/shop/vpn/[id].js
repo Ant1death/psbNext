@@ -6,8 +6,10 @@ import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
 
 import { wrapper } from '../../../../store/store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { createNewOrder } from '../../../../api/createNewOrder';
+import { fetchVpn } from '../../../../store/slices/vpn';
+import { getProducts } from '../../../../api/getProducts';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -26,13 +28,17 @@ const  VpnItem = (id) => {
   const [period, setPeriod] = useState('');
 
   const { t } = useTranslation();
-  const vpn = useAppSelector(store => store.vpn.vpn)
+  const vpn = useAppSelector(store => store.vpn.vpn);
+  const dispatch = useAppDispatch();
 
   const handleChangePeriod = (evt) => {
     setPeriod(evt.targer.value)
   }
 
-  const fetchData = () => {}
+  const fetchData = async () => {
+    const data = await getProducts('VPN');
+    if (data) dispatch(fetchVpn(data.products));
+  }
 
   const sentDataToOrder = (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
@@ -41,13 +47,17 @@ const  VpnItem = (id) => {
     createNewOrder(token, queries);
   }
 
+  const findItem = () => {
+    const product = vpn.find(el => el.id === Number(id.pageProps.id));
+    setItem(product);
+  }
+
   useEffect(() => {
-    if (vpn) {
-      const product = vpn.find(el => el.id === Number(id.pageProps.id));
-      setItem(product);
-    } else {
-      fetchData();
-    }
+    if (!vpn) fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (vpn) findItem();
   }, []);
 
   useEffect(() => {

@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next';
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
 import { createNewOrder } from '../../../../api/createNewOrder';
+import { getProducts } from '../../../../api/getProducts';
+import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
 
 import { wrapper } from '../../../../store/store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -28,6 +30,7 @@ const AbuseItem = (id) => {
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const dispatch = useAppDispatch();
 
   const handleChangeSystem = (evt) => {
     setSystem(evt.target.value);
@@ -37,16 +40,26 @@ const AbuseItem = (id) => {
     setControlPanel(evt.target.value);
   }
 
-  const fetchData = () => {}
+  const fetchData = async () => {
+    const vpsData = await getProducts('Bulletproof VDS');
+    const vps = vpsData ? vpsData.products : [];
+    const vdsData = await getProducts('Bulletproof VPS');
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
+  }
+
+  const findItem = () => {
+    const product = vdsVpsBulletproof.find(el => el.id === Number(id.pageProps.id));
+    setItem(product);
+  }
 
   useEffect(() => {
-    if (vdsVpsBulletproof) {
-      const product = vdsVpsBulletproof.find(el => el.id === Number(id.pageProps.id));
-      setItem(product);
-    } else {
-      fetchData();
-    }
+    if (!vdsVpsBulletproof) fetchData();
   }, []);
+
+  useEffect(() => {
+    if (vdsVpsBulletproof) findItem();
+  }, [vdsVpsBulletproof]);
 
   useEffect(() => {
     if (item) {

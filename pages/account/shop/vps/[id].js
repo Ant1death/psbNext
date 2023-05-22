@@ -6,8 +6,10 @@ import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
 
 import { wrapper } from '../../../../store/store';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { createNewOrder } from '../../../../api/createNewOrder';
+import { getProducts } from '../../../../api/getProducts';
+import { fetchVdsVps } from '../../../../store/slices/vdsVps';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -28,6 +30,7 @@ const VpsItem = (id) => {
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps)
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const handleChangeSystem = (evt) => {
     setSystem(evt.target.value);
@@ -37,16 +40,26 @@ const VpsItem = (id) => {
     setControlPanel(evt.target.value);
   }
 
-  const fetchData = () => {}
+  const findItem = () => {
+    const product = vdsVps.find(el => el.id === Number(id.pageProps.id));
+    setItem(product);
+  }
+
+  const fetchData = async () => {
+    const vpsData = await getProducts('VPS');
+    const vps = vpsData ? vpsData.products : [];
+    const vdsData = await getProducts('VDS');
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVps(vds.concat(vps)));
+  }
 
   useEffect(() => {
-    if (vdsVps) {
-      const product = vdsVps.find(el => el.id === Number(id.pageProps.id));
-      setItem(product);
-    } else {
-      fetchData();
-    }
+    if (!vdsVps) fetchData();
   }, []);
+
+  useEffect(() => {
+    if (vdsVps) findItem();
+  }, [vdsVps]);
 
   useEffect(() => {
     if (item) {
