@@ -18,15 +18,16 @@ const Account = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const orders = useAppSelector(store => store.orders.orders);
+  const user = useAppSelector(store => store.user.user);
 
-  const fetchData = async (token) => {
+  const fetchDataOrders = async (token) => {
     const data = await getOrders(token);
     if (data) dispatch(fetchOrders(data));
   }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) fetchData(token);
+    if (token) fetchDataOrders(token);
   }, []);
 
   return (
@@ -39,7 +40,9 @@ const Account = () => {
               <iconify-icon icon="fa-solid:credit-card"></iconify-icon>
             </div>
             <div className={style['report__card-text']}>
-              <h2 className={style['report__card-title']}>0,0$</h2>
+              <h2 className={style['report__card-title']}>
+                {user && `${user.balance}$`}
+              </h2>
               <h4 className={style['report__card-description']}>
                 {t('balance')}
               </h4>
