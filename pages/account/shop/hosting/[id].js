@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+import { createNewOrder } from '../../../../api/createNewOrder';
 
 import { wrapper } from '../../../../store/store';
 import { useAppSelector } from '../../../../store/hooks';
@@ -24,6 +25,13 @@ const HostingItem = (id) => {
 
   const fetchData = () => {}
 
+  const sentDataToOrder = (payment) => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    const queries = `product_id=${item.id}&payment_type=${Number(payment)}`;
+
+    createNewOrder(token, queries);
+  }
+
   useEffect(() => {
     if (hosting) {
       const product = hosting.find(el => el.id === Number(id.pageProps.id));
@@ -34,7 +42,9 @@ const HostingItem = (id) => {
   }, []);
 
   return (
-    <NewServise />
+    <NewServise
+      sentDataToOrder={sentDataToOrder}
+    />
   );
 }
 

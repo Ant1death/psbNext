@@ -1,12 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import style from '../../styles/NewServise.module.scss';
 
 const NewServise = ({ children, sentDataToOrder }) => {
   const { t } = useTranslation();
 
-  const [payment, setPayment] = useState('0');
+  const [payment, setPayment] = useState('1');
 
   const handleChoosePayment = (evt) => {
     setPayment(evt.target.value);
@@ -34,8 +34,8 @@ const NewServise = ({ children, sentDataToOrder }) => {
               className={style['card__form-input-radio']}
               name='payment'
               id='balance'
-              value='0'
-              checked={payment === '0' && true}
+              value='1'
+              checked={payment === '1' && true}
               onChange={handleChoosePayment}
             />
             <span className={style['card__form-span']}>
@@ -48,9 +48,9 @@ const NewServise = ({ children, sentDataToOrder }) => {
               className={style['card__form-input-radio']}
               name='payment'
               id='card'
-              value='1'
+              value='2'
               onChange={handleChoosePayment}
-              checked={payment === '1' && true}
+              checked={payment === '2' && true}
             />
             <span className={style['card__form-span']}>
               {t('new-service-card')}

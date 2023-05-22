@@ -1,13 +1,12 @@
 import { BASE_URL } from '../utils/constants';
 
-export const createNewOrder = async (token, body) => {
+export const createNewOrder = async (token, queries) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/new?product_id=${body.product_id}&payment_type=${body.payment_type}&os=${body.os}&control_panel=${body.control_panel}`, {
+    const res = await fetch(`${BASE_URL}/order/new?${queries}`, {
       method: 'POST',
       headers: {
         'Authorization' : `Bearer ${token}`,
       },
-      body: JSON.stringify(body),
     });
 
     if (!res.ok) throw new Error(`error: ${res.status}`);

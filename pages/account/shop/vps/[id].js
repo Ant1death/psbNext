@@ -57,15 +57,9 @@ const VpsItem = (id) => {
 
   const sentDataToOrder = (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}&control_panel=${controlPanel}`;
 
-    const body = {
-      product_id: item.id,
-      payment_type: Number(payment),
-      os: system,
-      control_panel: controlPanel,
-    }
-
-    createNewOrder(token, body);
+    createNewOrder(token, queries);
   }
 
   return (
