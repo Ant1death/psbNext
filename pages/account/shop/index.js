@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
-import 'iconify-icon';
-import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
-import style from '../../../styles/AccountShop.module.scss';
-// ToDo: delete after connecting API
-import { vpsCountries } from '../../../utils/data/vpsCountries';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import 'iconify-icon';
+
+import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
+
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { fetchVdsVps } from '../../../store/slices/vdsVps';
+import { getProducts } from '../../../api/getProducts';
+
+import style from '../../../styles/AccountShop.module.scss';
 
 AccountVps.getLayout = function getLayout(page) {
   return (
@@ -23,6 +28,10 @@ export default function AccountVps() {
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
 
+  const { t } = useTranslation();
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+  const dispatch = useAppDispatch();
+
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
   const classItem = `${style['card']} ${style['shop__item']} ${isListActive ? style['shop__item_list'] : ''}`;
@@ -35,10 +44,10 @@ export default function AccountVps() {
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
 
-    if (country === 'Все страны') {
-      setCurrentCountry(vpsCountries);
+    if (country === t('card-all-countries')) {
+      setCurrentCountry(vdsVps);
     } else {
-      const items = vpsCountries.filter(el => el.country === country);
+      const items = vdsVps.filter(el => el.country === country);
       setCurrentCountry(items);
     }
   }
@@ -56,41 +65,53 @@ export default function AccountVps() {
     isListActive ? setIsListActive(false) : setIsListActive(true);
   }
 
+  const fetchData = async () => {
+    const vpsData = await getProducts('VPS');
+    const vps = vpsData ? vpsData.products : [];
+    const vdsData = await getProducts('VDS');
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVps(vds.concat(vps)));
+  }
+
+  useEffect(() => {
+    if (!vdsVps || (vdsVps && vdsVps.length === 0)) fetchData();
+  }, []);
+
   useEffect(() => {
     const map = new Map();
-    vpsCountries.forEach(el => {
+    vdsVps && vdsVps.forEach(el => {
       map.has(el.country) ? map.set(el.country, map.get(el.country) + 1) : map.set(el.country, 1);
     });
     setAmountContry(Array.from(map));
-  }, []);
+  }, [vdsVps]);
 
   useEffect(() => {
-    setCurrentCountry(vpsCountries);
-  }, []);
+    setCurrentCountry(vdsVps);
+  }, [vdsVps]);
 
   useEffect(() => {
     const set = new Set();
-    vpsCountries.forEach(el => {
-      el.systems.forEach(system => set.add(system));
+    vdsVps && vdsVps.forEach(el => {
+      el.os && el.os.forEach(system => set.add(system.name));
     });
     setSystemList(Array.from(set));
-  }, []);
+  }, [vdsVps]);
 
   useEffect(() => {
     if (selectedSystem === '') {
-      setCurrentCountry(vpsCountries);
+      setCurrentCountry(vdsVps);
     } else {
-      const items = vpsCountries.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVps.filter(el => el.systems.includes(selectedSystem));
       setCurrentCountry(items);
     }
   }, [selectedSystem]);
 
   useEffect(() => {
     if (seachedItem === '') {
-      setCurrentCountry(vpsCountries);
+      setCurrentCountry(vdsVps);
     } else {
       const search = seachedItem.toLowerCase();
-      const items = vpsCountries.filter(el =>
+      const items = vdsVps.filter(el =>
         el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
       );
       setCurrentCountry(items);
@@ -102,16 +123,16 @@ export default function AccountVps() {
       <div className={style['shop__filters']}>
         <div className={`${style['shop__country']} ${style['card']}`}>
           <h2 className={style['shop__country-title']}>
-            Страны
+            {t('card-countries')}
           </h2>
           <ul className={style['shop__country-list']}>
             <li>
               <button className={style['shop__country-button']} onClick={handleCountryClick}>
                 <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Все страны
+                {t('card-all-countries')}
               </button>
               <span className={style['shop__country-amount']}>
-                {vpsCountries.length}
+                {vdsVps && vdsVps.length}
               </span>
             </li>
             {amountContry.length > 0 && amountContry.map(el => {
@@ -131,7 +152,7 @@ export default function AccountVps() {
         </div>
         <form className={`${style['shop__system']} ${style['card']}`}>
           <label className={style['shop__system-label']} htmlFor='system'>
-            Операционная система
+            {t('card-system')}
           </label>
           <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
@@ -145,10 +166,10 @@ export default function AccountVps() {
       </div>
       <div className={style['shop__content']}>
         <div className={`${style['card']} ${style['shop__search']}`}>
-          <form className={style['shop__search-form']}>
+          <form className={`${style['shop__search-form']} ${seachedItem === '' ? '' : style['shop__search-form_active']}`}>
             <input
               type='search'
-              placeholder='Введите название'
+              placeholder={t('card-search')}
               className={style['shop__search-input']}
               name='search'
               onChange={handleSearchItem}
@@ -176,7 +197,7 @@ export default function AccountVps() {
           </ul>
         </div>
         <ul className={style['shop__card-list']}>
-          {currentCountry.map(el => {
+          {currentCountry && currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
                 <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
@@ -189,22 +210,20 @@ export default function AccountVps() {
                     </Link>
                   </h2>
                   <ul className={style['shop__item-list']}>
-                    <li>{el.DMCA}</li>
-                    <li>{el.vCPU}</li>
-                    <li>{el.RAM}</li>
-                    <li>{el.SSD}</li>
-                    <li>{el.KVM}</li>
-                    <li>{el.Gbps}</li>
-                    <li>{el.bandwidth}</li>
+                    {el.characters.map(item => {
+                      return (
+                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className={classPriceWrapItem}>
                   <p className={classPriceItem}>
-                    {isListActive ? el.price.split('/')[0] : el.price}
+                    {`$${el.price}`}
                   </p>
                   <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;Мгновенная покупка
+                    &nbsp;{t('card-button')}
                   </Link>
                 </div>
               </li>

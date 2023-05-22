@@ -1,6 +1,13 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import 'iconify-icon';
+
 import AccountHeaderNavmenu from '../AccountHeaderNavmenu/AccountHeaderNavmenu';
+import { getUser } from '../../api/getUser';
+import { fetchUser } from '../../store/slices/user';
+import { useAppDispatch } from '../../store/hooks';
+
 import style from '../../styles/AccountHeader.module.scss';
 
 const AccountHeader = ({
@@ -15,6 +22,23 @@ const AccountHeader = ({
   isHeaderNamenuVisible,
   toggleHeaderNavmenu,
 }) => {
+  const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const fetchData = async (token) => {
+    const data = await getUser(token);
+    if (data) dispatch(fetchUser(data));
+  }
+
+  useEffect(() => {
+    const lang = localStorage.getItem('MY_LANGUAGE');
+    lang === 'en' ? i18n.changeLanguage('en') : i18n.changeLanguage('ru');
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) fetchData(token);
+  }, []);
 
   return (
     <header className={`${style['header']} ${isButtonSidebarMiniHidden ? style['header_mini'] : ''}`}>

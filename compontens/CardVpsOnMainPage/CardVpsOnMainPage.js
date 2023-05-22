@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import style from '../../styles/Main.module.scss';
 
 const CardVpsOnMainPage = ({ country }) => {
@@ -15,7 +16,7 @@ const CardVpsOnMainPage = ({ country }) => {
             )
           })}
         </ul>
-        <Link href='/vps' className={style['country__item-btn']}>Show Plans</Link>
+        <Link href={`/vds/#${country.country}`} className={style['country__item-btn']}>Show Plans</Link>
     </li>
   );
 }

@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
+import { getProducts } from '../../../../api/getProducts';
+
 import style from '../../../../styles/AccountShop.module.scss';
-// ToDo: delete after connecting API
-import { abuseList } from '../../../../utils/data/abuseList';
 
 Bulletproof.getLayout = function getLayout(page) {
   return (
@@ -22,6 +27,10 @@ export default function Bulletproof() {
   const [isListActive, setIsListActive] = useState(false);
   const [currentCountry, setCurrentCountry] = useState([]);
 
+  const { t } = useTranslation();
+  const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const dispatch = useAppDispatch();
+
   const classButtonTable = `${style['shop__display-button']} ${isTableActive ? style['shop__display-button_active'] : ''}`;
   const classButtonList = `${style['shop__display-button']} ${isListActive ? style['shop__display-button_active'] : ''}`;
   const classItem = `${style['card']} ${style['shop__item']} ${isListActive ? style['shop__item_list'] : ''}`;
@@ -34,8 +43,8 @@ export default function Bulletproof() {
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
 
-    if (country === 'Все страны') {
-      setCurrentCountry(abuseList);
+    if (country === t('card-all-countries')) {
+      setCurrentCountry(vdsVpsBulletproof);
     }
   }
 
@@ -52,33 +61,45 @@ export default function Bulletproof() {
     isListActive ? setIsListActive(false) : setIsListActive(true);
   }
 
+  const fetchData = async () => {
+    const vpsData = await getProducts('Bulletproof VDS');
+    const vps = vpsData ? vpsData.products : [];
+    const vdsData = await getProducts('Bulletproof VPS');
+    const vds = vdsData ? vdsData.products : [];
+    dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
+  }
+
   useEffect(() => {
-    setCurrentCountry(abuseList);
+    if (!vdsVpsBulletproof || (vdsVpsBulletproof && vdsVpsBulletproof.length === 0)) fetchData();
   }, []);
+
+  useEffect(() => {
+    setCurrentCountry(vdsVpsBulletproof);
+  }, [vdsVpsBulletproof]);
 
   useEffect(() => {
     const set = new Set();
-    abuseList.forEach(el => {
-      el.systems.forEach(system => set.add(system));
+    vdsVpsBulletproof && vdsVpsBulletproof.forEach(el => {
+      el.os && el.os.forEach(system => set.add(system.name));
     });
     setSystemList(Array.from(set));
-  }, []);
+  }, [vdsVpsBulletproof]);
 
   useEffect(() => {
     if (selectedSystem === '') {
-      setCurrentCountry(abuseList);
+      setCurrentCountry(vdsVpsBulletproof);
     } else {
-      const items = abuseList.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVpsBulletproof.filter(el => el.systems.includes(selectedSystem));
       setCurrentCountry(items);
     }
   }, [selectedSystem]);
 
   useEffect(() => {
     if (seachedItem === '') {
-      setCurrentCountry(abuseList);
+      setCurrentCountry(vdsVpsBulletproof);
     } else {
       const search = seachedItem.toLowerCase();
-      const items = abuseList.filter(el => el.title.toLowerCase().includes(search));
+      const items = vdsVpsBulletproof.filter(el => el.title.toLowerCase().includes(search));
       setCurrentCountry(items);
     }
   }, [seachedItem]);
@@ -88,23 +109,23 @@ export default function Bulletproof() {
       <div className={style['shop__filters']}>
         <div className={`${style['shop__country']} ${style['card']}`}>
           <h2 className={style['shop__country-title']}>
-            Страны
+            {t('card-countries')}
           </h2>
           <ul className={style['shop__country-list']}>
             <li>
               <button className={style['shop__country-button']} onClick={handleCountryClick}>
                 <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                Все страны
+                {t('card-all-countries')}
               </button>
               <span className={style['shop__country-amount']}>
-                {abuseList.length}
+                {vdsVpsBulletproof && vdsVpsBulletproof.length}
               </span>
             </li>
           </ul>
         </div>
         <form className={`${style['shop__system']} ${style['card']}`}>
           <label className={style['shop__system-label']} htmlFor='system'>
-            Операционная система
+            {t('card-system')}
           </label>
           <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
             <option value=''>Select</option>
@@ -121,7 +142,7 @@ export default function Bulletproof() {
           <form className={style['shop__search-form']}>
             <input
               type='search'
-              placeholder='Введите название'
+              placeholder={t('card-search')}
               className={style['shop__search-input']}
               name='search'
               onChange={handleSearchItem}
@@ -149,7 +170,7 @@ export default function Bulletproof() {
           </ul>
         </div>
         <ul className={style['shop__card-list']}>
-          {currentCountry.map(el => {
+          {currentCountry && currentCountry.map(el => {
             return (
               <li key={el.id} className={classItem}>
                 <Link href={`/account/shop/bulletproof/${el.id}`} className={imgItemClass}>
@@ -162,18 +183,20 @@ export default function Bulletproof() {
                     </Link>
                   </h2>
                   <ul className={style['shop__item-list']}>
-                    <li>{el.vCPU}</li>
-                    <li>{el.RAM}</li>
-                    <li>{el.SSD}</li>
+                    {el.characters.map(item => {
+                      return (
+                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className={classPriceWrapItem}>
                   <p className={classPriceItem}>
-                    {el.price.split('/')[0]}
+                    {`$${el.price}`}
                   </p>
                   <Link href={`/account/shop/bulletproof/${el.id}`} className={style['shop__button-cta']}>
                     <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;Мгновенная покупка
+                    &nbsp;{t('card-button')}
                   </Link>
                 </div>
               </li>

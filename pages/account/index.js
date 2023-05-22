@@ -1,20 +1,18 @@
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import 'iconify-icon';
+
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import OrderCardPending from '../../compontens/OrderCardPending/OrderCardPending';
 import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess';
+
 import style from '../../styles/Account.module.scss';
 // ToDo: delete after connecting API
 import { orders } from '../../utils/data/orders';
 
-Account.getLayout = function getLayout(page) {
-  return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
-  );
-}
+const Account = () => {
+  const { t } = useTranslation();
 
-export default function Account() {
   return (
     <>
       <section className={style['report']}>
@@ -26,7 +24,9 @@ export default function Account() {
             </div>
             <div className={style['report__card-text']}>
               <h2 className={style['report__card-title']}>0,0$</h2>
-              <h4 className={style['report__card-description']}>Баланс кошелька</h4>
+              <h4 className={style['report__card-description']}>
+                {t('balance')}
+              </h4>
             </div>
           </li>
           <li className={style['report__card']}>
@@ -36,7 +36,9 @@ export default function Account() {
             </div>
             <div className={style['report__card-text']}>
               <h2 className={style['report__card-title']}>0</h2>
-              <h4 className={style['report__card-description']}>Активных услуг</h4>
+              <h4 className={style['report__card-description']}>
+                {t('active-servises')}
+              </h4>
             </div>
           </li>
           <li className={style['report__card']}>
@@ -46,14 +48,16 @@ export default function Account() {
             </div>
             <div className={style['report__card-text']}>
               <h2 className={style['report__card-title']}>0$</h2>
-              <h4 className={style['report__card-description']}>Общий расход в месяц</h4>
+              <h4 className={style['report__card-description']}>
+                {t('expense')}
+              </h4>
             </div>
           </li>
         </ul>
       </section>
       <section className={style['goods']}>
         <h2 className={style['goods__title']}>
-          Активные товары
+          {t('active-products')}
         </h2>
         <ul className={style['goods__list']}>
           {orders.map(el => {
@@ -87,3 +91,13 @@ export default function Account() {
     </>
   );
 }
+
+Account.getLayout = function getLayout(page) {
+  return (
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default connect(state => state)(Account);

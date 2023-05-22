@@ -1,8 +1,12 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
 import style from '../../styles/OrderCard.module.scss';
 
 const OrderCardSuccess = ({ status, price, name, autoRenewal, deadline, id }) => {
+  const { t } = useTranslation();
+
   return (
     <li className={style['card']}>
       {/* ToDo: fix link */}
@@ -15,35 +19,31 @@ const OrderCardSuccess = ({ status, price, name, autoRenewal, deadline, id }) =>
         </h3>
         <ul className={style['card__list']}>
           <li className={style['card__item']}>
-            Статус:&nbsp;
+            {t('order-status')}&nbsp;
             <span className={`${style['card__status']} ${style['card__status_blue']}`}>{status}</span>
           </li>
           <li className={style['card__item']}>
-            {`Цена: ${price}`}
+            {`${t('order-price')} ${price}`}
           </li>
           <li className={style['card__item']}>
-            {`Статус: ${status}`}
+            {`${t('order-name')} ${name}`}
           </li>
           <li className={style['card__item']}>
-            {`Наименование услуги: ${name}`}
-          </li>
-          <li className={style['card__item']}>
-            Авто-продление:&nbsp;
+            {t('order-renewal')}&nbsp;
             <span className={style['card__text-denger']}>{autoRenewal}</span>
           </li>
           <li className={style['card__item']}>
-            {`Дата блокировки: ${deadline}`}
+            {`${t('order-date')} ${deadline}`}
           </li>
         </ul>
       </div>
       <div className={style['card__footer']}>
         <Link className={style['card__button-link']} href={`/account/profile/order/${id}`}>
           <iconify-icon icon="simple-line-icons:key"></iconify-icon>
-          &nbsp;Перейти в заказ
+          &nbsp;{t('order-link')}
         </Link>
         <p className={style['card__message']}>
-          Заказ обработан и готов к работе, для ознакомления с данными,
-          пожалуйста, перейдите в заказ.
+          {t('order-text')}
         </p>
       </div>
     </li>

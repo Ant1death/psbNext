@@ -1,63 +1,93 @@
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import 'iconify-icon';
+
 import Layout from '../compontens/Layout/Layout';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
-import { FAQ_LIST_VPS } from '../utils/constants';
-import style from '../styles/Vps.module.scss';
 import { Advantages } from '../compontens/Advantages/Advantages';
-// ToDo: delete after connecting with API
-import { vpsCountries } from '../utils/data/vpsCountries';
 
-Vps.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
+import { getProducts } from '../api/getProducts';
+import { fetchVdsVps } from '../store/slices/vdsVps';
+import { wrapper } from '../store/store';
+import { useAppSelector } from '../store/hooks';
 
-function Vps() {
+import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants';
+
+import style from '../styles/Vps.module.scss';
+
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+  const dispatch = store.dispatch;
+
+  const vpsData = await getProducts('VPS');
+  const vps = vpsData ? vpsData.products : [];
+  const vdsData = await getProducts('VDS');
+  const vds = vdsData ? vdsData.products : [];
+  dispatch(fetchVdsVps(vds.concat(vps)));
+
+  return {
+    props: { },
+  }
+});
+
+const Vds = () => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+
+  const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
+  const [currentVpsList, setCurrentVpsList] = useState([]);
+
+  const handleCountryClick = (evt) => {
+    const el = evt.currentTarget;
+    setActiveCountry(el.id);
+  }
+
+  useEffect(() => {
+    const country = router.asPath.slice(router.asPath.indexOf('#') + 1);
+
+    for (let i = 0; i < VPS_COUNTRY_LIST.length; i++) {
+      if (country.includes(VPS_COUNTRY_LIST[i].country.slice(0, 4))) {
+        setActiveCountry(VPS_COUNTRY_LIST[i].country);
+        break;
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    vdsVps && setCurrentVpsList(vdsVps.filter(el => el.country === activeCountry));
+  }, [activeCountry, vdsVps])
+
   return (
     <>
       <section className={style.vps}>
         <div>
           <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
-          <p>Список услуг выделенных серверов</p>
+          <p>{t('vds-list')}</p>
         </div>
-        {/* ToDo: fix with API */}
         <ul className={style['offer__list-country']}>
-          <li className={`${style['offer__country']} ${style['offer__country_Netherlands']} ${style['offer__country_active']}`}>
-            Netherlands
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Moldowa']}`}>
-            Moldowa
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Hong-Kong']}`}>
-            Hong Kong
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_USA']}`}>
-            USA
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Germany']}`}>
-            Germany
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Canada']}`}>
-            Canada
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Great-Britain']}`}>
-            Great Britain
-          </li>
-          <li className={`${style['offer__country']} ${style['offer__country_Turkey']}`}>
-            Turkey
-          </li>
+          {VPS_COUNTRY_LIST.map(el => {
+            return (
+              <li
+                key={el.id}
+                className={`${style['offer__country']} ${activeCountry === el.country ? style['offer__country_active'] : ''}`}
+                onClick={handleCountryClick}
+                id={el.country}
+              >
+                <img src={el.flag} alt={el.country} className={style['offer__flag']} />
+                <span>{el.country}</span>
+              </li>
+            );
+          })}
         </ul>
         <ul className={style['offer__wrapper']}>
-          {/* ToDo: fix with API */}
-          {vpsCountries.map(el => {
+          {currentVpsList && currentVpsList.map((el, ind) => {
             return (
               <VpsCard
-                key={el.id}
+                key={ind}
                 vpsItem={el}
               />
             );
@@ -67,9 +97,18 @@ function Vps() {
       <AvailableSystems />
       <Advantages />
       <section className={style['faq']}>
-      <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
+      <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
       <ul className={style['faq__items']}>
-        {FAQ_LIST_VPS.map(el => {
+        {t('faq-lang') === 'ru' && FAQ_LIST_VPS_RU.map(el => {
+          return (
+            <FaqItem
+              key={el.id}
+              question={el.question}
+              answer={el.answer}
+            />
+          );
+        })}
+        {t('faq-lang') === 'en' && FAQ_LIST_VPS_EN.map(el => {
           return (
             <FaqItem
               key={el.id}
@@ -84,4 +123,12 @@ function Vps() {
   );
 }
 
-export default Vps;
+Vds.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Vds);

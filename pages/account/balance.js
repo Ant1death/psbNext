@@ -1,6 +1,9 @@
 import 'iconify-icon';
+import { useTranslation } from 'react-i18next';
+
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import RowTableHistory from '../../compontens/RowTableHistory/RowTableHistory';
+
 import style from '../../styles/Balance.module.scss';
 // ToDo: delete after connecting API
 import { payments } from '../../utils/data/paymentHistory';
@@ -14,37 +17,39 @@ Balance.getLayout = function getLayout(page) {
 }
 
 export default function Balance() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className='section-account'>
         <h3 className='section-account-title'>
-          Пополнение баланса
+          {t('balance-page')}
         </h3>
         <div className={style['section__body']}>
           <div className={style['section__balance']}>
             <h4 className={style['section__balance-title']}>
               <iconify-icon icon="simple-line-icons:wallet"></iconify-icon>
-              &nbsp;Баланс кошелька:
+              &nbsp;{t('balance-section')}
             </h4>
             <p className={style['section__balance-count']}>
-              Текущий баланс: 0,0$
+              {`${t('balance-current')} 0,0$`}
             </p>
           </div>
           <form className={style['section__form']}>
             <input
               type='text'
               name='amount'
-              placeholder='Сумма пополнения'
+              placeholder={t('balance-sum')}
             />
             <button type='submit' className={style['section__button-submit']}>
-              Пополнить
+              {t('balance-button')}
             </button>
           </form>
         </div>
       </section>
       <section className='section-account'>
         <h3 className='section-account-title'>
-          История платежей
+          {t('payment-history')}
         </h3>
         <div className={style['section__table-wrap']}>
           <div className={style['section__table-responsive']}>
@@ -52,10 +57,10 @@ export default function Balance() {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Тип</th>
-                  <th>Дата</th>
-                  <th>Сумма</th>
-                  <th>Статус</th>
+                  <th>{t('payment-type')}</th>
+                  <th>{t('payment-date')}</th>
+                  <th>{t('payment-sum')}</th>
+                  <th>{t('payment-status')}</th>
                 </tr>
               </thead>
               <tbody>

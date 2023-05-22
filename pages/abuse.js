@@ -1,39 +1,60 @@
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import 'iconify-icon';
+
 import Layout from '../compontens/Layout/Layout';
 import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import HostingCard from '../compontens/HostingCard/HostingCard';
-import { FAQ_LIST_ABUSE } from '../utils/constants';
-import style from '../styles/Abuse.module.scss';
+import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
-// ToDo: delete after connecting with API
-import { abuseList } from '../utils/data/abuseList';
-import { hostings } from '../utils/data/hostings';
 
-Abuse.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
+import { getProducts } from '../api/getProducts';
+import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
+import { fetchHosting } from '../store/slices/hosting';
+import { wrapper } from '../store/store';
+import { useAppSelector } from '../store/hooks';
 
-export default function Abuse() {
+import style from '../styles/Abuse.module.scss';
+
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+  const dispatch = store.dispatch;
+
+  const vpsData = await getProducts('Bulletproof VDS');
+  const vps = vpsData ? vpsData.products : [];
+  const vdsData = await getProducts('Bulletproof VPS');
+  const vds = vdsData ? vdsData.products : [];
+  dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
+
+  const hostings = await getProducts('Hosting');
+  const hosting = hostings ? hostings.products : [];
+  dispatch(fetchHosting(hosting));
+
+  return {
+    props: { },
+  }
+});
+
+const Abuse = () => {
+  const { t } = useTranslation();
+  const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const hosting = useAppSelector(store => store.hosting.hosting);
+
   return (
     <>
       <section className={style['abuse']}>
         <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`}>
-            Абузоустойчивые VPS/VDS
+          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='servers'>
+            {t('abuse-page')}
           </h2>
-          <p>Список услуг выделенных серверов</p>
+          <p>{t('abuse-page-about')}</p>
         </div>
         <ul className={style['abuse__list']}>
-          {abuseList.map(el => {
+          {vdsVpsBulletproof && vdsVpsBulletproof.map((el, ind) => {
             return (
               <AbuseCard
-                key={el.id}
+                key={ind}
                 abuseItem={el}
               />
             );
@@ -42,13 +63,13 @@ export default function Abuse() {
       </section>
       <section className={style['abuse']}>
         <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`}>
-            Абузоустойчивые Hosting
+          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='hosting'>
+            {t('abuse-hosting')}
           </h2>
-          <p>Список услуг выделенных хостингов</p>
+          <p>{t('abuse-hosting-about')}</p>
         </div>
         <ul className={style['abuse__list']}>
-          {hostings.map(el => {
+          {hosting && hosting.map(el => {
             return (
               <HostingCard
                 key={el.id}
@@ -61,9 +82,18 @@ export default function Abuse() {
       <AvailableSystems />
       <Advantages />
       <section className={style['faq']}>
-        <h2 className={`${['h2-title']}`}>Частые вопросы</h2>
+        <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
         <ul>
-          {FAQ_LIST_ABUSE.map(el => {
+          {t('faq-lang') === 'ru' && FAQ_LIST_ABUSE_RU.map(el => {
+            return (
+              <FaqItem
+                key={el.id}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_ABUSE_EN.map(el => {
             return (
               <FaqItem
                 key={el.id}
@@ -77,3 +107,13 @@ export default function Abuse() {
     </>
   );
 }
+
+Abuse.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Abuse);

@@ -1,10 +1,50 @@
+import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import 'iconify-icon';
+
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
+import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { signup } from '../../api/signup';
+
 import style from '../../styles/Auth.module.scss';
 
 export default function SignUp() {
+  const { t } = useTranslation();
+  const router = useRouter();
   const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
+  const { handleChange, values, isValid, errors, setIsValid } = useFormAndValidation();
+
+  const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
+  const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmitForm = (evt) => {
+    evt.preventDefault();
+
+   signup(values.name, values.email, values.password)
+    .then (res => {
+      if (res) router.push('/account/login');
+    })
+    .catch(err => {
+      setErrorMessage(`Ошибка: ${err.message}`);
+      setIsErrorMessageOpen(true);
+    });
+  }
+
+  useEffect(() => {
+    if (values.password !== values.repeatPassword) {
+      setIsValid(false);
+      setErrorPasswordRepeat('Пароли не совпадают');
+    } else if (!errors.name && !errors.email && !errors.password && !errors.repeatPassword && errorPasswordRepeat) {
+      setIsValid(true);
+      setErrorPasswordRepeat('');
+    } else {
+      setErrorPasswordRepeat('');
+    }
+  }, [values.name, values.email, values.password, values.repeatPassword]);
 
   return (
     <main className={style['container']}>
@@ -19,10 +59,12 @@ export default function SignUp() {
           <img className={style['content__logo']} alt='logo' src='/logo.png' />
         </div>
         <AuthForm
-          title='Регистрация'
-          button='Создать аккаунт'
-          bottomLink='Уже зарегистрированы? войдите'
+          title={t('signup')}
+          button={t('signup-button')}
+          bottomLink={t('signup-link')}
           bottomLinkHref='/account/login/'
+          handleSubmitForm={handleSubmitForm}
+          isValid={isValid}
         >
           <label className={style['input']} htmlFor='name'>
             <input
@@ -31,23 +73,33 @@ export default function SignUp() {
               id='name'
               required
               className={style['input__field']}
-              placeholder='Имя пользователя'
+              placeholder={t('name')}
+              value={values.name || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="ri:user-fill"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {!isValid && errors.name}
+          </p>
           <label className={style['input']} htmlFor='email'>
             <input
-              type='text'
+              type='email'
               name='email'
               id='email'
               required
               className={style['input__field']}
-              placeholder='Электронная почта'
+              placeholder={t('email')}
+              value={values.email || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {!isValid && errors.email}
+          </p>
           <label className={style['input']} htmlFor='password'>
             <input
               type='password'
@@ -55,25 +107,40 @@ export default function SignUp() {
               id='password'
               required
               className={style['input__field']}
-              placeholder='Пароль'
+              placeholder={t('password')}
+              value={values.password || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {!isValid && errors.password}
+          </p>
           <label className={style['input']} htmlFor='repeat-password'>
             <input
               type='password'
-              name='repeat-password'
+              name='repeatPassword'
               id='repeat-password'
               required
               className={style['input__field']}
-              placeholder='Повторите пароль'
+              placeholder={t('password-repeat')}
+              value={values.repeatPassword || ''}
+              onChange={handleChange}
             />
             <span className={style['input__field-focus']}></span>
             <iconify-icon icon="bxs:lock-alt"></iconify-icon>
           </label>
+          <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+            {errorPasswordRepeat ? errorPasswordRepeat : (!isValid ? errors.repeatPassword : '')}
+          </p>
         </AuthForm>
       </section>
+      <MessagePopup
+        isOpen={isErrorMessaggeOpen}
+        message={errorMessage}
+        setIsOpen={setIsErrorMessageOpen}
+      />
     </main>
   );
 }

@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
+import { VPS_COUNTRY_LIST } from '../utils/constants';
+
 import style from '../styles/Main.module.scss';
-// ToDo: delete after connecting with API
-import { vpsCountriesList } from '../utils/data/vpsOnMainPage';
 
 Home.getLayout = function getLayout(page) {
   return (
@@ -15,25 +17,20 @@ Home.getLayout = function getLayout(page) {
 }
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={style.hero}>
         <div className={style.hero__info}>
-          <h2 className={`${['h2-title']} ${style.hero__title}`}>PSB HOSTING</h2>
-          <p className={style.hero__text}>
-            Наш хостинг провайдер предоставляет анонимные VPS/VDS.
-          </p>
-          <p className={style.hero__text}>
-            Благодаря серверам, расположенным в оффшорных юрисдикциях, всем нашим международным клиентам гарантируется полная конфиденциальность данных и широкий спектр приемлемого контента.
-          </p>
-          <p className={style.hero__text}>
-            Наша основная задача это анонимность и стабильная работа вашего бизнеса.
-          </p>
-          <p className={style.hero__text}>
-            Расположение наших серверов позволяет игнорировать запросы DCMA. Мы не храним логи и предоставляем качественную техническую поддержку 24/7.
-          </p>
+          <h2 className={`${['h2-title']} ${style.hero__title}`}>
+            PSB HOSTING
+          </h2>
+          <p className={style.hero__text}>{t('hero-one')}</p>
+          <p className={style.hero__text}>{t('hero-two')}</p>
+          <p className={style.hero__text}>{t('hero-three')}</p>
           <button className={style.hero__btn}>
-            <Link href="/company">О компании</Link>
+            <Link href="/company">{t('company')}</Link>
           </button>
         </div>
         <div className={style.hero__img}>
@@ -41,12 +38,14 @@ export default function Home() {
         </div>
       </section>
       <section className={style.country}>
-        <h2 className={`${['h2-title']} ${style.country__title}`}>Аренда сервера</h2>
+        <h2 className={`${['h2-title']} ${style.country__title}`}>
+          {t('rental')}
+        </h2>
         <p className={style.country__title}>
-          PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
+          {t('rental-about')}
         </p>
         <ul className={style.country__wrapper}>
-          {vpsCountriesList && vpsCountriesList.map(el => {
+          {VPS_COUNTRY_LIST.map(el => {
             return (
               <CardVpsOnMainPage
                 key={el.id}
@@ -57,9 +56,11 @@ export default function Home() {
         </ul>
       </section>
       <section className={style['ads']}>
-        <h2 className={`${['h2-title']}`}>Абузоустойчивые сервера</h2>
+        <h2 className={`${['h2-title']}`}>
+          {t('servers')}
+        </h2>
         <p className={style['ads__subtitle']}>
-          Bulletproof VPS и Hosting по лучшим ценам
+          {t('servers-about')}
         </p>
         <ul className={style['ads__list']}>
           <li className={style['ads__item']}>
@@ -67,13 +68,13 @@ export default function Home() {
               Bulletproof VPS
             </h3>
             <ul className={style['ads__card-list']}>
-              <li>100% абузоустойчевые VPS</li>
-              <li>Процессор Xeon Ryzen 9 и Intel i7</li>
-              <li>NVMe диски</li>
+              <li>{t('vps-one')}</li>
+              <li>{t('vps-two')}</li>
+              <li>{t('vps-three')}</li>
               <li>Linux &amp; Windows</li>
             </ul>
-            <Link href='/abuse' className={style['ads__link']}>
-              Подробнее
+            <Link href='/abuse/#servers' className={style['ads__link']}>
+              {t('button-more')}
             </Link>
           </li>
           <li className={style['ads__item']}>
@@ -81,13 +82,13 @@ export default function Home() {
               Bulletproof hosting
             </h3>
             <ul className={style['ads__card-list']}>
-              <li>100% абузоустойчевые VPS</li>
-              <li>Защита от DDos атак</li>
-              <li>Панель IPSmanagerr</li>
-              <li>До 50 сайтов на одном хостинге</li>
+              <li>{t('hosting-one')}</li>
+              <li>{t('hosting-two')}</li>
+              <li>{t('hosting-three')}</li>
+              <li>{t('hosting-four')}</li>
             </ul>
-            <Link href='/abuse' className={style['ads__link']}>
-              Подробнее
+            <Link href='/abuse/#hosting' className={style['ads__link']}>
+              {t('button-more')}
             </Link>
           </li>
         </ul>
@@ -95,9 +96,11 @@ export default function Home() {
       <section className={style['about']}>
         <div className={style['about__wrapper']}>
           <div className={style['about__wrapper-text']}>
-            <h2 className={`${['h2-title']}`}>Приватный VPN с быстрой настройкой WireGuard</h2>
+            <h2 className={`${['h2-title']}`}>
+              {t('vpn-title')}
+            </h2>
             <p className={style['about__wrapper-info']}>
-              Современный и не требовательный к ресурсам протокол VPN-туннелей, использующий надёжные алгоритмы шифрования. WireGuard VPN предназначен для создания защищенных соединений и ориентирован на высокую производительность, безопасность и простоту в настройке.
+              {t('vpn-about')}
             </p>
             <LinkToBuyVpn
               page='home'
@@ -107,8 +110,12 @@ export default function Home() {
         </div>
       </section>
       <section className={style["map"]}>
-        <h3 className={`${['h3-title']} ${style.map__title}`}>Наша сеть и центры обработки данных</h3>
-        <h4 className={`${['h4-title']} ${style.map__subtitle}`}> Сервера нашей компании находятся по всему миру</h4>
+        <h3 className={`${['h3-title']} ${style.map__title}`}>
+          {t('map')}
+        </h3>
+        <h4 className={`${['h4-title']} ${style.map__subtitle}`}>
+          {t('map-about')}
+        </h4>
         <div className={style["map-wrapper"]}>
           <ul>
             <li>Netherlands</li>
@@ -142,7 +149,9 @@ export default function Home() {
         </div>
       </section>
       <section className="payment">
-        <h3 className={`${['h3-title']} ${style.payment__title}`}>Способы оплаты</h3>
+        <h3 className={`${['h3-title']} ${style.payment__title}`}>
+          {t('payment')}
+        </h3>
         <div className={style.payment__wrapper}>
           <div className={style['payment__wrapper-item']}>
             <div className={style["payment__wrapper-img"]}>
