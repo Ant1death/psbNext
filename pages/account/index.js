@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -18,6 +18,8 @@ const Account = () => {
   const orders = useAppSelector(store => store.orders.orders);
   const user = useAppSelector(store => store.user.user);
 
+  const [activeServises, setActiveServises] = useState([]);
+
   const fetchDataOrders = async (token) => {
     const data = await getOrders(token);
     if (data) dispatch(fetchOrders(data));
@@ -27,6 +29,13 @@ const Account = () => {
     const token = localStorage.getItem('token');
     if (token && !orders) fetchDataOrders(token);
   }, []);
+
+  useEffect(() => {
+    if (orders) {
+      const activeOrders = orders.filter(el => el.status === 'Запущен');
+      setActiveServises(activeOrders.length);
+    }
+  }, [orders]);
 
   return (
     <>
@@ -52,7 +61,9 @@ const Account = () => {
               <iconify-icon icon="ph:suitcase-simple-bold"></iconify-icon>
             </div>
             <div className={style['report__card-text']}>
-              <h2 className={style['report__card-title']}>0</h2>
+              <h2 className={style['report__card-title']}>
+                {activeServises}
+              </h2>
               <h4 className={style['report__card-description']}>
                 {t('active-servises')}
               </h4>
