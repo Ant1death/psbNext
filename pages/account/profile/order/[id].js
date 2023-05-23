@@ -12,6 +12,9 @@ import { fetchCurrentOrder } from '../../../../store/slices/currentOrder';
 import { changeOperativeSystem } from '../../../../api/changeOperativeSystem';
 import { useFormAndValidation } from '../../../../hooks/useFormAndValidation';
 import { changeServerPassword } from '../../../../api/changeServerPassword';
+import { startServer } from '../../../../api/startServer';
+import { restartServer } from '../../../../api/restartServer';
+import { stopServer } from '../../../../api/stopServer';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -95,6 +98,54 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
 
+    }
+  }
+
+  const handleStartServer = async () => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+      const res = await startServer(token, currentOrder.order_id);
+
+      if (res) {
+        setMessage('Сервер включен');
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+      } else {
+        setMessage('Произошла ошибка');
+        setIsPopupOpen(true);
+      }
+    }
+  }
+
+  const handleRestartServer = async () => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+      const res = await restartServer(token, currentOrder.order_id);
+
+      if (res) {
+        setMessage('Сервер перезагружен');
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+      } else {
+        setMessage('Произошла ошибка');
+        setIsPopupOpen(true);
+      }
+    }
+  }
+
+  const handleStopServer = async () => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+      const res = await stopServer(token, currentOrder.order_id);
+
+      if (res) {
+        setMessage('Сервер выключен');
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+      } else {
+        setMessage('Произошла ошибка');
+        setIsPopupOpen(true);
+      }
     }
   }
 
@@ -237,25 +288,38 @@ const Order = (id) => {
                   className={`${style['order__options-button']}
                   ${currentOrder.auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
                   onClick={handleSwitchAutoRefresh}
+                  type='button'
                 >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
                 </button>
                 {!currentOrder.auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
               </li>
               <li>
-                <button className={`${style['order__options-button']} ${style['order__options-button_green']}`}>
+                <button
+                  className={`${style['order__options-button']} ${style['order__options-button_green']}`}
+                  type='button'
+                  onClick={handleStartServer}
+                >
                   <iconify-icon icon="material-symbols:power-rounded"></iconify-icon>
                 </button>
                 {t('profile-order-option-two')}
               </li>
               <li>
-                <button className={`${style['order__options-button']} ${style['order__options-button_orange']}`}>
+                <button
+                  className={`${style['order__options-button']} ${style['order__options-button_orange']}`}
+                  type='button'
+                  onClick={handleRestartServer}
+                >
                   <iconify-icon icon="zondicons:reload"></iconify-icon>
                 </button>
                 {t('profile-order-option-three')}
               </li>
               <li>
-                <button className={`${style['order__options-button']} ${style['order__options-button_red']}`}>
+                <button
+                  className={`${style['order__options-button']} ${style['order__options-button_red']}`}
+                  type='button'
+                  onClick={handleStopServer}
+                >
                   <iconify-icon icon="lucide:power-off"></iconify-icon>
                 </button>
                 {t('profile-order-option-four')}
