@@ -36,7 +36,7 @@ const PopupProfile = ({ isOpen, right, windowWidth }) => {
             </Link>
           </li>
           <li>
-            <Link className={style['popup__profile-link']} href='/account/logout'>
+            <Link className={style['popup__profile-link']} href='/logout'>
               <iconify-icon icon="mdi:alert-circle-outline"></iconify-icon>
               {t('popup-profile-logout')}
             </Link>

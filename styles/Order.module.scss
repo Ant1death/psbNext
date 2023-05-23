@@ -87,6 +87,10 @@
     max-width: 440px;
     width: 100%;
     row-gap: 12px;
+
+    &_password {
+      row-gap: 0;
+    }
   }
 
   &__select {
@@ -214,4 +218,16 @@
   border-radius: 7px;
   box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);
   padding: 25px;
+}
+
+.error {
+  font-size: 10px;
+  color: #ff5b51;
+  visibility: hidden;
+  min-height: 12px;
+  display: inline-block;
+
+  &_active {
+    visibility: visible;
+  }
 }

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -5,13 +6,27 @@ import 'iconify-icon';
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import OrderCardPending from '../../compontens/OrderCardPending/OrderCardPending';
 import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess';
+import { fetchOrders } from '../../store/slices/orders';
+import { getOrders } from '../../api/getOrders';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import style from '../../styles/Account.module.scss';
-// ToDo: delete after connecting API
-import { orders } from '../../utils/data/orders';
 
 const Account = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const orders = useAppSelector(store => store.orders.orders);
+  const user = useAppSelector(store => store.user.user);
+
+  const fetchDataOrders = async (token) => {
+    const data = await getOrders(token);
+    if (data) dispatch(fetchOrders(data));
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token && !orders) fetchDataOrders(token);
+  }, []);
 
   return (
     <>
@@ -23,7 +38,9 @@ const Account = () => {
               <iconify-icon icon="fa-solid:credit-card"></iconify-icon>
             </div>
             <div className={style['report__card-text']}>
-              <h2 className={style['report__card-title']}>0,0$</h2>
+              <h2 className={style['report__card-title']}>
+                {user && `${user.balance}$`}
+              </h2>
               <h4 className={style['report__card-description']}>
                 {t('balance')}
               </h4>
@@ -60,15 +77,12 @@ const Account = () => {
           {t('active-products')}
         </h2>
         <ul className={style['goods__list']}>
-          {orders.map(el => {
-            if (el.status === 'Заказ в обработке') {
+          {orders && orders.map(el => {
+            if (el.status === 'Обработка заказа') {
               return (
                 <OrderCardPending
                   key={el.id}
-                  status={el.status}
-                  number={el.number}
-                  name={el.name}
-                  autoRenewal={el.autoRenewal}
+                  order={el}
                 />
               );
             }
@@ -76,12 +90,7 @@ const Account = () => {
               return (
                 <OrderCardSuccess
                   key={el.id}
-                  status={el.status}
-                  price={el.price}
-                  name={el.name}
-                  autoRenewal={el.autoRenewal}
-                  deadline={el.deadline}
-                  id={el.id}
+                  order={el}
                 />
               );
             }

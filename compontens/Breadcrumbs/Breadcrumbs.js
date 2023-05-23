@@ -7,8 +7,6 @@ import { useAppSelector } from '../../store/hooks';
 import { PATH_LIST_RU, PATH_LIST_EN } from '../../utils/constants';
 
 import style from '../../styles/Breadcrumbs.module.scss';
-// ToDo: delete after connecting API
-import { orders } from '../../utils/data/orders';
 
 const Breadcrumbs = () => {
   const router = useRouter();
@@ -17,6 +15,7 @@ const Breadcrumbs = () => {
   const vpn = useAppSelector(store => store.vpn.vpn);
   const vsdVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
   const hosting = useAppSelector(store => store.hosting.hosting);
+  const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
 
   const [lastCrumb, setLastCrumb] = useState('');
   const [pageTitle, setPageTitle] = useState('');
@@ -30,12 +29,6 @@ const Breadcrumbs = () => {
     const item = itemList.find(el => el.id === id);
 
     if (item) return item.title;
-  }
-
-  const findOrderWhithId = (itemList, id) => {
-    const item = itemList.find(el => el.id === id);
-
-    if (item) return item.number;
   }
 
   useEffect(() => {
@@ -65,7 +58,7 @@ const Breadcrumbs = () => {
       setPageTitle(title);
       setLastCrumb(t('category-store'));
     } else if (asPath.length === 4 && (asPath.includes('profile'))) {
-        const name = findOrderWhithId(orders, +asPath[3]);
+        const name = currentOrder && currentOrder.title;
         setPageTitle(`${t('path-order')} #${name}`);
         setLastCrumb(t('path-order'));
     } else {

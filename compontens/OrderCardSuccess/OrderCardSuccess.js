@@ -2,38 +2,45 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
 
+import { formatDateRu } from '../../utils/formatDateRu';
+import { formatDateEn } from '../../utils/formatDateEn';
+
 import style from '../../styles/OrderCard.module.scss';
 
-const OrderCardSuccess = ({ status, price, name, autoRenewal, deadline, id }) => {
+const OrderCardSuccess = ({ order }) => {
   const { t } = useTranslation();
+  const { id, status, auto_refresh, date_end, title, price, } = order;
 
   return (
     <li className={style['card']}>
-      {/* ToDo: fix link */}
-      <Link href='#' className={style['card__header-link']}>
+      <Link href={`/account/profile/order/${id}`} className={style['card__header-link']}>
         <img src='/server.png' alt='icon server' className={style['card__img']} />
       </Link>
       <div className={style['card__body']}>
         <h3 className={style['card__title']}>
-          <Link href='#' className={style['card__link']}>{name}</Link>
+          <Link href={`/account/profile/order/${id}`} className={style['card__link']}>
+            {title}
+          </Link>
         </h3>
         <ul className={style['card__list']}>
           <li className={style['card__item']}>
             {t('order-status')}&nbsp;
-            <span className={`${style['card__status']} ${style['card__status_blue']}`}>{status}</span>
+            <span className={`${style['card__status']} ${style['card__status_blue']}`}>
+              {status}
+            </span>
           </li>
           <li className={style['card__item']}>
-            {`${t('order-price')} ${price}`}
+            {`${t('order-price')} ${price}$/${t('order-price-period')}`}
           </li>
           <li className={style['card__item']}>
-            {`${t('order-name')} ${name}`}
+            {`${t('order-name')} ${title}`}
           </li>
           <li className={style['card__item']}>
             {t('order-renewal')}&nbsp;
-            <span className={style['card__text-denger']}>{autoRenewal}</span>
+            <span className={style['card__text-denger']}>{auto_refresh}</span>
           </li>
           <li className={style['card__item']}>
-            {`${t('order-date')} ${deadline}`}
+            {`${t('order-date')} ${t('lang') === 'ru' ? formatDateRu(date_end) : formatDateEn(date_end)}`}
           </li>
         </ul>
       </div>

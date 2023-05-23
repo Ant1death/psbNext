@@ -33,7 +33,7 @@ const FormPassword = () => {
 
     if (values.oldPassword !== values.newPassword) {
       console.log(values.newPassword);
-      setMessage('Изменения сохранены');
+      setMessage(t('error-saved'));
       setIsMessaggePopupOpen(true);
       setIsFormSubmitSuccess(true);
       resetForm();
@@ -53,7 +53,7 @@ const FormPassword = () => {
       && values.oldPassword !==undefined
     ) {
       setIsValid(false);
-      setErrorPasswordRepeat('Этот пароль уже используется');
+      setErrorPasswordRepeat(t('error-password-use'));
     } else if (!errors.oldPassword && !errorPasswordEquals && errorPasswordRepeat) {
       setIsValid(true);
       setErrorPasswordRepeat('');
@@ -63,7 +63,7 @@ const FormPassword = () => {
 
     if (values.confirmPassword !== values.newPassword) {
       setIsValid(false);
-      setErrorPasswordEquals('Пароли не совпадают');
+      setErrorPasswordEquals(t('error-passwords-not-match'));
     } else if (!errors.oldPassword && errorPasswordEquals && !errorPasswordRepeat) {
       setIsValid(true);
       setErrorPasswordEquals('');
@@ -81,7 +81,7 @@ const FormPassword = () => {
         <label htmlFor='oldPassword' className={style['form__label']}>
           {t('profile-password-old')}
           <input
-            type='password'
+            type='text'
             name='oldPassword'
             id='oldPassword'
             required
@@ -89,7 +89,7 @@ const FormPassword = () => {
             value={values.oldPassword || ''}
             onChange={handleChange}
             minLength='8'
-            /* pattern={/^(?=.*[a-zA-Z])[0-9]+$/} */
+            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
@@ -106,7 +106,7 @@ const FormPassword = () => {
             value={values.newPassword || ''}
             onChange={handleChange}
             minLength='8'
-            /* pattern={/^(?=.*[^\d])[^\s]$/} */
+            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
@@ -129,7 +129,7 @@ const FormPassword = () => {
             value={values.confirmPassword || ''}
             onChange={handleChange}
             minLength='8'
-           /*  pattern={/^(?=.[a-zA-Z])(?=.\d).+$/} */
+            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
