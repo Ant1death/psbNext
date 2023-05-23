@@ -6,6 +6,7 @@ import { vdsVpsBulletproofSlice } from './vdsVpsBulletproof';
 import { hostingSlice } from './hosting';
 import { userSlice } from './user';
 import { ordersSlice } from './orders';
+import { currentOrderSlice } from './currentOrder';
 
 export const rootReducer = combineReducers({
   vdsVps: vdsVpsSlice.reducer,
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   hosting: hostingSlice.reducer,
   user: userSlice.reducer,
   orders: ordersSlice.reducer,
+  currentOrder: currentOrderSlice.reducer,
 });

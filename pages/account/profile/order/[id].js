@@ -1,91 +1,96 @@
-import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import { wrapper } from '../../../../store/store';
+import { getCurrentOrder } from '../../../../api/getCurrentOrder';
+import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
+import { fetchCurrentOrder } from '../../../../store/slices/currentOrder';
 
 import style from '../../../../styles/Order.module.scss';
-// ToDo: delete after connecting API
-import { orders } from '../../../../utils/data/orders';
 
+export const getServerSideProps = wrapper.getServerSideProps(store => async ({ params }) => {
+  const id = params.id;
 
-Order.getLayout = function getLayout(page) {
-  return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
-  );
-}
+  return {
+    props: {
+      id,
+    }
+  }
+});
 
-export default function Order() {
-  const [order, setOrder] = useState({});
-
+const Order = (id) => {
   const { t } = useTranslation();
-  const router = useRouter();
+  const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
+  const dispatch = useAppDispatch();
 
-  const getItemWithId = () => {
-    const { id } = router.query;
-    return orders.find(el => el.id === +id);
+  const fetchData = async () => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+      const res = await getCurrentOrder(token, id.pageProps.id);
+      if (res) dispatch(fetchCurrentOrder(res[0]));
+    }
   }
 
   useEffect(() => {
-    setOrder(getItemWithId());
-  }, [router]);
+    fetchData();
+  }, []);
 
   return (
     <div className={style['order']}>
-      {order && order.id &&
+      {currentOrder &&
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
-              {`${t('profile-order')} на аренду сервера ${order.name}`}
+              {`${t('profile-order')} на аренду сервера ${currentOrder.title}`}
             </h2>
             <h3 className={style['order__section-title']}>
               {t('profile-order-info')}
             </h3>
             <ul className={style['order__details-list']}>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-number')} ${order.number}`}
+                {`${t('profile-order-number')} ${currentOrder.order_id}`}
               </li>
               <li className={style['order__details-item']}>
-                {`IP: ${order.ip}`}
+                {`IP: ${currentOrder.ip}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-user')} ${order.user}`}
+                {`${t('profile-order-user')} ${currentOrder.superuser}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-password')} ${order.password}`}
+                {`${t('profile-order-password')} ${currentOrder.password}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-port')} ${order.port}`}
+                {`${t('profile-order-port')} ${currentOrder.port}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-type')} ${order.type}`}
+                {`${t('profile-order-type')} ${currentOrder.type}`}
               </li>
               <li className={style['order__details-item']}>
-                {`OS: ${order.os}`}
+                {`OS: ${currentOrder.os}`}
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-command')}&nbsp;
                 <span className={style['order__span_red']}>
-                  {`${order.instruction}`}
+                  {`${currentOrder.instruction}`}
                 </span>
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-renewal')}&nbsp;
-                <span className={`${order.autoRenewal === 'Отключено' ? style['order__span_red'] : ''}`}>
-                  {`${order.autoRenewal}`}
+                <span className={`${currentOrder.autoRenewal === 'Отключено' ? style['order__span_red'] : ''}`}>
+                  {`${currentOrder.autoRenewal}`}
                 </span>
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-price')}&nbsp;
                 <span className={style['order__span_dark']}>
-                  {`${order.price}`}
+                  {`${currentOrder.price}`}
                 </span>
               </li>
             </ul>
-            {order.name.includes('RDP') &&
+            {currentOrder.title && currentOrder.title.includes('RDP') &&
               <p className={style['order__message']}>
                 {t('profile-order-rdp')}
               </p>
@@ -106,13 +111,17 @@ export default function Order() {
                {t('profile-order-system')}
               </label>
               <select id='system' className={style['order__select']}>
-                <option value={order.os}>
-                  {order.os}
-                </option>
-                {order.systems.map(el => {
-                  if (el !== order.os) {
+                {currentOrder.os &&
+                  <option value={currentOrder.os.name}>
+                    {currentOrder.os.name}
+                  </option>
+                }
+                {currentOrder.os && currentOrder.os.map(el => {
+                  if (el.name !== currentOrder.os.name) {
                     return (
-                      <option value={el} key={order.systems.indexOf(el)}>{el}</option>
+                      <option value={el.content} key={el.id}>
+                        {el.name}
+                      </option>
                     );
                   }
                 })}
@@ -171,3 +180,13 @@ export default function Order() {
     </div>
   );
 }
+
+Order.getLayout = function getLayout(page) {
+  return (
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
+  );
+}
+
+export default connect(state => state)(Order);
