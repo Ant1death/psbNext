@@ -29,9 +29,9 @@ const Login = () => {
 
     const name = await checkAuth(token);
 
-    if (name.username === username) {
+    if (name && name.username === username) {
       router.push('/account');
-    } else if (name.username !== username || !username) {
+    } else if (!name || !username || name.username !== username) {
       setIsLoading(true);
     }
   }
