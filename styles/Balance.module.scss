@@ -29,6 +29,7 @@
   &__form {
     margin-bottom: 0.25rem;
     display: flex;
+    flex-wrap: wrap;
 
     & input {
       padding: 0.475rem 0.75rem;
@@ -139,5 +140,18 @@
     &-sum {
       color: #e82646;
     }
+  }
+}
+
+.error {
+  font-size: 10px;
+  color: #ff5b51;
+  visibility: hidden;
+  min-height: 12px;
+  display: inline-block;
+  width: 100%;
+
+  &_active {
+    visibility: visible;
   }
 }
