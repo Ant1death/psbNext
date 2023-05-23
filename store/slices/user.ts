@@ -26,7 +26,7 @@ export const userSlice = createSlice({
         ...action.payload.user,
       }
 
-      if (state.user) nextState.hosting = state.user;
+      if (state.user) nextState.user = state.user;
 
       return nextState;
     });

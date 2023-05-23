@@ -26,7 +26,7 @@ export const ordersSlice = createSlice({
         ...action.payload.orders,
       }
 
-      if (state.orders) nextState.hosting = state.orders;
+      if (state.orders) nextState.orders = state.orders;
 
       return nextState;
     });

@@ -34,19 +34,4 @@ export const vpnSlice = createSlice({
   },
 });
 
-
-/* const stateDiff = diff(state, action.payload);
-      const isdiff1 = stateDiff?.server?.[0]?.test?.data?.[0];
-      // return {
-      //   ...state,
-      //   data: isdiff1 ? action.payload.server.test.data : state.data,
-      // };
-      state.data = isdiff1 ? action.payload.server.test.data : state.data;
-    },
-    [TestFetch.fulfilled]: (state, action) => {
-      state.data = action.payload;
-    }, */
-
-
-
 export const { fetchVpn } = vpnSlice.actions;
