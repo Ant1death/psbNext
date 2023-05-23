@@ -245,6 +245,6 @@
   "error-stop-auto-refresh-success": "Автопродление выключено",
   "error-saved": "Изменения сохранены",
   "error-password-use": "Этот пароль уже используется",
-  "error-passwords-not-match": "Пароли не совпадают"
-
+  "error-passwords-not-match": "Пароли не совпадают",
+  "error-order-success": "Заказ успешно создан и ждёт выдачи"
 }
