@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 
 import LayoutAccount from '../../compontens/LayoutAccount/LayoutAccount';
 import RowTableHistory from '../../compontens/RowTableHistory/RowTableHistory';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { topUpBalance } from '../../api/topUpBalance';
-import { increaseBalance } from '../../store/slices/user';
 import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 
 import style from '../../styles/Balance.module.scss';
@@ -18,12 +17,10 @@ import { payments } from '../../utils/data/paymentHistory';
 const Balance = () => {
   const { t } = useTranslation();
   const user = useAppSelector(store => store.user.user);
-  const { errors, values, handleChange, isValid, resetForm } = useFormAndValidation();
-  const dispatch = useAppDispatch();
+  const { errors, values, handleChange, isValid } = useFormAndValidation();
 
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleTopUpBalance = async (evt) => {
     evt.preventDefault();
@@ -31,13 +28,9 @@ const Balance = () => {
     const token = typeof window !== undefined && localStorage.getItem('token');
     const queries = `user_id=${user.id}&amount=${values.amount}`;
     const res = await topUpBalance(token, queries);
-console.log(res)
-    if (res) {
-      dispatch(increaseBalance(values.amount));
-      resetForm();
-      setMessage('Баланс пополнен')
-      setIsSuccess(true);
-      setIsPopupOpen(true)
+
+    if (res && res.pay_url) {
+      window.open(res.pay_url, '_blank');
     } else {
       setMessage('Произошла ошибка');
       setIsPopupOpen(true);
@@ -121,8 +114,6 @@ console.log(res)
         message={message}
         isOpen={isPopupOpen}
         setIsOpen={setIsPopupOpen}
-        isSuccess={isSuccess}
-        setIsSuccess={setIsSuccess}
       />
     </>
   );

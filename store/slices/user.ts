@@ -18,9 +18,6 @@ export const userSlice = createSlice({
     fetchUser(state, action: PayloadAction<any>) {
       state.user = action.payload;
     },
-    increaseBalance(state, action: PayloadAction<any>) {
-      state.user.balance = Number(state.user.balance) + Number(action.payload);
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
@@ -36,4 +33,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { fetchUser, increaseBalance } = userSlice.actions;
+export const { fetchUser } = userSlice.actions;
