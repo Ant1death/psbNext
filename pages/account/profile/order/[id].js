@@ -8,8 +8,10 @@ import MessagePopup from '../../../../compontens/MessagePopup/MessagePopup';
 import { wrapper } from '../../../../store/store';
 import { getCurrentOrder } from '../../../../api/getCurrentOrder';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
-import { fetchCurrentOrder, changeSystem } from '../../../../store/slices/currentOrder';
+import { fetchCurrentOrder } from '../../../../store/slices/currentOrder';
 import { changeOperativeSystem } from '../../../../api/changeOperativeSystem';
+import { useFormAndValidation } from '../../../../hooks/useFormAndValidation';
+import { changeServerPassword } from '../../../../api/changeServerPassword';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -27,6 +29,7 @@ const Order = (id) => {
   const { t } = useTranslation();
   const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
   const dispatch = useAppDispatch();
+  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
 
   const [system, setSystem] = useState('');
   const [message, setMessage] = useState('');
@@ -57,6 +60,7 @@ const Order = (id) => {
         setMessage('Операционная система изменена');
         setIsPopupOpen(true);
         setIsSuccess(true);
+        fetchData();
       } else {
         setMessage('Произошла ошибка');
         setIsPopupOpen(true);
@@ -65,6 +69,27 @@ const Order = (id) => {
       setMessage('Вы не выбрали операционную систему');
       setIsPopupOpen(true);
     }
+  }
+
+  const submitChangePassword = async (evt) => {
+    evt.preventDefault();
+
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+      const queries = `order_id=${currentOrder.order_id}&password=${values.password}`;
+      const res = await changeServerPassword(token, queries);
+
+      if (res) {
+        setMessage('Пароль изменен');
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+        fetchData();
+      } else {
+        setMessage('Произошла ошибка');
+        setIsPopupOpen(true);
+      }
+    }
+
   }
 
   useEffect(() => {
@@ -168,14 +193,29 @@ const Order = (id) => {
                 {t('profile-order-change-system')}
               </button>
             </form>
-            <form className={style['order__form']}>
+            <form
+              className={`${style['order__form']} ${style['order__form_password']}`}
+              noValidate
+              onSubmit={submitChangePassword}
+            >
               <input
                 placeholder={t('profile-order-new-password')}
                 type='password'
                 name='password'
                 className={style['order__input']}
+                value={values.password || ''}
+                onChange={handleChange}
+                required
+                pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
               />
-              <button type='submit' className={style['order__button']}>
+              <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+                {!isValid && errors.password}
+              </p>
+              <button
+                type='submit'
+                className={style['order__button']}
+                disabled={!isValid}
+              >
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
                 {t('profile-order-button')}
               </button>

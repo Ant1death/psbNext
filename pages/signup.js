@@ -133,6 +133,7 @@ export default function SignUp() {
                   placeholder={t('password')}
                   value={values.password || ''}
                   onChange={handleChange}
+                  pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
                 />
                 <span className={style['input__field-focus']}></span>
                 <iconify-icon icon="bxs:lock-alt"></iconify-icon>
@@ -150,6 +151,7 @@ export default function SignUp() {
                   placeholder={t('password-repeat')}
                   value={values.repeatPassword || ''}
                   onChange={handleChange}
+                  pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
                 />
                 <span className={style['input__field-focus']}></span>
                 <iconify-icon icon="bxs:lock-alt"></iconify-icon>
