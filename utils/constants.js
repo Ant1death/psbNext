@@ -350,3 +350,6 @@ export const VPN_COUNTRIES = [
     flag: './tr.svg',
   },
 ];
+
+export const MONTH_RU = [ 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+export const MONTH_EN = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

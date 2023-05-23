@@ -78,14 +78,11 @@ const Account = () => {
         </h2>
         <ul className={style['goods__list']}>
           {orders && orders.map(el => {
-            if (el.status === 'Заказ в обработке') {
+            if (el.status === 'Обработка заказа') {
               return (
                 <OrderCardPending
                   key={el.id}
-                  status={el.status}
-                  number={el.number}
-                  name={el.name}
-                  autoRenewal={el.autoRenewal}
+                  order={el}
                 />
               );
             }
@@ -93,12 +90,7 @@ const Account = () => {
               return (
                 <OrderCardSuccess
                   key={el.id}
-                  status={el.status}
-                  price={el.price}
-                  name={el.name}
-                  autoRenewal={el.autoRenewal}
-                  deadline={el.deadline}
-                  id={el.id}
+                  order={el}
                 />
               );
             }

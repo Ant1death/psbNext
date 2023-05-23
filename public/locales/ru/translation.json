@@ -227,5 +227,9 @@
   "profile-order-new-password": "Новый пароль",
 
   "lang": "Выберите язык",
-  "language": "Язык"
+  "language": "Язык",
+
+  "auto-refresh-true": "Включено",
+  "auto-refresh-false": "Отключено",
+  "order-price-period": "мес"
 }

@@ -227,5 +227,9 @@
   "profile-order-new-password": "New password",
 
   "lang": "Choose Country",
-  "language": "Language"
+  "language": "Language",
+
+  "auto-refresh-true": "Connected",
+  "auto-refresh-false": "Disabled",
+  "order-price-period": "month"
 }
