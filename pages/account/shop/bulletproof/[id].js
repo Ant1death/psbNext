@@ -7,6 +7,8 @@ import NewServise from '../../../../compontens/NewService/NewServise';
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
+import { fetchOrders } from '../../../../store/slices/orders';
+import { getOrders } from '../../../../api/getOrders';
 
 import { wrapper } from '../../../../store/store';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
@@ -27,6 +29,9 @@ const AbuseItem = (id) => {
   const [item, setItem] = useState({});
   const [system, setSystem] = useState('');
   const [controlPanel, setControlPanel] = useState('');
+  const [message, setMessage] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
@@ -68,16 +73,32 @@ const AbuseItem = (id) => {
     }
   }, [item]);
 
-  const sentDataToOrder = (payment) => {
+  const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}&control_panel=${controlPanel}`;
+    const res = await createNewOrder(token, queries);
 
-    createNewOrder(token, queries);
+    if (res) {
+      const data = await getOrders(token);
+      if (data) dispatch(fetchOrders(data));
+
+      setMessage('Заказ успешно создан и ждёт выдачи');
+      setIsSuccess(true);
+      setIsPopupOpen(true);
+    } else {
+      setMessage('Произошла ошибка');
+      setIsPopupOpen(true);
+    }
   }
 
   return (
     <NewServise
       sentDataToOrder={sentDataToOrder}
+      message={message}
+      isPopupOpen={isPopupOpen}
+      setIsPopupOpen={setIsPopupOpen}
+      isSuccess={isSuccess}
+      setIsSuccess={setIsSuccess}
     >
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-system')}

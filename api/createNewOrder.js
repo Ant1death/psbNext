@@ -11,9 +11,7 @@ export const createNewOrder = async (token, queries) => {
 
     if (!res.ok) throw new Error(`error: ${res.status}`);
 
-    const data = await res.json();
-
-    return data;
+    return res.ok;
   } catch (err) {
     console.error(err);
   }

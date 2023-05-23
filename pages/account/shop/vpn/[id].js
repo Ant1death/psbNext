@@ -10,6 +10,8 @@ import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
+import { fetchOrders } from '../../../../store/slices/orders';
+import { getOrders } from '../../../../api/getOrders';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -26,6 +28,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 const  VpnItem = (id) => {
   const [item, setItem] = useState({});
   const [period, setPeriod] = useState('');
+  const [message, setMessage] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
@@ -40,11 +45,22 @@ const  VpnItem = (id) => {
     if (data) dispatch(fetchVpn(data.products));
   }
 
-  const sentDataToOrder = (payment) => {
+  const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&period=${period}`;
+    const res = await createNewOrder(token, queries);
 
-    createNewOrder(token, queries);
+    if (res) {
+      const data = await getOrders(token);
+      if (data) dispatch(fetchOrders(data));
+
+      setMessage('Заказ успешно создан и ждёт выдачи');
+      setIsSuccess(true);
+      setIsPopupOpen(true);
+    } else {
+      setMessage('Произошла ошибка');
+      setIsPopupOpen(true);
+    }
   }
 
   const findItem = () => {
@@ -67,6 +83,11 @@ const  VpnItem = (id) => {
   return (
     <NewServise
       sentDataToOrder={sentDataToOrder}
+      message={message}
+      isPopupOpen={isPopupOpen}
+      setIsPopupOpen={setIsPopupOpen}
+      isSuccess={isSuccess}
+      setIsSuccess={setIsSuccess}
     >
       {item &&
         <h3 className={style['card__title-item']}>

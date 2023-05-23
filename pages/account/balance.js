@@ -23,7 +23,7 @@ const Balance = () => {
 
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleTopUpBalance = async (evt) => {
     evt.preventDefault();
