@@ -32,7 +32,7 @@ const Balance = () => {
     if (res && res.pay_url) {
       window.open(res.pay_url, '_blank');
     } else {
-      setMessage('Произошла ошибка');
+      setMessage(t('error'));
       setIsPopupOpen(true);
     }
   }

@@ -32,7 +32,7 @@ export default function SignUp() {
       if (res) router.push('/login');
     })
     .catch(err => {
-      setErrorMessage(`Ошибка: ${err.message}`);
+      setErrorMessage(`${t('error')}: ${err.message}`);
       setIsErrorMessageOpen(true);
     });
   }
@@ -57,7 +57,7 @@ export default function SignUp() {
   useEffect(() => {
     if (values.password !== values.repeatPassword) {
       setIsValid(false);
-      setErrorPasswordRepeat('Пароли не совпадают');
+      setErrorPasswordRepeat(t('error-passwords-not-match'));
     } else if (!errors.name && !errors.email && !errors.password && !errors.repeatPassword && errorPasswordRepeat) {
       setIsValid(true);
       setErrorPasswordRepeat('');

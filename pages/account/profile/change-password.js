@@ -33,7 +33,7 @@ const FormPassword = () => {
 
     if (values.oldPassword !== values.newPassword) {
       console.log(values.newPassword);
-      setMessage('Изменения сохранены');
+      setMessage(t('error-saved'));
       setIsMessaggePopupOpen(true);
       setIsFormSubmitSuccess(true);
       resetForm();
@@ -53,7 +53,7 @@ const FormPassword = () => {
       && values.oldPassword !==undefined
     ) {
       setIsValid(false);
-      setErrorPasswordRepeat('Этот пароль уже используется');
+      setErrorPasswordRepeat(t('error-password-use'));
     } else if (!errors.oldPassword && !errorPasswordEquals && errorPasswordRepeat) {
       setIsValid(true);
       setErrorPasswordRepeat('');
@@ -63,7 +63,7 @@ const FormPassword = () => {
 
     if (values.confirmPassword !== values.newPassword) {
       setIsValid(false);
-      setErrorPasswordEquals('Пароли не совпадают');
+      setErrorPasswordEquals(t('error-passwords-not-match'));
     } else if (!errors.oldPassword && errorPasswordEquals && !errorPasswordRepeat) {
       setIsValid(true);
       setErrorPasswordEquals('');

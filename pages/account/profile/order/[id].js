@@ -60,16 +60,16 @@ const Order = (id) => {
       const res = await changeOperativeSystem(token, queries);
 
       if (res) {
-        setMessage('Операционная система изменена');
+        setMessage(t('error-system-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
         fetchData();
       } else {
-        setMessage('Произошла ошибка');
+        setMessage(t('error'));
         setIsPopupOpen(true);
       }
     } else {
-      setMessage('Вы не выбрали операционную систему');
+      setMessage(t('error-system-unsuccess'));
       setIsPopupOpen(true);
     }
   }
@@ -83,12 +83,12 @@ const Order = (id) => {
       const res = await changeServerPassword(token, queries);
 
       if (res) {
-        setMessage('Пароль изменен');
+        setMessage(t('error-password-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
         fetchData();
       } else {
-        setMessage('Произошла ошибка');
+        setMessage(t('error'));
         setIsPopupOpen(true);
       }
     }
@@ -107,11 +107,11 @@ const Order = (id) => {
       const res = await startServer(token, currentOrder.order_id);
 
       if (res) {
-        setMessage('Сервер включен');
+        setMessage(t('error-start-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
       } else {
-        setMessage('Произошла ошибка');
+        setMessage(t('error'));
         setIsPopupOpen(true);
       }
     }
@@ -123,11 +123,11 @@ const Order = (id) => {
       const res = await restartServer(token, currentOrder.order_id);
 
       if (res) {
-        setMessage('Сервер перезагружен');
+        setMessage(t('error-restart-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
       } else {
-        setMessage('Произошла ошибка');
+        setMessage(t('error'));
         setIsPopupOpen(true);
       }
     }
@@ -139,11 +139,11 @@ const Order = (id) => {
       const res = await stopServer(token, currentOrder.order_id);
 
       if (res) {
-        setMessage('Сервер выключен');
+        setMessage(t('error-stop-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
       } else {
-        setMessage('Произошла ошибка');
+        setMessage(t('error'));
         setIsPopupOpen(true);
       }
     }

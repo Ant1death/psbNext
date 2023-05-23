@@ -31,7 +31,7 @@ const Profile = () => {
 
     if (values.name !== user.username || values.email !== user.email) {
       console.log(values.name, values.email);
-      setMessage('Изменения сохранены');
+      setMessage(t('error-saved'));
       setIsMessaggePopupOpen(true);
       setIsFormSubmitSuccess(true);
     }

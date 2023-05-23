@@ -232,5 +232,19 @@
 
   "auto-refresh-true": "Включено",
   "auto-refresh-false": "Отключено",
-  "order-price-period": "мес"
+  "order-price-period": "мес",
+
+  "error": "Произошла ошибка",
+  "error-system-success": "Операционная система изменена",
+  "error-system-unsuccess": "Вы не выбрали операционную систему",
+  "error-password-success": "Пароль изменен",
+  "error-start-server-success": "Сервер включен",
+  "error-stop-server-success": "Сервер выключен",
+  "error-restart-server-success": "Сервер перезагружен",
+  "error-start-auto-refresh-success": "Автопродление включено",
+  "error-stop-auto-refresh-success": "Автопродление выключено",
+  "error-saved": "Изменения сохранены",
+  "error-password-use": "Этот пароль уже используется",
+  "error-passwords-not-match": "Пароли не совпадают"
+
 }

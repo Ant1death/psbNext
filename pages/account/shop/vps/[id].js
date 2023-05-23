@@ -82,11 +82,11 @@ const VpsItem = (id) => {
       const data = await getOrders(token);
       if (data) dispatch(fetchOrders(data));
 
-      setMessage('Заказ успешно создан и ждёт выдачи');
+      setMessage(t('error-order-success'));
       setIsSuccess(true);
       setIsPopupOpen(true);
     } else {
-      setMessage('Произошла ошибка');
+      setMessage(t('error'));
       setIsPopupOpen(true);
     }
   }

@@ -48,7 +48,7 @@ const Login = () => {
         }
       })
       .catch(err => {
-        setErrorMessage(`Ошибка: ${err.message}`);
+        setErrorMessage(`${t('error')}: ${err.message}`);
         setIsErrorMessageOpen(true);
       });
   }

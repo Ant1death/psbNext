@@ -232,5 +232,19 @@
 
   "auto-refresh-true": "Connected",
   "auto-refresh-false": "Disabled",
-  "order-price-period": "month"
+  "order-price-period": "month",
+
+  "error": "An error has occurred",
+  "error-system-success": "The operating system has been changed",
+  "error-system-unsuccess": "You have not selected an operating system",
+  "error-password-success": "The password has been changed",
+  "error-start-server-success": "The server is enabled",
+  "error-stop-server-success": "The server is disabled",
+  "error-restart-server-success": "The server has been restarted",
+  "error-start-auto-refresh-success": "Auto-renewal is enabled",
+  "error-stop-auto-refresh-success": "Auto-renewal is disabled",
+  "error-saved": "Changes has been saved",
+  "error-password-use": "This password is already in use",
+  "error-passwords-not-match": "Passwords don't match",
+  "error-order-success": "The order has been successfully created"
 }
