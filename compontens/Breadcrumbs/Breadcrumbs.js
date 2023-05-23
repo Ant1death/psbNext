@@ -58,7 +58,7 @@ const Breadcrumbs = () => {
       setPageTitle(title);
       setLastCrumb(t('category-store'));
     } else if (asPath.length === 4 && (asPath.includes('profile'))) {
-        const name = currentOrder.title;
+        const name = currentOrder && currentOrder.title;
         setPageTitle(`${t('path-order')} #${name}`);
         setLastCrumb(t('path-order'));
     } else {

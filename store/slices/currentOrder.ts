@@ -18,6 +18,9 @@ export const currentOrderSlice = createSlice({
     fetchCurrentOrder(state, action: PayloadAction<any>) {
       state.currentOrder = action.payload;
     },
+    changeSystem(state, action: PayloadAction<any>) {
+      state.currentOrder.os = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
@@ -33,4 +36,4 @@ export const currentOrderSlice = createSlice({
   },
 });
 
-export const { fetchCurrentOrder } = currentOrderSlice.actions;
+export const { fetchCurrentOrder, changeSystem } = currentOrderSlice.actions;

@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import MessagePopup from '../../../../compontens/MessagePopup/MessagePopup';
 import { wrapper } from '../../../../store/store';
 import { getCurrentOrder } from '../../../../api/getCurrentOrder';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
-import { fetchCurrentOrder } from '../../../../store/slices/currentOrder';
+import { fetchCurrentOrder, changeSystem } from '../../../../store/slices/currentOrder';
+import { changeOperativeSystem } from '../../../../api/changeOperativeSystem';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -26,11 +28,42 @@ const Order = (id) => {
   const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
   const dispatch = useAppDispatch();
 
+  const [system, setSystem] = useState('');
+  const [message, setMessage] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const fetchData = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await getCurrentOrder(token, id.pageProps.id);
       if (res) dispatch(fetchCurrentOrder(res[0]));
+    }
+  }
+
+  const handleChangeSystem = (evt) => {
+    setSystem(evt.target.value);
+  }
+
+  const submitChangeSystem = async (evt) => {
+    evt.preventDefault();
+
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (system && token) {
+      const queries = `order_id=${currentOrder.order_id}&os=${system}`;
+      const res = await changeOperativeSystem(token, queries);
+
+      if (res) {
+        setMessage('Операционная система изменена');
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+      } else {
+        setMessage('Произошла ошибка');
+        setIsPopupOpen(true);
+      }
+    } else {
+      setMessage('Вы не выбрали операционную систему');
+      setIsPopupOpen(true);
     }
   }
 
@@ -106,11 +139,15 @@ const Order = (id) => {
                 {t('profile-order-instruction')}
               </Link>
             </p>
-            <form className={style['order__form']}>
+            <form className={style['order__form']} onSubmit={submitChangeSystem}>
               <label htmlFor='system'>
                {t('profile-order-system')}
               </label>
-              <select id='system' className={style['order__select']}>
+              <select
+                id='system'
+                className={style['order__select']}
+                onClick={handleChangeSystem}
+              >
                 {currentOrder.os &&
                   <option value={currentOrder.os.name}>
                     {currentOrder.os.name}
@@ -177,6 +214,13 @@ const Order = (id) => {
           </section>
         </>
       }
+      <MessagePopup
+        message={message}
+        isOpen={isPopupOpen}
+        setIsOpen={setIsPopupOpen}
+        isSuccess={isSuccess}
+        setIsSuccess={setIsSuccess}
+      />
     </div>
   );
 }

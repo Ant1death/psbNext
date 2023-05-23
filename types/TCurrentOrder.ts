@@ -5,4 +5,5 @@ export type TCurrentOrder = {
   password: string;
   port: string;
   superuser: string;
+  os?: {}
 }
