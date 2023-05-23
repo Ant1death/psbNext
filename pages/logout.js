@@ -48,7 +48,7 @@ const Logout = () => {
 
     const name = await checkAuth(token);
 
-    if (name.username !== username || !username) {
+    if (!name || !username || name.username !== username) {
       router.push('/login');
     } else {
       setIsLoading(true);
