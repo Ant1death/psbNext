@@ -89,7 +89,13 @@ const Order = (id) => {
         setIsPopupOpen(true);
       }
     }
+  }
 
+  const handleSwitchAutoRefresh = async () => {
+    const token = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (token) {
+
+    }
   }
 
   useEffect(() => {
@@ -227,10 +233,14 @@ const Order = (id) => {
             </h3>
             <ul className={style['order__options-list']}>
               <li>
-                <button className={`${style['order__options-button']} ${style['order__options-button_green']}`}>
+                <button
+                  className={`${style['order__options-button']}
+                  ${currentOrder.auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
+                  onClick={handleSwitchAutoRefresh}
+                >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
                 </button>
-                {t('profile-order-option-one')}
+                {!currentOrder.auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
               </li>
               <li>
                 <button className={`${style['order__options-button']} ${style['order__options-button_green']}`}>
