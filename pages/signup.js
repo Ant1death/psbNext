@@ -42,7 +42,7 @@ export default function SignUp() {
 
     const name = await checkAuth(token);
 
-    if (!name || !username || name.username !== username) {
+    if (name && username && name.username === username) {
       router.push('/account');
     } else {
       setIsLoading(true);
@@ -51,7 +51,7 @@ export default function SignUp() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    token ? checkName(token) : router.push('/login');
+    token ? checkName(token) : setIsLoading(true);
   }, []);
 
   useEffect(() => {

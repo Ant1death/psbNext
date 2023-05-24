@@ -36,21 +36,19 @@ const Login = () => {
     }
   }
 
-  const handleSubmitForm = (evt) => {
+  const handleSubmitForm = async (evt) => {
     evt.preventDefault();
 
-    login(values.name, values.password)
-      .then(res => {
-        if (res) {
-          localStorage.setItem('username', values.name);
-          localStorage.setItem('token', res.access_token);
-          router.push('/account');
-        }
-      })
-      .catch(err => {
-        setErrorMessage(`${t('error')}: ${err.message}`);
-        setIsErrorMessageOpen(true);
-      });
+    const res = await login(values.name, values.password);
+
+    if (res) {
+      localStorage.setItem('username', values.name);
+      localStorage.setItem('token', res.access_token);
+      router.push('/account');
+    } else {
+      setErrorMessage(`${t('error')}`);
+      setIsErrorMessageOpen(true);
+    }
   }
 
   useEffect(() => {

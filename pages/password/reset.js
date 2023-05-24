@@ -36,7 +36,7 @@ export default function ResetPasswordDone() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    token ? checkName(token) : router.push('/login');
+    token ? checkName(token) : setIsLoading(true);
   }, []);
 
   return (

@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const stopServer = async (token, id) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/server/stop?order_id=${id}`, {
+    const res = await fetch(`/api/stopServer?order_id=${id}`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token}`,

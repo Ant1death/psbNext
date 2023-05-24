@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const getUser = async (token) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/get_current_user`, {
+    const res = await fetch(`/api/getUser`, {
       headers: {
         'Authorization' : `Bearer ${token}`,
       }

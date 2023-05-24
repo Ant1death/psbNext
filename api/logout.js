@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const logout = async (token) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/logout`, {
+    const res = await fetch(`/api/logout`, {
       method: 'POST',
       headers: {
         'Authorization' : `Bearer ${token}`,
