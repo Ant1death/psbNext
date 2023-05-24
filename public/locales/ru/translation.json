@@ -209,7 +209,6 @@
   "profile-order-port": "Порт:",
   "profile-order-type": "Тип соединения:",
   "profile-order-password": "Пароль:",
-  "profile-order-command": "Команда на подключение:",
   "profile-order-renewal": "Авто-продление:",
   "profile-order-price": "Цена:",
   "profile-order-rdp": "Если не удается подключиться по имени пользователя Admin, попробуйте Administrator",

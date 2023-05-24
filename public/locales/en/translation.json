@@ -209,7 +209,6 @@
   "profile-order-port": "Port:",
   "profile-order-type": "Type of connection:",
   "profile-order-password": "Password:",
-  "profile-order-command": "Connect command:",
   "profile-order-renewal": "Auto-renewal:",
   "profile-order-price": "Price:",
   "profile-order-rdp": "If you cannot connect using the Admin username, try Administrator",

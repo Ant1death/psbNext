@@ -187,12 +187,6 @@ const Order = (id) => {
                 {`OS: ${currentOrder.os}`}
               </li>
               <li className={style['order__details-item']}>
-                {t('profile-order-command')}&nbsp;
-                <span className={style['order__span_red']}>
-                  {`${currentOrder.instruction}`}
-                </span>
-              </li>
-              <li className={style['order__details-item']}>
                 {t('profile-order-renewal')}&nbsp;
                 <span className={`${currentOrder.autoRenewal === 'Отключено' ? style['order__span_red'] : ''}`}>
                   {`${currentOrder.autoRenewal}`}
