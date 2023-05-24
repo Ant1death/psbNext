@@ -17,5 +17,6 @@ export const signup = (name, email, password) => {
       balance: 0
     }),
   })
-  .then(checkResponse);
+  .then(checkResponse)
+  .catch(err => console.error(err));
 }

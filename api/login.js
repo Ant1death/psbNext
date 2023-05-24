@@ -9,18 +9,6 @@ export const login = async (name, password) => {
     },
     body: `username=${name}&password=${password}`,
   })
-    .then(checkResponse);
+    .then(checkResponse)
+    .catch(err => console.error(err));
 };
-
-/* try {
-  const serverRes = await fetch(`${process.env.BASE_URL}/order/new?${queries}`, {
-    method: 'GET',
-    headers: req.headers,
-  });
-
-  if (!serverRes.ok) throw new Error(`error: ${serverRes.status}`);
-
-  res.status(200).send(serverRes.ok);
-} catch (err) {
-  res.status(err.status).send({ error: 'failed to fetch data' });
-} */
