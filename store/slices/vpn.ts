@@ -5,11 +5,11 @@ import { diff } from 'jsondiffpatch';
 import { TVpn } from '../../types';
 
 interface vpnState {
-  vpn: TVpn | null;
+  vpn: TVpn[] | [];
 }
 
 const initialState: vpnState = {
-  vpn: null,
+  vpn: [],
 }
 
 export const vpnSlice = createSlice({

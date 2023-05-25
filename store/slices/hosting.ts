@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { THosting } from '../../types';
 
 interface hostingState {
-  hosting: THosting | null;
+  hosting: THosting[] | [];
 }
 
 const initialState: hostingState = {
-  hosting: null,
+  hosting: [],
 }
 
 export const hostingSlice = createSlice({

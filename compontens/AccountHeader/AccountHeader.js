@@ -36,7 +36,7 @@ const AccountHeader = ({
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token && !user) fetchData(token);
+    if (token && (!user || (!user || user.id === undefined))) fetchData(token);
   }, [user]);
 
   return (

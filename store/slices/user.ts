@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TUser } from '../../types';
 
 interface userState {
-  user: TUser | null;
+  user: TUser | {};
 }
 
 const initialState: userState = {
-  user: null,
+  user: {},
 }
 
 export const userSlice = createSlice({

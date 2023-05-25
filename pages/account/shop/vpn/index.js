@@ -8,6 +8,7 @@ import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
+import { VPN_CHARACTERS_RU, VPN_CHARACTERS_EN, VPN_COUNTRIES } from '../../../../utils/constants';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -35,11 +36,11 @@ export default function AccountVpn() {
 
   const fetchData = async () => {
     const data = await getProducts('VPN');
-    if (data) dispatch(fetchVpn(data.products));
+    if (data) dispatch(fetchVpn(data));
   }
 
   useEffect(() => {
-    if (!vpn && (vpn && vpn.length === 0)) fetchData();
+    if (!vpn || (vpn && vpn.length === 0)) fetchData();
   }, []);
 
   useEffect(() => {
@@ -88,13 +89,13 @@ export default function AccountVpn() {
                       {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
-                  <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
+                  {/* <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
                     {el.characters.map(item => {
                       return (
                         <li key={item.id}>{`${item.name} ${item.content}`}</li>
                       );
                     })}
-                  </ul>
+                  </ul> */}
                 </div>
                 <div className={style['shop__item-price-wrap']}>
                   <p className={style['shop__item-price']}>

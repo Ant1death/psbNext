@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TVdsBulletproof } from '../../types';
 
 interface vdsBulletproofState {
-  vdsVpsBulletproof: TVdsBulletproof | null;
+  vdsVpsBulletproof: TVdsBulletproof[] | [];
 }
 
 const initialState: vdsBulletproofState = {
-  vdsVpsBulletproof: null,
+  vdsVpsBulletproof: [],
 }
 
 export const vdsVpsBulletproofSlice = createSlice({

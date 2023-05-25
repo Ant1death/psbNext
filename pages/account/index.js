@@ -18,7 +18,7 @@ const Account = () => {
   const orders = useAppSelector(store => store.orders.orders);
   const user = useAppSelector(store => store.user.user);
 
-  const [activeServises, setActiveServises] = useState([]);
+  const [activeServises, setActiveServises] = useState(0);
 
   const fetchDataOrders = async (token) => {
     const data = await getOrders(token);
@@ -27,11 +27,11 @@ const Account = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token && !orders) fetchDataOrders(token);
+    if (token && (!orders || (orders && orders.length === 0))) fetchDataOrders(token);
   }, []);
 
   useEffect(() => {
-    if (orders) {
+    if (orders && orders.length > 0) {
       const activeOrders = orders.filter(el => el.status === 'Запущен');
       setActiveServises(activeOrders.length);
     }
