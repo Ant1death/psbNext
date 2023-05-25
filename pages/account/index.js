@@ -32,7 +32,7 @@ const Account = () => {
 
   useEffect(() => {
     if (orders && orders.length > 0) {
-      const activeOrders = orders.filter(el => el.status === 'Запущен');
+      const activeOrders = orders.filter(el => el.status === 'Заказ выдан');
       setActiveServises(activeOrders.length);
     }
   }, [orders]);
@@ -97,7 +97,7 @@ const Account = () => {
                 />
               );
             }
-            if (el.status === 'Запущен') {
+            if (el.status === 'Заказ выдан') {
               return (
                 <OrderCardSuccess
                   key={el.id}

@@ -37,7 +37,9 @@ const OrderCardSuccess = ({ order }) => {
           </li>
           <li className={style['card__item']}>
             {t('order-renewal')}&nbsp;
-            <span className={style['card__text-denger']}>{auto_refresh}</span>
+            <span className={auto_refresh ? style['card__text-success'] : style['card__text-denger']}>
+              {auto_refresh ? t('auto-refresh-true') : t('auto-refresh-false')}
+            </span>
           </li>
           <li className={style['card__item']}>
             {`${t('order-date')} ${t('faq-lang') === 'ru' ? formatDateRu(date_end) : formatDateEn(date_end)}`}
