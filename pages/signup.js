@@ -1,23 +1,20 @@
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import 'iconify-icon';
 
-import useParralaxOnBlock from '../hooks/useParralaxOnBlock';
 import AuthForm from '../compontens/AuthForm/AuthForm';
 import MessagePopup from '../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation';
 import { signup } from '../api/signup';
-import Preloader from '../compontens/Preloader/Preloader';
 import { checkAuth } from '../api/checkAuth';
+import LayoutAuth from '../compontens/LayoutAuth/LayoutAuth';
 
 import style from '../styles/Auth.module.scss';
 
 export default function SignUp() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const { handleChange, values, isValid, errors, setIsValid } = useFormAndValidation();
 
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
@@ -68,114 +65,95 @@ export default function SignUp() {
   }, [values.name, values.email, values.password, values.repeatPassword]);
 
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="PSB Hosting" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{`${t('login')}`}</title>
-        <link rel="icon" href="/images/logo.svg" />
-      </Head>
-      {!isLoading && <Preloader />}
-      {isLoading &&
-        <main className={style['container']}>
-          <section className={style['content']}>
-            <div
-              className={style['content__block-logo']}
-              ref={block}
-              onMouseMove={transformBlock}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <img className={style['content__logo']} alt='logo' src='/logo.png' />
-            </div>
-            <AuthForm
-              title={t('signup')}
-              button={t('signup-button')}
-              bottomLink={t('signup-link')}
-              bottomLinkHref='/login'
-              handleSubmitForm={handleSubmitForm}
-              isValid={isValid}
-            >
-              <label className={style['input']} htmlFor='name'>
-                <input
-                  type='text'
-                  name='name'
-                  id='name'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('name')}
-                  value={values.name || ''}
-                  onChange={handleChange}
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="ri:user-fill"></iconify-icon>
-              </label>
-              <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-                {!isValid && errors.name}
-              </p>
-              <label className={style['input']} htmlFor='email'>
-                <input
-                  type='email'
-                  name='email'
-                  id='email'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('email')}
-                  value={values.email || ''}
-                  onChange={handleChange}
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
-              </label>
-              <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-                {!isValid && errors.email}
-              </p>
-              <label className={style['input']} htmlFor='password'>
-                <input
-                  type='password'
-                  name='password'
-                  id='password'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('password')}
-                  value={values.password || ''}
-                  onChange={handleChange}
-                  pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="bxs:lock-alt"></iconify-icon>
-              </label>
-              <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-                {!isValid && errors.password}
-              </p>
-              <label className={style['input']} htmlFor='repeat-password'>
-                <input
-                  type='password'
-                  name='repeatPassword'
-                  id='repeat-password'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('password-repeat')}
-                  value={values.repeatPassword || ''}
-                  onChange={handleChange}
-                  pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="bxs:lock-alt"></iconify-icon>
-              </label>
-              <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-                {errorPasswordRepeat ? errorPasswordRepeat : (!isValid ? errors.repeatPassword : '')}
-              </p>
-            </AuthForm>
-          </section>
-          <MessagePopup
-            isOpen={isErrorMessaggeOpen}
-            message={errorMessage}
-            setIsOpen={setIsErrorMessageOpen}
-          />
-        </main>
+    <LayoutAuth
+      isLoading={isLoading}
+      popup={
+        <MessagePopup
+          isOpen={isErrorMessaggeOpen}
+          message={errorMessage}
+          setIsOpen={setIsErrorMessageOpen}
+        />
       }
-    </>
+    >
+      <AuthForm
+        title={t('signup')}
+        button={t('signup-button')}
+        bottomLink={t('signup-link')}
+        bottomLinkHref='/login'
+        handleSubmitForm={handleSubmitForm}
+        isValid={isValid}
+      >
+        <label className={style['input']} htmlFor='name'>
+          <input
+            type='text'
+            name='name'
+            id='name'
+            required
+            className={style['input__field']}
+            placeholder={t('name')}
+            value={values.name || ''}
+            onChange={handleChange}
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="ri:user-fill"></iconify-icon>
+        </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {!isValid && errors.name}
+        </p>
+        <label className={style['input']} htmlFor='email'>
+          <input
+            type='email'
+            name='email'
+            id='email'
+            required
+            className={style['input__field']}
+            placeholder={t('email')}
+            value={values.email || ''}
+            onChange={handleChange}
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
+        </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {!isValid && errors.email}
+        </p>
+        <label className={style['input']} htmlFor='password'>
+          <input
+            type='password'
+            name='password'
+            id='password'
+            required
+            className={style['input__field']}
+            placeholder={t('password')}
+            value={values.password || ''}
+            onChange={handleChange}
+            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="bxs:lock-alt"></iconify-icon>
+        </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {!isValid && errors.password}
+        </p>
+        <label className={style['input']} htmlFor='repeat-password'>
+          <input
+            type='password'
+            name='repeatPassword'
+            id='repeat-password'
+            required
+            className={style['input__field']}
+            placeholder={t('password-repeat')}
+            value={values.repeatPassword || ''}
+            onChange={handleChange}
+            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="bxs:lock-alt"></iconify-icon>
+        </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {errorPasswordRepeat ? errorPasswordRepeat : (!isValid ? errors.repeatPassword : '')}
+        </p>
+      </AuthForm>
+    </LayoutAuth>
   );
 }

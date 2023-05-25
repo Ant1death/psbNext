@@ -1,22 +1,22 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import 'iconify-icon';
 
-import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
+import LayoutAuth from '../../compontens/LayoutAuth/LayoutAuth';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
-import Preloader from '../../compontens/Preloader/Preloader';
 import { checkAuth } from '../../api/checkAuth';
+import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 
 import style from '../../styles/Auth.module.scss';
 
 export default function ResetPassword() {
-  const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const router = useRouter();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmitForm = (evt) => {
     evt.preventDefault();
@@ -41,53 +41,39 @@ export default function ResetPassword() {
   }, []);
 
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="PSB Hosting" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{`${t('login')}`}</title>
-        <link rel="icon" href="/images/logo.svg" />
-      </Head>
-      {!isLoading && <Preloader />}
-      {isLoading &&
-        <main className={style['container']}>
-          <section className={style['content']}>
-            <div
-              className={style['content__block-logo']}
-              ref={block}
-              onMouseMove={transformBlock}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <img className={style['content__logo']} alt='logo' src='/logo.png' />
-            </div>
-            <AuthForm
-              title={t('reset-password-title')}
-              button={t('reset-password-button')}
-              bottomLink={t('reset-password-link')}
-              bottomLinkHref='/login'
-              handleSubmitForm={handleSubmitForm}
-            >
-              <p className={style['form__message']}>
-                {t('reset-password-text')}
-              </p>
-              <label className={style['input']} htmlFor='email'>
-                <input
-                  type='text'
-                  name='email'
-                  id='email'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('email')}
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
-              </label>
-            </AuthForm>
-          </section>
-        </main>
+    <LayoutAuth
+      isLoading={isLoading}
+      popup={
+        <MessagePopup
+          isOpen={isErrorMessaggeOpen}
+          message={errorMessage}
+          setIsOpen={setIsErrorMessageOpen}
+        />
       }
-    </>
+    >
+      <AuthForm
+        title={t('reset-password-title')}
+        button={t('reset-password-button')}
+        bottomLink={t('reset-password-link')}
+        bottomLinkHref='/login'
+        handleSubmitForm={handleSubmitForm}
+      >
+        <p className={style['form__message']}>
+          {t('reset-password-text')}
+        </p>
+        <label className={style['input']} htmlFor='email'>
+          <input
+            type='text'
+            name='email'
+            id='email'
+            required
+            className={style['input__field']}
+            placeholder={t('email')}
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
+        </label>
+      </AuthForm>
+    </LayoutAuth>
   );
 }
