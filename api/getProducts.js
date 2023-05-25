@@ -1,6 +1,6 @@
-export const getProducts = async (type) => {
+export const getProducts = async (type, url) => {
   try {
-    const res = await fetch(`/api/getProducts?types=${type}`);
+    const res = await fetch(`${url}?types=${type}`);
 
     if (!res.ok) throw new Error(`error: ${res.status}`);
 

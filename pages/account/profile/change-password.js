@@ -8,6 +8,7 @@ import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getUser } from '../../../api/getUser';
 import { fetchUser } from '../../../store/slices/user';
+import { changeProfilePassword } from '../../../api/changeProfilePassword';
 
 import style from '../../../styles/Profile.module.scss';
 
@@ -28,20 +29,31 @@ const FormPassword = () => {
     if (data) dispatch(fetchUser(data));
   }
 
-  const handleFormSubmit = (evt) => {
+  const handleFormSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (values.oldPassword !== values.newPassword) {
-      console.log(values.newPassword);
-      setMessage(t('error-saved'));
+    const token = localStorage.getItem('token');
+
+    if (token && values.oldPassword !== values.newPassword) {
+      const res = await changeProfileData(token, values.newPassword);
+
+      if (res) {
+        setMessage(t('error-saved'));
+        setIsMessaggePopupOpen(true);
+        setIsFormSubmitSuccess(true);
+        resetForm();
+      } else {
+        setMessage(t('error'));
+        setIsMessaggePopupOpen(true);
+      }
+    } else {
+      setMessage(t('error-change-profile'));
       setIsMessaggePopupOpen(true);
-      setIsFormSubmitSuccess(true);
-      resetForm();
     }
   }
 
   useEffect(() => {
-    if (user) {
+    if (!user) {
       const token = localStorage.getItem('token');
       fetchData(token);
     }

@@ -15,6 +15,7 @@ import { changeServerPassword } from '../../../../api/changeServerPassword';
 import { startServer } from '../../../../api/startServer';
 import { restartServer } from '../../../../api/restartServer';
 import { stopServer } from '../../../../api/stopServer';
+import { toggleAutoRefresh } from '../../../../api/toggleAutoRefresh';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -32,7 +33,7 @@ const Order = (id) => {
   const { t } = useTranslation();
   const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
   const dispatch = useAppDispatch();
-  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
+  const { values, errors, isValid, handleChange } = useFormAndValidation();
 
   const [system, setSystem] = useState('');
   const [message, setMessage] = useState('');
@@ -43,7 +44,11 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await getCurrentOrder(token, id.pageProps.id);
-      if (res) dispatch(fetchCurrentOrder(res[0]));
+      if (res) {
+        const orderdata = [res[0].find(el => el.order_id === res[1][0].id)];
+        const order = orderdata.concat(res[1][0]);
+        dispatch(fetchCurrentOrder(order))
+      };
     }
   }
 
@@ -94,10 +99,20 @@ const Order = (id) => {
     }
   }
 
-  const handleSwitchAutoRefresh = async () => {
+  const handleToggleAutoRefresh = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
+      const res = await toggleAutoRefresh(token, currentOrder.bill_id);
 
+      if (res) {
+        setMessage(t('error-saved'));
+        setIsPopupOpen(true);
+        setIsSuccess(true);
+        fetchData();
+      } else {
+        setMessage(t('error'));
+        setIsPopupOpen(true);
+      }
     }
   }
 
@@ -159,44 +174,44 @@ const Order = (id) => {
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
-              {`${t('profile-order')} на аренду сервера ${currentOrder.title}`}
+              {`${t('profile-order')} на аренду сервера ${currentOrder[1].title}`}
             </h2>
             <h3 className={style['order__section-title']}>
               {t('profile-order-info')}
             </h3>
             <ul className={style['order__details-list']}>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-number')} ${currentOrder.order_id}`}
+                {`${t('profile-order-number')} ${currentOrder[1].order_id}`}
               </li>
               <li className={style['order__details-item']}>
-                {`IP: ${currentOrder.ip}`}
+                {`IP: ${currentOrder[0].ip}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-user')} ${currentOrder.superuser}`}
+                {`${t('profile-order-user')} ${currentOrder[0].superuser}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-password')} ${currentOrder.password}`}
+                {`${t('profile-order-password')} ${currentOrder[0].password}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-port')} ${currentOrder.port}`}
+                {`${t('profile-order-port')} ${currentOrder[0].port}`}
               </li>
               <li className={style['order__details-item']}>
-                {`OS: ${currentOrder.os}`}
+                {`OS: ${currentOrder[1].os}`}
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-renewal')}&nbsp;
-                <span className={`${currentOrder.autoRenewal === 'Отключено' ? style['order__span_red'] : ''}`}>
-                  {`${currentOrder.autoRenewal}`}
+                <span className={`${currentOrder[1].auto_refresh ? style['order__span_green'] : style['order__span_red']}`}>
+                  {currentOrder[1].auto_refresh ? t('auto-refresh-true') : t('auto-refresh-false')}
                 </span>
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-price')}&nbsp;
                 <span className={style['order__span_dark']}>
-                  {`${currentOrder.price}`}
+                  {`$${currentOrder[1].price}/${t('order-price-period')}`}
                 </span>
               </li>
             </ul>
-            {currentOrder.title && currentOrder.title.includes('RDP') &&
+            {currentOrder[1].title && currentOrder[1].title.includes('RDP') &&
               <p className={style['order__message']}>
                 {t('profile-order-rdp')}
               </p>
@@ -226,7 +241,7 @@ const Order = (id) => {
                     {currentOrder.os.name}
                   </option>
                 }
-                {currentOrder.os && currentOrder.os.map(el => {
+                {/* {currentOrder.os && currentOrder.os.map(el => {
                   if (el.name !== currentOrder.os.name) {
                     return (
                       <option value={el.content} key={el.id}>
@@ -234,7 +249,7 @@ const Order = (id) => {
                       </option>
                     );
                   }
-                })}
+                })} */}
               </select>
               <button type='submit' className={style['order__button']}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
@@ -278,7 +293,7 @@ const Order = (id) => {
                 <button
                   className={`${style['order__options-button']}
                   ${currentOrder.auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
-                  onClick={handleSwitchAutoRefresh}
+                  onClick={handleToggleAutoRefresh}
                   type='button'
                 >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>

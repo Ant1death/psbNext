@@ -25,7 +25,7 @@ export default function AccountHosting() {
   const dispatch = useAppDispatch();
 
   const fetchData = async () => {
-    const hostings = await getProducts('Hosting');
+    const hostings = await getProducts('Hosting', '/api/getProducts');
     const hosting = hostings ? hostings.products : [];
     dispatch(fetchHosting(hosting));
   }

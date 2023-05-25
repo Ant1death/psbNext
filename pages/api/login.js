@@ -8,12 +8,12 @@ export default async function handler(req, res) {
       body: `username=${username}&password=${password}`,
     });
 
-    if (!serverRes.ok) throw new Error(`error: ${serverRes.status}`);
+    if (!serverRes.ok) throw new Error(`${serverRes.status}`);
 
     const data = await serverRes.json();
 
     res.status(200).send(data);
   } catch (err) {
-    res.status(err.status).send({ error: 'failed to fetch data' });
+    res.status(err.message).send(err.message);
   }
 }

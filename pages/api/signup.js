@@ -17,10 +17,10 @@ export default async function handler(req, res) {
       }),
     });
 
-    if (!serverRes.ok) throw new Error(`error: ${serverRes.status}`);
+    if (!serverRes.ok) throw new Error(`${serverRes.status}`);
 
     res.status(200).send(serverRes.ok);
   } catch (err) {
-    res.status(err.status).send({ error: 'failed to fetch data' });
+    res.status(err.message).send(err.message);
   }
 }

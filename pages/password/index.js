@@ -7,20 +7,30 @@ import LayoutAuth from '../../compontens/LayoutAuth/LayoutAuth';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
 import { checkAuth } from '../../api/checkAuth';
 import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
+import { restorePassword } from '../../api/restorePassword';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 import style from '../../styles/Auth.module.scss';
 
 export default function ResetPassword() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { values, isValid, handleChange, errors } = useFormAndValidation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = (evt) => {
+  const handleSubmitForm = async (evt) => {
     evt.preventDefault();
-    router.push('/password/reset');
+    const res = await restorePassword(values.email);
+
+    if (res) {
+      router.push('/password/reset');
+    } else {
+      setErrorMessage(t('error'));
+      setIsErrorMessageOpen(true);
+    }
   }
 
   const checkName = async (token) => {
@@ -57,22 +67,28 @@ export default function ResetPassword() {
         bottomLink={t('reset-password-link')}
         bottomLinkHref='/login'
         handleSubmitForm={handleSubmitForm}
+        isValid={isValid}
       >
         <p className={style['form__message']}>
           {t('reset-password-text')}
         </p>
         <label className={style['input']} htmlFor='email'>
           <input
-            type='text'
+            type='email'
             name='email'
             id='email'
             required
             className={style['input__field']}
             placeholder={t('email')}
+            value={values.email || ''}
+            onChange={handleChange}
           />
           <span className={style['input__field-focus']}></span>
           <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
         </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {!isValid && errors.email}
+        </p>
       </AuthForm>
     </LayoutAuth>
   );

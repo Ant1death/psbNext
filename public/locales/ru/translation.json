@@ -247,5 +247,7 @@
   "error-saved": "Изменения сохранены",
   "error-password-use": "Этот пароль уже используется",
   "error-passwords-not-match": "Пароли не совпадают",
-  "error-order-success": "Заказ успешно создан и ждёт выдачи"
+  "error-order-success": "Заказ успешно создан и ждёт выдачи",
+  "error-change-profile": "Вы не изменили данные",
+  "error-login": "Неправильные почта или пароль"
 }

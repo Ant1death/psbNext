@@ -22,9 +22,9 @@ import style from '../styles/Vps.module.scss';
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
-  const vpsData = await getProducts('VPS');
+  const vpsData = await getProducts('VPS', `${process.env.BASE_URL}/products/all`);
   const vps = vpsData ? vpsData.products : [];
-  const vdsData = await getProducts('VDS');
+  const vdsData = await getProducts('VDS', `${process.env.BASE_URL}/products/all`);
   const vds = vdsData ? vdsData.products : [];
   dispatch(fetchVdsVps(vds.concat(vps)));
 

@@ -37,16 +37,18 @@ const Login = () => {
   const handleSubmitForm = async (evt) => {
     evt.preventDefault();
 
-    const res = await login(values.name, values.password);
-
-    if (res) {
-      localStorage.setItem('username', values.name);
-      localStorage.setItem('token', res.access_token);
-      router.push('/account');
-    } else {
-      setErrorMessage(`${t('error')}`);
-      setIsErrorMessageOpen(true);
-    }
+    await login(values.name, values.password)
+      .then (res => {
+        if (res) {
+          localStorage.setItem('username', values.name.toLowerCase());
+          localStorage.setItem('token', res.access_token);
+          router.push('/account');
+        }
+      })
+      .catch ((err) => {
+        setErrorMessage(`${err.includes('400') || err.includes('422') ? t('error-login') : t('error')}`);
+        setIsErrorMessageOpen(true);
+      })
   }
 
   useEffect(() => {

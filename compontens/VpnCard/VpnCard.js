@@ -12,10 +12,10 @@ const VpnCard = ({ vpnItem }) => {
     <li className={style['card']}>
       <div className={style['card__title']}>
         <h3 className={style['card__h3-title']}>
-          {VPN_COUNTRIES.map(el => {
+          {VPN_COUNTRIES.map(item => {
             return (
-              item.country === el.country &&
-                <img key={el.id} src={item.flag.slice(1)} alt={`icon ${el.title}`} className={style['shop__item-flag']} />
+              item.country === vpnItem.country &&
+                <img key={vpnItem.id} src={item.flag.slice(1)} alt={`icon ${vpnItem.title}`} className={style['card__img']} />
             )
           })}
           {vpnItem.title}

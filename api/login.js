@@ -1,5 +1,4 @@
 import { checkResponse } from '../utils/checkResponse';
-import { BASE_URL } from '../utils/constants';
 
 export const login = async (name, password) => {
   return fetch (`/api/login`, {
@@ -10,5 +9,4 @@ export const login = async (name, password) => {
     body: `username=${name}&password=${password}`,
   })
     .then(checkResponse)
-    .catch(err => console.error(err));
 };

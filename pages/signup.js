@@ -30,7 +30,7 @@ export default function SignUp() {
       if (res) router.push('/login');
     })
     .catch(err => {
-      setErrorMessage(`${t('error')}: ${err.message}`);
+      setErrorMessage(`${t('error')}: ${err}`);
       setIsErrorMessageOpen(true);
     });
   }

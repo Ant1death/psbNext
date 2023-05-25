@@ -18,5 +18,4 @@ export const signup = (name, email, password) => {
     }),
   })
   .then(checkResponse)
-  .catch(err => console.error(err));
 }

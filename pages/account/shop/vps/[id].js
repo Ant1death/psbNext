@@ -51,9 +51,9 @@ const VpsItem = (id) => {
   }
 
   const fetchData = async () => {
-    const vpsData = await getProducts('VPS');
+    const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('VDS');
+    const vdsData = await getProducts('VDS', '/api/getProducts');
     const vds = vdsData ? vdsData.products : [];
     dispatch(fetchVdsVps(vds.concat(vps)));
   }

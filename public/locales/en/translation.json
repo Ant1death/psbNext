@@ -247,5 +247,7 @@
   "error-saved": "Changes has been saved",
   "error-password-use": "This password is already in use",
   "error-passwords-not-match": "Passwords don't match",
-  "error-order-success": "The order has been successfully created"
+  "error-order-success": "The order has been successfully created",
+  "error-change-profile": "You have not changed the data",
+  "error-login": "Email or password are wrong"
 }

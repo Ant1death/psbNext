@@ -46,9 +46,9 @@ const AbuseItem = (id) => {
   }
 
   const fetchData = async () => {
-    const vpsData = await getProducts('Bulletproof VDS');
+    const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('Bulletproof VPS');
+    const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
     const vds = vdsData ? vdsData.products : [];
     dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }

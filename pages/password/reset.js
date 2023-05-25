@@ -47,6 +47,7 @@ export default function ResetPasswordDone() {
         bottomLink={t('reset-password-link')}
         bottomLinkHref='/login'
         handleSubmitForm={handleSubmitForm}
+        isValid={true}
       >
         <p className={style['form__message']}>
           {t('reset-password-success-text')}
