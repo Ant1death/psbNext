@@ -80,22 +80,28 @@ export default function AccountVpn() {
                 </Link>
                 <div className={style['shop__item-wrap-title']}>
                   <h2 className={style['shop__item-title']}>
-                    <img
-                      src='/de.svg'
-                      alt={`icon ${el.title}`}
-                      className={style['shop__item-flag']}
-                    />
+                    {VPN_COUNTRIES.map(item => {
+                      return (
+                        item.country === el.country &&
+                          <img key={el.id} src={item.flag.slice(1)} alt={`icon ${el.title}`} className={style['shop__item-flag']} />
+                      )
+                    })}
                     <Link href={`/account/shop/vpn/${el.id}`}>
                       {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
-                  {/* <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
-                    {el.characters.map(item => {
+                  <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
+                    {t('faq-lang') === 'ru' && VPN_CHARACTERS_RU.map((el, ind) => {
                       return (
-                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                        <li key={ind}>{el}</li>
                       );
                     })}
-                  </ul> */}
+                    {t('faq-lang') === 'en' && VPN_CHARACTERS_EN.map((el, ind) => {
+                      return (
+                        <li key={ind}>{el}</li>
+                      );
+                    })}
+                  </ul>
                 </div>
                 <div className={style['shop__item-price-wrap']}>
                   <p className={style['shop__item-price']}>
