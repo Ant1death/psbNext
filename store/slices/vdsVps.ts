@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TVds } from '../../types';
 
 interface vdsVpsState {
-  vdsVps: TVds[] | [];
+  vdsVps: TVds[] | null;
 }
 
 const initialState: vdsVpsState = {
-  vdsVps: [],
+  vdsVps: null,
 }
 
 export const vdsVpsSlice = createSlice({

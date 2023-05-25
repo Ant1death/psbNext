@@ -40,7 +40,7 @@ export default function AccountVpn() {
   }
 
   useEffect(() => {
-    if (!vpn || (vpn && vpn.length === 0)) fetchData();
+    if (!vpn) fetchData();
   }, []);
 
   useEffect(() => {

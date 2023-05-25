@@ -31,7 +31,7 @@ export default function AccountHosting() {
   }
 
   useEffect(() => {
-    if (!hosting || (hosting && hosting.length === 0)) fetchData();
+    if (!hosting) fetchData();
   }, []);
 
   return (

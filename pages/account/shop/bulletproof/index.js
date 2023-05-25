@@ -70,7 +70,7 @@ export default function Bulletproof() {
   }
 
   useEffect(() => {
-    if (!vdsVpsBulletproof || (vdsVpsBulletproof && vdsVpsBulletproof.length === 0)) fetchData();
+    if (!vdsVpsBulletproof) fetchData();
   }, []);
 
   useEffect(() => {

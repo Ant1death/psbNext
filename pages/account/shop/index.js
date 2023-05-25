@@ -74,7 +74,7 @@ export default function AccountVps() {
   }
 
   useEffect(() => {
-    if (!vdsVps || (vdsVps && vdsVps.length === 0)) fetchData();
+    if (!vdsVps) fetchData();
   }, []);
 
   useEffect(() => {

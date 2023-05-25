@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TOrders } from '../../types';
 
 interface ordersState {
-  orders: TOrders | [];
+  orders: TOrders | null;
 }
 
 const initialState: ordersState = {
-  orders: [],
+  orders: null,
 }
 
 export const ordersSlice = createSlice({

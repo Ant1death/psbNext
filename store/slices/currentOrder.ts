@@ -4,11 +4,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TCurrentOrder } from '../../types';
 
 interface currentOrderState {
-  currentOrder: TCurrentOrder | {};
+  currentOrder: TCurrentOrder | null;
 }
 
 const initialState: currentOrderState = {
-  currentOrder: {},
+  currentOrder: null,
 }
 
 export const currentOrderSlice = createSlice({
