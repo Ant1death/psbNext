@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { diff } from 'jsondiffpatch';
 
 import { TVpn } from '../../types';
 
 interface vpnState {
-  vpn: TVpn[] | [];
+  vpn: TVpn[] | null;
 }
 
 const initialState: vpnState = {
-  vpn: [],
+  vpn: null,
 }
 
 export const vpnSlice = createSlice({

@@ -12,6 +12,7 @@ import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
+import { VPN_PERIOD_EN, VPN_PERIOD_RU } from '../../../../utils/constants';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -27,7 +28,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 
 const  VpnItem = (id) => {
   const [item, setItem] = useState({});
-  const [period, setPeriod] = useState('');
+  const [period, setPeriod] = useState(1);
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -37,12 +38,12 @@ const  VpnItem = (id) => {
   const dispatch = useAppDispatch();
 
   const handleChangePeriod = (evt) => {
-    setPeriod(evt.targer.value)
+    setPeriod(evt.target.value);
   }
 
   const fetchData = async () => {
     const data = await getProducts('VPN');
-    if (data) dispatch(fetchVpn(data.products));
+    if (data) dispatch(fetchVpn(data));
   }
 
   const sentDataToOrder = async (payment) => {
@@ -74,11 +75,7 @@ const  VpnItem = (id) => {
 
   useEffect(() => {
     if (vpn) findItem();
-  }, []);
-
-  useEffect(() => {
-    item && item.period && setPeriod(item.period[0].content);
-  }, [item]);
+  }, [vpn]);
 
   return (
     <NewServise
@@ -109,13 +106,24 @@ const  VpnItem = (id) => {
         id='system'
         onClick={handleChangePeriod}
       >
-        {item && item.period && item.period.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {el.name}
-            </option>
-          );
-        })}
+        {t('faq-lang') === 'ru' &&
+          VPN_PERIOD_RU.map((el, ind) => {
+            return (
+              <option key={ind} value={el.value}>
+                {el.option}
+              </option>
+            );
+          })
+        }
+        {t('faq-lang') === 'en' &&
+          VPN_PERIOD_EN.map((el, ind) => {
+            return (
+              <option key={ind} value={el.value}>
+                {el.option}
+              </option>
+            );
+          })
+        }
       </select>
     </NewServise>
   );

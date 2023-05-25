@@ -352,3 +352,41 @@ export const VPN_COUNTRIES = [
 
 export const MONTH_RU = [ 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 export const MONTH_EN = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+export const VPN_PERIOD_RU = [
+  {
+    option: '1 месяц',
+    value: 1,
+  },
+  {
+    option: '3 месяца - 5%',
+    value: 3,
+  },
+  {
+    option: '6 месяцев - 10%',
+    value: 6,
+  },
+  {
+    option: '12 месяцев - 15%',
+    value: 12,
+  },
+];
+
+export const VPN_PERIOD_EN = [
+  {
+    option: '1 month',
+    value: 1,
+  },
+  {
+    option: '3 month - 5%',
+    value: 3,
+  },
+  {
+    option: '6 month - 10%',
+    value: 6,
+  },
+  {
+    option: '12 month - 15%',
+    value: 12,
+  },
+];
