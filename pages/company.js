@@ -1,19 +1,12 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 
 import Layout from '../compontens/Layout/Layout';
 
 import style from '../styles/Company.module.scss';
 
-Company.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  );
-}
-
-export default function Company() {
+const Company = () => {
   const { t } = useTranslation();
 
   return (
@@ -46,3 +39,13 @@ export default function Company() {
     </section>
   );
 }
+
+Company.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
+
+export default connect(state => state)(Company);

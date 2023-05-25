@@ -166,7 +166,7 @@ const Vpn = () => {
 
 Vpn.getLayout = function getLayout(page) {
   return (
-    <Layout>
+    <Layout title='- VPN'>
       {page}
     </Layout>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 
 import useParralaxOnBlock from '../hooks/useParralaxOnBlock';
 import AuthForm from '../compontens/AuthForm/AuthForm';
@@ -62,6 +63,13 @@ const Logout = () => {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="PSB Hosting" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{`${t('login')}`}</title>
+        <link rel="shortcut icon" href="/images/logo.svg" />
+      </Head>
       {!isLoading && <Preloader />}
       {isLoading &&
         <main className={style['container']}>

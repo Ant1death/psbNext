@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 import 'iconify-icon';
 
 import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
@@ -41,6 +42,13 @@ export default function ResetPassword() {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="PSB Hosting" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{`${t('login')}`}</title>
+        <link rel="icon" href="/images/logo.svg" />
+      </Head>
       {!isLoading && <Preloader />}
       {isLoading &&
         <main className={style['container']}>

@@ -110,7 +110,7 @@ const Abuse = () => {
 
 Abuse.getLayout = function getLayout(page) {
   return (
-    <Layout>
+    <Layout title='- VPS/VDS'>
       {page}
     </Layout>
   );
