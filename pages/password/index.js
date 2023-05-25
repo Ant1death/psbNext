@@ -28,7 +28,7 @@ export default function ResetPassword() {
 
     const name = await checkAuth(token);
 
-    if (name.username === username) {
+    if (name && username && name.username === username) {
       router.push('/account');
     } else {
       setIsLoading(true);
