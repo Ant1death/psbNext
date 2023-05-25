@@ -40,7 +40,7 @@ const OrderCardSuccess = ({ order }) => {
             <span className={style['card__text-denger']}>{auto_refresh}</span>
           </li>
           <li className={style['card__item']}>
-            {`${t('order-date')} ${t('lang') === 'ru' ? formatDateRu(date_end) : formatDateEn(date_end)}`}
+            {`${t('order-date')} ${t('faq-lang') === 'ru' ? formatDateRu(date_end) : formatDateEn(date_end)}`}
           </li>
         </ul>
       </div>
