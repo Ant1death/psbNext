@@ -12,8 +12,6 @@ import style from '../../styles/AccountHeader.module.scss';
 
 const AccountHeader = ({
   chooseLanquage,
-  openPopupNotification,
-  setXCoordPopupNotification,
   windowWidth,
   openPopupProfile,
   setXCoordPopupProfile,
@@ -55,8 +53,6 @@ const AccountHeader = ({
       <nav className={style['header__navbar-desktop']}>
         <AccountHeaderNavmenu
           chooseLanquage={chooseLanquage}
-          openPopupNotification={openPopupNotification}
-          setXCoordPopupNotification={setXCoordPopupNotification}
           windowWidth={windowWidth}
           openPopupProfile={openPopupProfile}
           setXCoordPopupProfile={setXCoordPopupProfile}
@@ -68,8 +64,6 @@ const AccountHeader = ({
       <nav className={`${style['header__mobile-menu']} ${isHeaderNamenuVisible ? style['header__mobile-menu_show'] : ''}`}>
         <AccountHeaderNavmenu
           chooseLanquage={chooseLanquage}
-          openPopupNotification={openPopupNotification}
-          setXCoordPopupNotification={setXCoordPopupNotification}
           windowWidth={windowWidth}
           openPopupProfile={openPopupProfile}
           setXCoordPopupProfile={setXCoordPopupProfile}

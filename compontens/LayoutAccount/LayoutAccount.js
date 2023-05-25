@@ -9,7 +9,6 @@ import AccountHeader from '../AccountHeader/AccountHeader';
 import AccountFooter from '../AccountFooter/AccountFooter';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import PopupLanguage from '../PopupLanguage/PopupLanguage';
-import PopupNotification from '../PopupNotification/PopupNotification';
 import PopupProfile from '../PopupProfile/PopupProfile';
 import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
 import ButtonToTop from '../../compontens/ButtonToTop/ButtonToTop';
@@ -23,11 +22,9 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ['400', '500'],
 });
 
-const LayoutAccount = ({ children, title }) => {
+const LayoutAccount = ({ children }) => {
   const [isOpenPopupLanguage, setIsOpenPopupLanguage] = useState(false);
-  const [isOpenPopupNotification, setIsOpenPopupNotification] = useState(false);
   const [isOpenPopupProfile, setIsOpenPopupProfile] = useState(false);
-  const [xCoordPopupNotification, setXCoordPopupNotification] = useState(0);
   const [xCoordPopupProfile, setXCoordPopupProfile] = useState(0);
   const [isButtonSidebarMiniHidden, setIsButtonSidebarMiniHidden] = useState(false);
   const [isSidebarMini, setIsSideBarMini] = useState(false);
@@ -67,7 +64,6 @@ const LayoutAccount = ({ children, title }) => {
   const handleBackgroundClose = (evt) => {
     if (evt.target.classList.value.toString().includes('popup_opened')
       || evt.target.classList.value.toString().includes('popup__container')
-      || evt.target.classList.value.toString().includes('popup__notification-title')
       || evt.target.classList.value.toString().includes('popup__notification-nemu')
       || evt.target.classList.value.toString().includes('popup__profile-heading')
       || evt.target.classList.value.toString().includes('popup__profile-link')
@@ -77,18 +73,9 @@ const LayoutAccount = ({ children, title }) => {
     }
   }
 
-  const openPopupNotification = (right) => {
-    setXCoordPopupNotification(right);
-    setIsOpenPopupNotification(true);
-  }
-
   const openPopupProfile = (right) => {
     setXCoordPopupProfile(right);
     setIsOpenPopupProfile(true);
-  }
-
-  const closePopupNotification = () => {
-    setIsOpenPopupNotification(false);
   }
 
   const closePopupProfile = () => {
@@ -97,7 +84,6 @@ const LayoutAccount = ({ children, title }) => {
 
   const closeAllPopup = () => {
     closePopupLanguage();
-    closePopupNotification();
     closePopupProfile();
   }
 
@@ -140,12 +126,6 @@ const LayoutAccount = ({ children, title }) => {
     return () => document.removeEventListener('keydown', handleEscClose);
   }, []);
 
-  useEffect(() => {
-    if (windowWidth <= 991) {
-      setXCoordPopupNotification(0);
-    }
-  }, [windowWidth]);
-
   return (
     <>
       <Head>
@@ -170,8 +150,6 @@ const LayoutAccount = ({ children, title }) => {
             />
             <AccountHeader
               chooseLanquage={chooseLanquage}
-              openPopupNotification={openPopupNotification}
-              setXCoordPopupNotification={setXCoordPopupNotification}
               openPopupProfile={openPopupProfile}
               setXCoordPopupProfile={setXCoordPopupProfile}
               windowWidth={windowWidth}
@@ -191,11 +169,6 @@ const LayoutAccount = ({ children, title }) => {
             <PopupLanguage
               isOpen={isOpenPopupLanguage}
               closePopup={closePopupLanguage}
-            />
-            <PopupNotification
-              isOpen={isOpenPopupNotification}
-              right={xCoordPopupNotification}
-              windowWidth={windowWidth}
             />
             <PopupProfile
               isOpen={isOpenPopupProfile}
