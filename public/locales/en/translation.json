@@ -111,6 +111,10 @@
   "reset-password-success-text": "Great! The letter was sent to your mail. Usually it takes 5 minutes. Check your email and follow the link.",
   "button-go-back": "Go back",
 
+  "change-password-title": "Change password",
+  "change-password-button": "Change password",
+  "change-password": "New password",
+
   "logout": "Log out",
   "logout-button": "Log out",
   "logout-text": "You leave your personal account and you will redirected to the login form. Are you sure?",
