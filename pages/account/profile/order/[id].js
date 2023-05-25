@@ -181,9 +181,6 @@ const Order = (id) => {
                 {`${t('profile-order-port')} ${currentOrder.port}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-type')} ${currentOrder.type}`}
-              </li>
-              <li className={style['order__details-item']}>
                 {`OS: ${currentOrder.os}`}
               </li>
               <li className={style['order__details-item']}>
