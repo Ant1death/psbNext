@@ -101,7 +101,11 @@ export default function AccountVps() {
     if (selectedSystem === '') {
       setCurrentCountry(vdsVps);
     } else {
-      const items = vdsVps.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVps.filter(el => {
+        const names = [];
+        el.os.forEach(el => names.push(el.name));
+        if (names.includes(selectedSystem)) return el;
+      });
       setCurrentCountry(items);
     }
   }, [selectedSystem]);

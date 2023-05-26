@@ -89,7 +89,11 @@ export default function Bulletproof() {
     if (selectedSystem === '') {
       setCurrentCountry(vdsVpsBulletproof);
     } else {
-      const items = vdsVpsBulletproof.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVpsBulletproof.filter(el => {
+        const names = [];
+        el.os.forEach(el => names.push(el.name));
+        if (names.includes(selectedSystem)) return el;
+      });
       setCurrentCountry(items);
     }
   }, [selectedSystem]);
