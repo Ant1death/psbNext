@@ -29,16 +29,24 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 const  VpnItem = (id) => {
   const [item, setItem] = useState({});
   const [period, setPeriod] = useState(1);
+  const [valuePeriod, setValuePeriod] = useState('');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
   const dispatch = useAppDispatch();
 
   const handleChangePeriod = (evt) => {
-    setPeriod(evt.target.value);
+    setPeriod(evt.currentTarget.id);
+    setIsDropDownOpen(false);
+    setValuePeriod(evt.currentTarget.textContent);
+  }
+
+  const openDropDown = () => {
+    isDropDownOpen ? setIsDropDownOpen(false) : setIsDropDownOpen(true);
   }
 
   const fetchData = async () => {
@@ -77,6 +85,10 @@ const  VpnItem = (id) => {
     if (vpn) findItem();
   }, [vpn]);
 
+  useEffect(() => {
+    t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
+  }, []);
+
   return (
     <NewServise
       sentDataToOrder={sentDataToOrder}
@@ -100,31 +112,34 @@ const  VpnItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-subscribe')}
       </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangePeriod}
-      >
-        {t('faq-lang') === 'ru' &&
-          VPN_PERIOD_RU.map((el, ind) => {
-            return (
-              <option key={ind} value={el.value}>
-                {el.option}
-              </option>
-            );
-          })
-        }
-        {t('faq-lang') === 'en' &&
-          VPN_PERIOD_EN.map((el, ind) => {
-            return (
-              <option key={ind} value={el.value}>
-                {el.option}
-              </option>
-            );
-          })
-        }
-      </select>
+      <div className={style['card__select-wrap']}>
+        <p
+          className={`${style['card__form-select']} ${isDropDownOpen ? style['card__form-select_open'] : ''}`}
+          onClick={openDropDown}
+        >
+          {valuePeriod}
+        </p>
+        <ul className={`${style['card__option-list']} ${isDropDownOpen ? style['card__option-list_open'] : ''}`}>
+          {t('faq-lang') === 'ru' &&
+            VPN_PERIOD_RU.map((el, ind) => {
+              return (
+                <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                  {el.option}
+                </li>
+              );
+            })
+          }
+          {t('faq-lang') === 'en' &&
+            VPN_PERIOD_EN.map((el, ind) => {
+              return (
+                <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                  {el.option}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     </NewServise>
   );
 }
