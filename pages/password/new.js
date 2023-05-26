@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import 'iconify-icon';
 
 import LayoutAuth from '../../compontens/LayoutAuth/LayoutAuth';
@@ -8,6 +9,7 @@ import AuthForm from '../../compontens/AuthForm/AuthForm';
 import { checkAuth } from '../../api/checkAuth';
 import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { resetPassword } from '../../api/resetPassword';
 
 import style from '../../styles/Auth.module.scss';
 
@@ -15,14 +17,25 @@ export default function ResetPassword() {
   const router = useRouter();
   const { t } = useTranslation();
   const { handleChange, values, isValid, errors, setIsValid } = useFormAndValidation();
+  const searchParams = useSearchParams();
 
   const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = (evt) => {
+  const handleSubmitForm = async (evt) => {
+    evt.preventDefault();
 
+    const token = searchParams.get('token');
+    const res = await resetPassword(token, values.password);
+
+    if (res) {
+      router.push('/login');
+    } else {
+      setErrorMessage(t('error'));
+      setIsErrorMessageOpen(true);
+    }
   }
 
   const checkName = async (token) => {
@@ -69,6 +82,7 @@ export default function ResetPassword() {
         title={t('change-password-title')}
         button={t('change-password-button')}
         handleSubmitForm={handleSubmitForm}
+        isValid={isValid}
       >
         <label className={style['input']} htmlFor='password'>
           <input

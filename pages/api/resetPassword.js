@@ -10,6 +10,8 @@ export default async function handler(req, res) {
       }),
     });
 
+console.log(serverRes)
+
     if (!serverRes.ok) throw new Error(`error: ${serverRes.status}`);
 
     res.status(200).send(serverRes.ok);
