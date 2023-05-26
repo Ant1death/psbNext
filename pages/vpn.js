@@ -21,8 +21,8 @@ import styleAdvantages from '../styles/Advantages.module.scss';
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
-  const data = await getProducts('VPN');
-  if (data) dispatch(fetchVpn(data.products));
+  const data = await getProducts('VPN', `${process.env.BASE_URL}/products/all`);
+  if (data) dispatch(fetchVpn(data));
 
   return {
     props: { },
@@ -166,7 +166,7 @@ const Vpn = () => {
 
 Vpn.getLayout = function getLayout(page) {
   return (
-    <Layout>
+    <Layout title='- VPN'>
       {page}
     </Layout>
   );

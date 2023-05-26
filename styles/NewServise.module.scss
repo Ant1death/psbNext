@@ -19,6 +19,11 @@
     font-weight: 500;
   }
 
+  &__select-wrap {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
   &__form {
     padding: 25px;
     display: flex;
@@ -106,27 +111,60 @@
       color: #76839a;
       vertical-align: middle;
       background-size: 8px 10px;
-      border-radius: 7px;
       appearance: none;
+      position: relative;
       border: 1px solid #e9edf4;
-      background-image: url(../public/chevron-down.svg);
-      background-repeat: no-repeat;
-      background-position: calc(100% - .5rem) center;
-      background-size: 12.25px;
-      margin-bottom: 1rem;
+      border-radius: 7px;
 
-      &::-webkit-scrollbar {
-        display: none;
+      &::after {
+        content: '';
+        position: absolute;
+        background-image: url(../public/chevron-down.svg);
+        background-repeat: no-repeat;
+        background-size: 12.25px;
+        z-index: 1000;
+        width: 13px;
+        height: 13px;
+        right: 1rem;
+        top: 11px;
       }
 
-      &:focus {
-        outline: none;
-      }
+      &_open {
+        border-radius: 7px 7px 0 0;
+        border-bottom-color: transparent;
 
-      & option {
-        line-height: 1.5;
-        color: #76839a;
-        font-size: 0.875rem;
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__option-list {
+    box-shadow: 0px 16px 18px rgba(104, 113, 123, 0.2);
+    display: none;
+    flex-direction: column;
+    color: #282f53;
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1000;
+    border: 1px solid #e9edf4;
+    border-top: transparent;
+    border-radius: 0 0 7px 7px;
+
+    &_open {
+      display: flex;
+    }
+
+    li {
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+
+      &:hover {
+        color: #fff;
+        background-color: #79c8c2;
       }
     }
   }

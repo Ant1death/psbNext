@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -9,6 +9,8 @@ import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess
 import { fetchOrders } from '../../store/slices/orders';
 import { getOrders } from '../../api/getOrders';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getPaymentHistory } from '../../api/getPaymentHistory';
+import { fetchPaymentHistory } from '../../store/slices/paymentHystory';
 
 import style from '../../styles/Account.module.scss';
 
@@ -17,16 +19,51 @@ const Account = () => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector(store => store.orders.orders);
   const user = useAppSelector(store => store.user.user);
+  const paymentHystory = useAppSelector(store => store.paymentHistory.paymentHistory);
+
+  const [activeServises, setActiveServises] = useState(0);
+  const [cost, setCost] = useState(0);
 
   const fetchDataOrders = async (token) => {
     const data = await getOrders(token);
     if (data) dispatch(fetchOrders(data));
   }
 
+  const fetchDataPaymentHystory = async (token) => {
+    const data = await getPaymentHistory(token);
+    if (data) dispatch(fetchPaymentHistory(data));
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token && !orders) fetchDataOrders(token);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token && !paymentHystory) fetchDataPaymentHystory(token);
+  }, []);
+
+  useEffect(() => {
+    if (orders && orders.length > 0) {
+      const activeOrders = orders.filter(el => el.status === 'Заказ выдан');
+      setActiveServises(activeOrders.length);
+    }
+  }, [orders]);
+
+  useEffect(() => {
+    if (paymentHystory) {
+      const date = new Date();
+      const month = date.getMonth();
+      const amount = paymentHystory.reduce((sum, el) => {
+        const currentDate = new Date(el.date);
+        if (currentDate.getMonth() === month) sum = sum + el.amount;
+        return sum;
+      }, 0);
+
+      setCost(amount);
+  }
+  }, [paymentHystory]);
 
   return (
     <>
@@ -52,7 +89,9 @@ const Account = () => {
               <iconify-icon icon="ph:suitcase-simple-bold"></iconify-icon>
             </div>
             <div className={style['report__card-text']}>
-              <h2 className={style['report__card-title']}>0</h2>
+              <h2 className={style['report__card-title']}>
+                {activeServises}
+              </h2>
               <h4 className={style['report__card-description']}>
                 {t('active-servises')}
               </h4>
@@ -64,7 +103,7 @@ const Account = () => {
               <iconify-icon icon="ph:suitcase-simple-bold"></iconify-icon>
             </div>
             <div className={style['report__card-text']}>
-              <h2 className={style['report__card-title']}>0$</h2>
+              <h2 className={style['report__card-title']}>{`${cost}$`}</h2>
               <h4 className={style['report__card-description']}>
                 {t('expense')}
               </h4>
@@ -86,7 +125,7 @@ const Account = () => {
                 />
               );
             }
-            if (el.status === 'Запущен') {
+            if (el.status === 'Заказ выдан') {
               return (
                 <OrderCardSuccess
                   key={el.id}

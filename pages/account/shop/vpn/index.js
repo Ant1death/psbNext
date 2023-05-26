@@ -8,6 +8,7 @@ import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
+import { VPN_CHARACTERS_RU, VPN_CHARACTERS_EN, VPN_COUNTRIES } from '../../../../utils/constants';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -34,12 +35,12 @@ export default function AccountVpn() {
   }
 
   const fetchData = async () => {
-    const data = await getProducts('VPN');
-    if (data) dispatch(fetchVpn(data.products));
+    const data = await getProducts('VPN', '/api/getProducts');
+    if (data) dispatch(fetchVpn(data));
   }
 
   useEffect(() => {
-    if (!vpn && (vpn && vpn.length === 0)) fetchData();
+    if (!vpn) fetchData();
   }, []);
 
   useEffect(() => {
@@ -79,19 +80,25 @@ export default function AccountVpn() {
                 </Link>
                 <div className={style['shop__item-wrap-title']}>
                   <h2 className={style['shop__item-title']}>
-                    <img
-                      src='/de.svg'
-                      alt={`icon ${el.title}`}
-                      className={style['shop__item-flag']}
-                    />
+                    {VPN_COUNTRIES.map(item => {
+                      return (
+                        item.country === el.country &&
+                          <img key={el.id} src={item.flag.slice(1)} alt={`icon ${el.title}`} className={style['shop__item-flag']} />
+                      )
+                    })}
                     <Link href={`/account/shop/vpn/${el.id}`}>
                       {`${el.title} - ${el.country}`}
                     </Link>
                   </h2>
                   <ul className={`${style['shop__item-list']} ${style['shop__item-list_vpn']}`}>
-                    {el.characters.map(item => {
+                    {t('faq-lang') === 'ru' && VPN_CHARACTERS_RU.map((el, ind) => {
                       return (
-                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                        <li key={ind}>{el}</li>
+                      );
+                    })}
+                    {t('faq-lang') === 'en' && VPN_CHARACTERS_EN.map((el, ind) => {
+                      return (
+                        <li key={ind}>{el}</li>
                       );
                     })}
                   </ul>

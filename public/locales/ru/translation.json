@@ -111,6 +111,10 @@
   "reset-password-success-text": "Отлично, письмо отправлено на вашу почту, обычно это занимает 5 минут, проверьте почту и перейдите по ссылке.",
   "button-go-back": "Вернуться",
 
+  "change-password-title": "Сменить пароль",
+  "change-password-button": "Изменить пароль",
+  "change-password": "Новый пароль",
+
   "logout": "Выход из личного кабинета",
   "logout-button": "Покинуть личный кабинет",
   "logout-text": "Вы покидаете личный кабинет, и будете перенаправлены на форму авторизации, уверены?",
@@ -153,7 +157,6 @@
   "popup-profile-info": "Изменить информацию",
   "popup-profile-password": "Изменить пароль",
   "popup-profile-logout": "Выйти",
-  "popup-notice": "Уведомления",
 
   "card-all-countries": "Все страны",
   "card-countries": "Страны",
@@ -207,9 +210,7 @@
   "profile-order-number": "Номер заказа:",
   "profile-order-user": "Пользователь:",
   "profile-order-port": "Порт:",
-  "profile-order-type": "Тип соединения:",
   "profile-order-password": "Пароль:",
-  "profile-order-command": "Команда на подключение:",
   "profile-order-renewal": "Авто-продление:",
   "profile-order-price": "Цена:",
   "profile-order-rdp": "Если не удается подключиться по имени пользователя Admin, попробуйте Administrator",
@@ -246,5 +247,7 @@
   "error-saved": "Изменения сохранены",
   "error-password-use": "Этот пароль уже используется",
   "error-passwords-not-match": "Пароли не совпадают",
-  "error-order-success": "Заказ успешно создан и ждёт выдачи"
+  "error-order-success": "Заказ успешно создан и ждёт выдачи",
+  "error-change-profile": "Вы не изменили данные",
+  "error-login": "Неправильные почта или пароль"
 }

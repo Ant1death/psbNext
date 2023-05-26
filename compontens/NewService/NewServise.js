@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
-import MessagePopup from './compontens/MessagePopup/MessagePopup';
+import MessagePopup from '../MessagePopup/MessagePopup';
 
 import style from '../../styles/NewServise.module.scss';
 

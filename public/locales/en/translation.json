@@ -111,6 +111,10 @@
   "reset-password-success-text": "Great! The letter was sent to your mail. Usually it takes 5 minutes. Check your email and follow the link.",
   "button-go-back": "Go back",
 
+  "change-password-title": "Change password",
+  "change-password-button": "Change password",
+  "change-password": "New password",
+
   "logout": "Log out",
   "logout-button": "Log out",
   "logout-text": "You leave your personal account and you will redirected to the login form. Are you sure?",
@@ -153,7 +157,6 @@
   "popup-profile-info": "Change info",
   "popup-profile-password": "Change password",
   "popup-profile-logout": "Log out",
-  "popup-notice": "Notifications",
 
   "card-all-countries": "All countries",
   "card-countries": "Countries",
@@ -207,9 +210,7 @@
   "profile-order-number": "Order number:",
   "profile-order-user": "User:",
   "profile-order-port": "Port:",
-  "profile-order-type": "Type of connection:",
   "profile-order-password": "Password:",
-  "profile-order-command": "Connect command:",
   "profile-order-renewal": "Auto-renewal:",
   "profile-order-price": "Price:",
   "profile-order-rdp": "If you cannot connect using the Admin username, try Administrator",
@@ -246,5 +247,7 @@
   "error-saved": "Changes has been saved",
   "error-password-use": "This password is already in use",
   "error-passwords-not-match": "Passwords don't match",
-  "error-order-success": "The order has been successfully created"
+  "error-order-success": "The order has been successfully created",
+  "error-change-profile": "You have not changed the data",
+  "error-login": "Email or password are wrong"
 }

@@ -21,13 +21,13 @@ import style from '../styles/Abuse.module.scss';
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
 
-  const vpsData = await getProducts('Bulletproof VDS');
+  const vpsData = await getProducts('Bulletproof VDS', `${process.env.BASE_URL}/products/all`);
   const vps = vpsData ? vpsData.products : [];
-  const vdsData = await getProducts('Bulletproof VPS');
+  const vdsData = await getProducts('Bulletproof VPS', `${process.env.BASE_URL}/products/all`);
   const vds = vdsData ? vdsData.products : [];
   dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
 
-  const hostings = await getProducts('Hosting');
+  const hostings = await getProducts('Hosting', `${process.env.BASE_URL}/products/all`);
   const hosting = hostings ? hostings.products : [];
   dispatch(fetchHosting(hosting));
 
@@ -110,7 +110,7 @@ const Abuse = () => {
 
 Abuse.getLayout = function getLayout(page) {
   return (
-    <Layout>
+    <Layout title='- VPS/VDS'>
       {page}
     </Layout>
   );

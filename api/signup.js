@@ -1,8 +1,7 @@
-import { BASE_URL } from '../utils/constants';
 import { checkResponse } from '../utils/checkResponse';
 
 export const signup = (name, email, password) => {
-  return fetch(`${BASE_URL}/auth/register`, {
+  return fetch(`/api/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -18,5 +17,5 @@ export const signup = (name, email, password) => {
       balance: 0
     }),
   })
-  .then(checkResponse);
+  .then(checkResponse)
 }

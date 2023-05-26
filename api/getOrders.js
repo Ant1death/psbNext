@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const getOrders = async (token) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/get_user_order`, {
+    const res = await fetch(`/api/getOrders`, {
       headers: {
         'Authorization' : `Bearer ${token}`,
       }

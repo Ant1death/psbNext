@@ -121,11 +121,10 @@
           font-size: 14px;
         }
 
-        .section__table_success {
+        .section__table {
           color: #495057;
           padding: 3px 8px 5px 8px;
           margin: .25rem .25rem .25rem 0;
-          background: linear-gradient(to bottom right, #1ea38f 0%, #5cf9e2 100%);
           line-height: 1;
           text-align: center;
           white-space: nowrap;
@@ -133,12 +132,26 @@
           border-radius: 50rem;
           font-size: 0.75em;
           font-weight: 500;
+
+          &_success {
+            background: linear-gradient(to bottom right, #1ea38f 0%, #5cf9e2 100%);
+          }
+
+          &_unsuccess {
+            background: linear-gradient(to bottom right, #f66b4e 0%, #fbc434 100%);
+          }
         }
       }
     }
 
     &-sum {
-      color: #e82646;
+      &_minus {
+        color: #e82646;
+      }
+
+      &_plus {
+        color: #1ea38f;
+      }
     }
   }
 }

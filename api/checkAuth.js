@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const checkAuth = async (token) => {
   try {
-    const res = await fetch(`${BASE_URL}/auth/users/me`, {
+    const res = await fetch(`/api/checkAuth`, {
       headers: {
         'Authorization' : `Bearer ${token}`,
       }

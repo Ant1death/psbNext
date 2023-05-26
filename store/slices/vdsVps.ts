@@ -4,7 +4,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TVds } from '../../types';
 
 interface vdsVpsState {
-  vdsVps: TVds | null;
+  vdsVps: TVds[] | null;
 }
 
 const initialState: vdsVpsState = {

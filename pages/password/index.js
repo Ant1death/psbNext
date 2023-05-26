@@ -3,23 +3,34 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import 'iconify-icon';
 
-import useParralaxOnBlock from '../../hooks/useParralaxOnBlock';
+import LayoutAuth from '../../compontens/LayoutAuth/LayoutAuth';
 import AuthForm from '../../compontens/AuthForm/AuthForm';
-import Preloader from '../../compontens/Preloader/Preloader';
 import { checkAuth } from '../../api/checkAuth';
+import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
+import { restorePassword } from '../../api/restorePassword';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 
 import style from '../../styles/Auth.module.scss';
 
 export default function ResetPassword() {
-  const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const router = useRouter();
   const { t } = useTranslation();
+  const { values, isValid, handleChange, errors } = useFormAndValidation();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmitForm = (evt) => {
+  const handleSubmitForm = async (evt) => {
     evt.preventDefault();
-    router.push('/password/reset');
+    const res = await restorePassword(values.email);
+
+    if (res) {
+      router.push('/password/reset');
+    } else {
+      setErrorMessage(t('error'));
+      setIsErrorMessageOpen(true);
+    }
   }
 
   const checkName = async (token) => {
@@ -27,7 +38,7 @@ export default function ResetPassword() {
 
     const name = await checkAuth(token);
 
-    if (name.username === username) {
+    if (name && username && name.username === username) {
       router.push('/account');
     } else {
       setIsLoading(true);
@@ -36,50 +47,49 @@ export default function ResetPassword() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    token ? checkName(token) : router.push('/login');
+    token ? checkName(token) : setIsLoading(true);
   }, []);
 
   return (
-    <>
-      {!isLoading && <Preloader />}
-      {isLoading &&
-        <main className={style['container']}>
-          <section className={style['content']}>
-            <div
-              className={style['content__block-logo']}
-              ref={block}
-              onMouseMove={transformBlock}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <img className={style['content__logo']} alt='logo' src='/logo.png' />
-            </div>
-            <AuthForm
-              title={t('reset-password-title')}
-              button={t('reset-password-button')}
-              bottomLink={t('reset-password-link')}
-              bottomLinkHref='/login'
-              handleSubmitForm={handleSubmitForm}
-            >
-              <p className={style['form__message']}>
-                {t('reset-password-text')}
-              </p>
-              <label className={style['input']} htmlFor='email'>
-                <input
-                  type='text'
-                  name='email'
-                  id='email'
-                  required
-                  className={style['input__field']}
-                  placeholder={t('email')}
-                />
-                <span className={style['input__field-focus']}></span>
-                <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
-              </label>
-            </AuthForm>
-          </section>
-        </main>
+    <LayoutAuth
+      isLoading={isLoading}
+      popup={
+        <MessagePopup
+          isOpen={isErrorMessaggeOpen}
+          message={errorMessage}
+          setIsOpen={setIsErrorMessageOpen}
+        />
       }
-    </>
+    >
+      <AuthForm
+        title={t('reset-password-title')}
+        button={t('reset-password-button')}
+        bottomLink={t('reset-password-link')}
+        bottomLinkHref='/login'
+        handleSubmitForm={handleSubmitForm}
+        isValid={isValid}
+      >
+        <p className={style['form__message']}>
+          {t('reset-password-text')}
+        </p>
+        <label className={style['input']} htmlFor='email'>
+          <input
+            type='email'
+            name='email'
+            id='email'
+            required
+            className={style['input__field']}
+            placeholder={t('email')}
+            value={values.email || ''}
+            onChange={handleChange}
+          />
+          <span className={style['input__field-focus']}></span>
+          <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
+        </label>
+        <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
+          {!isValid && errors.email}
+        </p>
+      </AuthForm>
+    </LayoutAuth>
   );
 }

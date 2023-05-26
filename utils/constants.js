@@ -1,7 +1,6 @@
 export const TRANSFORM_AMOUNT = 10;
 export const INDENT_POPUP_NOTIFICATION = 25;
 export const INDENT_POPUP_PROFILE = 20;
-export const BASE_URL = 'http://37.139.42.75:8000';
 
 export const PATH_LIST_RU = {
   account: 'Панель управления',
@@ -353,3 +352,124 @@ export const VPN_COUNTRIES = [
 
 export const MONTH_RU = [ 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 export const MONTH_EN = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+export const VPN_PERIOD_RU = [
+  {
+    option: '1 месяц',
+    value: 1,
+  },
+  {
+    option: '3 месяца - 5%',
+    value: 3,
+  },
+  {
+    option: '6 месяцев - 10%',
+    value: 6,
+  },
+  {
+    option: '12 месяцев - 15%',
+    value: 12,
+  },
+];
+
+export const VPN_PERIOD_EN = [
+  {
+    option: '1 month',
+    value: 1,
+  },
+  {
+    option: '3 month - 5%',
+    value: 3,
+  },
+  {
+    option: '6 month - 10%',
+    value: 6,
+  },
+  {
+    option: '12 month - 15%',
+    value: 12,
+  },
+];
+
+export const OS_LIST = [
+  {
+    id: 24,
+    name: "Debian 11",
+    content: "VM6_ISPsystem_Debian-11_25",
+  },
+  {
+    id: 23,
+    name: "Ubuntu 22.04",
+    content: "VM6_ISPsystem_Ubuntu-22.04_14",
+  },
+  {
+    id: 21,
+    name: "Centos 7",
+    content: "VM6_ISPsystem_Windows-10_17",
+  },
+  {
+    id: 14,
+    name: "Astra Linux CE",
+    content: "VM6_ISPsystem_Astra-Linux-CE_21",
+  },
+  {
+    id: 13,
+    name: "FreeBSD 13",
+    content: "VM6_ISPsystem_FreeBSD-13_20",
+  },
+  {
+    id: 12,
+    name: "FreeBSD 12",
+    content: "VM6_ISPsystem_FreeBSD-12_19",
+  },
+  {
+    id: 11,
+    name: "Ubuntu 20.04",
+    content: "VM6_ISPsystem_Ubuntu-20.04_13",
+  },
+  {
+    id: 10,
+    name: "Ubuntu 18.04",
+    content: "VM6_ISPsystem_Ubuntu-18.04_6",
+  },
+  {
+    id: 8,
+    name: "Oracle linux 8",
+    content: "VM6_ISPsystem_Oracle-Linux-8_24",
+  },
+  {
+    id: 7,
+    name: "Debian 10",
+    content: "VM6_ISPsystem_Debian-10_3",
+  },
+  {
+    id: 6,
+    name: "Debian 9",
+    content: "VM6_ISPsystem_Debian-9_4",
+  },
+  {
+    id: 5,
+    name: "VzLinux 8",
+    content: "VM6_ISPsystem_VzLinux-8_26",
+  },
+  {
+    id: 4,
+    name: "Rocky Linux 8",
+    content: "VM6_ISPsystem_Rocky-Linux-8_23",
+  },
+  {
+    id: 3,
+    name: "Alma Linux 8",
+    content: "VM6_ISPsystem_Alma-Linux-8_22",
+  },
+  {
+    id: 2,
+    name: "Centos 9 Steam",
+    content: "VM6_ISPsystem_CentOS-9-Stream_27",
+  },
+  {
+    id: 1,
+    name: "Centos 8 Steam",
+    content: "VM6_ISPsystem_CentOS-8-Stream_18",
+  },
+];

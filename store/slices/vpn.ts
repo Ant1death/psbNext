@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { diff } from 'jsondiffpatch';
 
 import { TVpn } from '../../types';
 
 interface vpnState {
-  vpn: TVpn | null;
+  vpn: TVpn[] | null;
 }
 
 const initialState: vpnState = {

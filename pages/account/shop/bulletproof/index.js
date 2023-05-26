@@ -62,15 +62,15 @@ export default function Bulletproof() {
   }
 
   const fetchData = async () => {
-    const vpsData = await getProducts('Bulletproof VDS');
+    const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('Bulletproof VPS');
+    const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
     const vds = vdsData ? vdsData.products : [];
     dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }
 
   useEffect(() => {
-    if (!vdsVpsBulletproof || (vdsVpsBulletproof && vdsVpsBulletproof.length === 0)) fetchData();
+    if (!vdsVpsBulletproof) fetchData();
   }, []);
 
   useEffect(() => {
@@ -89,7 +89,11 @@ export default function Bulletproof() {
     if (selectedSystem === '') {
       setCurrentCountry(vdsVpsBulletproof);
     } else {
-      const items = vdsVpsBulletproof.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVpsBulletproof.filter(el => {
+        const names = [];
+        el.os.forEach(el => names.push(el.name));
+        if (names.includes(selectedSystem)) return el;
+      });
       setCurrentCountry(items);
     }
   }, [selectedSystem]);

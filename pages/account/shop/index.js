@@ -66,15 +66,15 @@ export default function AccountVps() {
   }
 
   const fetchData = async () => {
-    const vpsData = await getProducts('VPS');
+    const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('VDS');
+    const vdsData = await getProducts('VDS', '/api/getProducts');
     const vds = vdsData ? vdsData.products : [];
     dispatch(fetchVdsVps(vds.concat(vps)));
   }
 
   useEffect(() => {
-    if (!vdsVps || (vdsVps && vdsVps.length === 0)) fetchData();
+    if (!vdsVps) fetchData();
   }, []);
 
   useEffect(() => {
@@ -101,7 +101,11 @@ export default function AccountVps() {
     if (selectedSystem === '') {
       setCurrentCountry(vdsVps);
     } else {
-      const items = vdsVps.filter(el => el.systems.includes(selectedSystem));
+      const items = vdsVps.filter(el => {
+        const names = [];
+        el.os.forEach(el => names.push(el.name));
+        if (names.includes(selectedSystem)) return el;
+      });
       setCurrentCountry(items);
     }
   }, [selectedSystem]);

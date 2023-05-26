@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const changeOperativeSystem = async (token, queries) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/server/change_operative_system?${queries}`, {
+    const res = await fetch(`/api/changeOperativeSystem?${queries}`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token}`,

@@ -18,6 +18,12 @@ export const userSlice = createSlice({
     fetchUser(state, action: PayloadAction<any>) {
       state.user = action.payload;
     },
+    changeName(state, action: PayloadAction<any>) {
+      state.user.username = action.payload;
+    },
+    changeEmail(state, action: PayloadAction<any>) {
+      state.user.email = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: any) => {
@@ -33,4 +39,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const { fetchUser } = userSlice.actions;
+export const { fetchUser, changeName, changeEmail } = userSlice.actions;

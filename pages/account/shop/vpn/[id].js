@@ -12,6 +12,7 @@ import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
+import { VPN_PERIOD_EN, VPN_PERIOD_RU } from '../../../../utils/constants';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -27,22 +28,30 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 
 const  VpnItem = (id) => {
   const [item, setItem] = useState({});
-  const [period, setPeriod] = useState('');
+  const [period, setPeriod] = useState(1);
+  const [valuePeriod, setValuePeriod] = useState('');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
   const dispatch = useAppDispatch();
 
   const handleChangePeriod = (evt) => {
-    setPeriod(evt.targer.value)
+    setPeriod(evt.currentTarget.id);
+    setIsDropDownOpen(false);
+    setValuePeriod(evt.currentTarget.textContent);
+  }
+
+  const openDropDown = () => {
+    isDropDownOpen ? setIsDropDownOpen(false) : setIsDropDownOpen(true);
   }
 
   const fetchData = async () => {
-    const data = await getProducts('VPN');
-    if (data) dispatch(fetchVpn(data.products));
+    const data = await getProducts('VPN', '/api/getProducts');
+    if (data) dispatch(fetchVpn(data));
   }
 
   const sentDataToOrder = async (payment) => {
@@ -74,11 +83,11 @@ const  VpnItem = (id) => {
 
   useEffect(() => {
     if (vpn) findItem();
-  }, []);
+  }, [vpn]);
 
   useEffect(() => {
-    item && item.period && setPeriod(item.period[0].content);
-  }, [item]);
+    t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
+  }, []);
 
   return (
     <NewServise
@@ -103,20 +112,34 @@ const  VpnItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-subscribe')}
       </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangePeriod}
-      >
-        {item && item.period && item.period.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {el.name}
-            </option>
-          );
-        })}
-      </select>
+      <div className={style['card__select-wrap']}>
+        <p
+          className={`${style['card__form-select']} ${isDropDownOpen ? style['card__form-select_open'] : ''}`}
+          onClick={openDropDown}
+        >
+          {valuePeriod}
+        </p>
+        <ul className={`${style['card__option-list']} ${isDropDownOpen ? style['card__option-list_open'] : ''}`}>
+          {t('faq-lang') === 'ru' &&
+            VPN_PERIOD_RU.map((el, ind) => {
+              return (
+                <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                  {el.option}
+                </li>
+              );
+            })
+          }
+          {t('faq-lang') === 'en' &&
+            VPN_PERIOD_EN.map((el, ind) => {
+              return (
+                <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                  {el.option}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
     </NewServise>
   );
 }

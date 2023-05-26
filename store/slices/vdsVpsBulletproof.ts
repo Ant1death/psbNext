@@ -4,7 +4,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { TVdsBulletproof } from '../../types';
 
 interface vdsBulletproofState {
-  vdsVpsBulletproof: TVdsBulletproof | null;
+  vdsVpsBulletproof: TVdsBulletproof[] | null;
 }
 
 const initialState: vdsBulletproofState = {

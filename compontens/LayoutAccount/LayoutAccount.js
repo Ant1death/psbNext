@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { IBM_Plex_Sans } from '@next/font/google';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 import useWindowWidth from '../../hooks/useWindowWidth';
 import AccountHeader from '../AccountHeader/AccountHeader';
 import AccountFooter from '../AccountFooter/AccountFooter';
 import AccountSidebar from '../AccountSidebar/AccountSidebar';
 import PopupLanguage from '../PopupLanguage/PopupLanguage';
-import PopupNotification from '../PopupNotification/PopupNotification';
 import PopupProfile from '../PopupProfile/PopupProfile';
 import Breadcrumbs from '../../compontens/Breadcrumbs/Breadcrumbs';
 import ButtonToTop from '../../compontens/ButtonToTop/ButtonToTop';
@@ -17,15 +18,13 @@ import Preloader from '../../compontens/Preloader/Preloader';
 import { checkAuth } from '../../api/checkAuth';
 
 const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   weight: ['400', '500'],
 });
 
 const LayoutAccount = ({ children }) => {
   const [isOpenPopupLanguage, setIsOpenPopupLanguage] = useState(false);
-  const [isOpenPopupNotification, setIsOpenPopupNotification] = useState(false);
   const [isOpenPopupProfile, setIsOpenPopupProfile] = useState(false);
-  const [xCoordPopupNotification, setXCoordPopupNotification] = useState(0);
   const [xCoordPopupProfile, setXCoordPopupProfile] = useState(0);
   const [isButtonSidebarMiniHidden, setIsButtonSidebarMiniHidden] = useState(false);
   const [isSidebarMini, setIsSideBarMini] = useState(false);
@@ -35,6 +34,7 @@ const LayoutAccount = ({ children }) => {
 
   const windowWidth = useWindowWidth();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const checkName = async (token) => {
     const username = localStorage.getItem('username');
@@ -64,7 +64,6 @@ const LayoutAccount = ({ children }) => {
   const handleBackgroundClose = (evt) => {
     if (evt.target.classList.value.toString().includes('popup_opened')
       || evt.target.classList.value.toString().includes('popup__container')
-      || evt.target.classList.value.toString().includes('popup__notification-title')
       || evt.target.classList.value.toString().includes('popup__notification-nemu')
       || evt.target.classList.value.toString().includes('popup__profile-heading')
       || evt.target.classList.value.toString().includes('popup__profile-link')
@@ -74,18 +73,9 @@ const LayoutAccount = ({ children }) => {
     }
   }
 
-  const openPopupNotification = (right) => {
-    setXCoordPopupNotification(right);
-    setIsOpenPopupNotification(true);
-  }
-
   const openPopupProfile = (right) => {
     setXCoordPopupProfile(right);
     setIsOpenPopupProfile(true);
-  }
-
-  const closePopupNotification = () => {
-    setIsOpenPopupNotification(false);
   }
 
   const closePopupProfile = () => {
@@ -94,7 +84,6 @@ const LayoutAccount = ({ children }) => {
 
   const closeAllPopup = () => {
     closePopupLanguage();
-    closePopupNotification();
     closePopupProfile();
   }
 
@@ -137,65 +126,61 @@ const LayoutAccount = ({ children }) => {
     return () => document.removeEventListener('keydown', handleEscClose);
   }, []);
 
-  useEffect(() => {
-    if (windowWidth <= 991) {
-      setXCoordPopupNotification(0);
-    }
-  }, [windowWidth]);
-
   return (
-    <div className={ibmPlexSans.className}>
-      {!isLoading && <Preloader />}
-      {isLoading &&
-        <div className='page-account'
-          onClick={handleBackgroundClose}
-        >
-          <AccountSidebar
-            isSidebarMini={isSidebarMini}
-            mouseEnterSidebar={mouseEnterSidebar}
-            mouseLeaveSidebar={mouseLeaveSidebar}
-            isSidebarVisible={isSidebarVisible}
-            windowWidth={windowWidth}
-          />
-          <AccountHeader
-            chooseLanquage={chooseLanquage}
-            openPopupNotification={openPopupNotification}
-            setXCoordPopupNotification={setXCoordPopupNotification}
-            openPopupProfile={openPopupProfile}
-            setXCoordPopupProfile={setXCoordPopupProfile}
-            windowWidth={windowWidth}
-            toggleSidebar={toggleSidebar}
-            isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
-            isHeaderNamenuVisible={isHeaderNamenuVisible}
-            toggleHeaderNavmenu={toggleHeaderNavmenu}
-          />
-            <main className={`account-main ${isSidebarMini ? 'account-main_sidebar-mini' : ''}`}>
-              <Breadcrumbs />
-              { children }
-            </main>
-          <AccountFooter
-            isSidebarMini={isSidebarMini}
-            windowWidth={windowWidth}
-          />
-          <PopupLanguage
-            isOpen={isOpenPopupLanguage}
-            closePopup={closePopupLanguage}
-          />
-          <PopupNotification
-            isOpen={isOpenPopupNotification}
-            right={xCoordPopupNotification}
-            windowWidth={windowWidth}
-          />
-          <PopupProfile
-            isOpen={isOpenPopupProfile}
-            right={xCoordPopupProfile}
-            windowWidth={windowWidth}
-          />
-          <ButtonToTop />
-          <ButtonTelegram />
-        </div>
-      }
-    </div>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="PSB Hosting" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{`${t('account-page')}`}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+      </Head>
+      <div className={ibmPlexSans.className}>
+        {!isLoading && <Preloader />}
+        {isLoading &&
+          <div className='page-account'
+            onClick={handleBackgroundClose}
+          >
+            <AccountSidebar
+              isSidebarMini={isSidebarMini}
+              mouseEnterSidebar={mouseEnterSidebar}
+              mouseLeaveSidebar={mouseLeaveSidebar}
+              isSidebarVisible={isSidebarVisible}
+              windowWidth={windowWidth}
+            />
+            <AccountHeader
+              chooseLanquage={chooseLanquage}
+              openPopupProfile={openPopupProfile}
+              setXCoordPopupProfile={setXCoordPopupProfile}
+              windowWidth={windowWidth}
+              toggleSidebar={toggleSidebar}
+              isButtonSidebarMiniHidden={isButtonSidebarMiniHidden}
+              isHeaderNamenuVisible={isHeaderNamenuVisible}
+              toggleHeaderNavmenu={toggleHeaderNavmenu}
+            />
+              <main className={`account-main ${isSidebarMini ? 'account-main_sidebar-mini' : ''}`}>
+                <Breadcrumbs />
+                { children }
+              </main>
+            <AccountFooter
+              isSidebarMini={isSidebarMini}
+              windowWidth={windowWidth}
+            />
+            <PopupLanguage
+              isOpen={isOpenPopupLanguage}
+              closePopup={closePopupLanguage}
+            />
+            <PopupProfile
+              isOpen={isOpenPopupProfile}
+              right={xCoordPopupProfile}
+              windowWidth={windowWidth}
+            />
+            <ButtonToTop />
+            <ButtonTelegram />
+          </div>
+        }
+      </div>
+    </>
   );
 }
 

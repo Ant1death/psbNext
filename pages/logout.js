@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-import useParralaxOnBlock from '../hooks/useParralaxOnBlock';
 import AuthForm from '../compontens/AuthForm/AuthForm';
-import Preloader from '../compontens/Preloader/Preloader';
 import { checkAuth } from '../api/checkAuth';
 import { useAppDispatch } from '../store/hooks';
 import { fetchVdsVps } from '../store/slices/vdsVps';
@@ -14,12 +12,13 @@ import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
 import { fetchHosting } from '../store/slices/hosting';
 import { fetchUser } from '../store/slices/user';
 import { fetchOrders } from '../store/slices/orders';
+import { fetchCurrentOrder } from '../store/slices/currentOrder';
 import { logout } from '../api/logout';
+import LayoutAuth from '../compontens/LayoutAuth/LayoutAuth';
 
 import style from '../styles/Auth.module.scss';
 
 const Logout = () => {
-  const { transformBlock, handleMouseEnter, handleMouseLeave, block } = useParralaxOnBlock();
   const router = useRouter();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -38,6 +37,7 @@ const Logout = () => {
     dispatch(fetchVdsVps(null));
     dispatch(fetchVpn(null));
     dispatch(fetchVdsVpsBulletproof(null));
+    dispatch(fetchCurrentOrder({}));
     logout(token);
 
     router.push('/');
@@ -61,34 +61,20 @@ const Logout = () => {
   }, []);
 
   return (
-    <>
-      {!isLoading && <Preloader />}
-      {isLoading &&
-        <main className={style['container']}>
-          <section className={style['content']}>
-            <div
-              className={style['content__block-logo']}
-              ref={block}
-              onMouseMove={transformBlock}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <img className={style['content__logo']} alt='logo' src='/logo.png' />
-            </div>
-            <AuthForm
-              title={t('logout')}
-              button={t('logout-button')}
-              handleSubmitForm={handleLogout}
-              isValid={true}
-            >
-              <p className={`${style['form__message']} ${style['form__message_logout']}`}>
-                {t('logout-text')}
-              </p>
-            </AuthForm>
-          </section>
-        </main>
-      }
-    </>
+    <LayoutAuth
+      isLoading={isLoading}
+    >
+      <AuthForm
+        title={t('logout')}
+        button={t('logout-button')}
+        handleSubmitForm={handleLogout}
+        isValid={true}
+      >
+        <p className={`${style['form__message']} ${style['form__message_logout']}`}>
+          {t('logout-text')}
+        </p>
+      </AuthForm>
+    </LayoutAuth>
   );
 }
 

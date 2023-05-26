@@ -7,7 +7,8 @@ import MessagePopup from '../../../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../../../hooks/useFormAndValidation';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getUser } from '../../../api/getUser';
-import { fetchUser } from '../../../store/slices/user';
+import { fetchUser, changeName, changeEmail } from '../../../store/slices/user';
+import { changeProfileData } from '../../../api/changeProfileData';
 
 import style from '../../../styles/Profile.module.scss';
 
@@ -26,19 +27,36 @@ const Profile = () => {
     if (data) dispatch(fetchUser(data));
   }
 
-  const hendleFormSubmit = (evt) => {
+  const hendleFormSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (values.name !== user.username || values.email !== user.email) {
-      console.log(values.name, values.email);
-      setMessage(t('error-saved'));
+    const token = localStorage.getItem('token');
+
+    if (token && (values.name !== user.username || values.email !== user.email)) {
+      const queries = `username=${values.name}&email=${values.email}`;
+      const res = await changeProfileData(token, queries);
+
+      if (res) {
+        setMessage(t('error-saved'));
+        setIsMessaggePopupOpen(true);
+        setIsFormSubmitSuccess(true);
+        if (values.name !== user.username) dispatch(changeName(values.name));
+        if (values.email !== user.email) {
+          dispatch(changeEmail(values.email));
+        typeof window !== 'undefined' && localStorage.setItem('username', values.email.toLowerCase());
+        };
+      } else {
+        setMessage(t('error'));
+        setIsMessaggePopupOpen(true);
+      }
+    } else {
+      setMessage(t('error-change-profile'));
       setIsMessaggePopupOpen(true);
-      setIsFormSubmitSuccess(true);
     }
   }
 
   useEffect(() => {
-    if (user) {
+    if (!user) {
       const token = localStorage.getItem('token');
       fetchData(token);
     }

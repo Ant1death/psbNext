@@ -1,8 +1,6 @@
-import { BASE_URL } from '../utils/constants';
-
 export const changeServerPassword = async (token, queries) => {
   try {
-    const res = await fetch(`${BASE_URL}/order/server/change_password?${queries}`, {
+    const res = await fetch(`/api/changeServerPassword?${queries}`, {
       method: 'GET',
       headers: {
         'Authorization' : `Bearer ${token}`,

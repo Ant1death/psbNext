@@ -12,9 +12,11 @@ const VpnCard = ({ vpnItem }) => {
     <li className={style['card']}>
       <div className={style['card__title']}>
         <h3 className={style['card__h3-title']}>
-          {VPN_COUNTRIES.map(el => {
-            el.country === vpnItem.country &&
-              <img src={el.flag} alt={vpnItem.title} className={style['card__img']} />
+          {VPN_COUNTRIES.map(item => {
+            return (
+              item.country === vpnItem.country &&
+                <img key={vpnItem.id} src={item.flag.slice(1)} alt={`icon ${vpnItem.title}`} className={style['card__img']} />
+            )
           })}
           {vpnItem.title}
         </h3>
@@ -23,12 +25,12 @@ const VpnCard = ({ vpnItem }) => {
         </p>
       </div>
       <ul className={style['card__list']}>
-        {t('lang') === 'ru' && VPN_CHARACTERS_RU.map((el, ind) => {
+        {t('faq-lang') === 'ru' && VPN_CHARACTERS_RU.map((el, ind) => {
           return (
             <li key={ind}>{el}</li>
           );
         })}
-        {t('lang') === 'en' && VPN_CHARACTERS_EN.map((el, ind) => {
+        {t('faq-lang') === 'en' && VPN_CHARACTERS_EN.map((el, ind) => {
           return (
             <li key={ind}>{el}</li>
           );
