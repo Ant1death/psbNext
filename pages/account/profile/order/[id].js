@@ -16,6 +16,7 @@ import { startServer } from '../../../../api/startServer';
 import { restartServer } from '../../../../api/restartServer';
 import { stopServer } from '../../../../api/stopServer';
 import { toggleAutoRefresh } from '../../../../api/toggleAutoRefresh';
+import { OS_LIST } from '../../../../utils/constants';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -236,20 +237,13 @@ const Order = (id) => {
                 className={style['order__select']}
                 onClick={handleChangeSystem}
               >
-                {currentOrder.os &&
-                  <option value={currentOrder.os.name}>
-                    {currentOrder.os.name}
-                  </option>
-                }
-                {/* {currentOrder.os && currentOrder.os.map(el => {
-                  if (el.name !== currentOrder.os.name) {
-                    return (
-                      <option value={el.content} key={el.id}>
-                        {el.name}
-                      </option>
-                    );
-                  }
-                })} */}
+                {OS_LIST.map(el => {
+                  return (
+                    <option value={el.content} key={el.id}>
+                      {el.name}
+                    </option>
+                  );
+                })}
               </select>
               <button type='submit' className={style['order__button']}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;

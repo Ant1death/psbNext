@@ -390,3 +390,86 @@ export const VPN_PERIOD_EN = [
     value: 12,
   },
 ];
+
+export const OS_LIST = [
+  {
+    id: 24,
+    name: "Debian 11",
+    content: "VM6_ISPsystem_Debian-11_25",
+  },
+  {
+    id: 23,
+    name: "Ubuntu 22.04",
+    content: "VM6_ISPsystem_Ubuntu-22.04_14",
+  },
+  {
+    id: 21,
+    name: "Centos 7",
+    content: "VM6_ISPsystem_Windows-10_17",
+  },
+  {
+    id: 14,
+    name: "Astra Linux CE",
+    content: "VM6_ISPsystem_Astra-Linux-CE_21",
+  },
+  {
+    id: 13,
+    name: "FreeBSD 13",
+    content: "VM6_ISPsystem_FreeBSD-13_20",
+  },
+  {
+    id: 12,
+    name: "FreeBSD 12",
+    content: "VM6_ISPsystem_FreeBSD-12_19",
+  },
+  {
+    id: 11,
+    name: "Ubuntu 20.04",
+    content: "VM6_ISPsystem_Ubuntu-20.04_13",
+  },
+  {
+    id: 10,
+    name: "Ubuntu 18.04",
+    content: "VM6_ISPsystem_Ubuntu-18.04_6",
+  },
+  {
+    id: 8,
+    name: "Oracle linux 8",
+    content: "VM6_ISPsystem_Oracle-Linux-8_24",
+  },
+  {
+    id: 7,
+    name: "Debian 10",
+    content: "VM6_ISPsystem_Debian-10_3",
+  },
+  {
+    id: 6,
+    name: "Debian 9",
+    content: "VM6_ISPsystem_Debian-9_4",
+  },
+  {
+    id: 5,
+    name: "VzLinux 8",
+    content: "VM6_ISPsystem_VzLinux-8_26",
+  },
+  {
+    id: 4,
+    name: "Rocky Linux 8",
+    content: "VM6_ISPsystem_Rocky-Linux-8_23",
+  },
+  {
+    id: 3,
+    name: "Alma Linux 8",
+    content: "VM6_ISPsystem_Alma-Linux-8_22",
+  },
+  {
+    id: 2,
+    name: "Centos 9 Steam",
+    content: "VM6_ISPsystem_CentOS-9-Stream_27",
+  },
+  {
+    id: 1,
+    name: "Centos 8 Steam",
+    content: "VM6_ISPsystem_CentOS-8-Stream_18",
+  },
+];
