@@ -1,6 +1,6 @@
 export const changeProfilePassword = async (token, password) => {
   try {
-    const res = await fetch(`/api/changeProfileData?password=${password}`, {
+    const res = await fetch(`/api/changeProfilePassword?password=${password}`, {
       method: 'POST',
       headers: {
         'Authorization' : `Bearer ${token}`,

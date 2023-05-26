@@ -35,7 +35,7 @@ const FormPassword = () => {
     const token = localStorage.getItem('token');
 
     if (token && values.oldPassword !== values.newPassword) {
-      const res = await changeProfileData(token, values.newPassword);
+      const res = await changeProfilePassword(token, values.newPassword);
 
       if (res) {
         setMessage(t('error-saved'));
@@ -93,7 +93,7 @@ const FormPassword = () => {
         <label htmlFor='oldPassword' className={style['form__label']}>
           {t('profile-password-old')}
           <input
-            type='text'
+            type='password'
             name='oldPassword'
             id='oldPassword'
             required
