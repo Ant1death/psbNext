@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { fetchHosting } from '../../../../store/slices/hosting';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
-
+import { checkBalance } from '../../../../utils/checkBalance';
 import { wrapper } from '../../../../store/store';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
 
@@ -29,6 +30,7 @@ const HostingItem = (id) => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const hosting = useAppSelector(store => store.hosting.hosting);
+  const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
 
   const fetchData = async () => {
@@ -42,16 +44,26 @@ const HostingItem = (id) => {
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}`;
     const res = await createNewOrder(token, queries);
 
-    if (res) {
-      const data = await getOrders(token);
-      if (data) dispatch(fetchOrders(data));
+    if (Number(payment) === 1) {
+      const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      if (message) {
+        setMessage(message);
+        setIsPopupOpen(true);
+      } else {
+        const res = await createNewOrder(token, queries);
 
-      setMessage(t('error-order-success'));
-      setIsSuccess(true);
-      setIsPopupOpen(true);
-    } else {
-      setMessage(t('error'));
-      setIsPopupOpen(true);
+        if (res) {
+          const data = await getOrders(token);
+          if (data) dispatch(fetchOrders(data));
+
+          setMessage(t('error-order-success'));
+          setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else {
+          setMessage(t('error'));
+          setIsPopupOpen(true);
+        }
+      }
     }
   }
 

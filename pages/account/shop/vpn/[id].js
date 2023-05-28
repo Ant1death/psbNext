@@ -13,6 +13,7 @@ import { getProducts } from '../../../../api/getProducts';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
 import { VPN_PERIOD_EN, VPN_PERIOD_RU } from '../../../../utils/constants';
+import { checkBalance } from '../../../../utils/checkBalance';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -37,6 +38,7 @@ const  VpnItem = (id) => {
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
+  const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
 
   const handleChangePeriod = (evt) => {
@@ -57,18 +59,27 @@ const  VpnItem = (id) => {
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&period=${period}`;
-    const res = await createNewOrder(token, queries);
 
-    if (res) {
-      const data = await getOrders(token);
-      if (data) dispatch(fetchOrders(data));
+    if (Number(payment) === 1) {
+      const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      if (message) {
+        setMessage(message);
+        setIsPopupOpen(true);
+      } else {
+        const res = await createNewOrder(token, queries);
 
-      setMessage(t('error-order-success'));
-      setIsSuccess(true);
-      setIsPopupOpen(true);
-    } else {
-      setMessage(t('error'));
-      setIsPopupOpen(true);
+        if (res) {
+          const data = await getOrders(token);
+          if (data) dispatch(fetchOrders(data));
+
+          setMessage(t('error-order-success'));
+          setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else {
+          setMessage(t('error'));
+          setIsPopupOpen(true);
+        }
+      }
     }
   }
 

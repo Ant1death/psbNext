@@ -12,6 +12,7 @@ import { getProducts } from '../../../../api/getProducts';
 import { fetchVdsVps } from '../../../../store/slices/vdsVps';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
+import { checkBalance } from '../../../../utils/checkBalance';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -33,7 +34,8 @@ const VpsItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps)
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+  const user = useAppSelector(store => store.user.user);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -76,18 +78,27 @@ const VpsItem = (id) => {
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}&control_panel=${controlPanel}`;
-    const res = await createNewOrder(token, queries);
 
-    if (res) {
-      const data = await getOrders(token);
-      if (data) dispatch(fetchOrders(data));
+    if (Number(payment) === 1) {
+      const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      if (message) {
+        setMessage(message);
+        setIsPopupOpen(true);
+      } else {
+        const res = await createNewOrder(token, queries);
 
-      setMessage(t('error-order-success'));
-      setIsSuccess(true);
-      setIsPopupOpen(true);
-    } else {
-      setMessage(t('error'));
-      setIsPopupOpen(true);
+        if (res) {
+          const data = await getOrders(token);
+          if (data) dispatch(fetchOrders(data));
+
+          setMessage(t('error-order-success'));
+          setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else {
+          setMessage(t('error'));
+          setIsPopupOpen(true);
+        }
+      }
     }
   }
 
