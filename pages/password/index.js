@@ -9,17 +9,19 @@ import { checkAuth } from '../../api/checkAuth';
 import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 import { restorePassword } from '../../api/restorePassword';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
+import { EMAIL_REG_EXP } from '../../utils/constants';
 
 import style from '../../styles/Auth.module.scss';
 
 export default function ResetPassword() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { values, isValid, handleChange, errors } = useFormAndValidation();
+  const { values, isValid, handleChange, errors, setIsValid } = useFormAndValidation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorEmail, setErrorEmail] = useState('');
 
   const handleSubmitForm = async (evt) => {
     evt.preventDefault();
@@ -49,6 +51,18 @@ export default function ResetPassword() {
     const token = localStorage.getItem('token');
     token ? checkName(token) : setIsLoading(true);
   }, []);
+
+  useEffect(() => {
+    if (values.email && !EMAIL_REG_EXP.test(values.email)) {
+      setIsValid(false);
+      setErrorEmail(t('error-email'));
+    } else if (!errors.email && errorEmail) {
+      setIsValid(true);
+      setErrorEmail('');
+    } else {
+      setErrorEmail('');
+    }
+  }, [values.email]);
 
   return (
     <LayoutAuth
@@ -87,7 +101,7 @@ export default function ResetPassword() {
           <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
         </label>
         <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-          {!isValid && errors.email}
+          {errorEmail ? errorEmail : !isValid && errors.email}
         </p>
       </AuthForm>
     </LayoutAuth>
