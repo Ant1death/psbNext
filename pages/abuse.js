@@ -22,13 +22,13 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const dispatch = store.dispatch;
 
   const vpsData = await getProducts('Bulletproof VDS', `${process.env.BASE_URL}/products/all`);
-  const vps = vpsData ? vpsData.products : [];
+  const vps = vpsData && vpsData.products ? vpsData.products : [];
   const vdsData = await getProducts('Bulletproof VPS', `${process.env.BASE_URL}/products/all`);
-  const vds = vdsData ? vdsData.products : [];
+  const vds = vdsData && vdsData.products ? vdsData.products : [];
   dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
 
   const hostings = await getProducts('Hosting', `${process.env.BASE_URL}/products/all`);
-  const hosting = hostings ? hostings.products : [];
+  const hosting = hostings && hostings.products ? hostings.products : [];
   dispatch(fetchHosting(hosting));
 
   return {

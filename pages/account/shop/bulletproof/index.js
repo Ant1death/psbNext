@@ -65,9 +65,9 @@ export default function Bulletproof() {
 
   const fetchData = async () => {
     const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
-    const vps = vpsData ? vpsData.products : [];
+    const vps = vpsData && vpsData.products ? vpsData.products : [];
     const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
+    const vds = vdsData && vdsData.products ? vdsData.products : [];
     dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }
 

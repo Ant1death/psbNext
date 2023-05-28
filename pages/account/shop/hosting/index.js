@@ -29,7 +29,7 @@ export default function AccountHosting() {
 
   const fetchData = async () => {
     const hostings = await getProducts('Hosting', '/api/getProducts');
-    const hosting = hostings ? hostings.products : [];
+    const hosting = hostings && hostings.products ? hostings.products : [];
     dispatch(fetchHosting(hosting));
   }
 
