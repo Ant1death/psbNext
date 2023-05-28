@@ -10,6 +10,7 @@ import { checkAuth } from '../../api/checkAuth';
 import MessagePopup from '../../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { resetPassword } from '../../api/resetPassword';
+import { NUMBER_REG_EXP } from '../../utils/constants';
 
 import style from '../../styles/Auth.module.scss';
 
@@ -23,6 +24,7 @@ export default function ResetPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorOnlyNumbers, setErrorOnlyNumbers] = useState('');
 
   const handleSubmitForm = async (evt) => {
     evt.preventDefault();
@@ -59,13 +61,33 @@ export default function ResetPassword() {
     if (values.password !== values.repeatPassword) {
       setIsValid(false);
       setErrorPasswordRepeat(t('error-passwords-not-match'));
-    } else if (!errors.name && !errors.email && !errors.password && !errors.repeatPassword && errorPasswordRepeat) {
+    } else if (
+      !errors.password
+      && !errors.repeatPassword
+      && errorPasswordRepeat
+      && !errorOnlyNumbers
+    ) {
       setIsValid(true);
       setErrorPasswordRepeat('');
     } else {
       setErrorPasswordRepeat('');
     }
-  }, [values.name, values.email, values.password, values.repeatPassword]);
+
+    if (values.password && NUMBER_REG_EXP.test(values.password)) {
+      setIsValid(false);
+      setErrorOnlyNumbers(t('error-numbers'));
+    } else if (
+      !errors.password
+      && !errors.repeatPassword
+      && !errorPasswordRepeat
+      && errorOnlyNumbers
+    ) {
+      setIsValid(true);
+      setErrorOnlyNumbers('');
+    } else {
+      setErrorOnlyNumbers('');
+    }
+  }, [values.password, values.repeatPassword]);
 
   return (
     <LayoutAuth
@@ -94,13 +116,13 @@ export default function ResetPassword() {
             placeholder={t('change-password')}
             value={values.password || ''}
             onChange={handleChange}
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+            minLength='8'
           />
           <span className={style['input__field-focus']}></span>
           <iconify-icon icon="bxs:lock-alt"></iconify-icon>
         </label>
         <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-          {!isValid && errors.password}
+          {errorOnlyNumbers ? errorOnlyNumbers : !isValid && errors.password}
         </p>
         <label className={style['input']} htmlFor='repeat-password'>
           <input
@@ -112,7 +134,7 @@ export default function ResetPassword() {
             placeholder={t('password-repeat')}
             value={values.repeatPassword || ''}
             onChange={handleChange}
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+            minLength='8'
           />
           <span className={style['input__field-focus']}></span>
           <iconify-icon icon="bxs:lock-alt"></iconify-icon>
