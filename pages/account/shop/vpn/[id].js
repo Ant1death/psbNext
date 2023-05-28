@@ -53,7 +53,8 @@ const  VpnItem = (id) => {
 
   const fetchData = async () => {
     const data = await getProducts('VPN', '/api/getProducts');
-    if (data) dispatch(fetchVpn(data));
+    const vpn = data && data.products ? data.products : [];
+    dispatch(fetchVpn(vpn));
   }
 
   const sentDataToOrder = async (payment) => {

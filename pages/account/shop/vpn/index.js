@@ -38,7 +38,8 @@ export default function AccountVpn() {
 
   const fetchData = async () => {
     const data = await getProducts('VPN', '/api/getProducts');
-    if (data) dispatch(fetchVpn(data));
+    const vpn = data && data.products ? data.products : [];
+    dispatch(fetchVpn(vpn));
   }
 
   useEffect(() => {

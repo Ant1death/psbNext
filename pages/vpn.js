@@ -22,7 +22,8 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const dispatch = store.dispatch;
 
   const data = await getProducts('VPN', `${process.env.BASE_URL}/products/all`);
-  if (data) dispatch(fetchVpn(data));
+  const vpn = data && data.products ? data.products : [];
+  dispatch(fetchVpn(vpn));
 
   return {
     props: { },
