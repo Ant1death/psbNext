@@ -9,6 +9,7 @@ import { useFormAndValidation } from '../hooks/useFormAndValidation';
 import { signup } from '../api/signup';
 import { checkAuth } from '../api/checkAuth';
 import LayoutAuth from '../compontens/LayoutAuth/LayoutAuth';
+import { CYRILLIC_REG_EXP, EMAIL_REG_EXP, NUMBER_REG_EXP } from '../utils/constants';
 
 import style from '../styles/Auth.module.scss';
 
@@ -19,6 +20,9 @@ export default function SignUp() {
 
   const [isErrorMessaggeOpen, setIsErrorMessageOpen] = useState(false);
   const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
+  const [errorEmail, setErrorEmail] = useState('');
+  const [errorOnlyNumbers, setErrorOnlyNumbers] = useState('');
+  const [errorCyrillicName, setErrorCyrilycName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,11 +60,77 @@ export default function SignUp() {
     if (values.password !== values.repeatPassword) {
       setIsValid(false);
       setErrorPasswordRepeat(t('error-passwords-not-match'));
-    } else if (!errors.name && !errors.email && !errors.password && !errors.repeatPassword && errorPasswordRepeat) {
+    } else if (
+        !errors.name
+        && !errors.email
+        && !errors.password
+        && !errors.repeatPassword
+        && !errorCyrillicName
+        && errorPasswordRepeat
+        && !errorEmail
+        && !errorOnlyNumbers
+      ) {
       setIsValid(true);
       setErrorPasswordRepeat('');
     } else {
       setErrorPasswordRepeat('');
+    }
+
+    if (values.name && values.name.match(CYRILLIC_REG_EXP)) {
+      setIsValid(false);
+      setErrorCyrilycName(t('error-name'));
+    } else if (
+        !errors.name &&
+        !errors.email &&
+        !errors.password
+        && !errors.repeatPassword
+        && errorCyrillicName
+        && !errorPasswordRepeat
+        && !errorEmail
+        && !errorOnlyNumbers
+      ) {
+      setIsValid(true);
+      setErrorCyrilycName('');
+    } else {
+      setErrorCyrilycName('');
+    }
+
+    if (values.email && !EMAIL_REG_EXP.test(values.email)) {
+      setIsValid(false);
+      setErrorEmail(t('error-email'));
+    } else if (
+        !errors.name
+        && !errors.email
+        && !errors.password
+        && !errors.repeatPassword
+        && !errorCyrillicName
+        && !errorPasswordRepeat
+        && errorEmail
+        && !errorOnlyNumbers
+      ) {
+      setIsValid(true);
+      setErrorEmail('');
+    } else {
+      setErrorEmail('');
+    }
+
+    if (values.password && NUMBER_REG_EXP.test(values.password)) {
+      setIsValid(false);
+      setErrorOnlyNumbers(t('error-numbers'));
+    } else if (
+        !errors.name
+        && !errors.email
+        && !errors.password
+        && !errors.repeatPassword
+        && !errorCyrillicName
+        && !errorPasswordRepeat
+        && !errorEmail
+        && errorOnlyNumbers
+      ) {
+      setIsValid(true);
+      setErrorOnlyNumbers('');
+    } else {
+      setErrorOnlyNumbers('');
     }
   }, [values.name, values.email, values.password, values.repeatPassword]);
 
@@ -98,7 +168,7 @@ export default function SignUp() {
           <iconify-icon icon="ri:user-fill"></iconify-icon>
         </label>
         <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-          {!isValid && errors.name}
+          {errorCyrillicName ? errorCyrillicName : (!isValid && errors.name)}
         </p>
         <label className={style['input']} htmlFor='email'>
           <input
@@ -115,7 +185,7 @@ export default function SignUp() {
           <iconify-icon icon="heroicons:envelope-solid"></iconify-icon>
         </label>
         <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-          {!isValid && errors.email}
+          {errorEmail ? errorEmail : !isValid && errors.email}
         </p>
         <label className={style['input']} htmlFor='password'>
           <input
@@ -127,13 +197,13 @@ export default function SignUp() {
             placeholder={t('password')}
             value={values.password || ''}
             onChange={handleChange}
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+            minLength='8'
           />
           <span className={style['input__field-focus']}></span>
           <iconify-icon icon="bxs:lock-alt"></iconify-icon>
         </label>
         <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-          {!isValid && errors.password}
+          {errorOnlyNumbers ? errorOnlyNumbers : !isValid && errors.password}
         </p>
         <label className={style['input']} htmlFor='repeat-password'>
           <input
@@ -145,7 +215,7 @@ export default function SignUp() {
             placeholder={t('password-repeat')}
             value={values.repeatPassword || ''}
             onChange={handleChange}
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+            minLength='8'
           />
           <span className={style['input__field-focus']}></span>
           <iconify-icon icon="bxs:lock-alt"></iconify-icon>

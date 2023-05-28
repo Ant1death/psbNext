@@ -249,5 +249,8 @@
   "error-passwords-not-match": "Passwords don't match",
   "error-order-success": "The order has been successfully created",
   "error-change-profile": "You have not changed the data",
-  "error-login": "Email or password are wrong"
+  "error-login": "Email or password are wrong",
+  "error-name": "The name contains russian letters",
+  "error-email": "Email does not match the format a@xyz.xyz",
+  "error-numbers": "The password can't contain only numbers"
 }
