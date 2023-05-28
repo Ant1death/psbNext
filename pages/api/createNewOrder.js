@@ -9,6 +9,8 @@ export default async function handler(req, res) {
     queries = `product_id=${product_id}&payment_type=${payment_type}`;
   } else if (product_id && payment_type && !os && !control_panel && period) {
     queries = `product_id=${product_id}&payment_type=${payment_type}&period=${period}`;
+  } else if (product_id && payment_type && os && !control_panel && !period) {
+    queries = `product_id=${product_id}&payment_type=${payment_type}&os=${os}`;
   }
 
   try {
