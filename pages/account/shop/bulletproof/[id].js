@@ -68,12 +68,12 @@ const AbuseItem = (id) => {
     if (vdsVpsBulletproof) findItem();
   }, [vdsVpsBulletproof]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (item) {
       item.os && setSystem(item.os[0].content);
       item.control_panel && setControlPanel(item.control_panel[0].content);
     }
-  }, [item]);
+  }, [item]); */
 
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
@@ -132,7 +132,7 @@ const AbuseItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {`${t('new-service-panel')} NL`}
       </label>
-      <select
+      {/* <select
         className={style['card__form-select']}
         name='system'
         id='system'
@@ -145,7 +145,7 @@ const AbuseItem = (id) => {
             </option>
           );
         })}
-      </select>
+      </select>*/}
     </NewServise>
   );
 }

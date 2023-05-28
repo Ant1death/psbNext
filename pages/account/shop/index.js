@@ -4,6 +4,7 @@ import Link from 'next/link';
 import 'iconify-icon';
 
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
+import Preloader from '../../../compontens/Preloader/Preloader';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
@@ -27,6 +28,7 @@ export default function AccountVps() {
   const [systemList, setSystemList] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t } = useTranslation();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -68,9 +70,9 @@ export default function AccountVps() {
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('VDS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
-    dispatch(fetchVdsVps(vds.concat(vps)));
+    /* const vdsData = await getProducts('VDS', '/api/getProducts');
+    const vds = vdsData ? vdsData.products : []; */
+    dispatch(fetchVdsVps(vps));
   }
 
   useEffect(() => {
@@ -122,119 +124,128 @@ export default function AccountVps() {
     }
   }, [seachedItem]);
 
+  useEffect(() => {
+    !vdsVps ? setIsLoading(true) : setIsLoading(false);
+  }, [vdsVps]);
+
   return (
-    <section className={style['shop']}>
-      <div className={style['shop__filters']}>
-        <div className={`${style['shop__country']} ${style['card']}`}>
-          <h2 className={style['shop__country-title']}>
-            {t('card-countries')}
-          </h2>
-          <ul className={style['shop__country-list']}>
-            <li>
-              <button className={style['shop__country-button']} onClick={handleCountryClick}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                {t('card-all-countries')}
-              </button>
-              <span className={style['shop__country-amount']}>
-                {vdsVps && vdsVps.length}
-              </span>
-            </li>
-            {amountContry.length > 0 && amountContry.map(el => {
-              return (
-                <li key={amountContry.indexOf(el)}>
+    <div className={style['shop']}>
+      {isLoading && <Preloader />}
+      {!isLoading &&
+        <>
+          <div className={style['shop__filters']}>
+            <div className={`${style['shop__country']} ${style['card']}`}>
+              <h2 className={style['shop__country-title']}>
+                {t('card-countries')}
+              </h2>
+              <ul className={style['shop__country-list']}>
+                <li>
                   <button className={style['shop__country-button']} onClick={handleCountryClick}>
                     <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                    {el[0]}
+                    {t('card-all-countries')}
                   </button>
                   <span className={style['shop__country-amount']}>
-                    {el[1]}
+                    {vdsVps && vdsVps.length}
                   </span>
                 </li>
-              );
-            })}
-          </ul>
-        </div>
-        <form className={`${style['shop__system']} ${style['card']}`}>
-          <label className={style['shop__system-label']} htmlFor='system'>
-            {t('card-system')}
-          </label>
-          <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
-            <option value=''>Select</option>
-            {systemList.length > 0 && systemList.map(el => {
-              return (
-                <option key={systemList.indexOf(el)} value={el}>{el}</option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
-      <div className={style['shop__content']}>
-        <div className={`${style['card']} ${style['shop__search']}`}>
-          <form className={`${style['shop__search-form']} ${seachedItem === '' ? '' : style['shop__search-form_active']}`}>
-            <input
-              type='search'
-              placeholder={t('card-search')}
-              className={style['shop__search-input']}
-              name='search'
-              onChange={handleSearchItem}
-            />
-          </form>
-          <ul className={style['shop__display']}>
-            <li>
-              <button
-                type='button'
-                className={classButtonTable}
-                onClick={toggleLookCards}
-              >
-                <iconify-icon icon="fa-solid:th"></iconify-icon>
-              </button>
-            </li>
-            <li>
-              <button
-                type='button'
-                className={classButtonList}
-                onClick={toggleLookCards}
-              >
-                <iconify-icon icon="fa:list"></iconify-icon>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <ul className={style['shop__card-list']}>
-          {currentCountry && currentCountry.map(el => {
-            return (
-              <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
-                  <img src='/server.png' alt='icon server' />
-                </Link>
-                <div className={classWrapTitle}>
-                  <h2 className={classItemTitle}>
-                    <Link href={`/account/shop/vps/${el.id}`}>
-                      {`${el.title} - ${el.country}`}
+                {amountContry.length > 0 && amountContry.map(el => {
+                  return (
+                    <li key={amountContry.indexOf(el)}>
+                      <button className={style['shop__country-button']} onClick={handleCountryClick}>
+                        <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
+                        {el[0]}
+                      </button>
+                      <span className={style['shop__country-amount']}>
+                        {el[1]}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <form className={`${style['shop__system']} ${style['card']}`}>
+              <label className={style['shop__system-label']} htmlFor='system'>
+                {t('card-system')}
+              </label>
+              <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
+                <option value=''>Select</option>
+                {systemList.length > 0 && systemList.map(el => {
+                  return (
+                    <option key={systemList.indexOf(el)} value={el}>{el}</option>
+                  );
+                })}
+              </select>
+            </form>
+          </div>
+          <div className={style['shop__content']}>
+            <div className={`${style['card']} ${style['shop__search']}`}>
+              <form className={`${style['shop__search-form']} ${seachedItem === '' ? '' : style['shop__search-form_active']}`}>
+                <input
+                  type='search'
+                  placeholder={t('card-search')}
+                  className={style['shop__search-input']}
+                  name='search'
+                  onChange={handleSearchItem}
+                />
+              </form>
+              <ul className={style['shop__display']}>
+                <li>
+                  <button
+                    type='button'
+                    className={classButtonTable}
+                    onClick={toggleLookCards}
+                  >
+                    <iconify-icon icon="fa-solid:th"></iconify-icon>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type='button'
+                    className={classButtonList}
+                    onClick={toggleLookCards}
+                  >
+                    <iconify-icon icon="fa:list"></iconify-icon>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <ul className={style['shop__card-list']}>
+              {currentCountry && currentCountry.map(el => {
+                return (
+                  <li key={el.id} className={classItem}>
+                    <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
+                      <img src='/server.png' alt='icon server' />
                     </Link>
-                  </h2>
-                  <ul className={style['shop__item-list']}>
-                    {el.characters.map(item => {
-                      return (
-                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div className={classPriceWrapItem}>
-                  <p className={classPriceItem}>
-                    {`$${el.price}`}
-                  </p>
-                  <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
-                    <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;{t('card-button')}
-                  </Link>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
+                    <div className={classWrapTitle}>
+                      <h2 className={classItemTitle}>
+                        <Link href={`/account/shop/vps/${el.id}`}>
+                          {`${el.title} - ${el.country}`}
+                        </Link>
+                      </h2>
+                      <ul className={style['shop__item-list']}>
+                        {el.characters.map(item => {
+                          return (
+                            <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                    <div className={classPriceWrapItem}>
+                      <p className={classPriceItem}>
+                        {`$${el.price}`}
+                      </p>
+                      <Link href={`/account/shop/vps/${el.id}`} className={style['shop__button-cta']}>
+                        <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
+                        &nbsp;{t('card-button')}
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      }
+    </div>
   );
 }

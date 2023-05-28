@@ -46,6 +46,8 @@ const HostingItem = (id) => {
 
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      console.log(222)
+
       if (message) {
         setMessage(message);
         setIsPopupOpen(true);
@@ -64,6 +66,9 @@ const HostingItem = (id) => {
           setIsPopupOpen(true);
         }
       }
+    } else if (Number(payment) === 2) {
+      console.log(111)
+      const res = await createNewOrder(token, queries);
     }
   }
 

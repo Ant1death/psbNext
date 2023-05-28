@@ -55,9 +55,9 @@ const VpsItem = (id) => {
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('VDS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
-    dispatch(fetchVdsVps(vds.concat(vps)));
+    /* const vdsData = await getProducts('VDS', '/api/getProducts');
+    const vds = vdsData ? vdsData.products : []; */
+    dispatch(fetchVdsVps(vps));
   }
 
   useEffect(() => {
@@ -99,6 +99,9 @@ const VpsItem = (id) => {
           setIsPopupOpen(true);
         }
       }
+    } else if (Number(payment) === 2) {
+      const res = await createNewOrder(token, queries);
+
     }
   }
 
