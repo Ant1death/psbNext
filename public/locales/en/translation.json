@@ -252,5 +252,6 @@
   "error-login": "Email or password are wrong",
   "error-name": "The name contains russian letters",
   "error-email": "Email does not match the format a@xyz.xyz",
-  "error-numbers": "The password can't contain only numbers"
+  "error-numbers": "The password can't contain only numbers",
+  "error-user": "User with this email already exists"
 }

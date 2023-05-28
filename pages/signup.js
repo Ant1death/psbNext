@@ -34,7 +34,11 @@ export default function SignUp() {
       if (res) router.push('/login');
     })
     .catch(err => {
-      setErrorMessage(`${t('error')}: ${err}`);
+      if (err.includes('400')) {
+        setErrorMessage(`${t('error-user')}`);
+      } else {
+        setErrorMessage(`${err}`);
+      }
       setIsErrorMessageOpen(true);
     });
   }
