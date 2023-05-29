@@ -85,12 +85,15 @@ const VpsItem = (id) => {
       } else {
         const res = await createNewOrder(token, queries);
 
-        if (res) {
+        if (res.status === '200') {
           const data = await getOrders(token);
           if (data) dispatch(fetchOrders(data));
 
           setMessage(t('error-order-success'));
           setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else if (res.status === '422') {
+          setMessage(t('error-balance'));
           setIsPopupOpen(true);
         } else {
           setMessage(t('error'));

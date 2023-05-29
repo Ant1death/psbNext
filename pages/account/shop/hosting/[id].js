@@ -44,11 +44,9 @@ const HostingItem = (id) => {
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}`;
-    const res = await createNewOrder(token, queries);
 
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
-      console.log(222)
 
       if (message) {
         setMessage(message);
@@ -56,12 +54,15 @@ const HostingItem = (id) => {
       } else {
         const res = await createNewOrder(token, queries);
 
-        if (res) {
+        if (res.status === '200') {
           const data = await getOrders(token);
           if (data) dispatch(fetchOrders(data));
 
           setMessage(t('error-order-success'));
           setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else if (res.status === '422') {
+          setMessage(t('error-balance'));
           setIsPopupOpen(true);
         } else {
           setMessage(t('error'));
