@@ -149,19 +149,6 @@
         }
       }
     }
-
-    &_notifications {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      color: #79c8c2;
-      padding: 0;
-      position: relative;
-
-      & iconify-icon {
-        font-size: 20px;
-      }
-    }
   }
 
   &__pulse {

@@ -67,17 +67,7 @@ const AccountHeader = ({
           windowWidth={windowWidth}
           openPopupProfile={openPopupProfile}
           setXCoordPopupProfile={setXCoordPopupProfile}
-        >
-          {/* ToDo: fix search */}
-          <li className={style['header__navbar-item']}>
-            <button
-              className={`${style['header__button']} ${style['header__button_shearch']}`}
-              type='button'
-            >
-              <iconify-icon icon="ion:search"></iconify-icon>
-            </button>
-          </li>
-        </AccountHeaderNavmenu>
+        />
       </nav>
     </header>
   );

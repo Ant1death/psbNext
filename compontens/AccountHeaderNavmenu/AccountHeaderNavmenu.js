@@ -5,7 +5,6 @@ import 'iconify-icon';
 import style from '../../styles/AccountHeader.module.scss';
 
 const AccountHeaderNavmenu = ({
-  children,
   chooseLanquage,
   windowWidth,
   openPopupProfile,
@@ -32,7 +31,6 @@ const AccountHeaderNavmenu = ({
 
   return (
     <ul className={style['header__navbar']}>
-      { children }
       <li className={style['header__navbar-item']}>
         <button
           className={`${style['header__button']} ${style['header__button_country']}`}
