@@ -32,7 +32,9 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   dispatch(fetchHosting(hosting));
 
   return {
-    props: { },
+    props: {
+      hosting: hosting,
+    },
     fallback: true,
   }
 });

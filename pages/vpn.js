@@ -26,7 +26,9 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   dispatch(fetchVpn(vpn));
 
   return {
-    props: { },
+    props: {
+      vpn: vpn,
+    },
     fallback: true,
   }
 });
