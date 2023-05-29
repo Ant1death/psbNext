@@ -19,6 +19,7 @@ const Breadcrumbs = () => {
 
   const [lastCrumb, setLastCrumb] = useState('');
   const [pageTitle, setPageTitle] = useState('');
+  const [nameOrder, setNameOrder] = useState('');
 
   const replasePath = (crumb, pathList) => {
     crumb = pathList[crumb];
@@ -30,6 +31,11 @@ const Breadcrumbs = () => {
 
     if (item) return item.title;
   }
+
+  useEffect(() => {
+    const name = currentOrder && currentOrder[1] && currentOrder[1].order_id;
+    setNameOrder(name);
+  }, [currentOrder]);
 
   useEffect(() => {
     const pathWithoutQuery = router.asPath.split('?')[0];
@@ -58,8 +64,7 @@ const Breadcrumbs = () => {
       setPageTitle(title);
       setLastCrumb(t('category-store'));
     } else if (asPath.length === 4 && (asPath.includes('profile'))) {
-        const name = currentOrder && currentOrder[1].order_id;
-        setPageTitle(`${t('path-order')} #${name}`);
+        setPageTitle(`${t('path-order')} #${nameOrder}`);
         setLastCrumb(t('path-order'));
     } else {
       const path = t('account-lang') === 'en'
@@ -73,7 +78,7 @@ const Breadcrumbs = () => {
   return (
     <section className={style['breadcrumbs']}>
       <h1 className={style['breadcrumbs__title']}>
-        {pageTitle}
+        {nameOrder ? `${t('path-order')} #${nameOrder}` : pageTitle}
       </h1>
       <ol className={style['breadcrumbs__list']}>
         <li className={style['breadcrumbs__link']}>

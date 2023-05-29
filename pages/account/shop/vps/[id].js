@@ -12,6 +12,7 @@ import { getProducts } from '../../../../api/getProducts';
 import { fetchVdsVps } from '../../../../store/slices/vdsVps';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
+import { checkBalance } from '../../../../utils/checkBalance';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -33,7 +34,8 @@ const VpsItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps)
+  const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
+  const user = useAppSelector(store => store.user.user);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -52,10 +54,8 @@ const VpsItem = (id) => {
 
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
-    const vps = vpsData ? vpsData.products : [];
-    const vdsData = await getProducts('VDS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
-    dispatch(fetchVdsVps(vds.concat(vps)));
+    const vps = vpsData && vpsData.products ? vpsData.products : [];
+    dispatch(fetchVdsVps(vps));
   }
 
   useEffect(() => {
@@ -76,18 +76,45 @@ const VpsItem = (id) => {
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}&control_panel=${controlPanel}`;
-    const res = await createNewOrder(token, queries);
 
-    if (res) {
-      const data = await getOrders(token);
-      if (data) dispatch(fetchOrders(data));
+    if (Number(payment) === 1) {
+      const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      if (message) {
+        setMessage(message);
+        setIsPopupOpen(true);
+      } else {
+        const res = await createNewOrder(token, queries);
 
-      setMessage(t('error-order-success'));
-      setIsSuccess(true);
-      setIsPopupOpen(true);
-    } else {
-      setMessage(t('error'));
-      setIsPopupOpen(true);
+        if (res.status === '200') {
+          const data = await getOrders(token);
+          if (data) dispatch(fetchOrders(data));
+
+          setMessage(t('error-order-success'));
+          setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else if (res.status === '422') {
+          setMessage(t('error-balance'));
+          setIsPopupOpen(true);
+        } else {
+          setMessage(t('error'));
+          setIsPopupOpen(true);
+        }
+      }
+    } else if (Number(payment) === 2) {
+      const res = await createNewOrder(token, queries);
+
+      if (res && res.data && res.pay_url) {
+        setMessage(t('error-order'));
+        setIsSuccess(true);
+        setIsPopupOpen(true);
+
+        window.open(res.pay_url, '_blank');
+        const data = await getOrders(token);
+        if (data) dispatch(fetchOrders(data));
+      } else {
+        setMessage(t('error'));
+        setIsPopupOpen(true);
+      }
     }
   }
 

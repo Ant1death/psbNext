@@ -473,3 +473,7 @@ export const OS_LIST = [
     content: "VM6_ISPsystem_CentOS-8-Stream_18",
   },
 ];
+
+export const CYRILLIC_REG_EXP = /[а-яё]/gi;
+export const NUMBER_REG_EXP = /^\d+$/;
+export const EMAIL_REG_EXP = /^.*\.[a-z]{2,}$/;

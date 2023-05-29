@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
+import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
@@ -26,6 +27,7 @@ export default function Bulletproof() {
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
   const [currentCountry, setCurrentCountry] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
@@ -63,9 +65,9 @@ export default function Bulletproof() {
 
   const fetchData = async () => {
     const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
-    const vps = vpsData ? vpsData.products : [];
+    const vps = vpsData && vpsData.products ? vpsData.products : [];
     const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
+    const vds = vdsData && vdsData.products ? vdsData.products : [];
     dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }
 
@@ -108,106 +110,115 @@ export default function Bulletproof() {
     }
   }, [seachedItem]);
 
+  useEffect(() => {
+    !vdsVpsBulletproof ? setIsLoading(true) : setIsLoading(false);
+  }, [vdsVpsBulletproof]);
+
   return (
-    <section className={style['shop']}>
-      <div className={style['shop__filters']}>
-        <div className={`${style['shop__country']} ${style['card']}`}>
-          <h2 className={style['shop__country-title']}>
-            {t('card-countries')}
-          </h2>
-          <ul className={style['shop__country-list']}>
-            <li>
-              <button className={style['shop__country-button']} onClick={handleCountryClick}>
-                <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
-                {t('card-all-countries')}
-              </button>
-              <span className={style['shop__country-amount']}>
-                {vdsVpsBulletproof && vdsVpsBulletproof.length}
-              </span>
-            </li>
-          </ul>
-        </div>
-        <form className={`${style['shop__system']} ${style['card']}`}>
-          <label className={style['shop__system-label']} htmlFor='system'>
-            {t('card-system')}
-          </label>
-          <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
-            <option value=''>Select</option>
-            {systemList.length > 0 && systemList.map(el => {
-              return (
-                <option key={systemList.indexOf(el)} value={el}>{el}</option>
-              );
-            })}
-          </select>
-        </form>
-      </div>
-      <div className={style['shop__content']}>
-        <div className={`${style['card']} ${style['shop__search']}`}>
-          <form className={style['shop__search-form']}>
-            <input
-              type='search'
-              placeholder={t('card-search')}
-              className={style['shop__search-input']}
-              name='search'
-              onChange={handleSearchItem}
-            />
-          </form>
-          <ul className={style['shop__display']}>
-            <li>
-              <button
-                type='button'
-                className={classButtonTable}
-                onClick={toggleLookCards}
-              >
-                <iconify-icon icon="fa-solid:th"></iconify-icon>
-              </button>
-            </li>
-            <li>
-              <button
-                type='button'
-                className={classButtonList}
-                onClick={toggleLookCards}
-              >
-                <iconify-icon icon="fa:list"></iconify-icon>
-              </button>
-            </li>
-          </ul>
-        </div>
-        <ul className={style['shop__card-list']}>
-          {currentCountry && currentCountry.map(el => {
-            return (
-              <li key={el.id} className={classItem}>
-                <Link href={`/account/shop/bulletproof/${el.id}`} className={imgItemClass}>
-                  <img src='/server.png' alt='icon server' />
-                </Link>
-                <div className={classWrapTitle}>
-                  <h2 className={classItemTitle}>
-                    <Link href={`/account/shop/bulletproof/${el.id}`}>
-                      {el.title}
+    <div className={style['shop']}>
+      {isLoading && <Preloader />}
+      {!isLoading &&
+        <>
+          <div className={style['shop__filters']}>
+            <div className={`${style['shop__country']} ${style['card']}`}>
+              <h2 className={style['shop__country-title']}>
+                {t('card-countries')}
+              </h2>
+              <ul className={style['shop__country-list']}>
+                <li>
+                  <button className={style['shop__country-button']} onClick={handleCountryClick}>
+                    <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
+                    {t('card-all-countries')}
+                  </button>
+                  <span className={style['shop__country-amount']}>
+                    {vdsVpsBulletproof && vdsVpsBulletproof.length}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <form className={`${style['shop__system']} ${style['card']}`}>
+              <label className={style['shop__system-label']} htmlFor='system'>
+                {t('card-system')}
+              </label>
+              <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
+                <option value=''>Select</option>
+                {systemList.length > 0 && systemList.map(el => {
+                  return (
+                    <option key={systemList.indexOf(el)} value={el}>{el}</option>
+                  );
+                })}
+              </select>
+            </form>
+          </div>
+          <div className={style['shop__content']}>
+            <div className={`${style['card']} ${style['shop__search']}`}>
+              <form className={style['shop__search-form']}>
+                <input
+                  type='search'
+                  placeholder={t('card-search')}
+                  className={style['shop__search-input']}
+                  name='search'
+                  onChange={handleSearchItem}
+                />
+              </form>
+              <ul className={style['shop__display']}>
+                <li>
+                  <button
+                    type='button'
+                    className={classButtonTable}
+                    onClick={toggleLookCards}
+                  >
+                    <iconify-icon icon="fa-solid:th"></iconify-icon>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type='button'
+                    className={classButtonList}
+                    onClick={toggleLookCards}
+                  >
+                    <iconify-icon icon="fa:list"></iconify-icon>
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <ul className={style['shop__card-list']}>
+              {currentCountry && currentCountry.map(el => {
+                return (
+                  <li key={el.id} className={classItem}>
+                    <Link href={`/account/shop/bulletproof/${el.id}`} className={imgItemClass}>
+                      <img src='/server.png' alt='icon server' />
                     </Link>
-                  </h2>
-                  <ul className={style['shop__item-list']}>
-                    {el.characters.map(item => {
-                      return (
-                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div className={classPriceWrapItem}>
-                  <p className={classPriceItem}>
-                    {`$${el.price}`}
-                  </p>
-                  <Link href={`/account/shop/bulletproof/${el.id}`} className={style['shop__button-cta']}>
-                    <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
-                    &nbsp;{t('card-button')}
-                  </Link>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </section>
+                    <div className={classWrapTitle}>
+                      <h2 className={classItemTitle}>
+                        <Link href={`/account/shop/bulletproof/${el.id}`}>
+                          {el.title}
+                        </Link>
+                      </h2>
+                      <ul className={style['shop__item-list']}>
+                        {el.characters.map(item => {
+                          return (
+                            <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                    <div className={classPriceWrapItem}>
+                      <p className={classPriceItem}>
+                        {`$${el.price}`}
+                      </p>
+                      <Link href={`/account/shop/bulletproof/${el.id}`} className={style['shop__button-cta']}>
+                        <iconify-icon icon="ci:shopping-cart-02"></iconify-icon>
+                        &nbsp;{t('card-button')}
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      }
+    </div>
   );
 }

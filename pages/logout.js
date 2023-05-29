@@ -13,6 +13,7 @@ import { fetchHosting } from '../store/slices/hosting';
 import { fetchUser } from '../store/slices/user';
 import { fetchOrders } from '../store/slices/orders';
 import { fetchCurrentOrder } from '../store/slices/currentOrder';
+import { fetchPaymentHistory } from '../store/slices/paymentHystory';
 import { logout } from '../api/logout';
 import LayoutAuth from '../compontens/LayoutAuth/LayoutAuth';
 
@@ -38,6 +39,7 @@ const Logout = () => {
     dispatch(fetchVpn(null));
     dispatch(fetchVdsVpsBulletproof(null));
     dispatch(fetchCurrentOrder({}));
+    dispatch(fetchPaymentHistory(null));
     logout(token);
 
     router.push('/');

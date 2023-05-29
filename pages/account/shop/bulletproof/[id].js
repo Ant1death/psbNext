@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
-
+import { checkBalance } from '../../../../utils/checkBalance';
 import { wrapper } from '../../../../store/store';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 
@@ -28,28 +29,24 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async ({ p
 const AbuseItem = (id) => {
   const [item, setItem] = useState({});
   const [system, setSystem] = useState('');
-  const [controlPanel, setControlPanel] = useState('');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
+  const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
 
   const handleChangeSystem = (evt) => {
     setSystem(evt.target.value);
   }
 
-  const handleChangePanel = (evt) => {
-    setControlPanel(evt.target.value);
-  }
-
   const fetchData = async () => {
     const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
-    const vps = vpsData ? vpsData.products : [];
+    const vps = vpsData && vpsData.products ? vpsData.products : [];
     const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
-    const vds = vdsData ? vdsData.products : [];
+    const vds = vdsData && vdsData.products ? vdsData.products : [];
     dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
   }
 
@@ -69,26 +66,53 @@ const AbuseItem = (id) => {
   useEffect(() => {
     if (item) {
       item.os && setSystem(item.os[0].content);
-      item.control_panel && setControlPanel(item.control_panel[0].content);
     }
   }, [item]);
 
   const sentDataToOrder = async (payment) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
-    const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}&control_panel=${controlPanel}`;
-    const res = await createNewOrder(token, queries);
+    const queries = `product_id=${item.id}&payment_type=${Number(payment)}&os=${system}`;
 
-    if (res) {
-      const data = await getOrders(token);
-      if (data) dispatch(fetchOrders(data));
+    if (Number(payment) === 1) {
+      const message = checkBalance(user.balance, item.price, t('faq-lang'));
+      if (message) {
+        setMessage(message);
+        setIsPopupOpen(true);
+      } else {
+        const res = await createNewOrder(token, queries);
 
-      setMessage(t('error-order-success'));
-      setIsSuccess(true);
-      setIsPopupOpen(true);
-    } else {
-      setMessage(t('error'));
-      setIsPopupOpen(true);
+        if (res.status === '200') {
+          const data = await getOrders(token);
+          if (data) dispatch(fetchOrders(data));
+
+          setMessage(t('error-order-success'));
+          setIsSuccess(true);
+          setIsPopupOpen(true);
+        } else if (res.status === '422') {
+          setMessage(t('error-balance'));
+          setIsPopupOpen(true);
+        } else {
+          setMessage(t('error'));
+          setIsPopupOpen(true);
+        }
+      }
+    } else if (Number(payment) === 2) {
+      const res = await createNewOrder(token, queries);
+
+      if (res && res.data && res.pay_url) {
+        setMessage(t('error-order'));
+        setIsSuccess(true);
+        setIsPopupOpen(true);
+
+        const data = await getOrders(token);
+        if (data) dispatch(fetchOrders(data));
+        window.open(res.pay_url, '_blank');
+      } else {
+        setMessage(t('error'));
+        setIsPopupOpen(true);
+      }
     }
+
   }
 
   return (
@@ -120,20 +144,6 @@ const AbuseItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {`${t('new-service-panel')} NL`}
       </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangePanel}
-      >
-        {item && item.control_panel && item.control_panel.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {`${el.name} - ${el.price}$`}
-            </option>
-          );
-        })}
-      </select>
     </NewServise>
   );
 }

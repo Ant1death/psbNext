@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getUser } from '../../../api/getUser';
 import { fetchUser } from '../../../store/slices/user';
 import { changeProfilePassword } from '../../../api/changeProfilePassword';
+import { NUMBER_REG_EXP } from '../../../utils/constants';
 
 import style from '../../../styles/Profile.module.scss';
 
@@ -23,6 +24,7 @@ const FormPassword = () => {
   const [isFormSubmitSuccess, setIsFormSubmitSuccess] = useState(false);
   const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
   const [errorPasswordEquals, setErrorPasswordEquals] = useState('');
+  const [errorOnlyNumbers, setErrorOnlyNumbers] = useState('');
 
   const fetchData = async (token) => {
     const data = await getUser(token);
@@ -66,7 +68,14 @@ const FormPassword = () => {
     ) {
       setIsValid(false);
       setErrorPasswordRepeat(t('error-password-use'));
-    } else if (!errors.oldPassword && !errorPasswordEquals && errorPasswordRepeat) {
+    } else if (
+      !errors.oldPassword
+      && !errorPasswordEquals
+      && errorPasswordRepeat
+      && !errorOnlyNumbers
+      && !errors.newPassword
+      && !errors.confirmPassword
+    ) {
       setIsValid(true);
       setErrorPasswordRepeat('');
     } else {
@@ -76,11 +85,35 @@ const FormPassword = () => {
     if (values.confirmPassword !== values.newPassword) {
       setIsValid(false);
       setErrorPasswordEquals(t('error-passwords-not-match'));
-    } else if (!errors.oldPassword && errorPasswordEquals && !errorPasswordRepeat) {
+    } else if (
+      !errors.oldPassword
+      && !errors.newPassword
+      && !errors.confirmPassword
+      && errorPasswordEquals
+      && !errorPasswordRepeat
+      && !errorOnlyNumbers
+    ) {
       setIsValid(true);
       setErrorPasswordEquals('');
     } else {
       setErrorPasswordEquals('');
+    }
+
+    if (values.newPassword && NUMBER_REG_EXP.test(values.newPassword)) {
+      setIsValid(false);
+      setErrorOnlyNumbers(t('error-numbers'));
+    } else if (
+      !errors.oldPassword
+      && !errorPasswordEquals
+      && !errorPasswordRepeat
+      && errorOnlyNumbers
+      && !errors.newPassword
+      && !errors.confirmPassword
+      ) {
+      setIsValid(true);
+      setErrorOnlyNumbers('');
+    } else {
+      setErrorOnlyNumbers('');
     }
   }, [values.confirmPassword, values.newPassword, values.oldPassword]);
 
@@ -101,7 +134,6 @@ const FormPassword = () => {
             value={values.oldPassword || ''}
             onChange={handleChange}
             minLength='8'
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
@@ -118,11 +150,12 @@ const FormPassword = () => {
             value={values.newPassword || ''}
             onChange={handleChange}
             minLength='8'
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
-          {errorPasswordRepeat ? errorPasswordRepeat : (!isValid ? errors.repeatPassword : '')}
+          {errorPasswordRepeat
+            ? errorPasswordRepeat
+            : errorOnlyNumbers ? errorOnlyNumbers : (!isValid ? errors.newPassword : '')}
         </p>
         <ul className={style['form__list']}>
           <li>{t('profile-password-rule-one')}</li>
@@ -141,11 +174,10 @@ const FormPassword = () => {
             value={values.confirmPassword || ''}
             onChange={handleChange}
             minLength='8'
-            pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
-          {errorPasswordEquals ? errorPasswordEquals : (!isValid ? errors.repeatPassword : '')}
+          {errorPasswordEquals ? errorPasswordEquals : (!isValid ? errors.confirmPassword : '')}
         </p>
         <button type='submit' className={style['form__button']} disabled={!isValid}>
           {t('profile-password-button')}

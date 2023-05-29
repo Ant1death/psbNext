@@ -9,11 +9,12 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getUser } from '../../../api/getUser';
 import { fetchUser, changeName, changeEmail } from '../../../store/slices/user';
 import { changeProfileData } from '../../../api/changeProfileData';
+import { CYRILLIC_REG_EXP, EMAIL_REG_EXP } from '../../../utils/constants';
 
 import style from '../../../styles/Profile.module.scss';
 
 const Profile = () => {
-  const { values, handleChange, errors, isValid, setValues } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormAndValidation();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(store => store.user.user);
@@ -21,6 +22,8 @@ const Profile = () => {
   const [isMessaggePopupOpen, setIsMessaggePopupOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [isFormSubmitSuccess, setIsFormSubmitSuccess] = useState(false);
+  const [errorCyrillicName, setErrorCyrilycName] = useState('');
+  const [errorEmail, setErrorEmail] = useState('');
 
   const fetchData = async (token) => {
     const data = await getUser(token);
@@ -66,6 +69,38 @@ const Profile = () => {
     if (user) setValues({ ...values, name: user.username, email: user.email });
   }, [user]);
 
+  useEffect(() => {
+    if (values.name && values.name.match(CYRILLIC_REG_EXP)) {
+      setIsValid(false);
+      setErrorCyrilycName(t('error-name'));
+    } else if (
+        !errors.name
+        && !errors.email
+        && errorCyrillicName
+        && !errorEmail
+      ) {
+      setIsValid(true);
+      setErrorCyrilycName('');
+    } else {
+      setErrorCyrilycName('');
+    }
+
+    if (values.email && !EMAIL_REG_EXP.test(values.email)) {
+      setIsValid(false);
+      setErrorEmail(t('error-email'));
+    } else if (
+        !errors.name
+        && !errors.email
+        && !errorCyrillicName
+        && errorEmail
+      ) {
+      setIsValid(true);
+      setErrorEmail('');
+    } else {
+      setErrorEmail('');
+    }
+  }, [values.email, values.name]);
+
   return (
     <>
       <form className={style['form']} noValidate onSubmit={hendleFormSubmit}>
@@ -85,7 +120,7 @@ const Profile = () => {
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
-          {!isValid && errors.name}
+          {errorCyrillicName ? errorCyrillicName : (!isValid && errors.name)}
         </p>
         <label htmlFor='email' className={style['form__label']}>
           Email:
@@ -100,7 +135,7 @@ const Profile = () => {
           />
         </label>
         <p className={`${style['form__error']} ${!isValid ? style['form__error_active'] : ''}`}>
-          {!isValid && errors.email}
+          {errorEmail ? errorEmail : !isValid && errors.email}
         </p>
         <button type='submit' className={style['form__button']} disabled={!isValid}>
           {t('profile-button')}
