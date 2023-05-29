@@ -1,9 +1,12 @@
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 import style from '../../styles/PopupLanguage.module.scss';
 
 const PopupLanguage = ({ isOpen, closePopup }) => {
   const { t, i18n } = useTranslation();
+  const router = useRouter();
+  const { pathname, asPatch, query } = router;
 
   const changeLanguage = (evt) => {
     const el = evt.currentTarget;
@@ -11,9 +14,11 @@ const PopupLanguage = ({ isOpen, closePopup }) => {
     if (el.id === 'RU') {
       window.localStorage.setItem('MY_LANGUAGE', 'ru');
       i18n.changeLanguage('ru');
+      router.push({ pathname, query }, asPatch, { locale: 'ru' });
     } else if (el.id = 'EN') {
       window.localStorage.setItem('MY_LANGUAGE', 'en');
       i18n.changeLanguage('en');
+      router.push({ pathname, query }, asPatch, { locale: 'en' });
     }
     closePopup();
   }
