@@ -33,9 +33,16 @@ const Breadcrumbs = () => {
   }
 
   useEffect(() => {
-    const name = currentOrder && currentOrder[1] && currentOrder[1].order_id;
-    setNameOrder(name);
-  }, [currentOrder]);
+    const pathWithoutQuery = router.asPath.split('?')[0];
+    const asPath = pathWithoutQuery.split('/').filter(el => el.length > 0);
+
+    if (asPath.length === 4 && (asPath.includes('profile'))) {
+      const name = currentOrder && currentOrder[1] && currentOrder[1].order_id;
+      setNameOrder(name);
+    } else {
+      setNameOrder('');
+    }
+  }, [currentOrder, router]);
 
   useEffect(() => {
     const pathWithoutQuery = router.asPath.split('?')[0];
