@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 import style from '../../styles/Language.module.scss';
 
@@ -8,6 +9,8 @@ const Language = ({ isMobileMenuOpen }) => {
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
   const { i18n } = useTranslation();
+  const router = useRouter();
+  const { pathname, asPatch, query } = router;
 
   const listClass = `${style['language__list']}
     ${isLanguageMenuOpen ? style['language__list_visible'] : ''}
@@ -35,6 +38,7 @@ const Language = ({ isMobileMenuOpen }) => {
     window.localStorage.setItem('MY_LANGUAGE', el.id);
     setIsLanguageMenuOpen(false);
     i18n.changeLanguage(el.id);
+    router.push({ pathname, query }, asPatch, { locale: el.id });
   }
 
   useEffect(() => {
@@ -43,9 +47,11 @@ const Language = ({ isMobileMenuOpen }) => {
     if (lang === 'en') {
       setLanguage({ lang: 'English', img: '/us.svg' });
       i18n.changeLanguage('en');
+      router.push({ pathname, query }, asPatch, { locale: 'en' });
     } else {
       setLanguage({ lang: 'Русский', img: '/ru.svg' });
       i18n.changeLanguage('ru');
+      router.push({ pathname, query }, asPatch, { locale: 'ru' });
     }
   }, []);
 
