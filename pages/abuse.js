@@ -33,13 +33,13 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 
   return {
     props: {
-      hosting: hosting,
+      hostingList: hosting,
     },
     fallback: true,
   }
 });
 
-const Abuse = () => {
+const Abuse = (hostingList) => {
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
   const hosting = useAppSelector(store => store.hosting.hosting);

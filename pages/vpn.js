@@ -33,7 +33,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   }
 });
 
-const Vpn = () => {
+const Vpn = (vpn) => {
   const { t } = useTranslation();
   const vpnList = useAppSelector(store => store.vpn.vpn);
 
