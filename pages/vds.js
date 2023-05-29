@@ -29,8 +29,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   return {
     props: {
       vps: vps,
-    },
-    fallback: true,
+    }
   }
 });
 
