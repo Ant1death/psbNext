@@ -7,6 +7,7 @@ import AuthForm from '../compontens/AuthForm/AuthForm';
 import MessagePopup from '../compontens/MessagePopup/MessagePopup';
 import { useFormAndValidation } from '../hooks/useFormAndValidation';
 import { signup } from '../api/signup';
+import { login } from '../api/login';
 import { checkAuth } from '../api/checkAuth';
 import LayoutAuth from '../compontens/LayoutAuth/LayoutAuth';
 import { CYRILLIC_REG_EXP, EMAIL_REG_EXP, NUMBER_REG_EXP } from '../utils/constants';
@@ -31,13 +32,30 @@ export default function SignUp() {
 
    signup(values.name, values.email, values.password)
     .then (res => {
-      if (res) router.push('/login');
+      if (res) {
+        login(values.email, values.password)
+          .then (res => {
+            if (res) {
+              localStorage.setItem('username', values.email.toLowerCase());
+              localStorage.setItem('token', res.access_token);
+              router.push('/account');
+            }
+          })
+          .catch ((err) => {
+            setErrorMessage(`${err.includes('400') || err.includes('422') ? t('error-login') : t('error')}`);
+            setIsErrorMessageOpen(true);
+          })
+      }
     })
     .catch(err => {
-      if (err.includes('400')) {
-        setErrorMessage(`${t('error-user')}`);
-      } else {
+      if (typeof(err) === 'object') {
         setErrorMessage(`${err}`);
+      } else {
+        if (err.includes('400')) {
+          setErrorMessage(`${t('error-user')}`);
+        } else {
+          setErrorMessage(`${err}`);
+        }
       }
       setIsErrorMessageOpen(true);
     });
