@@ -93,6 +93,21 @@ const AbuseItem = (id) => {
           setIsPopupOpen(true);
         }
       }
+    } else if (Number(payment) === 2) {
+      const res = await createNewOrder(token, queries);
+
+      if (res && res.data && res.pay_url) {
+        setMessage(t('error-order'));
+        setIsSuccess(true);
+        setIsPopupOpen(true);
+
+        const data = await getOrders(token);
+        if (data) dispatch(fetchOrders(data));
+        window.open(res.pay_url, '_blank');
+      } else {
+        setMessage(t('error'));
+        setIsPopupOpen(true);
+      }
     }
 
   }

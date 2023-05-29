@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
@@ -29,6 +30,7 @@ const HostingItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const { t } = useTranslation();
   const hosting = useAppSelector(store => store.hosting.hosting);
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
@@ -67,8 +69,20 @@ const HostingItem = (id) => {
         }
       }
     } else if (Number(payment) === 2) {
-      console.log(111)
       const res = await createNewOrder(token, queries);
+
+      if (res && res.data && res.pay_url) {
+        setMessage(t('error-order'));
+        setIsSuccess(true);
+        setIsPopupOpen(true);
+
+        window.open(res.pay_url, '_blank');
+        const data = await getOrders(token);
+        if (data) dispatch(fetchOrders(data));
+      } else {
+        setMessage(t('error'));
+        setIsPopupOpen(true);
+      }
     }
   }
 

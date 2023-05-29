@@ -19,10 +19,11 @@ export default async function handler(req, res) {
       headers: req.headers,
     });
 
-    console.log(serverRes)
     if (!serverRes.ok) throw new Error(`error: ${serverRes.status}`);
 
-    res.status(200).send(serverRes.ok);
+    const data = await serverRes.json();
+
+    res.status(200).send(data);
   } catch (err) {
     res.status(err.status).send({ error: 'failed to fetch data' });
   }
