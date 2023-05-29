@@ -34,7 +34,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   }
 });
 
-const Vds = () => {
+const Vds = (vps) => {
   const { t } = useTranslation();
   const router = useRouter();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
