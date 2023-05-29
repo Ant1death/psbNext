@@ -175,44 +175,44 @@ const Order = (id) => {
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
-              {`${t('profile-order')} на аренду сервера ${currentOrder[1].title}`}
+              {currentOrder[1] && currentOrder[1].title && `${t('profile-order')} на аренду сервера ${currentOrder[1].title}`}
             </h2>
             <h3 className={style['order__section-title']}>
               {t('profile-order-info')}
             </h3>
             <ul className={style['order__details-list']}>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-number')} ${currentOrder[1].order_id}`}
+                {currentOrder[1] && currentOrder[1].order_id && `${t('profile-order-number')} ${currentOrder[1].order_id}`}
               </li>
               <li className={style['order__details-item']}>
-                {`IP: ${currentOrder[0].ip}`}
+                {currentOrder[0] && currentOrder[0].ip && `IP: ${currentOrder[0].ip}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-user')} ${currentOrder[0].superuser}`}
+                {currentOrder[0] && currentOrder[0].superuser && `${t('profile-order-user')} ${currentOrder[0].superuser}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-password')} ${currentOrder[0].password}`}
+                {currentOrder[0] && currentOrder[0].password && `${t('profile-order-password')} ${currentOrder[0].password}`}
               </li>
               <li className={style['order__details-item']}>
-                {`${t('profile-order-port')} ${currentOrder[0].port}`}
+                {currentOrder[0] && currentOrder[0].port && `${t('profile-order-port')} ${currentOrder[0].port}`}
               </li>
               <li className={style['order__details-item']}>
-                {`OS: ${currentOrder[1].os}`}
+                {currentOrder[1] && currentOrder[1].os && `OS: ${currentOrder[1].os}`}
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-renewal')}&nbsp;
                 <span className={`${currentOrder[1].auto_refresh ? style['order__span_green'] : style['order__span_red']}`}>
-                  {currentOrder[1].auto_refresh ? t('auto-refresh-true') : t('auto-refresh-false')}
+                  {currentOrder[1] && currentOrder[1].auto_refresh ? t('auto-refresh-true') : t('auto-refresh-false')}
                 </span>
               </li>
               <li className={style['order__details-item']}>
                 {t('profile-order-price')}&nbsp;
                 <span className={style['order__span_dark']}>
-                  {`$${currentOrder[1].price}/${t('order-price-period')}`}
+                  {currentOrder[1] && currentOrder[1].price && `$${currentOrder[1].price}/${t('order-price-period')}`}
                 </span>
               </li>
             </ul>
-            {currentOrder[1].title && currentOrder[1].title.includes('RDP') &&
+            {currentOrder[1].length > 0 && currentOrder[1].title && currentOrder[1].title.includes('RDP') &&
               <p className={style['order__message']}>
                 {t('profile-order-rdp')}
               </p>
