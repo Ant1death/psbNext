@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   const queries = `order_id=${order_id}&os=${os}`;
 
   try {
-    const serverRes = await fetch(`${process.env.BASE_URL}/order/new?${queries}`, {
+    const serverRes = await fetch(`${process.env.BASE_URL}/order/server/change_operative_system?${queries}`, {
       method: 'GET',
       headers: req.headers,
     });
