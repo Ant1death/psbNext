@@ -16,7 +16,7 @@ import { startServer } from '../../../../api/startServer';
 import { restartServer } from '../../../../api/restartServer';
 import { stopServer } from '../../../../api/stopServer';
 import { toggleAutoRefresh } from '../../../../api/toggleAutoRefresh';
-import { OS_LIST } from '../../../../utils/constants';
+import { OS_LIST, NUMBER_REG_EXP } from '../../../../utils/constants';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -34,12 +34,13 @@ const Order = (id) => {
   const { t } = useTranslation();
   const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
   const dispatch = useAppDispatch();
-  const { values, errors, isValid, handleChange } = useFormAndValidation();
+  const { values, errors, isValid, handleChange, setIsValid } = useFormAndValidation();
 
   const [system, setSystem] = useState('');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorOnlyNumbers, setErrorOnlyNumbers] = useState('');
 
   const fetchData = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
@@ -169,6 +170,18 @@ const Order = (id) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (values.password && NUMBER_REG_EXP.test(values.password)) {
+      setIsValid(false);
+      setErrorOnlyNumbers(t('error-numbers'));
+    } else if (!errors.password && errorOnlyNumbers) {
+      setIsValid(true);
+      setErrorOnlyNumbers('');
+    } else {
+      setErrorOnlyNumbers('');
+    }
+  }, [values.password]);
+
   return (
     <div className={style['order']}>
       {currentOrder &&
@@ -263,10 +276,10 @@ const Order = (id) => {
                 value={values.password || ''}
                 onChange={handleChange}
                 required
-                pattern='^(?=.*[+.=*_\-!@#&%,])(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$'
+                minLength='8'
               />
               <p className={`${style.error} ${!isValid ? style['error_active'] : ''}`}>
-                {!isValid && errors.password}
+                {errorOnlyNumbers ? errorOnlyNumbers : (!isValid ? errors.password : '')}
               </p>
               <button
                 type='submit'
