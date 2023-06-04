@@ -62,7 +62,7 @@ const Order = (id) => {
 
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (system && token) {
-      const queries = `order_id=${currentOrder[1].order_id}&os=${system}`;
+      const queries = `order_id=${currentOrder[0].order_id}&os=${system}`;
       const res = await changeOperativeSystem(token, queries);
 
       if (res) {
@@ -85,7 +85,7 @@ const Order = (id) => {
 
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
-      const queries = `order_id=${currentOrder[1].order_id}&password=${values.password}`;
+      const queries = `order_id=${currentOrder[0].order_id}&password=${values.password}`;
       const res = await changeServerPassword(token, queries);
 
       if (res) {
@@ -120,7 +120,7 @@ const Order = (id) => {
   const handleStartServer = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
-      const res = await startServer(token, currentOrder[1].order_id);
+      const res = await startServer(token, currentOrder[0].order_id);
 
       if (res) {
         setMessage(t('error-start-server-success'));
@@ -136,7 +136,7 @@ const Order = (id) => {
   const handleRestartServer = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
-      const res = await restartServer(token, currentOrder[1].order_id);
+      const res = await restartServer(token, currentOrder[0].order_id);
 
       if (res) {
         setMessage(t('error-restart-server-success'));
@@ -152,7 +152,7 @@ const Order = (id) => {
   const handleStopServer = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
-      const res = await stopServer(token, currentOrder[1].order_id);
+      const res = await stopServer(token, currentOrder[0].order_id);
 
       if (res) {
         setMessage(t('error-stop-server-success'));
