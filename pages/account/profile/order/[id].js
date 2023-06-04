@@ -36,7 +36,7 @@ const Order = (id) => {
   const dispatch = useAppDispatch();
   const { values, errors, isValid, handleChange, setIsValid } = useFormAndValidation();
 
-  const [system, setSystem] = useState('');
+  const [system, setSystem] = useState('Debian 11');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -252,7 +252,7 @@ const Order = (id) => {
               >
                 {OS_LIST.map(el => {
                   return (
-                    <option value={el.content} key={el.id}>
+                    <option value={el.name} key={el.id}>
                       {el.name}
                     </option>
                   );
