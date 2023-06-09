@@ -90,7 +90,7 @@ const Vpn = (vpn) => {
           <li className={style['instructions__list-item']}>
             <img alt='icon' src='/icon-three.png' className={style['instructions__icon']} />
             <p className={style['instructions__text']}>
-              {t('instructionn-three')}
+              {t('instruction-three')}
             </p>
           </li>
         </ul>

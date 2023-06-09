@@ -174,7 +174,7 @@ export const FAQ_LIST_ABUSE_RU = [
   },
   {
     id: 3,
-    question: 'Сколько времени происходит активация абузоустойчевого сервера?',
+    question: 'Сколько времени происходит активация абузоустойчивого сервера?',
     answer: 'До 24 часов',
   },
   {
@@ -235,7 +235,7 @@ export const VPS_COUNTRY_LIST = [
   },
   {
     id: 1,
-    country: 'Moldowa',
+    country: 'Moldova',
     flag: '/md.svg',
     description: [
       'DMCA 100% ignored',
