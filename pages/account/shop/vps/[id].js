@@ -145,7 +145,7 @@ const VpsItem = (id) => {
         })}
       </select>
       <label className={style['card__form-legend']} htmlFor='system'>
-        {`${t('new-service-panel')} NL`}
+        {`${t('new-service-panel')}`}
       </label>
       <select
         className={style['card__form-select']}
