@@ -38,6 +38,9 @@ button {
   width: 100%;
   margin: 0 auto;
   padding: 0 4%;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s linear, visibility .15s linear;
 }
 .h2-title {
   font-size: 2rem;
@@ -103,4 +106,9 @@ section {
   .account-main {
     padding: 75px calc(15px + .75rem) 0 calc(15px + .75rem);
   }
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
