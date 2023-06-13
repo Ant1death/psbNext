@@ -173,9 +173,6 @@
     row-gap: 15px;
 
     & li {
-      display: flex;
-      column-gap: 15px;
-      align-items: center;
       font-size: 13px;
     }
   }
@@ -189,6 +186,9 @@
     padding: 0;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-flex;
+    column-gap: 10px;
+    align-items: center;
 
     &_green {
       background: #13bfa6;

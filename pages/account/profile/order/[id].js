@@ -304,8 +304,8 @@ const Order = (id) => {
                   type='button'
                 >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
+                  {!currentOrder.auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
                 </button>
-                {!currentOrder.auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
               </li>
               <li>
                 <button
@@ -314,8 +314,8 @@ const Order = (id) => {
                   onClick={handleStartServer}
                 >
                   <iconify-icon icon="material-symbols:power-rounded"></iconify-icon>
+                  {t('profile-order-option-two')}
                 </button>
-                {t('profile-order-option-two')}
               </li>
               <li>
                 <button
@@ -324,8 +324,8 @@ const Order = (id) => {
                   onClick={handleRestartServer}
                 >
                   <iconify-icon icon="zondicons:reload"></iconify-icon>
+                  {t('profile-order-option-three')}
                 </button>
-                {t('profile-order-option-three')}
               </li>
               <li>
                 <button
@@ -334,8 +334,8 @@ const Order = (id) => {
                   onClick={handleStopServer}
                 >
                   <iconify-icon icon="lucide:power-off"></iconify-icon>
+                  {t('profile-order-option-four')}
                 </button>
-                {t('profile-order-option-four')}
               </li>
             </ul>
           </section>
