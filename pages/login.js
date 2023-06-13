@@ -82,7 +82,7 @@ const Login = () => {
             id='name'
             required
             className={style['input__field']}
-            placeholder={t('name')}
+            placeholder={t('email')}
             value={values.name || ''}
             onChange={handleChange}
           />
