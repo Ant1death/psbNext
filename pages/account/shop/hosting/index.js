@@ -9,6 +9,7 @@ import Preloader from '../../../../compontens/Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchHosting } from '../../../../store/slices/hosting';
 import { getProducts } from '../../../../api/getProducts';
+import { sortHostings } from '../../../../utils/sortHostings';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -30,7 +31,7 @@ export default function AccountHosting() {
   const fetchData = async () => {
     const hostings = await getProducts('Hosting', '/api/getProducts');
     const hosting = hostings && hostings.products ? hostings.products : [];
-    dispatch(fetchHosting(hosting));
+    dispatch(fetchHosting(sortHostings(hosting)));
   }
 
   useEffect(() => {

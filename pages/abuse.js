@@ -9,6 +9,7 @@ import FaqItem from '../compontens/FaqItem/FaqItem';
 import HostingCard from '../compontens/HostingCard/HostingCard';
 import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants';
 import { Advantages } from '../compontens/Advantages/Advantages';
+import { sortHostings } from '../utils/sortHostings';
 
 import { getProducts } from '../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
@@ -29,7 +30,8 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 
   const hostings = await getProducts('Hosting', `${process.env.BASE_URL}/products/all`);
   const hosting = hostings && hostings.products ? hostings.products : [];
-  dispatch(fetchHosting(hosting));
+
+  dispatch(fetchHosting(sortHostings(hosting)));
 
   return {
     props: {
