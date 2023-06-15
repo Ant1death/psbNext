@@ -50,9 +50,9 @@ const Layout = ({ children, title }) => {
         <div className={`container ${isLoading ? 'hidden' : ''}`}>
           <AppHeader />
             { children }
+          <AppFooter />
+          <ButtonTelegram />
         </div>
-        <AppFooter />
-        <ButtonTelegram />
       </div>
     </>
   );

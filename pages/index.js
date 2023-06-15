@@ -28,7 +28,7 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <main className={style.main}>
       <section className={style.hero}>
         <div className={style.hero__info}>
           <h2 className={`${['h2-title']} ${style.hero__title}`}>
@@ -82,7 +82,6 @@ export default function Home() {
             clickable: true,
           }}
           className='mySwiper'
-          centeredSlides={true}
         >
           <SwiperSlide>
             <div className={styleAdvantages['advantages__list-item']}>
@@ -314,7 +313,7 @@ export default function Home() {
           </div>
         </div>
       </section> */}
-    </>
+    </main>
   );
 }
 

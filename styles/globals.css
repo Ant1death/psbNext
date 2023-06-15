@@ -59,10 +59,7 @@ button {
   font-weight: bold;
 }
 .container {
-  max-width: 1434px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 4%;
   visibility: visible;
   opacity: 1;
   transition: opacity 0.15s linear, visibility .15s linear;
