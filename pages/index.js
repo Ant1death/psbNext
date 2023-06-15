@@ -9,7 +9,7 @@ import Layout from '../compontens/Layout/Layout';
 
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
-import { VPS_COUNTRY_LIST } from '../utils/constants';
+import { VPS_COUNTRY_LIST, PAYMENTS } from '../utils/constants';
 
 import style from '../styles/Main.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -191,7 +191,27 @@ export default function Home() {
           </li>
         </ul>
       </section>
-
+      <section className="payment">
+        <h3 className={`${['h3-title']} ${style.payment__title}`}>
+          {t('payment')}
+        </h3>
+        <ul className={style.payment__wrapper}>
+          {PAYMENTS.map((el, ind) => {
+            return (
+              <li key={ind} className={style['payment__wrapper-item']}>
+                <Image
+                  className={style["payment__wrapper-img"]}
+                  src={el.img}
+                  alt={el.name}
+                  width={160}
+                  height={160}
+                />
+                <p className={style["payment__wrapper-text"]}>{el.name}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
 
 
@@ -309,43 +329,7 @@ export default function Home() {
           <img src="/map.jpg" alt="map" />
         </div>
       </section>
-      <section className="payment">
-        <h3 className={`${['h3-title']} ${style.payment__title}`}>
-          {t('payment')}
-        </h3>
-        <div className={style.payment__wrapper}>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/ethereum.png" alt="Ethereum" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Ethereum</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/litecoin.svg" alt="Litecoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Litecoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/usdt.svg" alt="USDT" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>USDT</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/qiwi.png" alt="Qiwi" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Qiwi</div>
-          </div>
-        </div>
-      </section>
+
     </main>
   );
 }

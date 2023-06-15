@@ -1,3 +1,11 @@
+import bitcoin from '../public/bitcoin.svg';
+import ethereum from '../public/ethereum.svg';
+import litecoin from '../public/litecoin.svg';
+import usdt from '../public/usdt.svg';
+import qiwi from '../public/qiwi.svg';
+import visa from '../public/visa.svg';
+import mastercard from '../public/mk.svg';
+
 export const TRANSFORM_AMOUNT = 10;
 export const INDENT_POPUP_NOTIFICATION = 25;
 export const INDENT_POPUP_PROFILE = 20;
@@ -23,6 +31,37 @@ export const PATH_LIST_EN = {
   new: 'New Service',
   profile: 'Your Account',
 }
+
+export const PAYMENTS = [
+  {
+    name: 'Bitcoin',
+    img: bitcoin,
+  },
+  {
+    name: 'Ethereum',
+    img: ethereum,
+  },
+  {
+    name: 'Litecoin',
+    img: litecoin,
+  },
+  {
+    name: 'USDT',
+    img: usdt,
+  },
+  {
+    name: 'Qiwi',
+    img: qiwi,
+  },
+  {
+    name: 'Visa',
+    img: visa,
+  },
+  {
+    name: 'Mastercard',
+    img: mastercard,
+  },
+]
 
 export const FAQ_LIST_VPS_RU = [
   {
