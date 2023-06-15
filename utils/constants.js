@@ -141,6 +141,60 @@ export const FAQ_LIST_EN = [
   },
 ];
 
+export const REVIEW_RU = [
+  {
+    name: 'Hosting.info',
+    number: '4.9',
+    img: './review_stars.svg',
+    text: 'средняя оценка',
+  },
+  {
+    name: 'Hosting101.ru',
+    number: '6',
+    img: './review_lightning.svg',
+    text: 'преимуществ',
+  },
+  {
+    name: 'HostingHUB.ru',
+    number: '9',
+    img: './review_messages.svg',
+    text: 'отзывов',
+  },
+  {
+    name: 'VpsUP.ru',
+    number: '19',
+    img: './review_bomb.svg',
+    text: 'место из 169',
+  },
+];
+
+export const REVIEW_EN = [
+  {
+    name: 'Hosting.info',
+    number: '4.9',
+    img: './review_stars.svg',
+    text: 'average rating',
+  },
+  {
+    name: 'Hosting101.ru',
+    number: '6',
+    img: './review_lightning.svg',
+    text: 'advantages',
+  },
+  {
+    name: 'HostingHUB.ru',
+    number: '9',
+    img: './review_messages.svg',
+    text: 'reviews',
+  },
+  {
+    name: 'VpsUP.ru',
+    number: '19',
+    img: './review_bomb.svg',
+    text: 'place out of 169',
+  },
+];
+
 export const VPS_COUNTRY_LIST = [
   {
     id: 0,

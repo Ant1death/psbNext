@@ -10,7 +10,7 @@ import FaqItem from '../compontens/FaqItem/FaqItem';
 
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
-import { VPS_COUNTRY_LIST, PAYMENTS, FAQ_LIST_RU, FAQ_LIST_EN } from '../utils/constants';
+import { VPS_COUNTRY_LIST, PAYMENTS, FAQ_LIST_RU, FAQ_LIST_EN, REVIEW_EN, REVIEW_RU } from '../utils/constants';
 
 import style from '../styles/Main.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -228,7 +228,7 @@ export default function Home() {
               />
             );
           })}
-          {t('faq-lang') === 'en' && FAQ_LIST_EN.map(el => {
+          {t('faq-lang') === 'en' && FAQ_LIST_EN.map((el, ind) => {
             return (
               <FaqItem
                 key={ind}
@@ -242,50 +242,94 @@ export default function Home() {
 
       <section className={style['review']}>
         <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
-          {t('faq')}
+          {t('review')}
         </h2>
-        <ul className={style['faq__list']}>
-          {t('faq-lang') === 'ru' && FAQ_LIST_RU.map((el, ind) => {
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiperReview'
+        >
+          {t('faq-lang') === 'ru' && REVIEW_RU.map((el, ind) => {
             return (
-              <FaqItem
-                key={ind}
-                answer={el.answer}
-                question={el.question}
-              />
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
             );
           })}
-          {t('faq-lang') === 'en' && FAQ_LIST_EN.map(el => {
+          {t('faq-lang') === 'en' && REVIEW_EN.map((el, ind) => {
             return (
-              <FaqItem
-                key={ind}
-                answer={el.answer}
-                question={el.question}
-              />
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
             );
           })}
-        </ul>
+        </Swiper>
       </section>
+
+
+
 
 
 
       <section className={style.country}>
         <h2 className={`${['h2-title']} ${style.country__title}`}>
-          {t('rental')}
+          {t('review')}
         </h2>
-        <p className={style.country__title}>
-          {t('rental-about')}
-        </p>
-        <ul className={style.country__wrapper}>
-          {VPS_COUNTRY_LIST.map(el => {
-            return (
-              <CardVpsOnMainPage
-                key={el.id}
-                country={el}
-              />
-            );
-          })}
-        </ul>
+
       </section>
+
+
+
+
       <section className={style['ads']}>
         <h2 className={`${['h2-title']}`}>
           {t('servers')}
