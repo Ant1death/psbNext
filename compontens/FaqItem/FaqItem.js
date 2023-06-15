@@ -16,23 +16,17 @@ const FaqItem = ({ question, answer }) => {
   return (
     <li className={style['faq__item']}>
       <div className={style['faq__question']} onClick={handleClickQuestion}>
-        <h4 className={`${['h4-title']} ${style['faq__title']}`}>
+        <p className={style['faq__title']}>
           {question}
-        </h4>
-        <iconify-icon icon="material-symbols:keyboard-arrow-down-rounded"></iconify-icon>
+        </p>
+        <button
+          type='button'
+          aria-label='кнопка показать ответ'
+          className={`${style['faq__button']} ${isActive ? style['faq__button_open'] : ''}`}
+        ></button>
       </div>
       <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
-        {answer.includes('https') &&
-          <>
-            {`${t('faq-link')}`}&nbsp;
-            <Link href="https://www.wireguard.com/install/" target='_blank'>
-              https://www.wireguard.com/install/
-            </Link>.
-          </>
-        }
-        {!answer.includes('https') &&
-          answer
-        }
+        {answer}
       </p>
     </li>
   );

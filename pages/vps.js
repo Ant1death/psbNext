@@ -15,7 +15,7 @@ import { fetchVdsVps } from '../store/slices/vdsVps';
 import { wrapper } from '../store/store';
 import { useAppSelector } from '../store/hooks';
 
-import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants';
+/* import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants'; */
 
 import style from '../styles/Vps.module.scss';
 
@@ -96,7 +96,7 @@ const Vds = (vps) => {
       </section>
       <AvailableSystems />
       <Advantages sectionTitle='' />
-      <section className={style['faq']}>
+      {/* <section className={style['faq']}>
       <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
       <ul className={style['faq__items']}>
         {t('faq-lang') === 'ru' && FAQ_LIST_VPS_RU.map(el => {
@@ -118,7 +118,7 @@ const Vds = (vps) => {
           );
         })}
       </ul>
-      </section>
+      </section> */}
     </>
   );
 }

@@ -63,201 +63,81 @@ export const PAYMENTS = [
   },
 ]
 
-export const FAQ_LIST_VPS_RU = [
+export const FAQ_LIST_RU = [
   {
-    id: 0,
-    question: 'Что такое оффшорный веб хостинг?',
-    answer: 'Оффшорные хостинги гарантируют полную конфиденциальность данных, анонимность и широкий спектр приемлемого контента',
+    question: 'Что такое оффшорные сервера?',
+    answer: 'Оффшорные сервера гарантируют полную конфиденциальность данных и анонимность. Подходят для безопасного хранения информации и любых других проектов.',
   },
   {
-    id: 1,
+    question: 'Какой контент запрещено размещать на оффшорных серверах?',
+    answer: 'Любой контент по которому приходят жалобы на сервер, исключение DMCA.',
+  },
+  {
     question: 'Что такое DMCA?',
     answer: 'Digital Millenium Copyright Act — это закон, обеспечивающий соблюдение авторского права. Его приняли в 1998 году в США, и действует он только в американской юрисдикции',
   },
   {
-    id: 2,
-    question: 'Какие способы оплаты вы принимаете?',
-    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
+    question: 'В каких странах вы игнорируете запросы DMCA?',
+    answer: 'Нидерланды и Молдавия.',
   },
   {
-    id: 3,
+    question: 'Что такое Bulletproof сервера?',
+    answer: 'На Bulletproof серверах разрешено размещение любого контента. Исключение: майнинг, взлом RDP, атаки на сервера (DDoS, exploit и т.д.)',
+  },
+  {
     question: 'Вам нужна моя личная информация?',
     answer: 'Нет, мы не запрашиваем информацию о клиентах, весь процесс покупки и использования наших услуг является анонимным',
   },
   {
-    id: 4,
     question: 'Делаете ли вы резервное копирование (бэкапы)?',
     answer: 'По умолчанию бэкапы отключены',
   },
   {
-    id: 5,
     question: 'Есть ли у вас защита от DDOS атак?',
     answer: 'Да, мы предоставляем защиту от DDOS атак',
   },
+  {
+    question: 'Какие способы оплаты вы принимаете?',
+    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
+  },
 ];
 
-export const FAQ_LIST_VPS_EN = [
+export const FAQ_LIST_EN = [
   {
-    id: 0,
-    question: 'What is offshore web hosting?',
-    answer: 'Offshore web hosting guarantees complete data privacy, anonymity and a wide range of acceptable content',
+    question: 'What are offshore servers?',
+    answer: 'Offshore servers guarantee complete data confidentiality and anonymity. They are suitable for secure storage of information and any other projects.',
   },
   {
-    id: 1,
+    question: 'What content is prohibited from hosting offshore servers?',
+    answer: 'Any content for which complaints come to the server. DMCA is exception.',
+  },
+  {
     question: 'What is the DMCA?',
     answer: 'The Digital Millenium Copyright Act is a law enforcing copyright law. It was passed in 1998 in the United States and is only valid in American jurisdiction',
   },
   {
-    id: 2,
-    question: 'What payment methods do you accept?',
-    answer: 'We accept payment BTC, ETH, LTC, USDT (TRC-20)',
+    question: 'In which countries do you ignore DMCA requests?',
+    answer: 'Netherlands and Moldova.',
   },
   {
-    id: 3,
+    question: 'What are Bulletproof servers?',
+    answer: 'Any content is allowed on Bulletproof servers. Exception is mining, RDP hacking, server attacks (DDoS, exploit, etc.)',
+  },
+  {
     question: 'You want my personal information?',
     answer: 'No, we do not ask for customer information, the entire process of buying and use of our services is anonymous',
   },
   {
-    id: 4,
     question: 'Do you make backups?',
     answer: 'Backups are disabled by default',
   },
   {
-    id: 5,
     question: 'Do you have protection against DDOS attacks?',
     answer: 'Yes, we provide protection from DDOS attacks',
   },
-];
-
-export const FAQ_LIST_VPN_RU = [
   {
-    id: 0,
-    question: 'На каких устройствах можно использовать VPN?',
-    answer: 'Windows, macOS, Android, iOS, Linux.',
-  },
-  {
-    id: 1,
-    question: 'Чем WireGuard лучше OpenVPN?',
-    answer: 'WireGuard не использует большой объем кода, поэтому работает быстрее.',
-  },
-  {
-    id: 2,
-    question: 'Какие способы оплаты вы принимаете?',
-    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
-  },
-  {
-    id: 3,
-    question: 'У вас есть скидки за аренду VPN на длительный срок?',
-    answer: 'Да, 3 месяца -5%, 6 месяцев -10%, 12 месяцев -15%',
-  },
-  {
-    id: 4,
-    question: 'Ваш VPN анонимный?',
-    answer: 'Да, мы не храним логи и используем современные протоколы шифрования.',
-  },
-  {
-    id: 5,
-    question: 'Где мне скачать клиент для моего устройства?',
-    answer: 'На официальном сайте https://www.wireguard.com/install/.',
-  },
-];
-
-export const FAQ_LIST_VPN_EN = [
-  {
-    id: 0,
-    question: 'On which devices you can use a VPN?',
-    answer: 'Windows, macOS, Android, iOS, Linux.',
-  },
-  {
-    id: 1,
-    question: 'How is WireGuard better than OpenVPN?',
-    answer: 'WireGuard does not use a large amount of code, so it works faster.',
-  },
-  {
-    id: 2,
-    question: 'What payment methods do you accept?',
-    answer: 'We accept BTC, ETH, LTC, USDT (TRC-20)',
-  },
-  {
-    id: 3,
-    question: 'You have discounts for long term VPN rentals?',
-    answer: 'Yes, 3 months -5%, 6 months -10%, 12 months -15%',
-  },
-  {
-    id: 4,
-    question: 'Your VPN is anonymous?',
-    answer: 'Yes, we do not store logs and use modern encryption protocols.',
-  },
-  {
-    id: 5,
-    question: 'Where do I download the client for my device?',
-    answer: 'On the official website https://www.wireguard.com/install/.',
-  },
-];
-
-export const FAQ_LIST_ABUSE_RU = [
-  {
-    id: 0,
-    question: 'Что такое Абузоустойчивые сервера?',
-    answer: 'Абузоустойчивые VPS/VDS разрешают размещение любого контента',
-  },
-  {
-    id: 1,
-    question: 'На сколько выдается хостинг?',
-    answer: 'Минимальный срок 30 дней',
-  },
-  {
-    id: 2,
-    question: 'Какие способы оплаты вы принимаете?',
-    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
-  },
-  {
-    id: 3,
-    question: 'Сколько времени происходит активация абузоустойчивого сервера?',
-    answer: 'До 24 часов',
-  },
-  {
-    id: 4,
-    question: 'Вам нужна моя личная информация?',
-    answer: 'Нет, мы не запрашиваем информацию о клиентах, весь процесс покупки и использования наших услуг является анонимным',
-  },
-  {
-    id: 5,
-    question: 'Есть ли у вас защита от DDOS атак?',
-    answer: 'Да, мы предоставляем защиту от DDOS атак',
-  },
-];
-
-export const FAQ_LIST_ABUSE_EN = [
-  {
-    id: 0,
-    question: 'What is a bulletproof server?',
-    answer: 'Bulletproof VPS/VDS allows to host any content',
-  },
-  {
-    id: 1,
-    question: 'For how long is the hosting given out?',
-    answer: 'Minimum period 30 days',
-  },
-  {
-    id: 2,
     question: 'What payment methods do you accept?',
     answer: 'We accept payment BTC, ETH, LTC, USDT (TRC-20)',
-  },
-  {
-    id: 3,
-    question: 'How long does it take to activate an bulletproof server?',
-    answer: 'Up to 24 hours',
-  },
-  {
-    id: 4,
-    question: 'You want my personal information?',
-    answer: 'No, we do not ask for customer information, the entire process of buying and use of our services is anonymous',
-  },
-  {
-    id: 5,
-    question: 'Do you have protection against DDOS attacks?',
-    answer: 'Yes, we provide protection from DDOS attacks',
   },
 ];
 

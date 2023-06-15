@@ -131,7 +131,7 @@ section {
 }
 
 @media screen and (max-width: 768px) {
-  .h3-title {
+  .h2-title {
     font-size: 24px;
   }
 }

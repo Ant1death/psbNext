@@ -5,11 +5,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 
 import Layout from '../compontens/Layout/Layout';
+import FaqItem from '../compontens/FaqItem/FaqItem';
 
 
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
-import { VPS_COUNTRY_LIST, PAYMENTS } from '../utils/constants';
+import { VPS_COUNTRY_LIST, PAYMENTS, FAQ_LIST_RU, FAQ_LIST_EN } from '../utils/constants';
 
 import style from '../styles/Main.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -191,10 +192,10 @@ export default function Home() {
           </li>
         </ul>
       </section>
-      <section className="payment">
-        <h3 className={`${['h3-title']} ${style.payment__title}`}>
+      <section className={style['payment']}>
+        <h2 className={`${['h2-title']}`}>
           {t('payment')}
-        </h3>
+        </h2>
         <ul className={style.payment__wrapper}>
           {PAYMENTS.map((el, ind) => {
             return (
@@ -213,8 +214,57 @@ export default function Home() {
         </ul>
       </section>
 
+      <section className={style['faq']}>
+        <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
+          {t('faq')}
+        </h2>
+        <ul className={style['faq__list']}>
+          {t('faq-lang') === 'ru' && FAQ_LIST_RU.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_EN.map(el => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+        </ul>
+      </section>
 
-
+      <section className={style['review']}>
+        <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
+          {t('faq')}
+        </h2>
+        <ul className={style['faq__list']}>
+          {t('faq-lang') === 'ru' && FAQ_LIST_RU.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_EN.map(el => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+        </ul>
+      </section>
 
 
 

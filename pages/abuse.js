@@ -7,7 +7,7 @@ import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import HostingCard from '../compontens/HostingCard/HostingCard';
-import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants';
+/* import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants'; */
 import { Advantages } from '../compontens/Advantages/Advantages';
 import { sortHostings } from '../utils/sortHostings';
 
@@ -85,7 +85,7 @@ const Abuse = (hostingList) => {
       </section>
       <AvailableSystems />
       <Advantages sectionTitle='' />
-      <section className={style['faq']}>
+     {/*  <section className={style['faq']}>
         <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
         <ul>
           {t('faq-lang') === 'ru' && FAQ_LIST_ABUSE_RU.map(el => {
@@ -107,7 +107,7 @@ const Abuse = (hostingList) => {
             );
           })}
         </ul>
-      </section>
+      </section> */}
     </>
   );
 }

@@ -13,7 +13,7 @@ import { getProducts } from '../api/getProducts';
 import { fetchVpn } from '../store/slices/vpn';
 import { useAppSelector } from '../store/hooks';
 
-import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants';
+/* import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants'; */
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -138,7 +138,7 @@ const Vpn = (vpn) => {
           </li>
         </ul>
       </section>
-      <section className={style['faq']}>
+     {/*  <section className={style['faq']}>
         <h2 className={style['main-title']}>
           {t('faq')}
         </h2>
@@ -162,7 +162,7 @@ const Vpn = (vpn) => {
             );
           })}
         </ul>
-      </section>
+      </section> */}
     </>
   );
 }
