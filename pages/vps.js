@@ -15,7 +15,7 @@ import { fetchVdsVps } from '../store/slices/vdsVps';
 import { wrapper } from '../store/store';
 import { useAppSelector } from '../store/hooks';
 
-/* import { FAQ_LIST_VPS_RU, FAQ_LIST_VPS_EN, VPS_COUNTRY_LIST } from '../utils/constants'; */
+import { VPS_COUNTRY_LIST } from '../utils/constants';
 
 import style from '../styles/Vps.module.scss';
 
