@@ -95,7 +95,7 @@ const Vds = (vps) => {
         </ul>
       </section>
       <AvailableSystems />
-      <Advantages />
+      <Advantages sectionTitle='' />
       <section className={style['faq']}>
       <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
       <ul className={style['faq__items']}>

@@ -2,14 +2,13 @@ import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/Advantages.module.scss';
 
-export const Advantages = () => {
+export const Advantages = ({ sectionTitle }) => {
   const { t } = useTranslation();
 
   return (
     <section className={style['advantages']}>
         <div className={style['section-title']}>
-          <h2 className={`${['h2-title']}`}>{t('advantages')}</h2>
-          <p>{t('advantages-about')}</p>
+          <h2 className={`${['h2-title']}`}>{sectionTitle}</h2>
         </div>
         <ul className={style['advantages__list']}>
           <li className={style['advantages__list-item']}>

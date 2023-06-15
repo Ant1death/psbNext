@@ -1,13 +1,20 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
 
 import Layout from '../compontens/Layout/Layout';
+
+
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import CardVpsOnMainPage from '../compontens/CardVpsOnMainPage/CardVpsOnMainPage';
 import { VPS_COUNTRY_LIST } from '../utils/constants';
 
 import style from '../styles/Main.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 Home.getLayout = function getLayout(page) {
   return (
@@ -43,6 +50,122 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <section className={styleAdvantages['advantages']}>
+        <div className={styleAdvantages['section-title']}>
+          <h2 className={`${['h2-title']}`}>{t('advantages-title-main')}</h2>
+        </div>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiper'
+          centeredSlides={true}
+        >
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./equipment.svg'
+                alt='icon equipment'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-fix-one')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-fix-one-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./abuse.svg'
+                alt='icon Bulletproof'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-two')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-two-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./security.svg'
+                alt='icon security'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-one')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-one-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./vpn_adv.svg'
+                alt='icon vpn'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-seven')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-seven-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+
+
+        <ul className={styleAdvantages['advantages__list']}>
+
+
+
+
+        </ul>
+      </section>
+
+
+
+{/*
       <section className={style.country}>
         <h2 className={`${['h2-title']} ${style.country__title}`}>
           {t('rental')}
@@ -190,7 +313,7 @@ export default function Home() {
             <div className={style["payment__wrapper-text"]}>Qiwi</div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

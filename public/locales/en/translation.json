@@ -28,12 +28,19 @@
   "vds-list": "List of dedicated server services",
   "systems": "Available operating systems",
 
+  "advantages-title-main": "Why us?",
+  "advantages-fix-one": "Quality equipment",
+  "advantages-fix-one-about": "SSD NVMe drives and own high quality equipment are located in data-centers around the world: the Netherlands, Moldova, Hong Kong, USA, UK, Germany, Greece, Canada, Turkey.",
+  "advantages-two": "Bulletproof servers",
+  "advantages-two-about": "We provide Bulletproof VPS/VDS/Hosting at the best prices.",
+  "advantages-one": "Data privacy",
+  "advantages-one-about": "Customer safety is our top priority – anonymous registration, cryptocurrency payment, encrypted data storage.",
+  "advantages-seven": "Private VPN service",
+  "advantages-seven-about": "WireGuard's state-of-the-art, low-resource VPN, in more than 20 countries.",
+
+
   "advantages": "Benefits",
   "advantages-about": "Advantages of our hosting",
-  "advantages-one": "Data privacy",
-  "advantages-one-about": "Customer safety is our top priority. We keep all confidential data in encrypted form and do not share it with third parties.",
-  "advantages-two": "Bulletproof servers",
-  "advantages-two-about": "We provide bulletproof VPS/Hosting at the best prices.",
   "advantages-three": "DMCA 100% ignored",
   "advantages-three-about": "In the Netherlands and Moldova, DMCA requests are completely ignored, allowing to host a wider range of acceptable content.",
   "advantages-four": "Payment in cryptocurrency",
@@ -42,8 +49,6 @@
   "advantages-five-about": "Our servers are located in data-centers around the world: The Netherlands, Moldova, Hong Kong, USA, UK, Germany, Canada, Turkey.",
   "advantages-six": "SSD NVMe drives",
   "advantages-six-about": "NVMe disks and proprietary high-quality hardware.",
-  "advantages-seven": "Private VPN service",
-  "advantages-seven-about": "WireGuard's state-of-the-art, low-resource VPN, in more than 20 countries.",
   "advantages-eight": "Technical support",
   "advantages-eight-about": "Our technical support is available 24/7 to help you with any questions.",
 

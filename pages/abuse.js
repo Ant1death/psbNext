@@ -84,7 +84,7 @@ const Abuse = (hostingList) => {
         </ul>
       </section>
       <AvailableSystems />
-      <Advantages />
+      <Advantages sectionTitle='' />
       <section className={style['faq']}>
         <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
         <ul>
