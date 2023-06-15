@@ -52,9 +52,9 @@ export default function Home() {
       </section>
 
       <section className={styleAdvantages['advantages']}>
-        <div className={styleAdvantages['section-title']}>
-          <h2 className={`${['h2-title']}`}>{t('advantages-title-main')}</h2>
-        </div>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+          {t('advantages-title-main')}
+        </h2>
         <Swiper
           modules={[ Pagination ]}
           breakpoints={{
@@ -152,19 +152,52 @@ export default function Home() {
             </div>
           </SwiperSlide>
         </Swiper>
+      </section>
 
-
-        <ul className={styleAdvantages['advantages__list']}>
-
-
-
-
+      <section className={style.servises}>
+        <h2 className={`${['h2-title']} ${style.servises__title}`}>
+          {t('servises')}
+        </h2>
+        <ul className={style.servises__wrapper}>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__vps}`} href='/vps'>
+              <h3 className={style['servises__item-title']}>
+                VPS
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-vps')}
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__abuse}`} href='/abuse'>
+            <h3 className={style['servises__item-title']}>
+                Bulletproof
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-bulletproof')}
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__vpn}`} href='/vpn'>
+              <h3 className={style['servises__item-title']}>
+                VPN
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-vpn')}
+              </p>
+            </Link>
+          </li>
         </ul>
       </section>
 
 
 
-{/*
+
+
+
+
       <section className={style.country}>
         <h2 className={`${['h2-title']} ${style.country__title}`}>
           {t('rental')}
@@ -312,7 +345,7 @@ export default function Home() {
             <div className={style["payment__wrapper-text"]}>Qiwi</div>
           </div>
         </div>
-      </section> */}
+      </section>
     </main>
   );
 }

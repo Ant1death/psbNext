@@ -55,6 +55,93 @@
   }
 }
 
+.servises {
+  &__wrapper {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    display: flex;
+    column-gap: 3%;
+    row-gap: 32px;
+
+    @media screen and (max-width: 1130px) {
+      justify-content: center;
+    }
+  }
+
+  &__item {
+    width: 380px;
+    height: 360px;
+    display: flex;
+    padding: 16px;
+    row-gap: 20px;
+    flex-direction: column;
+    background-color: #F5F6F7;
+    border-radius: 8px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position-x: 170px;
+    background-position-y: 145px;
+
+    @media screen and (max-width: 1340px) {
+      width: 320px;
+      background-position-x: 110px;
+    }
+
+    @media screen and (max-width: 1130px) {
+      height: 320px;
+      background-position-x: 160px;
+      background-size: 150px 150px;
+    }
+
+    @media screen and (max-width: 740px) {
+      width: 390px;
+      background-position-x: 220px;
+    }
+
+    @media screen and (max-width: 450px) {
+      width: 300px;
+      background-position-x: 130px;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: #FFFFFF;
+      box-shadow: 0px 5px 25px rgba(71, 71, 71, 0.25);
+    }
+  }
+
+  &__vps {
+    background-image: url(../public/vps_servises.png);
+    background-position-y: 150px;
+  }
+
+  &__abuse {
+    background-image: url(../public/abuse_servises.png);
+  }
+
+  &__vpn {
+    background-image: url(../public/vpn_servises.png);
+  }
+
+  &__text {
+    color: #888888;
+    font-weight: 400;
+    max-width: 275px;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
 .country {
   &__wrapper {
     margin-top: 20px;

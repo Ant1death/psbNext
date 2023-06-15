@@ -32,7 +32,7 @@ function appFooter() {
               </Link>
             </li>
             <li>
-              <Link href='/vds' className={style.navbar__link}>
+              <Link href='/vps' className={style.navbar__link}>
                 VPS/VDS
               </Link>
             </li>
