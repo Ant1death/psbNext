@@ -1,18 +1,104 @@
 .footer {
+  background-color: #F5F6F7;
+
+  .buttonToTop {
+    background-color: #4E9AA5;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    background-image: url(../public/arrow_top.svg);
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 46px;
+    background-position: center center;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    @media screen and (max-width: 930px) {
+      order: 2;
+      width: 80px;
+    }
+  }
+
+  .wrapper {
+    max-width: 1434px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 4%;
+    display: grid;
+    grid-template-columns: 150px auto 120px;
+    row-gap: 60px;
+    box-sizing: border-box;
+    padding-bottom: 32px;
+    align-items: center;
+    justify-items: center;
+
+    @media screen and (max-width: 930px) {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      display: flex;
+      column-gap: 16.5px;
+      justify-content: space-between;
+    }
+  }
+
   &__copyright {
     text-align: center;
-    margin-bottom: 20px;
     font-weight: 700;
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+    font-size: 32px;
+    box-sizing: border-box;
+    padding-top: 16px;
+
+    @media screen and (max-width: 930px) {
+      order: 1;
+      padding-top: 0;
+      font-size: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 10px;
+    }
+  }
+
+  .link_logo {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    @media screen and (max-width: 930px) {
+      order: 0;
+    }
+
+    .logo {
+      width: 160px;
+      height: 50px;
+
+      @media screen and (max-width: 400px) {
+        width: 130px;
+        height: auto;
+      }
+    }
   }
 
   &__wrapper {
     justify-content: space-between;
-    margin-bottom: 20px;
     display: flex;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+
+    @media screen and (max-width: 930px) {
+      display: none;
+    }
 
     @media screen and (min-width: 720px) {
       justify-content: center;
-      margin: 0 auto 20px;
     }
 
     ul {
@@ -41,6 +127,21 @@
 
     li {
       width: 20%;
+    }
+  }
+
+  .navbar {
+    gap: 24px;
+
+    &__link {
+      font-size: 1.2rem;
+      width: 120px;
+      display: inline-block;
+
+      @media screen and (max-width: 1100px) {
+        width: 100%;
+        max-width: 120;
+      }
     }
   }
 }
