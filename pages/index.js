@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 import Layout from '../compontens/Layout/Layout';
 import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
@@ -28,13 +29,18 @@ export default function Home() {
           </h2>
           <p className={style.hero__text}>{t('hero-one')}</p>
           <p className={style.hero__text}>{t('hero-two')}</p>
-          <p className={style.hero__text}>{t('hero-three')}</p>
           <button className={style.hero__btn}>
             <Link href="/company">{t('company')}</Link>
           </button>
         </div>
         <div className={style.hero__img}>
-          <img src="/astronaut.jpg" alt="astronaut" />
+          <Image
+            src="/main_img.png"
+            alt="PSB hosting image"
+            width={522}
+            height={472}
+            className={style.img}
+          />
         </div>
       </section>
       <section className={style.country}>
