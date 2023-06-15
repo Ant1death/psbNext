@@ -156,6 +156,9 @@
     border-radius: 5px;
     width: 270px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media screen and (max-width: 380px) {
       width: 250px;
@@ -178,17 +181,17 @@
   }
 
   &__options-button {
-    width: 35px;
-    height: 35px;
+    width: 218px;
+    padding: 8px;
     color: #fff;
     text-align: center;
     font-weight: 400;
-    padding: 0;
     border-radius: 5px;
     cursor: pointer;
     display: inline-flex;
-    column-gap: 10px;
+    column-gap: 4px;
     align-items: center;
+    font-size: 14px;
 
     &_green {
       background: #13bfa6;

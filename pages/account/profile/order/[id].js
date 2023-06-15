@@ -184,7 +184,7 @@ const Order = (id) => {
 
   return (
     <div className={style['order']}>
-      {currentOrder &&
+      {currentOrder && currentOrder[1] && currentOrder[0] &&
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
