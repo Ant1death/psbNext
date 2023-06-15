@@ -10,6 +10,7 @@ import HostingCard from '../compontens/HostingCard/HostingCard';
 /* import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants'; */
 import { Advantages } from '../compontens/Advantages/Advantages';
 import { sortHostings } from '../utils/sortHostings';
+import { sortVps } from '../utils/sortVps';
 
 import { getProducts } from '../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
@@ -26,7 +27,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const vps = vpsData && vpsData.products ? vpsData.products : [];
   const vdsData = await getProducts('Bulletproof VPS', `${process.env.BASE_URL}/products/all`);
   const vds = vdsData && vdsData.products ? vdsData.products : [];
-  dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
+  dispatch(fetchVdsVpsBulletproof(sortVps(vds.concat(vps))));
 
   const hostings = await getProducts('Hosting', `${process.env.BASE_URL}/products/all`);
   const hosting = hostings && hostings.products ? hostings.products : [];

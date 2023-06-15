@@ -58,9 +58,11 @@ export default function AccountHosting() {
                   </h2>
                   <ul className={style['shop__item-list']}>
                     {el.characters.map(item => {
-                      return (
-                        <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                      );
+                      if (item) {
+                        return (
+                          <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                        );
+                      }
                     })}
                   </ul>
                 </div>

@@ -9,6 +9,7 @@ import Preloader from '../../../../compontens/Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
 import { getProducts } from '../../../../api/getProducts';
+import { sortVps } from '../../../../utils/sortVps';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -68,7 +69,7 @@ export default function Bulletproof() {
     const vps = vpsData && vpsData.products ? vpsData.products : [];
     const vdsData = await getProducts('Bulletproof VPS', '/api/getProducts');
     const vds = vdsData && vdsData.products ? vdsData.products : [];
-    dispatch(fetchVdsVpsBulletproof(vds.concat(vps)));
+    dispatch(fetchVdsVpsBulletproof(sortVps(vds.concat(vps))));
   }
 
   useEffect(() => {
@@ -197,9 +198,11 @@ export default function Bulletproof() {
                       </h2>
                       <ul className={style['shop__item-list']}>
                         {el.characters.map(item => {
-                          return (
-                            <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                          );
+                          if (item) {
+                            return (
+                              <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                            );
+                          }
                         })}
                       </ul>
                     </div>

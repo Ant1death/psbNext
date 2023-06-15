@@ -9,6 +9,7 @@ import Preloader from '../../../compontens/Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
 import { getProducts } from '../../../api/getProducts';
+import { sortVps } from '../../../utils/sortVps';
 
 import style from '../../../styles/AccountShop.module.scss';
 
@@ -70,7 +71,7 @@ export default function AccountVps() {
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData && vpsData.products ? vpsData.products : [];
-    dispatch(fetchVdsVps(vps));
+    dispatch(fetchVdsVps(sortVps(vps)));
   }
 
   useEffect(() => {
@@ -208,7 +209,7 @@ export default function AccountVps() {
               </ul>
             </div>
             <ul className={style['shop__card-list']}>
-              {currentCountry && currentCountry.map(el => {
+              {currentCountry && currentCountry.length > 0 && currentCountry.map(el => {
                 return (
                   <li key={el.id} className={classItem}>
                     <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
@@ -222,9 +223,11 @@ export default function AccountVps() {
                       </h2>
                       <ul className={style['shop__item-list']}>
                         {el.characters.map(item => {
-                          return (
-                            <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                          );
+                          if (item) {
+                            return (
+                              <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                            );
+                          }
                         })}
                       </ul>
                     </div>
