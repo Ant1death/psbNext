@@ -24,17 +24,20 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const dispatch = store.dispatch;
 
   const vpsData = await getProducts('VPS', `${process.env.BASE_URL}/products/all`);
+
   const vps = vpsData && vpsData.products ? vpsData.products : [];
-  dispatch(fetchVdsVps(sortVps(vps)));
+
+const arr = vps.filter((el, ind) => el.ind !== 14)
+
+
+  dispatch(fetchVdsVps(sortVps(arr)));
 
   return {
-    props: {
-      vps: vps,
-    }
+    props: { }
   }
 });
 
-const Vds = (vps) => {
+const Vds = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -126,7 +129,7 @@ const Vds = (vps) => {
 
 Vds.getLayout = function getLayout(page) {
   return (
-    <Layout title='- VPS/VDS'>
+    <Layout title='- VDS'>
       {page}
     </Layout>
   );

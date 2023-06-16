@@ -17,9 +17,9 @@ const HostingCard = ({ hostingItem }) => {
         </p>
       </div>
       <ul className={style['card__list']}>
-        {hostingItem.characters.map(el => {
+        {hostingItem.characters && hostingItem.characters.map(el => {
           return (
-            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+            el && <li key={el.id}>{`${el.name} ${el.content}`}</li>
           );
         })}
       </ul>

@@ -15,9 +15,9 @@ const VpsCard = ({ vpsItem }) => {
         </p>
       </div>
       <ul className={style['card__list']}>
-        {vpsItem.characters.map(el => {
+        {vpsItem.characters && vpsItem.characters.map(el => {
           return (
-            <li key={el.id}>{`${el.name} ${el.content}`}</li>
+            el && <li key={el.id}>{`${el.name} ${el.content}`}</li>
           );
         })}
       </ul>
