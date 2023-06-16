@@ -49,9 +49,14 @@
       border: none;
       font-size: 14px;
       font-weight: 400;
+      cursor: pointer;
+
+      &_active {
+        color: #79c8c2;
+      }
 
       &:hover {
-        color: #79c8c2;
+        opacity: .8;
       }
     }
 
