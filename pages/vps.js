@@ -66,7 +66,7 @@ const Vds = () => {
   }, [activeCountry, vdsVps])
 
   return (
-    <>
+    <main className='main'>
       <section className={style.vps}>
         <div>
           <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
@@ -123,7 +123,7 @@ const Vds = () => {
         })}
       </ul>
       </section> */}
-    </>
+    </main>
   );
 }
 

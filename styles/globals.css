@@ -63,6 +63,9 @@ button {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.15s linear, visibility .15s linear;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 .h2-title {
   font-size: 2rem;
@@ -122,6 +125,11 @@ section {
   letter-spacing: 0.2px;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.main {
+  flex-shrink: 0;
+  flex-grow: 1;
 }
 
 @media screen and (max-width: 991px) {

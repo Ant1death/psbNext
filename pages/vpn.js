@@ -37,7 +37,7 @@ const Vpn = (vpn) => {
   const vpnList = useAppSelector(store => store.vpn.vpn);
 
   return (
-    <>
+    <main className='main'>
       <section className={style.about}>
         <div className={style['about__wrap']}>
           <img src='/vpn.jpg' alt='vpn' className={style['about__img']} />
@@ -163,7 +163,7 @@ const Vpn = (vpn) => {
           })}
         </ul>
       </section> */}
-    </>
+    </main>
   );
 }
 

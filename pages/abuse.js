@@ -47,7 +47,7 @@ const Abuse = (hostingList) => {
   const hosting = useAppSelector(store => store.hosting.hosting);
 
   return (
-    <>
+    <main className='main'>
       <section className={style['abuse']}>
         <div>
           <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='servers'>
@@ -109,7 +109,7 @@ const Abuse = (hostingList) => {
           })}
         </ul>
       </section> */}
-    </>
+    </main>
   );
 }
 
