@@ -29,6 +29,20 @@
   margin-top: 24px;
 }
 
+/* range */
+.range-slider {
+  height: 2px!important;
+}
+
+.range-slider__range {
+  background: #4E9AA5!important;
+  height: 2px!important;
+}
+
+.range-slider__thumb {
+  background: #4E9AA5!important;
+}
+
 body {
   color: #000;
 }

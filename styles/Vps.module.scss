@@ -1,5 +1,9 @@
 .products {
   display: grid;
+  box-sizing: border-box;
+  padding-top: 48px;
+  row-gap: 32px;
+  column-gap: 2%;
 
   .offer {
     &__list-country {
@@ -8,9 +12,8 @@
       flex-wrap: wrap;
       display: flex;
       gap: 8px;
-      margin-top: 30px;
-      margin-bottom: 20px;
       justify-content: space-between;
+      height: min-content;
     }
 
     &__country {
@@ -42,13 +45,14 @@
     }
 
     &__wrapper {
-      margin: 30px 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       width: 100%;
       column-gap: 5%;
       grid-column: 2 / 3;
       grid-row: 2 / 3;
+      height: min-content;
+
 
       @media screen and (max-width: 1024px) {
         grid-template-columns: repeat(2, 1fr);

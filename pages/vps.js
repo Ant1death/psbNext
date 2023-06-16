@@ -25,13 +25,8 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const dispatch = store.dispatch;
 
   const vpsData = await getProducts('VPS', `${process.env.BASE_URL}/products/all`);
-
   const vps = vpsData && vpsData.products ? vpsData.products : [];
-
-const arr = vps.filter((el, ind) => el.ind !== 14)
-
-
-  dispatch(fetchVdsVps(sortVps(arr)));
+  dispatch(fetchVdsVps(sortVps(vps)));
 
   return {
     props: { }
@@ -45,6 +40,10 @@ const Vds = () => {
 
   const [activeCountry, setActiveCountry] = useState(VPS_COUNTRY_LIST[0].country);
   const [currentVpsList, setCurrentVpsList] = useState([]);
+  const [price, setPrice] = useState([8, 220]);
+  const [cpu, setCpu] = useState([1, 32]);
+  const [ram, setRam] = useState([1, 64]);
+  const [ssd, setSsd] = useState([15, 500]);
 
   const handleCountryClick = (evt) => {
     const el = evt.currentTarget;
@@ -63,8 +62,25 @@ const Vds = () => {
   }, []);
 
   useEffect(() => {
+    currentVpsList &&
+      setCurrentVpsList(vdsVps.filter(el => {
+        const elCpu = el.characters[0] && Number(el.characters[0].content.slice(0, -1));
+        const elRam = el.characters[1] && Number(el.characters[1].content.slice(0, -2));
+        const elSsd = el.characters[2] && Number(el.characters[2].content.slice(0, -2));
+
+        return (
+          (el.price < price[1] && el.price > price[0]) &&
+          (elCpu < cpu[1] && elCpu > cpu[0]) &&
+          (elRam < ram[1] && elRam > ram[0]) &&
+          (elSsd < ssd[1] && elSsd > ssd[0]) &&
+          (el.country === activeCountry)
+        );
+      }));
+  }, [price[0], price[1], cpu[1], cpu[0], ram[0], ram[1], ssd[0], ssd[1], activeCountry]);
+
+  useEffect(() => {
     vdsVps && setCurrentVpsList(vdsVps.filter(el => el.country === activeCountry));
-  }, [activeCountry, vdsVps])
+  }, [vdsVps]);
 
   return (
     <main className='main'>
@@ -74,7 +90,16 @@ const Vds = () => {
       </div>
 
       <section className={style.products}>
-        <Filters />
+        <Filters
+          price={price}
+          setPrice={setPrice}
+          cpu={cpu}
+          setCpu={setCpu}
+          ram={ram}
+          setRam={setRam}
+          ssd={ssd}
+          setSsd={setSsd}
+        />
 
         <ul className={style['offer__list-country']}>
           {VPS_COUNTRY_LIST.map(el => {
