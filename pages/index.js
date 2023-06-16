@@ -26,7 +26,7 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <main className={`${style.main} ${['main']}`}>
+    <main className='main'>
       <section className={style.hero}>
         <div className={style.hero__info}>
           <h2 className={`${['h2-title']} ${style.hero__title}`}>

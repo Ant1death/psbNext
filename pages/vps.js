@@ -9,6 +9,7 @@ import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
 import { Advantages } from '../compontens/Advantages/Advantages';
+import { Filters } from '../compontens//Filters/Filters';
 
 import { getProducts } from '../api/getProducts';
 import { fetchVdsVps } from '../store/slices/vdsVps';
@@ -67,11 +68,14 @@ const Vds = () => {
 
   return (
     <main className='main'>
-      <section className={style.vps}>
-        <div>
-          <h2 className={`${['h2-title']}`}>VPS/VDS</h2>
-          <p>{t('vds-list')}</p>
-        </div>
+      <div>
+        <h2 className={`${['h2-title']}`}>VPS</h2>
+        <p>{t('servises-vps')}</p>
+      </div>
+
+      <section className={style.products}>
+        <Filters />
+
         <ul className={style['offer__list-country']}>
           {VPS_COUNTRY_LIST.map(el => {
             return (
@@ -87,6 +91,7 @@ const Vds = () => {
             );
           })}
         </ul>
+
         <ul className={style['offer__wrapper']}>
           {currentVpsList && currentVpsList.map((el, ind) => {
             return (
@@ -98,31 +103,13 @@ const Vds = () => {
           })}
         </ul>
       </section>
+
+
+
+
+
       <AvailableSystems />
       <Advantages sectionTitle='' />
-      {/* <section className={style['faq']}>
-      <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
-      <ul className={style['faq__items']}>
-        {t('faq-lang') === 'ru' && FAQ_LIST_VPS_RU.map(el => {
-          return (
-            <FaqItem
-              key={el.id}
-              question={el.question}
-              answer={el.answer}
-            />
-          );
-        })}
-        {t('faq-lang') === 'en' && FAQ_LIST_VPS_EN.map(el => {
-          return (
-            <FaqItem
-              key={el.id}
-              question={el.question}
-              answer={el.answer}
-            />
-          );
-        })}
-      </ul>
-      </section> */}
     </main>
   );
 }

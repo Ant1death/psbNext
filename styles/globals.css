@@ -130,6 +130,10 @@ section {
 .main {
   flex-shrink: 0;
   flex-grow: 1;
+  max-width: 1434px;
+  margin: 0 auto;
+  padding: 0 4%;
+  width: 100%;
 }
 
 @media screen and (max-width: 991px) {
