@@ -31,7 +31,7 @@ const Account = () => {
 
   const fetchDataPaymentHystory = async (token) => {
     const data = await getPaymentHistory(token);
-    if (data) dispatch(fetchPaymentHistory(data));
+    if (data) dispatch(fetchPaymentHistory(data.reverse()));
   }
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Account = () => {
       const month = date.getMonth();
       const amount = paymentHystory.reduce((sum, el) => {
         const currentDate = new Date(el.date);
-        if (currentDate.getMonth() === month) sum = sum + el.amount;
+        if (currentDate.getMonth() === month && !el.type.includes('Пополнение')) sum = sum + el.amount;
         return sum;
       }, 0);
 

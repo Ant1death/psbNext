@@ -43,7 +43,7 @@ const Balance = () => {
 
   const fetchData = async (token) => {
     const data = await getPaymentHistory(token);
-    if (data) dispatch(fetchPaymentHistory(data));
+    if (data) dispatch(fetchPaymentHistory(data.reverse()));
   }
 
   useEffect(() => {
