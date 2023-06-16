@@ -254,5 +254,5 @@
   "error-numbers": "The password can't contain only numbers",
   "error-user": "User with this email already exists",
   "error-order": "Order has been created, please pay for it!",
-  "error-balance": "You don't have enough money"
-}
+  "error-balance": "You don't have enough money",
+  "error-pending": "Please wait. Order is processing"

@@ -61,10 +61,15 @@ const  VpnItem = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}&period=${period}`;
 
+    setMessage(t('error-pending'));
+    setIsSuccess(true);
+    setIsPopupOpen(true);
+
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
       if (message) {
         setMessage(message);
+        setIsSuccess(false);
         setIsPopupOpen(true);
       } else {
         const res = await createNewOrder(token, queries);
@@ -72,15 +77,15 @@ const  VpnItem = (id) => {
         if (res.status === '200') {
           const data = await getOrders(token);
           if (data) dispatch(fetchOrders(data));
-
           setMessage(t('error-order-success'));
-          setIsSuccess(true);
           setIsPopupOpen(true);
         } else if (res.status === '422') {
           setMessage(t('error-balance'));
+          setIsSuccess(false);
           setIsPopupOpen(true);
         } else {
           setMessage(t('error'));
+          setIsSuccess(false);
           setIsPopupOpen(true);
         }
       }
@@ -89,14 +94,13 @@ const  VpnItem = (id) => {
 
       if (res && res.data && res.pay_url) {
         setMessage(t('error-order'));
-        setIsSuccess(true);
         setIsPopupOpen(true);
-
         const data = await getOrders(token);
         if (data) dispatch(fetchOrders(data));
         window.open(res.pay_url, '_blank');
       } else {
         setMessage(t('error'));
+        setIsSuccess(false);
         setIsPopupOpen(true);
       }
     }
