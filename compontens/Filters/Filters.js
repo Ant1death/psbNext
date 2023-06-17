@@ -7,6 +7,13 @@ import style from '../../styles/Filters.module.scss';
 export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd }) => {
   const { t } = useTranslation();
 
+  const handleButtonReset = () => {
+    setPrice([8, 220]);
+    setCpu([1, 32]);
+    setRam([1, 64]);
+    setSsd([15, 500]);
+  }
+
   return (
     <div className={style.filters}>
       <ul className={style.list}>
@@ -86,6 +93,9 @@ export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd
           </div>
         </li>
       </ul>
+      <button type='button' className={style.button} onClick={handleButtonReset}>
+        Очистить фильтры
+      </button>
     </div>
   );
 }
