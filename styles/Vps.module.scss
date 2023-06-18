@@ -46,21 +46,12 @@
 
     &__wrapper {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr;
       width: 100%;
-      column-gap: 5%;
+      row-gap: 24px;
       grid-column: 2 / 3;
       grid-row: 2 / 3;
       height: min-content;
-
-
-      @media screen and (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      @media screen and (max-width: 640px) {
-        grid-template-columns: 1fr;
-      }
     }
   }
 }
