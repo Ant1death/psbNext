@@ -19,6 +19,7 @@
 
   "vds-list": "List of dedicated server services",
   "systems": "Available operating systems",
+  "systems-mobile": "Available OS",
 
   "button-filters": "Filters",
   "filter-price": "Price per month, $",
@@ -35,20 +36,21 @@
   "advantages-one-about": "Customer safety is our top priority – anonymous registration, cryptocurrency payment, encrypted data storage.",
   "advantages-seven": "Private VPN service",
   "advantages-seven-about": "WireGuard's state-of-the-art, low-resource VPN, in more than 20 countries.",
-
+  "advantages-title-vps": "Advantages of our VPS",
+  "advantages-six": "SSD NVMe drives",
+  "advantages-six-about": "NVMe disks and proprietary high-quality hardware.",
+  "advantages-five": "Large selection of countries",
+  "advantages-five-about": "Our servers are located in data-centers around the world: The Netherlands, Moldova, Hong Kong, USA, UK, Germany, Canada, Turkey.",
+  "advantages-three": "DMCA 100% ignored",
+  "advantages-three-about": "In the Netherlands and Moldova, DMCA requests are completely ignored, allowing to host a wider range of acceptable content.",
+  "advantages-eight": "Technical support",
+  "advantages-eight-about": "Our technical support is available 24/7 to help you with any questions.",
 
   "advantages": "Benefits",
   "advantages-about": "Advantages of our hosting",
-  "advantages-three": "DMCA 100% ignored",
-  "advantages-three-about": "In the Netherlands and Moldova, DMCA requests are completely ignored, allowing to host a wider range of acceptable content.",
   "advantages-four": "Payment in cryptocurrency",
   "advantages-four-about": "We accept payment: BTC, ETH, LTC, USDT. Available networks: ERC-20, TRC-20, BSC, MATIC.",
-  "advantages-five": "Large selection of countries",
-  "advantages-five-about": "Our servers are located in data-centers around the world: The Netherlands, Moldova, Hong Kong, USA, UK, Germany, Canada, Turkey.",
-  "advantages-six": "SSD NVMe drives",
-  "advantages-six-about": "NVMe disks and proprietary high-quality hardware.",
-  "advantages-eight": "Technical support",
-  "advantages-eight-about": "Our technical support is available 24/7 to help you with any questions.",
+
 
   "faq": "Frequently asked questions",
   "faq-lang": "en",

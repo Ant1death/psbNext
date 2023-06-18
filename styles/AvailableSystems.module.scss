@@ -1,14 +1,25 @@
 .systems {
-  padding: 0;
+  padding: 32px 0 22px;
   display: grid;
 
   &-title {
-    text-align: center;
-
     @media screen and (max-width: 1024px) {
       max-width: 635px;
       width: 100%;
       justify-self: center;
+    }
+
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+
+    &-mobile {
+      display: none;
+
+      @media screen and (max-width: 500px) {
+        display: block;
+        text-align: center;
+      }
     }
   }
 
@@ -18,20 +29,45 @@
     justify-content: space-around;
     gap: 30px;
     margin: 40px 0;
+
+    @media screen and (max-width: 480px) {
+      flex-wrap: wrap-reverse;
+      justify-content: center;
+    }
   }
 
   &__item {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
 
     &-title {
       text-align: center;
+      font-weight: 400;
+      font-size: 32px;
+
+      @media screen and (max-width: 1280px) {
+        font-size: 24px;
+      }
+
+      @media screen and (max-width: 840px) {
+        font-size: 14px;
+      }
     }
   }
 
   &__image {
-    aspect-ratio: 1;
-    width: 80px;
-    margin-bottom: 10px;
-    max-width: 100px;
+    height: 160px;
+    width: 160px;
+
+    @media screen and (max-width: 1280px) {
+      height: 100px;
+      width: 100px;
+    }
+
+    @media screen and (max-width: 840px) {
+      height: 60px;
+      width: 60px;
+    }
   }
 }
