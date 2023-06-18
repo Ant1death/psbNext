@@ -12,19 +12,11 @@
     justify-content: space-between;
   }
 
-  @media screen and (max-width: 560px) {
-    background-color: #F5F6F7;
-  }
-
   .logo {
     img {
       margin-top: 10px;
       height: 50px;
       width: 160px;
-
-      @media screen and (max-width: 560px) {
-        margin-left: 20px;
-      }
     }
   }
 
