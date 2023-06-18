@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
-import FaqItem from '../compontens/FaqItem/FaqItem';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import VpsCard from '../compontens/VpsCard/VpsCard';
 import { Advantages } from '../compontens/Advantages/Advantages';
@@ -69,10 +68,10 @@ const Vds = () => {
         const elSsd = el.characters[2] && Number(el.characters[2].content.slice(0, -2));
 
         return (
-          (el.price < price[1] && el.price > price[0]) &&
-          (elCpu < cpu[1] && elCpu > cpu[0]) &&
-          (elRam < ram[1] && elRam > ram[0]) &&
-          (elSsd < ssd[1] && elSsd > ssd[0]) &&
+          (el.price <= price[1] && el.price >= price[0]) &&
+          (elCpu <= cpu[1] && elCpu >= cpu[0]) &&
+          (elRam <= ram[1] && elRam >= ram[0]) &&
+          (elSsd <= ssd[1] && elSsd >= ssd[0]) &&
           (el.country === activeCountry)
         );
       }));
@@ -85,8 +84,10 @@ const Vds = () => {
   return (
     <main className='main'>
       <div>
-        <h2 className={`${['h2-title']}`}>VPS</h2>
-        <p>{t('servises-vps')}</p>
+        <h2 className={`${['h2-title']} ${style.title}`}>VPS</h2>
+        <p className={style.subtitle}>
+          {t('servises-vps')}
+        </p>
       </div>
 
       <section className={style.products}>

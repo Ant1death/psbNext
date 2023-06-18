@@ -1,9 +1,25 @@
+.title {
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
+.subtitle {
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
 .products {
   display: grid;
   box-sizing: border-box;
   padding-top: 48px;
   row-gap: 32px;
   column-gap: 2%;
+
+  @media screen and (max-width: 1180px) {
+    grid-template-columns: 1fr;
+  }
 
   .offer {
     &__list-country {
@@ -14,6 +30,22 @@
       gap: 8px;
       justify-content: space-between;
       height: min-content;
+
+      @media screen and (max-width: 1290px) {
+        justify-content: start;
+      }
+
+      @media screen and (max-width: 1180px) {
+        grid-column: 1 / 2;
+      }
+
+      @media screen and (max-width: 970px) {
+        justify-content: left;
+      }
+    }
+
+    @media screen and (max-width: 1180px) {
+      text-align: center;
     }
 
     &__country {
@@ -52,6 +84,11 @@
       grid-column: 2 / 3;
       grid-row: 2 / 3;
       height: min-content;
+
+      @media screen and (max-width: 1180px) {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+      }
     }
   }
 }

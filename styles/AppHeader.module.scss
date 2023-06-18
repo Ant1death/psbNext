@@ -49,14 +49,13 @@
 
 .navbar {
   width: 100%;
-  padding-left: 4%;
 
   @media screen and (max-width: 1100px) {
     position: absolute;
     left: 0;
     top: 100px;
     z-index: 100;
-    width: 100%;
+    padding-left: 4%;
   }
 
   &__list {

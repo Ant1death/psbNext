@@ -20,6 +20,7 @@
   "vds-list": "List of dedicated server services",
   "systems": "Available operating systems",
 
+  "button-filters": "Filters",
   "filter-price": "Price per month, $",
   "filter-cpu": "Number of CPUs, cores",
   "filter-ram": "The amount of RAM, GB",
