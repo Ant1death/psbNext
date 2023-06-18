@@ -154,6 +154,7 @@
   "order-text": "Order processed and ready to go, to review the data, please go to order.",
   "order-pending-text": "The order is processed up to 24 hours. In case of occurrence questions please contact technical support",
   "order-support": "Support",
+  "order-pay": "Pay",
 
   "develop": "The site was developed by",
   "develop-text": "All rights reserved. Copying the site content without the written permission of the site administrator is prohibited.",
