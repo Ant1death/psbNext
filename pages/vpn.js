@@ -3,6 +3,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
@@ -16,6 +18,8 @@ import { VPN_COUNTRIES } from '../utils/constants';
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
@@ -265,58 +269,108 @@ const Vpn = () => {
         </ul>
       </section>
 
-
-      {/*
-      <section className={style.vpn}>
-        <h2 className={style['main-title']}>
-          {t('choose-country')}
-        </h2>
-
-      </section>
-
       <section className={styleAdvantages['advantages']}>
-        <h2 className={style['main-title']}>
-          {t('advantages')}
-        </h2>
-        <ul className={styleAdvantages['advantages__list']}>
-          <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="icon-park-twotone:speed-one" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+      <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+        {t('advantages-title-vps')}
+      </h2>
+      <Swiper
+        modules={[ Pagination ]}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          660: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1000: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1350: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+        }}
+        pagination={{
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '"></span>';
+          },
+          clickable: true,
+        }}
+        className='mySwiper'
+      >
+        <SwiperSlide>
+          <div className={styleAdvantages['advantages__list-item']}>
+            <Image
+              src='./speed.svg'
+              alt='icon speed'
+              width={81}
+              height={77}
+              className={styleAdvantages.icon}
+            />
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               {t('advantages-vpn-one')}
-            </h3>
+            </h4>
             <p className={styleAdvantages['advantages__description']}>
               {t('advantages-vpn-one-about')}
             </p>
-          </li>
-          <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="uiw:setting-o" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={styleAdvantages['advantages__list-item']}>
+            <Image
+              src='./settings.svg'
+              alt='icon settings'
+              width={81}
+              height={77}
+              className={styleAdvantages.icon}
+            />
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               {t('advantages-vpn-two')}
-            </h3>
+            </h4>
             <p className={styleAdvantages['advantages__description']}>
               {t('advantages-vpn-two-about')}
             </p>
-          </li>
-          <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="mdi:shield-account" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={styleAdvantages['advantages__list-item']}>
+            <Image
+              src='./connect.svg'
+              alt='icon connect'
+              width={81}
+              height={77}
+              className={styleAdvantages.icon}
+            />
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               {t('advantages-vpn-three')}
-            </h3>
+            </h4>
             <p className={styleAdvantages['advantages__description']}>
               {t('advantages-vpn-three-about')}
             </p>
-          </li>
-          <li className={styleAdvantages['advantages__list-item']}>
-            <iconify-icon icon="ph:globe-hemisphere-west-fill" height="100"></iconify-icon>
-            <h3 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className={styleAdvantages['advantages__list-item']}>
+            <Image
+              src='./vpn_adv.svg'
+              alt='icon countries'
+              width={81}
+              height={77}
+              className={styleAdvantages.icon}
+            />
+            <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
               {t('advantages-vpn-four')}
-            </h3>
+            </h4>
             <p className={styleAdvantages['advantages__description']}>
               {t('advantages-vpn-four-about')}
             </p>
-          </li>
-        </ul>
-      </section> */}
+          </div>
+        </SwiperSlide>
+      </Swiper>
+      </section>
       <div className={`${style.overlay} ${isCountryListOpen ? style.overlayVisible : '' }`}></div>
     </main>
   );
