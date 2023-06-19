@@ -5,16 +5,29 @@ import { useTranslation } from 'react-i18next';
 import "react-range-slider-input/dist/style.css";
 import style from '../../styles/Filters.module.scss';
 
-export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd }) => {
+export const Filters = ({
+    price,
+    setPrice,
+    cpu,
+    setCpu,
+    ram,
+    setRam,
+    ssd,
+    setSsd,
+    initialPrice,
+    initialCpu,
+    initialRam,
+    initialSsd,
+  }) => {
   const { t } = useTranslation();
 
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   const handleButtonReset = () => {
-    setPrice([8, 220]);
-    setCpu([1, 32]);
-    setRam([1, 64]);
-    setSsd([15, 500]);
+    setPrice(initialPrice);
+    setCpu(initialCpu);
+    setRam(initialRam);
+    setSsd(initialSsd);
   }
 
   const handleToggleFilters = () => {
@@ -46,8 +59,8 @@ export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd
               <RangeSlider
                 value={price}
                 onInput={setPrice}
-                min={8}
-                max={220}
+                min={initialPrice[0]}
+                max={initialPrice[1]}
               />
             </div>
           </li>
@@ -65,8 +78,8 @@ export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd
               <RangeSlider
                 value={cpu}
                 onInput={setCpu}
-                min={1}
-                max={32}
+                min={initialCpu[0]}
+                max={initialCpu[1]}
               />
             </div>
           </li>
@@ -84,8 +97,8 @@ export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd
               <RangeSlider
                 value={ram}
                 onInput={setRam}
-                min={1}
-                max={64}
+                min={initialRam[0]}
+                max={initialRam[1]}
               />
             </div>
           </li>
@@ -103,8 +116,8 @@ export const Filters = ({ price, setPrice, cpu, setCpu, ram, setRam, ssd, setSsd
               <RangeSlider
                 value={ssd}
                 onInput={setSsd}
-                min={15}
-                max={500}
+                min={initialSsd[0]}
+                max={initialSsd[1]}
               />
             </div>
           </li>

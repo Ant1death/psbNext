@@ -105,6 +105,10 @@ const Vds = () => {
           setRam={setRam}
           ssd={ssd}
           setSsd={setSsd}
+          initialPrice={[8, 220]}
+          initialCpu={[1, 32]}
+          initialRam={[1, 64]}
+          initialSsd={[15, 500]}
         />
 
         <ul className={style['offer__list-country']}>
@@ -129,6 +133,7 @@ const Vds = () => {
               <VpsCard
                 key={ind}
                 vpsItem={el}
+                page='vps'
               />
             );
           })}

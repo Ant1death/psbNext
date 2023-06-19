@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -7,7 +8,6 @@ import AbuseCard from '../compontens/AbuseCard/AbuseCard';
 import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 import FaqItem from '../compontens/FaqItem/FaqItem';
 import HostingCard from '../compontens/HostingCard/HostingCard';
-/* import { FAQ_LIST_ABUSE_EN, FAQ_LIST_ABUSE_RU } from '../utils/constants'; */
 import { Advantages } from '../compontens/Advantages/Advantages';
 import { sortHostings } from '../utils/sortHostings';
 import { sortVps } from '../utils/sortVps';
@@ -16,7 +16,8 @@ import { getProducts } from '../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
 import { fetchHosting } from '../store/slices/hosting';
 import { wrapper } from '../store/store';
-import { useAppSelector } from '../store/hooks';
+import { AbusePage } from '../compontens/AbusePage/AbusePage';
+import { HostingPage } from '../compontens/HostingPage/HostingPage';
 
 import style from '../styles/Abuse.module.scss';
 
@@ -35,27 +36,58 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   dispatch(fetchHosting(sortHostings(hosting)));
 
   return {
-    props: {
-      hostingList: hosting,
-    }
+    props: { }
   }
 });
 
-const Abuse = (hostingList) => {
+const Abuse = () => {
   const { t } = useTranslation();
-  const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
-  const hosting = useAppSelector(store => store.hosting.hosting);
+
+  const [activeBlock, setActiveBlock] = useState('Bulletproof VPS/VDS');
+
+  const changePage = (evt) => {
+    setActiveBlock(evt.currentTarget.textContent);
+  }
 
   return (
-    <main className='main'>
-      <section className={style['abuse']}>
-        <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='servers'>
-            {t('abuse-page')}
-          </h2>
-          <p>{t('abuse-page-about')}</p>
-        </div>
-        <ul className={style['abuse__list']}>
+    <main className={`${['main']} ${style.main}`}>
+      <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof VPS/VDS' ? style.visible : ''}`}>
+        <h2 className={`${['h2-title']} ${style.title}`}>
+          Bulletproof
+        </h2>
+        <p className={style.subtitle}>
+          {t('bulletproof-subtitle')}
+        </p>
+      </div>
+      <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof Hosting' ? style.visible : ''}`}>
+        <h2 className={`${['h2-title']} ${style.title}`}>
+          Bulletproof Hosting
+        </h2>
+        <p className={style.subtitle}>
+          {t('abuse-hosting-about')}
+        </p>
+      </div>
+
+      <ul className={style.pageList}>
+        <li
+          onClick={changePage}
+          className={`${style.pageItem} ${activeBlock === 'Bulletproof VPS/VDS' ? style.pageItemActive : ''}`}
+        >
+          Bulletproof VPS/VDS
+        </li>
+        <li
+          onClick={changePage}
+          className={`${style.pageItem} ${activeBlock === 'Bulletproof Hosting' ? style.pageItemActive : ''}`}
+        >
+          Bulletproof Hosting
+        </li>
+      </ul>
+
+      {activeBlock === 'Bulletproof VPS/VDS' && <AbusePage />}
+      {activeBlock === 'Bulletproof Hosting'&& <HostingPage />}
+
+       {/*  <section className={style['abuse']}>
+       <ul className={style['abuse__list']}>
           {vdsVpsBulletproof && vdsVpsBulletproof.map((el, ind) => {
             return (
               <AbuseCard
@@ -85,30 +117,7 @@ const Abuse = (hostingList) => {
         </ul>
       </section>
       <AvailableSystems />
-      <Advantages sectionTitle='' />
-     {/*  <section className={style['faq']}>
-        <h2 className={`${['h2-title']}`}>{t('faq')}</h2>
-        <ul>
-          {t('faq-lang') === 'ru' && FAQ_LIST_ABUSE_RU.map(el => {
-            return (
-              <FaqItem
-                key={el.id}
-                answer={el.answer}
-                question={el.question}
-              />
-            );
-          })}
-          {t('faq-lang') === 'en' && FAQ_LIST_ABUSE_EN.map(el => {
-            return (
-              <FaqItem
-                key={el.id}
-                answer={el.answer}
-                question={el.question}
-              />
-            );
-          })}
-        </ul>
-      </section> */}
+      <Advantages sectionTitle='' />*/}
     </main>
   );
 }

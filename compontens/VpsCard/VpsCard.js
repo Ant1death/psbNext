@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/ItemCard.module.scss';
 
-const VpsCard = ({ vpsItem }) => {
+const VpsCard = ({ vpsItem, page }) => {
   const { t } = useTranslation();
 
   return (
@@ -62,7 +62,7 @@ const VpsCard = ({ vpsItem }) => {
         <p className={style['card__price']}>
           {`$${vpsItem.price}/мес.`}
         </p>
-        <Link href={`/account/shop/vps/${vpsItem.id}`}>
+        <Link href={`/account/shop/${page}/${vpsItem.id}`}>
           {t('button-buy-item')}
         </Link>
       </div>
