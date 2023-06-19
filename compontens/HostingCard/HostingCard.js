@@ -3,29 +3,59 @@ import { useTranslation } from 'react-i18next';
 
 import style from '../../styles/ItemCard.module.scss';
 
-const HostingCard = ({ hostingItem }) => {
+const HostingCard = ({ hostingItem, className }) => {
   const { t } = useTranslation();
 
   return (
     <li className={style['card']}>
-      <div className={style['card__title']}>
-        <h3 className={style['card__h3-title']}>
-          {hostingItem.title}
-        </h3>
+      <h3 className={style['card__title']}>{hostingItem.title}</h3>
+      <p className={style.price}>
+        {`$${hostingItem.price}/мес.`}
+      </p>
+      {hostingItem.characters &&
+        <>
+          <table className={style.table}>
+            <thead>
+              <tr>
+                <th>Кол-во сайтов:</th>
+                <th className={className ? className : style.tableVps}>Память</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {hostingItem.characters[1] && <td>{`${hostingItem.characters[1].name} ${hostingItem.characters[1].content}`}</td>}
+                {hostingItem.characters[0] && <td>{`SSD ${hostingItem.characters[0].content}`}</td>}
+              </tr>
+            </tbody>
+          </table>
+          <ul className={style.caracters}>
+            {hostingItem.characters[1] &&
+              <li>
+                <span>Кол-во сайтов:</span>
+                <span>
+                  {`${hostingItem.characters[1].name} ${hostingItem.characters[1].content}`}
+                </span>
+              </li>
+            }
+            {hostingItem.characters[0] &&
+              <li>
+                <span>Память</span>
+                <span>
+                  {`SSD ${hostingItem.characters[0].content}`}
+                </span>
+              </li>
+            }
+          </ul>
+        </>
+      }
+      <div className={style['card__order']}>
         <p className={style['card__price']}>
           {`$${hostingItem.price}/мес.`}
         </p>
+        <Link href={`/account/shop/hosting/${hostingItem.id}`}>
+          {t('button-buy-item')}
+        </Link>
       </div>
-      <ul className={style['card__list']}>
-        {hostingItem.characters && hostingItem.characters.map(el => {
-          return (
-            el && <li key={el.id}>{`${el.name} ${el.content}`}</li>
-          );
-        })}
-      </ul>
-      <Link href={`/account/shop/hosting/${hostingItem.id}`}>
-        {t('button-buy-item')}
-      </Link>
     </li>
   );
 }

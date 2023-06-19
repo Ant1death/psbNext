@@ -68,14 +68,6 @@
           width: 150px;
         }
       }
-
-      &:nth-child(2n) {
-        width: 171px;
-
-        @media screen and (max-width: 1270px) {
-          width: 120px;
-        }
-      }
     }
 
     td {
@@ -149,5 +141,13 @@
 
   @media screen and (max-width: 860px) {
     display: flex;
+  }
+}
+
+.tableVps {
+  width: 171px;
+
+  @media screen and (max-width: 1270px) {
+    width: 120px;
   }
 }

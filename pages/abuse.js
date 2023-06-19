@@ -193,28 +193,6 @@ const Abuse = () => {
       </section>
 
       <AvailableSystems />
-
-       {/*
-      <section className={style['abuse']}>
-        <div>
-          <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='hosting'>
-            {t('abuse-hosting')}
-          </h2>
-          <p>{t('abuse-hosting-about')}</p>
-        </div>
-        <ul className={style['abuse__list']}>
-          {hosting && hosting.map(el => {
-            return (
-              <HostingCard
-                key={el.id}
-                hostingItem={el}
-              />
-            );
-          })}
-        </ul>
-      </section>
-      <AvailableSystems />
-      <Advantages sectionTitle='' />*/}
     </main>
   );
 }

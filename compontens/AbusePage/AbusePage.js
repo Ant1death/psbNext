@@ -68,8 +68,6 @@ export const AbusePage = () => {
           })}
         </ul>
       </section>
-
-
     </div>
   );
 }
