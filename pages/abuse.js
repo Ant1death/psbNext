@@ -1,25 +1,26 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import Image from 'next/image';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
-import AbuseCard from '../compontens/AbuseCard/AbuseCard';
-import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
-import FaqItem from '../compontens/FaqItem/FaqItem';
-import HostingCard from '../compontens/HostingCard/HostingCard';
-import { Advantages } from '../compontens/Advantages/Advantages';
 import { sortHostings } from '../utils/sortHostings';
 import { sortVps } from '../utils/sortVps';
-
 import { getProducts } from '../api/getProducts';
 import { fetchVdsVpsBulletproof } from '../store/slices/vdsVpsBulletproof';
 import { fetchHosting } from '../store/slices/hosting';
 import { wrapper } from '../store/store';
 import { AbusePage } from '../compontens/AbusePage/AbusePage';
 import { HostingPage } from '../compontens/HostingPage/HostingPage';
+import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
 
 import style from '../styles/Abuse.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
   const dispatch = store.dispatch;
@@ -50,54 +51,150 @@ const Abuse = () => {
   }
 
   return (
-    <main className={`${['main']} ${style.main}`}>
-      <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof VPS/VDS' ? style.visible : ''}`}>
-        <h2 className={`${['h2-title']} ${style.title}`}>
-          Bulletproof
-        </h2>
-        <p className={style.subtitle}>
-          {t('bulletproof-subtitle')}
-        </p>
-      </div>
-      <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof Hosting' ? style.visible : ''}`}>
-        <h2 className={`${['h2-title']} ${style.title}`}>
-          Bulletproof Hosting
-        </h2>
-        <p className={style.subtitle}>
-          {t('abuse-hosting-about')}
-        </p>
-      </div>
+    <main className={`${['main']}`}>
+      <div className={`${style.main}`}>
+        <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof VPS/VDS' ? style.visible : ''}`}>
+          <h2 className={`${['h2-title']} ${style.title}`}>
+            Bulletproof
+          </h2>
+          <p className={style.subtitle}>
+            {t('bulletproof-subtitle')}
+          </p>
+        </div>
+        <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof Hosting' ? style.visible : ''}`}>
+          <h2 className={`${['h2-title']} ${style.title}`}>
+            Bulletproof Hosting
+          </h2>
+          <p className={style.subtitle}>
+            {t('abuse-hosting-about')}
+          </p>
+        </div>
 
-      <ul className={style.pageList}>
-        <li
-          onClick={changePage}
-          className={`${style.pageItem} ${activeBlock === 'Bulletproof VPS/VDS' ? style.pageItemActive : ''}`}
-        >
-          Bulletproof VPS/VDS
-        </li>
-        <li
-          onClick={changePage}
-          className={`${style.pageItem} ${activeBlock === 'Bulletproof Hosting' ? style.pageItemActive : ''}`}
-        >
-          Bulletproof Hosting
-        </li>
-      </ul>
-
-      {activeBlock === 'Bulletproof VPS/VDS' && <AbusePage />}
-      {activeBlock === 'Bulletproof Hosting'&& <HostingPage />}
-
-       {/*  <section className={style['abuse']}>
-       <ul className={style['abuse__list']}>
-          {vdsVpsBulletproof && vdsVpsBulletproof.map((el, ind) => {
-            return (
-              <AbuseCard
-                key={ind}
-                abuseItem={el}
-              />
-            );
-          })}
+        <ul className={style.pageList}>
+          <li
+            onClick={changePage}
+            className={`${style.pageItem} ${activeBlock === 'Bulletproof VPS/VDS' ? style.pageItemActive : ''}`}
+          >
+            Bulletproof VPS/VDS
+          </li>
+          <li
+            onClick={changePage}
+            className={`${style.pageItem} ${activeBlock === 'Bulletproof Hosting' ? style.pageItemActive : ''}`}
+          >
+            Bulletproof Hosting
+          </li>
         </ul>
+
+        {activeBlock === 'Bulletproof VPS/VDS' && <AbusePage />}
+        {activeBlock === 'Bulletproof Hosting'&& <HostingPage />}
+      </div>
+
+      <section className={`${styleAdvantages['advantages']} ${style.advantages}`}>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+          {t('advantages-title-vds')}
+        </h2>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiper'
+        >
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./equipment.svg'
+                alt='icon SSD NVMe'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-six')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-six-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./abuse_icon.svg'
+                alt='icon bulletproof'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-two')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-two-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./crypto.svg'
+                alt='icon crypto'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-four')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-four-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./support.svg'
+                alt='icon support'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-eight')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-eight-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </section>
+
+      <AvailableSystems />
+
+       {/*
       <section className={style['abuse']}>
         <div>
           <h2 className={`${['h2-title']} ${style['abuse__title']}`} id='hosting'>

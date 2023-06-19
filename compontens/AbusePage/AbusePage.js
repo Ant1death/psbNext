@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Filters } from '../Filters/Filters';
 
 import { useAppSelector } from '../../store/hooks';
 import VpsCard from '../VpsCard/VpsCard';
+import { Filters } from '../Filters/Filters';
 
 import style from '../../styles/AbusePage.module.scss';
 
@@ -68,6 +68,8 @@ export const AbusePage = () => {
           })}
         </ul>
       </section>
+
+
     </div>
   );
 }
