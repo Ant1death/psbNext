@@ -64,6 +64,10 @@ const Vpn = () => {
     setSearchCountry('');
   }
 
+  const closePopup = () => {
+    setIsCountryListOpen(false);
+  }
+
   useEffect(() => {
     if (currentCountry[0]) {
       VPN_COUNTRIES.forEach(el => {
@@ -170,6 +174,12 @@ const Vpn = () => {
                 </li>
               );
             })}
+            <button
+              className={style.buttonClose}
+              onClick={closePopup}
+              aria-label='button close popup'
+              type='button'
+            ></button>
           </ul>
           <button type='button' className={style.button} onClick={handleButtonReset}>
             {t('filter-clear')}
@@ -269,7 +279,7 @@ const Vpn = () => {
           </li>
         </ul>
       </section> */}
-
+      <div className={`${style.overlay} ${isCountryListOpen ? style.overlayVisible : '' }`}></div>
     </main>
   );
 }
