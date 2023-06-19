@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -45,6 +44,7 @@ const Vpn = () => {
 
   const chooseCountry = (evt) => {
     const country = evt.currentTarget.id;
+    setSearchCountry('');
 
     if (currentCountry.length > 0 && currentCountry.includes(country)) {
       const arr = currentCountry.filter(el => el !== country);
@@ -62,10 +62,20 @@ const Vpn = () => {
   const handleButtonReset = () => {
     setCurrentCountry([]);
     setSearchCountry('');
+    setCurrentVpsList(vpnList);
   }
 
   const closePopup = () => {
     setIsCountryListOpen(false);
+  }
+
+  const filterBySelect = (countries) => {
+    const arr = [];
+    currentCountry.forEach(el => {
+      const vpn = countries.find(item => item.country === el);
+      if (vpn) arr.push(vpn);
+    });
+    setCurrentVpsList(arr);
   }
 
   useEffect(() => {
@@ -79,6 +89,32 @@ const Vpn = () => {
   useEffect(() => {
     setCurrentVpsList(vpnList);
   }, [vpnList]);
+
+  useEffect(() => {
+    if (currentCountry.length > 0) {
+      filterBySelect(vpnList);
+    } else {
+      setCurrentVpsList(vpnList);
+    }
+  }, [currentCountry]);
+
+  useEffect(() => {
+    if (searchCountry !== '') {
+      const search = searchCountry.toLowerCase();
+      const arr = vpnList.filter(el => el.country.toLowerCase().includes(search));
+      if (currentCountry.length > 0) {
+        filterBySelect(arr);
+      } else {
+        setCurrentVpsList(arr);
+      }
+    } else {
+      if (currentCountry.length > 0) {
+        filterBySelect(vpnList);
+      } else {
+        setCurrentVpsList(vpnList);
+      }
+    }
+  }, [searchCountry]);
 
   return (
     <main className='main'>
@@ -187,7 +223,7 @@ const Vpn = () => {
         </div>
 
         <ul className={style.vpnList}>
-          {currentVpnList && currentVpnList.map(el => {
+          {currentVpnList && currentVpnList.length > 0 && currentVpnList.map(el => {
             return (
               <VpnCard
                 key={el.id}
