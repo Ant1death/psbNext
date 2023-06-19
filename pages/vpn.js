@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import 'iconify-icon';
@@ -10,6 +12,7 @@ import { wrapper } from '../store/store';
 import { getProducts } from '../api/getProducts';
 import { fetchVpn } from '../store/slices/vpn';
 import { useAppSelector } from '../store/hooks';
+import { VPN_COUNTRIES } from '../utils/constants';
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -30,6 +33,49 @@ const Vpn = () => {
   const { t } = useTranslation();
   const vpnList = useAppSelector(store => store.vpn.vpn);
 
+  const [searchCountry, setSearchCountry] = useState('');
+  const [currentCountry, setCurrentCountry] = useState([]);
+  const [isCountryListOpen, setIsCountryListOpen] = useState(false);
+  const [currentFlag, setCurrentFlag] = useState('');
+  const [currentVpnList, setCurrentVpsList] = useState([]);
+
+  const handleSearch = (evt) => {
+    setSearchCountry(evt.target.value);
+  }
+
+  const chooseCountry = (evt) => {
+    const country = evt.currentTarget.id;
+
+    if (currentCountry.length > 0 && currentCountry.includes(country)) {
+      const arr = currentCountry.filter(el => el !== country);
+      setCurrentCountry(arr);
+    } else {
+      const arr = [country, ...currentCountry];
+      setCurrentCountry(arr);
+    }
+  }
+
+  const toggleCountryList = () => {
+    isCountryListOpen ? setIsCountryListOpen(false) : setIsCountryListOpen(true);
+  }
+
+  const handleButtonReset = () => {
+    setCurrentCountry([]);
+    setSearchCountry('');
+  }
+
+  useEffect(() => {
+    if (currentCountry[0]) {
+      VPN_COUNTRIES.forEach(el => {
+        if (el.country === currentCountry[0]) setCurrentFlag(el.flag);
+      })
+    }
+  }, [currentCountry[0]]);
+
+  useEffect(() => {
+    setCurrentVpsList(vpnList);
+  }, [vpnList]);
+
   return (
     <main className='main'>
       <div>
@@ -42,39 +88,115 @@ const Vpn = () => {
       </div>
 
       <section className={style.products}>
-
-      </section>
-
-
-
-      {/* <section className={style.about}>
-        <div className={style['about__wrap']}>
-          <img src='/vpn.jpg' alt='vpn' className={style['about__img']} />
+        <div className={style.filters}>
+          <p className={style.filtersTitle}>
+            {t('vpn-countries')}
+          </p>
+          <div className={style.filtersContainer}>
+            <input
+              type='text'
+              className={style.filtersSearch}
+              placeholder={t('placeholder-search')}
+              value={searchCountry || ''}
+              onChange={handleSearch}
+            />
+          </div>
+          <div className={`${style.filtersContainer}`} onClick={toggleCountryList}>
+            {currentCountry && currentCountry.length === 0 &&
+              <div className={`${style.countryList} ${isCountryListOpen ? style.countryListOpen : ''}`}>
+                <Image
+                  src='/nl.svg'
+                  alt='Netherlands'
+                  width='28'
+                  height='20'
+                  className={style.flag}
+                />
+                <span className={style.country}>
+                  Netherlands
+                </span>
+              </div>
+            }
+            {currentCountry && currentCountry.length === 1 &&
+              <div className={`${style.countryList} ${isCountryListOpen ? style.countryListOpen : ''}`}>
+                <Image
+                  src={currentFlag}
+                  alt={currentCountry[0]}
+                  width='28'
+                  height='20'
+                  className={style.flag}
+                />
+                <span className={style.country}>
+                  {currentCountry[0]}
+                </span>
+              </div>
+            }
+            {currentCountry && currentCountry.length > 1 &&
+              <div className={`${style.countryList} ${isCountryListOpen ? style.countryListOpen : ''}`}>
+                <Image
+                  src={currentFlag}
+                  alt={currentCountry[0]}
+                  width='28'
+                  height='20'
+                  className={style.flag}
+                />
+                <span className={style.country}>
+                  {currentCountry[0]}
+                </span>
+                <span className={style.amount}>
+                  {`& еще ${currentCountry.length - 1}`}
+                </span>
+              </div>
+            }
+          </div>
+          <ul className={`${style.filtersList} ${isCountryListOpen ? style.filtersListOpen : ''}`}>
+            {VPN_COUNTRIES.map((el, ind) => {
+              return (
+                <li
+                  key={ind}
+                  className={`${style.countryItem} ${currentCountry.length > 0 && currentCountry.includes(el.country) ? style.countryItemActive : ''}`}
+                  onClick={chooseCountry}
+                  id={el.country}
+                >
+                  <Image
+                    src={el.flag}
+                    alt={el.country}
+                    width='28'
+                    height='20'
+                    className={style.flag}
+                  />
+                  <span className={style.country}>
+                    {el.country}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <button type='button' className={style.button} onClick={handleButtonReset}>
+            {t('filter-clear')}
+          </button>
         </div>
-        <div className={style['about__wrap']}>
-          <h2 className={style['main-title']}>
-            {t('vpn-page')}
-          </h2>
-          <p>{t('vpn-page-about')}</p>
-          <LinkToBuyVpn
-            page='vpn'
-          />
-        </div>
-      </section>
-      <section className={style.vpn}>
-        <h2 className={style['main-title']}>
-          {t('choose-country')}
-        </h2>
-        <ul className={style['vpn__wrapper']}>
-          {vpnList && vpnList.map(el => {
+
+        <ul className={style.vpnList}>
+          {currentVpnList && currentVpnList.map(el => {
             return (
               <VpnCard
                 key={el.id}
                 vpnItem={el}
+                classFirstRow={style.rowTable}
               />
             );
           })}
         </ul>
+      </section>
+
+
+
+      {/*
+      <section className={style.vpn}>
+        <h2 className={style['main-title']}>
+          {t('choose-country')}
+        </h2>
+
       </section>
       <section className={style['instructions']}>
         <h2 className={`${style['main-title']} ${style['instructions__title']}`}>

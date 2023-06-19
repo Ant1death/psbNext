@@ -26,6 +26,7 @@
   "filter-cpu": "Количество CPU, ядер",
   "filter-ram": "Объем RAM, ГБ",
   "folter-ssd": "Объем памяти SSD, ГБ",
+  "filter-clear": "Очистить фильтры",
 
   "hosting-about-one": "Лицензия ISPmanager",
   "hosting-about-two": "Защита от DDos",
@@ -65,6 +66,8 @@
 
   "vpn-page": "Приватный VPN WireGuard",
   "vpn-page-about": "Современный протокол VPN, использующий надёжные алгоритмы шифрования.",
+  "vpn-countries": "Страны",
+  "placeholder-search": "Найти страну",
   "choose-country": "Выберете страну VPN",
   "instructions": "Инструкция по использованию VPN",
   "instruction-one": "Оплатите тариф",

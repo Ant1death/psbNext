@@ -127,7 +127,7 @@ export const Filters = ({
           </li>
         </ul>
         <button type='button' className={style.button} onClick={handleButtonReset}>
-          Очистить фильтры
+          {t('filter-clear')}
         </button>
       </div>
     </>

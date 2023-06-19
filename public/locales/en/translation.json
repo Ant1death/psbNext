@@ -26,6 +26,7 @@
   "filter-cpu": "Number of CPUs, cores",
   "filter-ram": "The amount of RAM, GB",
   "folter-ssd": "SSD memory capacity, GB",
+  "filter-clear": "Clear filters",
 
   "hosting-about-one": "ISPmanager license",
   "hosting-about-two": "DDoS Protection",
@@ -67,6 +68,8 @@
 
   "vpn-page": "Private VPN WireGuard",
   "vpn-page-about": "A modern VPN protocol that uses strong encryption algorithms. Our VPN is designed to create secure connections and is focused on high performance, easy setup and security of your data.",
+  "vpn-countries": "Countries",
+  "placeholder-search": "Find country",
   "choose-country": "Choose a VPN country",
   "instructions": "Instructions for using a VPN",
   "instruction-one": "Pay the fare",

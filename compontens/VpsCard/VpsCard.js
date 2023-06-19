@@ -17,7 +17,7 @@ const VpsCard = ({ vpsItem, page }) => {
           <table className={style.table}>
             <thead>
               <tr>
-                <th>Кол-во ядер:</th>
+                <th className={style.tableVpsFirst}>Кол-во ядер:</th>
                 <th className={style.tableVps}>RAM</th>
                 <th>Память</th>
               </tr>

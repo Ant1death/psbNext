@@ -291,67 +291,67 @@ export const VPN_CHARACTERS_EN = [
 export const VPN_COUNTRIES = [
   {
     country: 'Netherlands',
-    flag: './nl.svg',
+    flag: '/nl.svg',
   },
   {
     country: 'USA',
-    flag: './us.svg',
+    flag: '/us.svg',
   },
   {
     country: 'Hong Kong',
-    flag: './hk.svg',
+    flag: '/hk.svg',
   },
   {
     country: 'Germany',
-    flag: './de.svg',
+    flag: '/de.svg',
   },
   {
     country: 'Canada',
-    flag: './ca.svg',
+    flag: '/ca.svg',
   },
   {
     country: 'Great Britain',
-    flag: './gb.svg',
+    flag: '/gb.svg',
   },
   {
     country: 'Spain',
-    flag: './spain.svg',
+    flag: '/spain.svg',
   },
   {
     country: 'France',
-    flag: './france.svg',
+    flag: '/france.svg',
   },
   {
     country: 'Ireland',
-    flag: './ireland.svg',
+    flag: '/ireland.svg',
   },
   {
     country: 'Switzerland',
-    flag: './switzerland.svg',
+    flag: '/switzerland.svg',
   },
   {
     country: 'Sweden',
-    flag: './sweden.svg',
+    flag: '/sweden.svg',
   },
   {
     country: 'Portugal',
-    flag: './portugal.svg',
+    flag: '/portugal.svg',
   },
   {
     country: 'Hungary',
-    flag: './hungary.svg',
+    flag: '/hungary.svg',
   },
   {
     country: 'Finland',
-    flag: './finland.svg',
+    flag: '/finland.svg',
   },
   {
     country: 'Italy',
-    flag: './italy.svg',
+    flag: '/italy.svg',
   },
   {
     country: 'Romania',
-    flag: './romania.svg',
+    flag: '/romania.svg',
   },
   {
     country: 'Bulgaria',
@@ -359,27 +359,27 @@ export const VPN_COUNTRIES = [
   },
   {
     country: 'Poland',
-    flag: './poland.svg',
+    flag: '/poland.svg',
   },
   {
     country: 'Czech',
-    flag: './czech.svg',
+    flag: '/czech.svg',
   },
   {
     country: 'Slovakia',
-    flag: './slovakia.svg',
+    flag: '/slovakia.svg',
   },
   {
     country: 'Latvia',
-    flag: './latvia.svg',
+    flag: '/latvia.svg',
   },
   {
     country: 'Israel',
-    flag: './israel.svg',
+    flag: '/israel.svg',
   },
   {
     country: 'Serbia',
-    flag: './serbia.png',
+    flag: '/serbia.png',
   },
 ];
 

@@ -17,8 +17,8 @@ const HostingCard = ({ hostingItem, className }) => {
           <table className={style.table}>
             <thead>
               <tr>
-                <th>Кол-во сайтов:</th>
-                <th className={className ? className : style.tableVps}>Память</th>
+                <th className={style.tableVpsFirst}>Кол-во сайтов:</th>
+                <th className={style.tableItem}>Память</th>
               </tr>
             </thead>
             <tbody>
