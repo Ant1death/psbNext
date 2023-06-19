@@ -294,10 +294,6 @@ export const VPN_COUNTRIES = [
     flag: './nl.svg',
   },
   {
-    country: 'Moldowa',
-    flag: './md.svg',
-  },
-  {
     country: 'USA',
     flag: './us.svg',
   },
@@ -318,8 +314,72 @@ export const VPN_COUNTRIES = [
     flag: './gb.svg',
   },
   {
-    country: 'Turkey',
-    flag: './tr.svg',
+    country: 'Spain',
+    flag: './spain.svg',
+  },
+  {
+    country: 'France',
+    flag: './france.svg',
+  },
+  {
+    country: 'Ireland',
+    flag: './ireland.svg',
+  },
+  {
+    country: 'Switzerland',
+    flag: './switzerland.svg',
+  },
+  {
+    country: 'Sweden',
+    flag: './sweden.svg',
+  },
+  {
+    country: 'Portugal',
+    flag: './portugal.svg',
+  },
+  {
+    country: 'Hungary',
+    flag: './hungary.svg',
+  },
+  {
+    country: 'Finland',
+    flag: './finland.svg',
+  },
+  {
+    country: 'Italy',
+    flag: './italy.svg',
+  },
+  {
+    country: 'Romania',
+    flag: './romania.svg',
+  },
+  {
+    country: 'Bulgaria',
+    flag: './bulgaria.svg',
+  },
+  {
+    country: 'Poland',
+    flag: './poland.svg',
+  },
+  {
+    country: 'Czech',
+    flag: './czech.svg',
+  },
+  {
+    country: 'Slovakia',
+    flag: './slovakia.svg',
+  },
+  {
+    country: 'Latvia',
+    flag: './latvia.svg',
+  },
+  {
+    country: 'Israel',
+    flag: './israel.svg',
+  },
+  {
+    country: 'Serbia',
+    flag: './serbia.png',
   },
 ];
 

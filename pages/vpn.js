@@ -4,16 +4,12 @@ import { connect } from 'react-redux';
 import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
-import LinkToBuyVpn from '../compontens/LinkToBuyVpn/LinkToBuyVpn';
 import VpnCard from '../compontens/VpnCard/VpnCard';
-import FaqItem from '../compontens/FaqItem/FaqItem';
 
 import { wrapper } from '../store/store';
 import { getProducts } from '../api/getProducts';
 import { fetchVpn } from '../store/slices/vpn';
 import { useAppSelector } from '../store/hooks';
-
-/* import { FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants'; */
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -26,19 +22,32 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   dispatch(fetchVpn(vpn));
 
   return {
-    props: {
-      vpn: vpn,
-    }
+    props: { }
   }
 });
 
-const Vpn = (vpn) => {
+const Vpn = () => {
   const { t } = useTranslation();
   const vpnList = useAppSelector(store => store.vpn.vpn);
 
   return (
     <main className='main'>
-      <section className={style.about}>
+      <div>
+        <h2 className={`${['h2-title']} ${style.title}`}>
+          {t('vpn-page')}
+        </h2>
+        <p className={style.subtitle}>
+          {t('vpn-page-about')}
+        </p>
+      </div>
+
+      <section className={style.products}>
+
+      </section>
+
+
+
+      {/* <section className={style.about}>
         <div className={style['about__wrap']}>
           <img src='/vpn.jpg' alt='vpn' className={style['about__img']} />
         </div>
@@ -137,32 +146,8 @@ const Vpn = (vpn) => {
             </p>
           </li>
         </ul>
-      </section>
-     {/*  <section className={style['faq']}>
-        <h2 className={style['main-title']}>
-          {t('faq')}
-        </h2>
-        <ul className={style['faq__list']}>
-          {t('faq-lang') === 'ru' && FAQ_LIST_VPN_RU.map(el => {
-            return (
-              <FaqItem
-                key={el.id}
-                answer={el.answer}
-                question={el.question}
-              />
-            );
-          })}
-          {t('faq-lang') === 'en' && FAQ_LIST_VPN_EN.map(el => {
-            return (
-              <FaqItem
-                key={el.id}
-                answer={el.answer}
-                question={el.question}
-              />
-            );
-          })}
-        </ul>
       </section> */}
+
     </main>
   );
 }
