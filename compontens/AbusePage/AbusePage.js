@@ -53,6 +53,8 @@ export const AbusePage = () => {
           initialCpu={[2, 32]}
           initialRam={[4, 256]}
           initialSsd={[20, 2000]}
+          className={style.filters}
+          classButton={style.buttonFilters}
         />
         <ul className={style['abuse__list']}>
           {currentBulletproofList && currentBulletproofList.map((el, ind) => {

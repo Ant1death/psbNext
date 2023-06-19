@@ -18,6 +18,8 @@ export const Filters = ({
     initialCpu,
     initialRam,
     initialSsd,
+    className,
+    classButton,
   }) => {
   const { t } = useTranslation();
 
@@ -39,12 +41,14 @@ export const Filters = ({
       <button
         type='button'
         onClick={handleToggleFilters}
-        className={`${style.buttonFilters} ${isFiltersOpen ? style.buttonOpen : ''}`}
+        className={`${style.buttonFilters} ${isFiltersOpen ? style.buttonOpen : ''} ${classButton ? classButton : ''}`}
       >
         {t('button-filters')}
       </button>
 
-      <div className={`${style.filters} ${isFiltersOpen ? style.filtersOpen : ''}`}>
+      <div
+        className={`${style.filters} ${isFiltersOpen ? style.filtersOpen : ''} ${className ? className : ''}`}
+      >
         <ul className={style.list}>
           <li>
             <p className={style.title}>

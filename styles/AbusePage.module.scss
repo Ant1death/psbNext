@@ -7,6 +7,11 @@
   display: grid;
   grid-template-columns: 280px auto;
   column-gap: 2%;
+  row-gap: 32px;
+
+  @media screen and (max-width: 1180px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .abuse {
@@ -16,5 +21,26 @@
     width: 100%;
     row-gap: 24px;
     height: min-content;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+
+    @media screen and (max-width: 1180px) {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
   }
+}
+
+.filters {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  @media screen and (max-width: 1180px) {
+    grid-row: 2 / 3;
+  }
+}
+
+.buttonFilters {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
 }
