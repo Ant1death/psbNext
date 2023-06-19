@@ -1,10 +1,17 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import Image from 'next/image';
 
 import Layout from '../compontens/Layout/Layout';
+import { REVIEW_EN, REVIEW_RU } from '../utils/constants';
 
 import style from '../styles/Company.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const Company = () => {
   const { t } = useTranslation();
@@ -37,6 +44,184 @@ const Company = () => {
             </Link>
           </p>
         </div>
+      </section>
+
+      <section className={styleAdvantages['advantages']}>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+          {t('advantages-title-main')}
+        </h2>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiper'
+        >
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./vps_adv.svg'
+                alt='icon vps'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-vps')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-vps-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./abuse_icon.svg'
+                alt='icon bulletproof'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-nine')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-five-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./security.svg'
+                alt='icon security'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-one')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-coenf')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./vpn_adv.svg'
+                alt='icon vpn'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-seven')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-seven-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </section>
+
+      <section className={style['review']}>
+        <h2 className={`${['h2-title']}  ${style['review__title']}`}>
+          {t('review')}
+        </h2>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiperReview'
+        >
+          {t('faq-lang') === 'ru' && REVIEW_RU.map((el, ind) => {
+            return (
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+          {t('faq-lang') === 'en' && REVIEW_EN.map((el, ind) => {
+            return (
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </section>
     </main>
   );
