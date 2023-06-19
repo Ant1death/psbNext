@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -235,6 +236,34 @@ const Vpn = () => {
         </ul>
       </section>
 
+      <section className={style['instructions']}>
+        <h2 className={`${style['main-title']} ${style['instructions__title']}`}>
+          {t('instructions')}
+        </h2>
+        <ul className={style['instructions__list']}>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-one.svg' className={style['instructions__icon']} />
+            <p className={`${style['instructions__text']} ${style.textOne}`}>
+              {t('instruction-one')}
+            </p>
+          </li>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-two.svg' className={style['instructions__icon']} />
+            <p className={`${style['instructions__text']}`}>
+              {`${t('instruction-two')} `}
+              <Link href='https://www.wireguard.com/install/'>
+                Wireguard
+              </Link>
+            </p>
+          </li>
+          <li className={style['instructions__list-item']}>
+            <img alt='icon' src='/icon-three.svg' className={style['instructions__icon']} />
+            <p className={style['instructions__text']}>
+              {t('instruction-three')}
+            </p>
+          </li>
+        </ul>
+      </section>
 
 
       {/*
@@ -244,34 +273,7 @@ const Vpn = () => {
         </h2>
 
       </section>
-      <section className={style['instructions']}>
-        <h2 className={`${style['main-title']} ${style['instructions__title']}`}>
-          {t('instructions')}
-        </h2>
-        <ul className={style['instructions__list']}>
-          <li className={style['instructions__list-item']}>
-            <img alt='icon' src='/icon-one.png' className={style['instructions__icon']} />
-            <p className={style['instructions__text']}>
-              {t('instruction-one')}
-            </p>
-          </li>
-          <li className={style['instructions__list-item']}>
-            <img alt='icon' src='/icon-two.png' className={style['instructions__icon']} />
-            <p className={style['instructions__text']}>
-              {t('instruction-two')}&nbsp;
-              <Link href='https://www.wireguard.com/install/'>
-                Wireguard
-              </Link>
-            </p>
-          </li>
-          <li className={style['instructions__list-item']}>
-            <img alt='icon' src='/icon-three.png' className={style['instructions__icon']} />
-            <p className={style['instructions__text']}>
-              {t('instruction-three')}
-            </p>
-          </li>
-        </ul>
-      </section>
+
       <section className={styleAdvantages['advantages']}>
         <h2 className={style['main-title']}>
           {t('advantages')}
