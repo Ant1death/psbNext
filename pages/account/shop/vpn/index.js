@@ -93,7 +93,7 @@ export default function AccountVpn() {
                         {VPN_COUNTRIES.map(item => {
                           return (
                             item.country === el.country &&
-                              <img key={el.id} src={item.flag.slice(1)} alt={`icon ${el.title}`} className={style['shop__item-flag']} />
+                              <img key={el.id} src={item.flag} alt={`icon ${el.country}`} className={style['shop__item-flag']} />
                           )
                         })}
                         <Link href={`/account/shop/vpn/${el.id}`}>

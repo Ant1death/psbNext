@@ -355,7 +355,7 @@ export const VPN_COUNTRIES = [
   },
   {
     country: 'Bulgaria',
-    flag: './bulgaria.svg',
+    flag: '/bulgaria.svg',
   },
   {
     country: 'Poland',
