@@ -271,7 +271,7 @@ const Vpn = () => {
 
       <section className={styleAdvantages['advantages']}>
       <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
-        {t('advantages-title-vps')}
+        {t('advantages-title-vpn')}
       </h2>
       <Swiper
         modules={[ Pagination ]}
