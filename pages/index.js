@@ -42,8 +42,8 @@ export default function Home() {
           <Image
             src="/main_img.png"
             alt="PSB hosting image"
-            width={522}
-            height={472}
+            width='522'
+            height='472'
             className={style.img}
           />
         </div>
