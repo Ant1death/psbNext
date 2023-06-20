@@ -49,9 +49,14 @@
       border: none;
       font-size: 14px;
       font-weight: 400;
+      cursor: pointer;
+
+      &_active {
+        color: #79c8c2;
+      }
 
       &:hover {
-        color: #79c8c2;
+        opacity: .8;
       }
     }
 
@@ -285,7 +290,7 @@
         display: block;
         margin-top: 25px;
         margin-left: 25px;
-        width: calc(25% - 25px);
+        width: 100px;
 
         @media screen and (max-width: 1280px) {
           align-self: center;
@@ -298,8 +303,7 @@
       margin-top: 8px;
 
       &_list {
-        margin: 25px 0 25px 0;
-        width: 50%;
+        margin: 25px auto;
       }
     }
 

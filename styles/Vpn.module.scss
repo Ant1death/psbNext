@@ -1,27 +1,257 @@
-.about {
+.title {
+  padding-top: 30px;
+
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1100px) {
+    padding-top: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.subtitle {
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: 280px auto;
+  column-gap: 2%;
+  row-gap: 48px;
+
+  @media screen and (max-width: 1330px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filters {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  row-gap: 12px;
+  position: relative;
+
+  &Title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #888;
+  }
+
+  &Container {
+    background: #F5F6F7;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  &Search {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+    padding: 8px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+      color: #000;
+    }
+  }
+
+  @media screen and (max-width: 1330px) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+}
+
+.countryList {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
   align-items: center;
+  column-gap: 8px;
+  padding: 8px;
 
-  @media screen and (max-width: 1024px) {
-    flex-direction: column;
+  &::after {
+    content: '';
+    background-image: url(../public/chevron-down.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    height: 20px;
+    position: absolute;
+    right: 16px;
+    top: 9px;
+    transform: rotate(0deg);
+    transition: transform .2s linear;
+    cursor: pointer;
   }
 
-  &__wrap {
-    width: 50%;
-
-    @media screen and (max-width: 1024px) {
-      width: 100%;
+  &Open {
+    &::after {
+      transform: rotate(180deg);
     }
   }
+}
 
-  &__img {
-    width: 90%;
+.flag {
+  width: 28px;
+  height: 20px;
+}
+
+.country {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.filtersList {
+  display: none;
+  grid-template-columns: auto auto;
+  column-gap: 6px;
+  row-gap: 15px;
+  width: 100%;
+  padding: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 25px rgba(71, 71, 71, 0.25);
+  border-radius: 8px;
+  position: absolute;
+  z-index: 10000;
+  top: 178px;
+  left: 0;
+
+  @media screen and (max-width: 1330px) {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 16px 16px;
+  }
+
+  @media screen and (max-width: 370px) {
+    column-gap: 0;
+    padding: 30px 8px 8px;
+  }
+
+  &Open {
+    display: grid;
+
+    @media screen and (max-width: 1330px) {
+      display: flex;
+    }
+
+    @media screen and (max-width: 550px) {
+      display: grid;
+    }
+  }
+}
+
+.countryItem {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  padding: 4px;
+  border-radius: 2px;
+
+  &Active {
+    background: #4E9AA5;
+    color: #FFFFFF;
+  }
+}
+
+.amount {
+  font-weight: 400;
+  font-size: 14px;
+  color: #888;
+  margin-left: 20px;
+}
+
+.button {
+  padding: 12px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 20px;
+  color: #4E9AA5;
+  border: 1px solid #4E9AA5;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+
+  @media screen and (max-width: 1180px) {
+    width: 280px;
+    align-self: center;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.vpnList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  @media screen and (max-width: 1330px) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+}
+
+.rowTable {
+  width: 100px;
+}
+
+.overlay {
+  @media screen and (max-width: 550px) {
+    position: fixed;
+    z-index: 9999;
+    background-color: #000;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  &Visible {
+    @media screen and (max-width: 550px) {
+      display: block;
+    }
+  }
+}
+
+.buttonClose {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-image: url(../public/button-close.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 15px;
+  right: 12px;
+  display: none;
+
+  @media screen and (max-width: 550px) {
     display: block;
-
-    @media screen and (max-width: 1024px) {
-      display: none;
-    }
   }
 }
 
@@ -31,71 +261,63 @@
   font-weight: 700;
 }
 
-.vpn {
-  &__wrapper {
-    margin: 30px 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 100%;
-    column-gap: 5%;
-
-    @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media screen and (max-width: 640px) {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
 .instructions {
   &__title {
-    text-align: center;
+    @media screen and (max-width: 770px) {
+      font-size: 24px;
+    }
+
+    @media screen and (max-width: 500px) {
+      text-align: center;
+    }
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    text-align: center;
     justify-content: space-between;
-
-    @media screen and (max-width: 1320px) {
-      & {
-        justify-content: center;
-      }
-    }
+    padding-top: 16px;
+    row-gap: 37px;
 
     &-item {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 20px 10px;
-      width: calc(100% / 3);
-      min-width: 220px;
-      max-height: 239px;
-      border-radius: 20px;
+      width: 285px;
+      row-gap: 16px;
+
+      @media screen and (max-width: 1050px) {
+        width: 100%;
+      }
     }
   }
 
   &__icon {
-    max-width: 100px;
-    margin-bottom: 10px;
-    text-align: center;
-    width: 100%;
-    height: auto;
-    display: block;
+    width: 72px;
+    height: 72px;
+
+    @media screen and (max-width: 1050px) {
+      margin: 0 auto;
+    }
   }
 
   &__text {
     font-weight: 700;
-    font-size: 18px;
-    text-align: center;
-    vertical-align: top;
+    font-size: 20px;
+
+    @media screen and (max-width: 1050px) {
+      width: 285px;
+      margin: 0 auto;
+    }
 
     a {
-      font-weight: 600;
       color: #4e9aa5;
+      font-size: 20px;
     }
+  }
+}
+
+.textOne {
+  @media screen and (max-width: 1050px) {
+    width: 170px;
   }
 }

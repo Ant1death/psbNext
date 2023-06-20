@@ -1,44 +1,38 @@
+.section-title {
+  @media screen and (max-width: 500px) {
+    text-align: center;
+  }
+}
+
 .advantages {
   &__list {
-    padding-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    flex-wrap: wrap;
-
-    @media screen and (max-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media screen and (max-width: 830px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media screen and (max-width: 560px) {
-      grid-template-columns: 1fr;
-    }
-
     &-item {
       display: flex;
       flex-direction: column;
-      align-items: center;
       width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px 10px 10px;
+      max-width: 319px;
+      padding: 20px 20px 0;
+      margin: 0 auto;
+
+      .icon {
+        width: 81px;
+        height: 77px;
+
+        @media screen and (max-width: 660px) {
+          align-self: center;
+        }
+      }
     }
   }
 
   &__title {
-    color: #4e9aa5;
-    margin-bottom: 10px;
-    margin-top: 5px;
+    color: #000;
+    padding-bottom: 8px;
+    padding-top: 16px;
     font-weight: 700;
-    text-align: center;
   }
 
   &__description {
-    text-align: center;
     color: #888;
     margin-bottom: 10px;
   }

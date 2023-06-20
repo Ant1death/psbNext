@@ -120,7 +120,41 @@
     white-space: nowrap;
     line-height: 1.84615385;
     border-radius: 5px;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition:
+      color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &__button-pay {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    color: #fff;
+    background: #4ecc47;
+    border-color: #4ecc47;
+    margin-top: 0.25rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: 0.8125rem;
+    min-width: 2.375rem;
+    padding: 0.375rem 1rem;
+    white-space: nowrap;
+    line-height: 1.84615385;
+    border-radius: 5px;
+    transition:
+      color 0.15s ease-in-out,
+      background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out,
+      box-shadow 0.15s ease-in-out;
 
     &:hover {
       opacity: .8;

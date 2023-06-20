@@ -1,35 +1,46 @@
 .faq {
   &__item {
-    display: block;
-    margin-bottom: 16px;
+    padding: 20px 16px;
+    background-color: #fff;
+    border-radius: 8px;
   }
 
   &__question {
     cursor: pointer;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
-
-    & iconify-icon {
-      color: #4e9aa5;
-    }
-
-    &:hover iconify-icon {
-      color: #6cd3e3;
-    }
-
-    &:hover .faq__title {
-      color: #6cd3e3;
-    }
+    justify-content: space-between;
+    cursor: pointer;
   }
 
   &__title {
-    font-weight: 700;
-    color: #4e9aa5;
+    font-weight: 500;
+    color: #4E9AA5;
+    font-size: 20px;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(../public/chervon.svg);
+    background-position: center;
+    transform: rotate(180deg);
+    transition: transform .2s linear;
+    cursor: pointer;
+
+    @media screen and (max-width: 530px) {
+      display: none;
+    }
+
+    &_open {
+      transform: rotate(0deg);
+    }
   }
 
   &__answer {
     display: none;
+    padding-top: 24px;
 
     &_active {
       display: block;

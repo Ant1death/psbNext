@@ -45,11 +45,16 @@ const HostingItem = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     const queries = `product_id=${item.id}&payment_type=${Number(payment)}`;
 
+    setMessage(t('error-pending'));
+    setIsSuccess(true);
+    setIsPopupOpen(true);
+
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
 
       if (message) {
         setMessage(message);
+        setIsSuccess(false);
         setIsPopupOpen(true);
       } else {
         const res = await createNewOrder(token, queries);
@@ -59,13 +64,14 @@ const HostingItem = (id) => {
           if (data) dispatch(fetchOrders(data));
 
           setMessage(t('error-order-success'));
-          setIsSuccess(true);
           setIsPopupOpen(true);
         } else if (res.status === '422') {
           setMessage(t('error-balance'));
+          setIsSuccess(false);
           setIsPopupOpen(true);
         } else {
           setMessage(t('error'));
+          setIsSuccess(false);
           setIsPopupOpen(true);
         }
       }
@@ -74,14 +80,13 @@ const HostingItem = (id) => {
 
       if (res && res.data && res.pay_url) {
         setMessage(t('error-order'));
-        setIsSuccess(true);
         setIsPopupOpen(true);
-
         window.open(res.pay_url, '_blank');
         const data = await getOrders(token);
         if (data) dispatch(fetchOrders(data));
       } else {
         setMessage(t('error'));
+        setIsSuccess(false);
         setIsPopupOpen(true);
       }
     }

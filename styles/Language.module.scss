@@ -1,11 +1,13 @@
 .language {
   &-wrapper {
-    width: 150px;
+    width: 189px;
     position: relative;
-    padding: 7px 7px 13px;
+    padding: 12px 24px;
+    background-color: #F5F6F7;
+    border-radius: 8px;
 
     &_mobile {
-      width: 310px;
+      width: 204px;
     }
   }
 
@@ -19,11 +21,10 @@
     top: 0;
     left: 0;
     width: 100%;
-    border: 1px solid #ccc;
     border-radius: 7%;
     padding: 7px 7px 13px;
     font-size: 1rem;
-    background-color: #fff;
+    background-color: #F5F6F7;
     transition: opacity .5s linear, visibility 0.5s linear;
 
     &_visible {
@@ -39,6 +40,9 @@
       flex-direction: row;
       column-gap: 10px;
       border-radius: 0;
+      width: 310px;
+      border: transparent;
+      border-radius: 8px;
 
       &-reverse {
         flex-direction: row-reverse;
@@ -82,8 +86,8 @@
     background-color: transparent;
     padding: 0;
     cursor: pointer;
-    top: 22px;
-    right: 6px;
+    top: 27px;
+    right: 22px;
     background-size: contain;
 
     &_open {
@@ -92,10 +96,10 @@
     }
 
     &_mobile {
-      right: 150px;
+      right: 30px;
 
       &-open {
-        right: 8px;
+        right: -90px;
       }
     }
   }

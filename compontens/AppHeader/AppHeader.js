@@ -35,18 +35,18 @@ function appHeader() {
             </Link>
           </li>
           <li>
-            <Link href="/vds" className={style.navbar__link} onClick={handleClickLink}>
-              VPS/VDS
+            <Link href="/vps" className={style.navbar__link} onClick={handleClickLink}>
+              VPS
+            </Link>
+          </li>
+          <li>
+            <Link href="/abuse" className={style.navbar__link} onClick={handleClickLink}>
+              Bulletproof
             </Link>
           </li>
           <li>
             <Link href="/vpn" className={style.navbar__link} onClick={handleClickLink}>
               VPN
-            </Link>
-          </li>
-          <li>
-            <Link href="/abuse" className={style.navbar__link} onClick={handleClickLink}>
-              Bulletproof VPS
             </Link>
           </li>
           <li>

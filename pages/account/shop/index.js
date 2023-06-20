@@ -9,6 +9,7 @@ import Preloader from '../../../compontens/Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
 import { getProducts } from '../../../api/getProducts';
+import { sortVps } from '../../../utils/sortVps';
 
 import style from '../../../styles/AccountShop.module.scss';
 
@@ -29,6 +30,7 @@ export default function AccountVps() {
   const [isTableActive, setIsTableActive] = useState(true);
   const [isListActive, setIsListActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeCountry, setActiveCountry] = useState('Все страны');
 
   const { t } = useTranslation();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -52,6 +54,8 @@ export default function AccountVps() {
       const items = vdsVps.filter(el => el.country === country);
       setCurrentCountry(items);
     }
+
+    setActiveCountry(country);
   }
 
   const handleChangeSelect = (evt) => {
@@ -70,7 +74,7 @@ export default function AccountVps() {
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData && vpsData.products ? vpsData.products : [];
-    dispatch(fetchVdsVps(vps));
+    dispatch(fetchVdsVps(sortVps(vps)));
   }
 
   useEffect(() => {
@@ -138,7 +142,11 @@ export default function AccountVps() {
               </h2>
               <ul className={style['shop__country-list']}>
                 <li>
-                  <button className={style['shop__country-button']} onClick={handleCountryClick}>
+                  <button
+                    className={`${style['shop__country-button']} ${activeCountry === 'Все страны' ? style['shop__country-button_active'] : ''}`}
+                    onClick={handleCountryClick}
+                    type='button'
+                  >
                     <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
                     {t('card-all-countries')}
                   </button>
@@ -149,7 +157,11 @@ export default function AccountVps() {
                 {amountContry.length > 0 && amountContry.map(el => {
                   return (
                     <li key={amountContry.indexOf(el)}>
-                      <button className={style['shop__country-button']} onClick={handleCountryClick}>
+                      <button
+                        className={`${style['shop__country-button']} ${activeCountry === el[0] ? style['shop__country-button_active'] : ''}`}
+                        onClick={handleCountryClick}
+                        type='button'
+                      >
                         <iconify-icon icon="material-symbols:chevron-right-rounded"></iconify-icon>
                         {el[0]}
                       </button>
@@ -208,7 +220,7 @@ export default function AccountVps() {
               </ul>
             </div>
             <ul className={style['shop__card-list']}>
-              {currentCountry && currentCountry.map(el => {
+              {currentCountry && currentCountry.length > 0 && currentCountry.map(el => {
                 return (
                   <li key={el.id} className={classItem}>
                     <Link href={`/account/shop/vps/${el.id}`} className={imgItemClass}>
@@ -222,9 +234,11 @@ export default function AccountVps() {
                       </h2>
                       <ul className={style['shop__item-list']}>
                         {el.characters.map(item => {
-                          return (
-                            <li key={item.id}>{`${item.name} ${item.content}`}</li>
-                          );
+                          if (item) {
+                            return (
+                              <li key={item.id}>{`${item.name} ${item.content}`}</li>
+                            );
+                          }
                         })}
                       </ul>
                     </div>
