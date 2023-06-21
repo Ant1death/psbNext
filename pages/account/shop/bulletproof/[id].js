@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { getProducts } from '../../../../api/getProducts';
@@ -32,6 +33,7 @@ const AbuseItem = (id) => {
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
@@ -54,6 +56,24 @@ const AbuseItem = (id) => {
     const product = vdsVpsBulletproof.find(el => el.id === Number(id.pageProps.id));
     setItem(product);
   }
+
+  const handleLoad = () => {
+    if (isLoading) setTimeout(() => setIsLoading(false), 1000);
+  }
+
+  useEffect(() => {
+    // for Chrome
+    window.addEventListener('load', handleLoad);
+
+    // for yandex browser
+    if (isLoading && document.readyState === 'complete') {
+      handleLoad();
+    }
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
 
   useEffect(() => {
     if (!vdsVpsBulletproof) fetchData();
@@ -152,11 +172,16 @@ const AbuseItem = (id) => {
   );
 }
 
-AbuseItem.getLayout = function getLayout(page) {
+AbuseItem.getLayout = function getLayout(page, isLoading) {
   return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
+    <>
+      {isLoading && <Preloader /> }
+      {!isLoading &&
+        <LayoutAccount>
+          {page}
+        </LayoutAccount>
+      }
+    </>
   );
 }
 

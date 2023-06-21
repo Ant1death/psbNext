@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { fetchHosting } from '../../../../store/slices/hosting';
@@ -29,6 +30,7 @@ const HostingItem = (id) => {
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t } = useTranslation();
   const hosting = useAppSelector(store => store.hosting.hosting);
@@ -97,6 +99,24 @@ const HostingItem = (id) => {
     setItem(product);
   }
 
+  const handleLoad = () => {
+    if (isLoading) setTimeout(() => setIsLoading(false), 1000);
+  }
+
+  useEffect(() => {
+    // for Chrome
+    window.addEventListener('load', handleLoad);
+
+    // for yandex browser
+    if (isLoading && document.readyState === 'complete') {
+      handleLoad();
+    }
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
   useEffect(() => {
     if (!hosting) fetchData();
   }, []);
@@ -117,11 +137,16 @@ const HostingItem = (id) => {
   );
 }
 
-HostingItem.getLayout = function getLayout(page) {
+HostingItem.getLayout = function getLayout(page, isLoading) {
   return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
+    <>
+      {isLoading && <Preloader /> }
+      {!isLoading &&
+        <LayoutAccount>
+          {page}
+        </LayoutAccount>
+      }
+    </>
   );
 }
 

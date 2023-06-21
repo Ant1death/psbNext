@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
+import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { wrapper } from '../../../../store/store';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
@@ -35,6 +36,7 @@ const  VpnItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
@@ -111,6 +113,24 @@ const  VpnItem = (id) => {
     setItem(product);
   }
 
+  const handleLoad = () => {
+    if (isLoading) setTimeout(() => setIsLoading(false), 1000);
+  }
+
+  useEffect(() => {
+    // for Chrome
+    window.addEventListener('load', handleLoad);
+
+    // for yandex browser
+    if (isLoading && document.readyState === 'complete') {
+      handleLoad();
+    }
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, []);
+
   useEffect(() => {
     if (!vpn) fetchData();
   }, []);
@@ -178,11 +198,16 @@ const  VpnItem = (id) => {
   );
 }
 
-VpnItem.getLayout = function getLayout(page) {
+VpnItem.getLayout = function getLayout(page, isLoading) {
   return (
-    <LayoutAccount>
-      {page}
-    </LayoutAccount>
+    <>
+      {isLoading && <Preloader /> }
+      {!isLoading &&
+        <LayoutAccount>
+          {page}
+        </LayoutAccount>
+      }
+    </>
   );
 }
 
