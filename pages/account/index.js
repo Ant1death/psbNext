@@ -9,8 +9,6 @@ import OrderCardSuccess from '../../compontens/OrderCardSuccess/OrderCardSuccess
 import { fetchOrders } from '../../store/slices/orders';
 import { getOrders } from '../../api/getOrders';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { getPaymentHistory } from '../../api/getPaymentHistory';
-import { fetchPaymentHistory } from '../../store/slices/paymentHystory';
 
 import style from '../../styles/Account.module.scss';
 
@@ -19,7 +17,6 @@ const Account = () => {
   const dispatch = useAppDispatch();
   const orders = useAppSelector(store => store.orders.orders);
   const user = useAppSelector(store => store.user.user);
-  const paymentHystory = useAppSelector(store => store.paymentHistory.paymentHistory);
 
   const [activeServises, setActiveServises] = useState(0);
   const [cost, setCost] = useState(0);
@@ -29,19 +26,9 @@ const Account = () => {
     if (data) dispatch(fetchOrders(data));
   }
 
-  const fetchDataPaymentHystory = async (token) => {
-    const data = await getPaymentHistory(token);
-    if (data) dispatch(fetchPaymentHistory(data.reverse()));
-  }
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token && !orders) fetchDataOrders(token);
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token && !paymentHystory) fetchDataPaymentHystory(token);
   }, []);
 
   useEffect(() => {
@@ -52,18 +39,15 @@ const Account = () => {
   }, [orders]);
 
   useEffect(() => {
-    if (paymentHystory) {
-      const date = new Date();
-      const month = date.getMonth();
-      const amount = paymentHystory.reduce((sum, el) => {
-        const currentDate = new Date(el.date);
-        if (currentDate.getMonth() === month && !el.type.includes('Пополнение')) sum = sum + el.amount;
+    if (orders) {
+      const amount = orders.reduce((sum, el) => {
+        if (el.status === 'Заказ выдан') sum = sum + Number(el.price);
         return sum;
       }, 0);
 
       setCost(amount);
   }
-  }, [paymentHystory]);
+  }, [orders]);
 
   return (
     <>
