@@ -42,7 +42,7 @@ const Logout = () => {
     dispatch(fetchPaymentHistory(null));
     logout(token);
 
-    router.push('/');
+    router.push('/login');
   }
 
   const checkName = async (token) => {
