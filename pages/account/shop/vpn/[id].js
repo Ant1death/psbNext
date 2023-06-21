@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
-import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { wrapper } from '../../../../store/store';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
@@ -36,7 +35,6 @@ const  VpnItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentFlag, setCurrentFlag] = useState('');
 
   const { t } = useTranslation();
@@ -114,24 +112,6 @@ const  VpnItem = (id) => {
     setItem(product);
   }
 
-  const handleLoad = () => {
-    if (isLoading) setTimeout(() => setIsLoading(false), 1000);
-  }
-
-  useEffect(() => {
-    // for Chrome
-    window.addEventListener('load', handleLoad);
-
-    // for yandex browser
-    if (isLoading && document.readyState === 'complete') {
-      handleLoad();
-    }
-
-    return () => {
-      window.removeEventListener('load', handleLoad);
-    };
-  }, []);
-
   useEffect(() => {
     if (!vpn) fetchData();
   }, []);
@@ -152,70 +132,64 @@ const  VpnItem = (id) => {
   }, [item]);
 
   return (
-    <NewServise
-      sentDataToOrder={sentDataToOrder}
-      message={message}
-      isPopupOpen={isPopupOpen}
-      setIsPopupOpen={setIsPopupOpen}
-      isSuccess={isSuccess}
-      setIsSuccess={setIsSuccess}
-    >
-      {item && item.country &&
+    item && item.country &&
+    <>
+      <NewServise
+        sentDataToOrder={sentDataToOrder}
+        message={message}
+        isPopupOpen={isPopupOpen}
+        setIsPopupOpen={setIsPopupOpen}
+        isSuccess={isSuccess}
+        setIsSuccess={setIsSuccess}
+      >
         <h3 className={style['card__title-item']}>
           <img src={currentFlag} alt={`icon ${item.title}`} className={style['card__flag']} />
           {`${item.title} - ${item.country}`}
         </h3>
-      }
-      <p className={style['card__price']}>
-        {item && item.price &&
-          `${t('new-service-price')}: ${item.price}$`
-        }
-      </p>
-      <label className={style['card__form-legend']} htmlFor='system'>
-        {t('new-service-subscribe')}
-      </label>
-      <div className={style['card__select-wrap']}>
-        <p
-          className={`${style['card__form-select']} ${isDropDownOpen ? style['card__form-select_open'] : ''}`}
-          onClick={openDropDown}
-        >
-          {valuePeriod}
+        <p className={style['card__price']}>
+          {`${t('new-service-price')}: ${item.price}$`}
         </p>
-        <ul className={`${style['card__option-list']} ${isDropDownOpen ? style['card__option-list_open'] : ''}`}>
-          {t('faq-lang') === 'ru' &&
-            VPN_PERIOD_RU.map((el, ind) => {
-              return (
-                <li key={ind} id={el.value} onClick={handleChangePeriod}>
-                  {el.option}
-                </li>
-              );
-            })
-          }
-          {t('faq-lang') === 'en' &&
-            VPN_PERIOD_EN.map((el, ind) => {
-              return (
-                <li key={ind} id={el.value} onClick={handleChangePeriod}>
-                  {el.option}
-                </li>
-              );
-            })
-          }
-        </ul>
-      </div>
-    </NewServise>
+        <label className={style['card__form-legend']} htmlFor='system'>
+          {t('new-service-subscribe')}
+        </label>
+        <div className={style['card__select-wrap']}>
+          <p
+            className={`${style['card__form-select']} ${isDropDownOpen ? style['card__form-select_open'] : ''}`}
+            onClick={openDropDown}
+          >
+            {valuePeriod}
+          </p>
+          <ul className={`${style['card__option-list']} ${isDropDownOpen ? style['card__option-list_open'] : ''}`}>
+            {t('faq-lang') === 'ru' &&
+              VPN_PERIOD_RU.map((el, ind) => {
+                return (
+                  <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                    {el.option}
+                  </li>
+                );
+              })
+            }
+            {t('faq-lang') === 'en' &&
+              VPN_PERIOD_EN.map((el, ind) => {
+                return (
+                  <li key={ind} id={el.value} onClick={handleChangePeriod}>
+                    {el.option}
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      </NewServise>
+    </>
   );
 }
 
-VpnItem.getLayout = function getLayout(page, isLoading) {
+VpnItem.getLayout = function getLayout(page) {
   return (
-    <>
-      {isLoading && <Preloader /> }
-      {!isLoading &&
-        <LayoutAccount>
-          {page}
-        </LayoutAccount>
-      }
-    </>
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
   );
 }
 

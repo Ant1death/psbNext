@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
-import Preloader from '../../../../compontens/Preloader/Preloader';
 
 import { wrapper } from '../../../../store/store';
 import { useAppSelector, useAppDispatch } from '../../../../store/hooks';
@@ -34,7 +33,6 @@ const VpsItem = (id) => {
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
   const user = useAppSelector(store => store.user.user);
@@ -59,24 +57,6 @@ const VpsItem = (id) => {
     const vps = vpsData && vpsData.products ? vpsData.products : [];
     dispatch(fetchVdsVps(vps));
   }
-
-  const handleLoad = () => {
-    if (isLoading) setTimeout(() => setIsLoading(false), 1000);
-  }
-
-  useEffect(() => {
-    // for Chrome
-    window.addEventListener('load', handleLoad);
-
-    // for yandex browser
-    if (isLoading && document.readyState === 'complete') {
-      handleLoad();
-    }
-
-    return () => {
-      window.removeEventListener('load', handleLoad);
-    };
-  }, []);
 
   useEffect(() => {
     if (!vdsVps) fetchData();
@@ -190,16 +170,11 @@ const VpsItem = (id) => {
   );
 }
 
-VpsItem.getLayout = function getLayout(page, isLoading) {
+VpsItem.getLayout = function getLayout(page) {
   return (
-    <>
-      {isLoading && <Preloader /> }
-      {!isLoading &&
-        <LayoutAccount>
-          {page}
-        </LayoutAccount>
-      }
-    </>
+    <LayoutAccount>
+      {page}
+    </LayoutAccount>
   );
 }
 

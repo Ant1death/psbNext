@@ -31,10 +31,11 @@ const LayoutAccount = ({ children }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isHeaderNamenuVisible, setIsHeaderNamenuVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true);
 
   const windowWidth = useWindowWidth();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
 
   const checkName = async (token) => {
     const username = localStorage.getItem('username');
@@ -47,6 +48,26 @@ const LayoutAccount = ({ children }) => {
       setIsLoading(true);
     }
   }
+
+  const handleLoad = () => {
+    if (isPageLoading) setTimeout(() => setIsPageLoading(true), 1000);
+  }
+
+  useEffect(() => {
+    if (ready) {
+      // for Chrome
+      window.addEventListener('load', handleLoad);
+
+      // for yandex browser
+      if (isPageLoading && document.readyState === 'complete') {
+        handleLoad();
+      }
+
+      return () => {
+        window.removeEventListener('load', handleLoad);
+      };
+    }
+  }, [ready]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -136,9 +157,9 @@ const LayoutAccount = ({ children }) => {
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
       </Head>
       <div className={ibmPlexSans.className}>
-        {!isLoading && <Preloader />}
-        {isLoading &&
-          <div className='page-account'
+        {(!isLoading || isPageLoading) && <Preloader />}
+
+          <div className={`page-account ${(!isLoading && isPageLoading) ? 'hidden' : ''}`}
             onClick={handleBackgroundClose}
           >
             <AccountSidebar
@@ -178,7 +199,7 @@ const LayoutAccount = ({ children }) => {
             <ButtonToTop />
             <ButtonTelegram />
           </div>
-        }
+
       </div>
     </>
   );
