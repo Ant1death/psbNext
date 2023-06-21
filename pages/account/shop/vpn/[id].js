@@ -13,7 +13,7 @@ import { fetchVpn } from '../../../../store/slices/vpn';
 import { getProducts } from '../../../../api/getProducts';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
-import { VPN_PERIOD_EN, VPN_PERIOD_RU } from '../../../../utils/constants';
+import { VPN_PERIOD_EN, VPN_PERIOD_RU, VPN_COUNTRIES } from '../../../../utils/constants';
 import { checkBalance } from '../../../../utils/checkBalance';
 
 import style from '../../../../styles/NewServise.module.scss';
@@ -37,6 +37,7 @@ const  VpnItem = (id) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentFlag, setCurrentFlag] = useState('');
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
@@ -143,6 +144,13 @@ const  VpnItem = (id) => {
     t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
   }, []);
 
+  useEffect(() => {
+    if (item.country) {
+      const flag = VPN_COUNTRIES.find(el => el.country === item.country).flag;
+      setCurrentFlag(flag);
+    }
+  }, [item]);
+
   return (
     <NewServise
       sentDataToOrder={sentDataToOrder}
@@ -152,9 +160,9 @@ const  VpnItem = (id) => {
       isSuccess={isSuccess}
       setIsSuccess={setIsSuccess}
     >
-      {item &&
+      {item && item.country &&
         <h3 className={style['card__title-item']}>
-          <img src='/de.svg' alt={`icon ${item.title}`} className={style['card__flag']} />
+          <img src={currentFlag} alt={`icon ${item.title}`} className={style['card__flag']} />
           {`${item.title} - ${item.country}`}
         </h3>
       }
