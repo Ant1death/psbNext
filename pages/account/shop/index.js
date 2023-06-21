@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
 import { getProducts } from '../../../api/getProducts';
 import { sortVps } from '../../../utils/sortVps';
+import { sortByAlphabet } from '../../../utils/sortByAlphabet';
 
 import style from '../../../styles/AccountShop.module.scss';
 
@@ -74,7 +75,10 @@ export default function AccountVps() {
   const fetchData = async () => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData && vpsData.products ? vpsData.products : [];
-    dispatch(fetchVdsVps(sortVps(vps)));
+    const sortArr = sortVps(vps);
+    const arr = sortArr.sort(sortByAlphabet);
+
+    dispatch(fetchVdsVps(arr));
   }
 
   useEffect(() => {
