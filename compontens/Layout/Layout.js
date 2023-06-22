@@ -1,4 +1,4 @@
-import { Rubik } from '@next/font/google';
+import { Inter } from '@next/font/google';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import AppFooter from '../AppFooter/AppFooter';
 import ButtonTelegram from '../ButtonTelegram/ButtonTelegram';
 import Preloader from '../Preloader/Preloader';
 
-const rubik = Rubik({
+const inter = Inter({
   subsets: ['latin', 'cyrillic'],
 });
 
@@ -46,7 +46,7 @@ const Layout = ({ children, title }) => {
         <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
       </Head>
       {isLoading && <Preloader /> }
-      <div className={rubik.className}>
+      <div className={inter.className}>
         <div className={`container ${isLoading ? 'hidden' : ''}`}>
           <AppHeader />
             { children }
