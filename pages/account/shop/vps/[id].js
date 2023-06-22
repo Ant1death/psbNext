@@ -76,9 +76,11 @@ const VpsItem = (id) => {
 
   useEffect(() => {
     if (item && item.control_panel) {
-      const arr = [...item.control_panel].sort((a, b) => {
+      const arrSort = [...item.control_panel].sort((a, b) => {
         return b.id - a.id;
       });
+      const arr = [arrSort[0], ...arrSort.slice(1).reverse()];
+
 
       setControlPanelList(arr);
     }
