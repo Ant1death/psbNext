@@ -13,6 +13,7 @@ const NewServise = ({
   setIsPopupOpen,
   isSuccess,
   setIsSuccess,
+  activeButton,
 }) => {
   const { t } = useTranslation();
 
@@ -68,7 +69,11 @@ const NewServise = ({
               </span>
             </label>
           </fieldset>
-          <button type='submit' className={style['card__button-cta']}>
+          <button
+            type='submit'
+            className={style['card__button-cta']}
+            disabled={!activeButton}
+          >
             {t('new-service-button')}
           </button>
         </form>

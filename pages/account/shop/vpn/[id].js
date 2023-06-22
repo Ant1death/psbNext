@@ -36,6 +36,7 @@ const  VpnItem = (id) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [currentFlag, setCurrentFlag] = useState('');
+  const [activeButton, setActiveButton] = useState(true);
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
@@ -65,6 +66,7 @@ const  VpnItem = (id) => {
     setMessage(t('error-pending'));
     setIsSuccess(true);
     setIsPopupOpen(true);
+    setActiveButton(false);
 
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
@@ -72,6 +74,7 @@ const  VpnItem = (id) => {
         setMessage(message);
         setIsSuccess(false);
         setIsPopupOpen(true);
+        setActiveButton(true);
       } else {
         const res = await createNewOrder(token, queries);
 
@@ -80,14 +83,17 @@ const  VpnItem = (id) => {
           if (data) dispatch(fetchOrders(data));
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else if (res.status === '422') {
           setMessage(t('error-balance'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else {
           setMessage(t('error'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         }
       }
     } else if (Number(payment) === 2) {
@@ -96,6 +102,7 @@ const  VpnItem = (id) => {
       if (res && res.data && res.pay_url) {
         setMessage(t('error-order'));
         setIsPopupOpen(true);
+        setActiveButton(true);
         const data = await getOrders(token);
         if (data) dispatch(fetchOrders(data));
         window.open(res.pay_url, '_blank');
@@ -103,6 +110,7 @@ const  VpnItem = (id) => {
         setMessage(t('error'));
         setIsSuccess(false);
         setIsPopupOpen(true);
+        setActiveButton(true);
       }
     }
   }
@@ -141,6 +149,7 @@ const  VpnItem = (id) => {
         setIsPopupOpen={setIsPopupOpen}
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
+        activeButton={activeButton}
       >
         <h3 className={style['card__title-item']}>
           <img src={currentFlag} alt={`icon ${item.title}`} className={style['card__flag']} />

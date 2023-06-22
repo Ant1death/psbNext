@@ -34,6 +34,7 @@ const VpsItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [controlPanelList, setControlPanelList] = useState([]);
+  const [activeButton, setActiveButton] = useState(true);
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
   const user = useAppSelector(store => store.user.user);
@@ -93,6 +94,7 @@ const VpsItem = (id) => {
     setMessage(t('error-pending'));
     setIsSuccess(true);
     setIsPopupOpen(true);
+    setActiveButton(false);
 
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
@@ -100,6 +102,7 @@ const VpsItem = (id) => {
         setMessage(message);
         setIsSuccess(false);
         setIsPopupOpen(true);
+        setActiveButton(true);
       } else {
         const res = await createNewOrder(token, queries);
 
@@ -108,14 +111,17 @@ const VpsItem = (id) => {
           if (data) dispatch(fetchOrders(data));
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else if (res.status === '422') {
           setMessage(t('error-balance'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else {
           setMessage(t('error'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         }
       }
     } else if (Number(payment) === 2) {
@@ -124,6 +130,7 @@ const VpsItem = (id) => {
       if (res && res.data && res.pay_url) {
         setMessage(t('error-order'));
         setIsPopupOpen(true);
+        setActiveButton(true);
 
         window.open(res.pay_url, '_blank');
         const data = await getOrders(token);
@@ -132,6 +139,7 @@ const VpsItem = (id) => {
         setMessage(t('error'));
         setIsPopupOpen(true);
         setIsSuccess(false);
+        setActiveButton(true);
       }
     }
   }
@@ -144,6 +152,7 @@ const VpsItem = (id) => {
       setIsPopupOpen={setIsPopupOpen}
       isSuccess={isSuccess}
       setIsSuccess={setIsSuccess}
+      activeButton={activeButton}
     >
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-system')}

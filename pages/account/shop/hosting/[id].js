@@ -29,6 +29,7 @@ const HostingItem = (id) => {
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [activeButton, setActiveButton] = useState(true);
 
   const { t } = useTranslation();
   const hosting = useAppSelector(store => store.hosting.hosting);
@@ -48,6 +49,7 @@ const HostingItem = (id) => {
     setMessage(t('error-pending'));
     setIsSuccess(true);
     setIsPopupOpen(true);
+    setActiveButton(false);
 
     if (Number(payment) === 1) {
       const message = checkBalance(user.balance, item.price, t('faq-lang'));
@@ -56,23 +58,26 @@ const HostingItem = (id) => {
         setMessage(message);
         setIsSuccess(false);
         setIsPopupOpen(true);
+        setActiveButton(true);
       } else {
         const res = await createNewOrder(token, queries);
 
         if (res.status === '200') {
           const data = await getOrders(token);
           if (data) dispatch(fetchOrders(data));
-
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else if (res.status === '422') {
           setMessage(t('error-balance'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         } else {
           setMessage(t('error'));
           setIsSuccess(false);
           setIsPopupOpen(true);
+          setActiveButton(true);
         }
       }
     } else if (Number(payment) === 2) {
@@ -81,6 +86,7 @@ const HostingItem = (id) => {
       if (res && res.data && res.pay_url) {
         setMessage(t('error-order'));
         setIsPopupOpen(true);
+        setActiveButton(true);
         window.open(res.pay_url, '_blank');
         const data = await getOrders(token);
         if (data) dispatch(fetchOrders(data));
@@ -88,6 +94,7 @@ const HostingItem = (id) => {
         setMessage(t('error'));
         setIsSuccess(false);
         setIsPopupOpen(true);
+        setActiveButton(true);
       }
     }
   }
@@ -113,6 +120,7 @@ const HostingItem = (id) => {
       setIsPopupOpen={setIsPopupOpen}
       isSuccess={isSuccess}
       setIsSuccess={setIsSuccess}
+      activeButton={activeButton}
     />
   );
 }
