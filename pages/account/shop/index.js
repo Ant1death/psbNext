@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
 import { getProducts } from '../../../api/getProducts';
 import { sortVps } from '../../../utils/sortVps';
-import { sortByAlphabet } from '../../../utils/sortByAlphabet';
+import { sortByCountries } from '../../../utils/sortByCountries';
 
 import style from '../../../styles/AccountShop.module.scss';
 
@@ -76,7 +76,7 @@ export default function AccountVps() {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData && vpsData.products ? vpsData.products : [];
     const sortArr = sortVps(vps);
-    const arr = sortArr.sort(sortByAlphabet);
+    const arr = sortArr.sort(sortByCountries);
 
     dispatch(fetchVdsVps(arr));
   }

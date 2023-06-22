@@ -17,7 +17,7 @@ import { fetchVdsVps } from '../store/slices/vdsVps';
 import { wrapper } from '../store/store';
 import { useAppSelector } from '../store/hooks';
 import { sortVps } from '../utils/sortVps';
-import { sortByAlphabet } from '../utils/sortByAlphabet';
+import { sortByCountries } from '../utils/sortByCountries';
 
 import { VPS_COUNTRY_LIST } from '../utils/constants';
 
@@ -32,7 +32,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
   const vpsData = await getProducts('VPS', `${process.env.BASE_URL}/products/all`);
   const vps = vpsData && vpsData.products ? vpsData.products : [];
   const sortArr = sortVps(vps);
-  const arr = sortArr.sort(sortByAlphabet);
+  const arr = sortArr.sort(sortByCountries);
 
   dispatch(fetchVdsVps(arr));
 
