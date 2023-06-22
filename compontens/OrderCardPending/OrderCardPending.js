@@ -51,9 +51,6 @@ const OrderCardPending = ({ order }) => {
             &nbsp;{t('order-pay')}
           </Link>
         }
-        <p className={style['card__message']}>
-          {t('order-pending-text')}
-        </p>
       </div>
     </li>
   );
