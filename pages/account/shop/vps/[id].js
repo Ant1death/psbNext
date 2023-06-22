@@ -33,6 +33,7 @@ const VpsItem = (id) => {
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [controlPanelList, setControlPanelList] = useState([]);
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
   const user = useAppSelector(store => store.user.user);
@@ -67,9 +68,19 @@ const VpsItem = (id) => {
   }, [vdsVps]);
 
   useEffect(() => {
-    if (item) {
+    if (item && controlPanelList && controlPanelList.length > 0) {
       item.os && setSystem(item.os[0].content);
-      item.control_panel && setControlPanel(item.control_panel[0].content);
+      setControlPanel(controlPanelList[0].content);
+    }
+  }, [controlPanelList, item]);
+
+  useEffect(() => {
+    if (item && item.control_panel) {
+      const arr = [...item.control_panel].sort((a, b) => {
+        return b.id - a.id;
+      });
+
+      setControlPanelList(arr);
     }
   }, [item]);
 
@@ -158,7 +169,7 @@ const VpsItem = (id) => {
         id='system'
         onClick={handleChangePanel}
       >
-        {item && item.control_panel && item.control_panel.map(el => {
+        {controlPanelList && controlPanelList.map(el => {
           return (
             <option key={el.id} value={el.content}>
               {`${el.name} - ${el.price}$`}

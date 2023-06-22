@@ -145,14 +145,11 @@ const AbuseItem = (id) => {
           );
         })}
       </select>
-      <label className={style['card__form-legend']} htmlFor='system'>
-        {`${t('new-service-panel')} NL`}
-      </label>
     </NewServise>
   );
 }
 
-AbuseItem.getLayout = function getLayout(page, isLoading) {
+AbuseItem.getLayout = function getLayout(page) {
   return (
     <LayoutAccount>
       {page}
