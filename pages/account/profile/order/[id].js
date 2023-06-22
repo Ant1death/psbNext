@@ -299,12 +299,12 @@ const Order = (id) => {
               <li>
                 <button
                   className={`${style['order__options-button']}
-                  ${currentOrder.auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
+                  ${currentOrder[1].auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
                   onClick={handleToggleAutoRefresh}
                   type='button'
                 >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
-                  {!currentOrder.auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
+                  {!currentOrder[1].auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
                 </button>
               </li>
               <li>
