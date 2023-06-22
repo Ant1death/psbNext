@@ -145,4 +145,22 @@
       }
     }
   }
+
+  .docList {
+    max-width: 1434px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 4%;
+    display: flex;
+    column-gap: 25px;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    font-size: 18px;
+
+    .doc {
+      &:hover {
+        color: #4e9aa5;
+      }
+    }
+  }
 }

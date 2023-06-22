@@ -274,5 +274,8 @@
   "error-user": "User with this email already exists",
   "error-order": "Order has been created, please pay for it!",
   "error-balance": "You don't have enough money",
-  "error-pending": "Please wait. Order is processing"
+  "error-pending": "Please wait. Order is processing",
+
+  "policy": "Personal data processing policy",
+  "offer": "Contract offer"
 }

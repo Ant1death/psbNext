@@ -60,6 +60,18 @@ function appFooter() {
           className={style.buttonToTop}
         ></button>
       </div>
+      <ul className={style.docList}>
+        <li>
+          <Link className={style.doc} href='/policy'>
+            {t('policy')}
+          </Link>
+        </li>
+        <li>
+          <Link className={style.doc} href='/offer'>
+            {t('offer')}
+          </Link>
+        </li>
+      </ul>
     </footer>
   );
 }
