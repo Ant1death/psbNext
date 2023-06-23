@@ -27,8 +27,8 @@ export const DropDownList = ({ list, name, setOption, setName }) => {
         {list.map(el => {
           return (
             <li key={el.id} id={el.content} onClick={handleOptionClick}>
-              {!el.price && el.name}
-              {el.price && `${el.name} - ${el.price}$`}
+              {!el.price && el.price !== 0 && el.name}
+              {(el.price || el.price === 0) && `${el.name} - ${el.price}$`}
             </li>
           );
         })}
