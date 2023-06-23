@@ -13,6 +13,7 @@ import { getOrders } from '../../../../api/getOrders';
 import { checkBalance } from '../../../../utils/checkBalance';
 import { wrapper } from '../../../../store/store';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { DropDownList } from '../../../../compontens/DropDownList/DropDownList';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -33,15 +34,12 @@ const AbuseItem = (id) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [activeButton, setActiveButton] = useState(true);
+  const [systemName, setSystemName] = useState('');
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
-
-  const handleChangeSystem = (evt) => {
-    setSystem(evt.target.value);
-  }
 
   const fetchData = async () => {
     const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
@@ -65,8 +63,9 @@ const AbuseItem = (id) => {
   }, [vdsVpsBulletproof]);
 
   useEffect(() => {
-    if (item) {
-      item.os && setSystem(item.os[0].content);
+    if (item && item.os) {
+      setSystem(item.os[0].content);
+      setSystemName(item.os[0].name);
     }
   }, [item]);
 
@@ -140,20 +139,14 @@ const AbuseItem = (id) => {
       <label className={style['card__form-legend']} htmlFor='system'>
         {t('new-service-system')}
       </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangeSystem}
-      >
-        {item && item.os && item.os.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {el.name}
-            </option>
-          );
-        })}
-      </select>
+      {item && item.os &&
+        <DropDownList
+          list={item.os}
+          name={systemName}
+          setOption={setSystem}
+          setName={setSystemName}
+        />
+      }
     </NewServise>
   );
 }

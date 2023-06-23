@@ -44,10 +44,6 @@ const VpsItem = (id) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const handleChangePanel = (evt) => {
-    setControlPanel(evt.target.value);
-  }
-
   const findItem = () => {
     const product = vdsVps.find(el => el.id === Number(id.pageProps.id));
     setItem(product);
