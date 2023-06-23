@@ -17,6 +17,7 @@ import { restartServer } from '../../../../api/restartServer';
 import { stopServer } from '../../../../api/stopServer';
 import { toggleAutoRefresh } from '../../../../api/toggleAutoRefresh';
 import { OS_LIST, NUMBER_REG_EXP } from '../../../../utils/constants';
+import { DropDownList } from '../../../../compontens/DropDownList/DropDownList';
 
 import style from '../../../../styles/Order.module.scss';
 
@@ -54,10 +55,6 @@ const Order = (id) => {
         dispatch(fetchCurrentOrder(res[0]));
       }
     }
-  }
-
-  const handleChangeSystem = (evt) => {
-    setSystem(evt.target.value);
   }
 
   const submitChangeSystem = async (evt) => {
@@ -247,19 +244,12 @@ const Order = (id) => {
               <label htmlFor='system'>
                 {t('profile-order-system')}
               </label>
-              <select
-                id='system'
-                className={style['order__select']}
-                onClick={handleChangeSystem}
-              >
-                {OS_LIST.map(el => {
-                  return (
-                    <option value={el.name} key={el.id}>
-                      {el.name}
-                    </option>
-                  );
-                })}
-              </select>
+              <DropDownList
+                list={OS_LIST}
+                name={system}
+                setOption={setSystem}
+                setName={setSystem}
+              />
               <button type='submit' className={style['order__button']}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
                 {t('profile-order-change-system')}
