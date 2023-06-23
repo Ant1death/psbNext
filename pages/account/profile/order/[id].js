@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import MessagePopup from '../../../../compontens/MessagePopup/MessagePopup';
@@ -346,14 +345,8 @@ const Order = (id) => {
       }
       {currentOrder && currentOrder.qr &&
         <div className={style.orderVpn}>
-          <Image
-            className={style.qr}
-            width='100'
-            height='100'
-            src={currentOrder.qr}
-            alt='order vpn'
-          />
-          <Link href={currentOrder.url}>
+          <img src={currentOrder.qr} alt='order vpn' className={style.qr} />
+          <Link href={currentOrder.url} className={style.vpnLink}>
             {t('order-config')}
           </Link>
         </div>
