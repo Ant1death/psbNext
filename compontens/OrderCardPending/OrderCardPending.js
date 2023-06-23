@@ -6,7 +6,7 @@ import style from '../../styles/OrderCard.module.scss';
 
 const OrderCardPending = ({ order }) => {
   const { t } = useTranslation();
-  const { id, order_id, status, auto_refresh, title, bill_id } = order;
+  const { id, order_id, status, auto_refresh, title, bill_id, payment_type } = order;
 
   return (
     <li className={style['card']}>
@@ -45,7 +45,7 @@ const OrderCardPending = ({ order }) => {
           <iconify-icon icon="ion:rocket-outline"></iconify-icon>
           &nbsp;{t('order-support')}
         </Link>
-        {bill_id &&
+        {bill_id && payment_type === 2 &&
           <Link className={style['card__button-pay']} href={`https://pay.cryptocloud.plus/${bill_id}`}>
             <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
             &nbsp;{t('order-pay')}
