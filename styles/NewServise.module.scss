@@ -211,6 +211,10 @@
     &:disabled {
       cursor: default;
       background: #91c2be;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
