@@ -33,7 +33,7 @@ export default function AccountVps() {
   const [isListActive, setIsListActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCountry, setActiveCountry] = useState('Все страны');
-  const [selectedSystemName, setSelectedSystemName] = useState('Select');
+  const [selectedSystemName, setSelectedSystemName] = useState('');
 
   const { t } = useTranslation();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -104,15 +104,17 @@ export default function AccountVps() {
   }, [vdsVps]);
 
   useEffect(() => {
-    if (selectedSystem === 'Select') {
-      setCurrentCountry(vdsVps);
-    } else {
-      const items = vdsVps.filter(el => {
-        const names = [];
-        el.os.forEach(el => names.push(el.name));
-        if (names.includes(selectedSystem)) return el;
-      });
-      setCurrentCountry(items);
+    if (vdsVps) {
+      if (selectedSystem === 'Select') {
+        setCurrentCountry(vdsVps);
+      } else {
+        const items = vdsVps.filter(el => {
+          const names = [];
+          el.os.forEach(el => names.push(el.name));
+          if (names.includes(selectedSystem)) return el;
+        });
+        setCurrentCountry(items);
+      }
     }
   }, [selectedSystem]);
 

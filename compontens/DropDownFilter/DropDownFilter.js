@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import style from '../../styles/AccountShop.module.scss';
 
@@ -14,6 +14,10 @@ export const DropDownFilter = ({ list, setOption, name, setName }) => {
     setSelectOpen(false);
     setName(evt.currentTarget.textContent);
   }
+
+  useEffect(() => {
+    setName('Select');
+  }, []);
 
   return (
     <div className={style['shop__select-wrap']}>
