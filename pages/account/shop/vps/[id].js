@@ -13,6 +13,7 @@ import { fetchVdsVps } from '../../../../store/slices/vdsVps';
 import { fetchOrders } from '../../../../store/slices/orders';
 import { getOrders } from '../../../../api/getOrders';
 import { checkBalance } from '../../../../utils/checkBalance';
+import { DropDownList } from '../../../../compontens/DropDownList/DropDownList';
 
 import style from '../../../../styles/NewServise.module.scss';
 
@@ -35,15 +36,13 @@ const VpsItem = (id) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [controlPanelList, setControlPanelList] = useState([]);
   const [activeButton, setActiveButton] = useState(true);
+  const [systemName, setSystemName] = useState('');
+  const [panelName, setPanelName] = useState('');
 
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
   const user = useAppSelector(store => store.user.user);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
-  const handleChangeSystem = (evt) => {
-    setSystem(evt.target.value);
-  }
 
   const handleChangePanel = (evt) => {
     setControlPanel(evt.target.value);
@@ -71,7 +70,9 @@ const VpsItem = (id) => {
   useEffect(() => {
     if (item && controlPanelList && controlPanelList.length > 0) {
       item.os && setSystem(item.os[0].content);
+      item.os && setSystemName(item.os[0].name);
       setControlPanel(controlPanelList[0].content);
+      setPanelName(`${controlPanelList[0].name} - ${controlPanelList[0].price}$`);
     }
   }, [controlPanelList, item]);
 
@@ -81,7 +82,6 @@ const VpsItem = (id) => {
         return b.id - a.id;
       });
       const arr = [arrSort[0], ...arrSort.slice(1).reverse()];
-
 
       setControlPanelList(arr);
     }
@@ -154,40 +154,28 @@ const VpsItem = (id) => {
       setIsSuccess={setIsSuccess}
       activeButton={activeButton}
     >
-      <label className={style['card__form-legend']} htmlFor='system'>
+      <p className={style['card__form-legend']}>
         {t('new-service-system')}
-      </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangeSystem}
-      >
-        {item && item.os && item.os.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {el.name}
-            </option>
-          );
-        })}
-      </select>
+      </p>
+      {item && item.os &&
+        <DropDownList
+          list={item.os}
+          name={systemName}
+          setOption={setSystem}
+          setName={setSystemName}
+        />
+      }
       <label className={style['card__form-legend']} htmlFor='system'>
         {`${t('new-service-panel')}`}
       </label>
-      <select
-        className={style['card__form-select']}
-        name='system'
-        id='system'
-        onClick={handleChangePanel}
-      >
-        {controlPanelList && controlPanelList.map(el => {
-          return (
-            <option key={el.id} value={el.content}>
-              {`${el.name} - ${el.price}$`}
-            </option>
-          );
-        })}
-      </select>
+      {controlPanelList && controlPanelList &&
+        <DropDownList
+          list={controlPanelList}
+          name={panelName}
+          setOption={setControlPanel}
+          setName={setPanelName}
+        />
+      }
     </NewServise>
   );
 }
