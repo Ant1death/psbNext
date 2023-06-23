@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import MessagePopup from '../../../../compontens/MessagePopup/MessagePopup';
@@ -49,8 +50,10 @@ const Order = (id) => {
       if (res && res[0] && res[1]) {
         const orderdata = [res[0].find(el => el.order_id === res[1][0].id)];
         const order = orderdata.concat(res[1][0]);
-        dispatch(fetchCurrentOrder(order))
-      };
+        dispatch(fetchCurrentOrder(order));
+      } else if (res && res[0]) {
+        dispatch(fetchCurrentOrder(res[0]));
+      }
     }
   }
 
@@ -184,7 +187,7 @@ const Order = (id) => {
 
   return (
     <div className={style['order']}>
-      {currentOrder && currentOrder[1] && currentOrder[0] &&
+      {currentOrder && !currentOrder.qr && currentOrder[1] && currentOrder[0] &&
         <>
           <section className={`${style['order__details']} ${style['card']}`}>
             <h2 className={style['order__main-title']}>
@@ -243,7 +246,7 @@ const Order = (id) => {
             </p>
             <form className={style['order__form']} onSubmit={submitChangeSystem}>
               <label htmlFor='system'>
-               {t('profile-order-system')}
+                {t('profile-order-system')}
               </label>
               <select
                 id='system'
@@ -340,6 +343,20 @@ const Order = (id) => {
             </ul>
           </section>
         </>
+      }
+      {currentOrder && currentOrder.qr &&
+        <div className={style.orderVpn}>
+          <Image
+            className={style.qr}
+            width='100'
+            height='100'
+            src={currentOrder.qr}
+            alt='order vpn'
+          />
+          <Link href={currentOrder.url}>
+            {t('order-config')}
+          </Link>
+        </div>
       }
       <MessagePopup
         message={message}
