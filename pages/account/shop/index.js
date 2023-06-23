@@ -5,6 +5,7 @@ import 'iconify-icon';
 
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 import Preloader from '../../../compontens/Preloader/Preloader';
+import { DropDownFilter } from '../../../compontens/DropDownFilter/DropDownFilter';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVdsVps } from '../../../store/slices/vdsVps';
@@ -32,6 +33,7 @@ export default function AccountVps() {
   const [isListActive, setIsListActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCountry, setActiveCountry] = useState('Все страны');
+  const [selectedSystemName, setSelectedSystemName] = useState('Select');
 
   const { t } = useTranslation();
   const vdsVps = useAppSelector(store => store.vdsVps.vdsVps);
@@ -57,10 +59,6 @@ export default function AccountVps() {
     }
 
     setActiveCountry(country);
-  }
-
-  const handleChangeSelect = (evt) => {
-    setSelectedSystem(evt.target.value);
   }
 
   const handleSearchItem = (evt) => {
@@ -106,7 +104,7 @@ export default function AccountVps() {
   }, [vdsVps]);
 
   useEffect(() => {
-    if (selectedSystem === '') {
+    if (selectedSystem === 'Select') {
       setCurrentCountry(vdsVps);
     } else {
       const items = vdsVps.filter(el => {
@@ -181,14 +179,14 @@ export default function AccountVps() {
               <label className={style['shop__system-label']} htmlFor='system'>
                 {t('card-system')}
               </label>
-              <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
-                <option value=''>Select</option>
-                {systemList.length > 0 && systemList.map(el => {
-                  return (
-                    <option key={systemList.indexOf(el)} value={el}>{el}</option>
-                  );
-                })}
-              </select>
+              {systemList.length > 0 &&
+                <DropDownFilter
+                  list={systemList}
+                  setOption={setSelectedSystem}
+                  name={selectedSystemName}
+                  setName={setSelectedSystemName}
+                />
+              }
             </form>
           </div>
           <div className={style['shop__content']}>
