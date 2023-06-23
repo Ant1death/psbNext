@@ -5,6 +5,7 @@ import 'iconify-icon';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import Preloader from '../../../../compontens/Preloader/Preloader';
+import { DropDownFilter } from '../../../../compontens/DropDownFilter/DropDownFilter';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchVdsVpsBulletproof } from '../../../../store/slices/vdsVpsBulletproof';
@@ -29,6 +30,7 @@ export default function Bulletproof() {
   const [isListActive, setIsListActive] = useState(false);
   const [currentCountry, setCurrentCountry] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedSystemName, setSelectedSystemName] = useState('Select');
 
   const { t } = useTranslation();
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
@@ -49,10 +51,6 @@ export default function Bulletproof() {
     if (country === t('card-all-countries')) {
       setCurrentCountry(vdsVpsBulletproof);
     }
-  }
-
-  const handleChangeSelect = (evt) => {
-    setSelectedSystem(evt.target.value);
   }
 
   const handleSearchItem = (evt) => {
@@ -89,7 +87,7 @@ export default function Bulletproof() {
   }, [vdsVpsBulletproof]);
 
   useEffect(() => {
-    if (selectedSystem === '') {
+    if (selectedSystem === 'Select') {
       setCurrentCountry(vdsVpsBulletproof);
     } else {
       const items = vdsVpsBulletproof.filter(el => {
@@ -141,14 +139,14 @@ export default function Bulletproof() {
               <label className={style['shop__system-label']} htmlFor='system'>
                 {t('card-system')}
               </label>
-              <select className={style['shop__system-select']} name='system' id='system' onClick={handleChangeSelect}>
-                <option value=''>Select</option>
-                {systemList.length > 0 && systemList.map(el => {
-                  return (
-                    <option key={systemList.indexOf(el)} value={el}>{el}</option>
-                  );
-                })}
-              </select>
+              {systemList.length > 0 &&
+                <DropDownFilter
+                  list={systemList}
+                  setOption={setSelectedSystem}
+                  name={selectedSystemName}
+                  setName={setSelectedSystemName}
+                />
+              }
             </form>
           </div>
           <div className={style['shop__content']}>
