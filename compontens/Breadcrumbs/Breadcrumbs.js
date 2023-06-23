@@ -37,7 +37,13 @@ const Breadcrumbs = () => {
     const asPath = pathWithoutQuery.split('/').filter(el => el.length > 0);
 
     if (asPath.length === 4 && (asPath.includes('profile'))) {
-      const name = currentOrder && currentOrder[1] && currentOrder[1].order_id;
+      let name;
+
+      if (currentOrder && currentOrder[1] && currentOrder[1].order_id) {
+        name = `#${currentOrder[1].order_id}`;
+      } else if (currentOrder && currentOrder.qr) {
+        name = 'VPN';
+      }
       setNameOrder(name);
     } else {
       setNameOrder('');
@@ -85,7 +91,7 @@ const Breadcrumbs = () => {
   return (
     <section className={style['breadcrumbs']}>
       <h1 className={style['breadcrumbs__title']}>
-        {nameOrder ? `${t('path-order')} #${nameOrder}` : pageTitle}
+        {nameOrder ? `${t('path-order')} ${nameOrder}` : pageTitle}
       </h1>
       <ol className={style['breadcrumbs__list']}>
         <li className={style['breadcrumbs__link']}>
