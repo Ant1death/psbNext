@@ -46,7 +46,7 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await getCurrentOrder(token, id.pageProps.id);
-      if (res) {
+      if (res && res[0] && res[1]) {
         const orderdata = [res[0].find(el => el.order_id === res[1][0].id)];
         const order = orderdata.concat(res[1][0]);
         dispatch(fetchCurrentOrder(order))
