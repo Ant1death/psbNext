@@ -119,6 +119,17 @@ export default function AccountVps() {
   }, [selectedSystem]);
 
   useEffect(() => {
+    if (vdsVps) {
+      if (activeCountry === t('card-all-countries')) {
+        setCurrentCountry(vdsVps);
+      } else {
+        const items = vdsVps.filter(el => el.country === activeCountry);
+        setCurrentCountry(items);
+      }
+    }
+  }, [activeCountry]);
+
+  useEffect(() => {
     if (seachedItem === '') {
       setCurrentCountry(vdsVps);
     } else {
@@ -200,6 +211,7 @@ export default function AccountVps() {
                   className={style['shop__search-input']}
                   name='search'
                   onChange={handleSearchItem}
+                  value={seachedItem || ''}
                 />
               </form>
               <ul className={style['shop__display']}>
