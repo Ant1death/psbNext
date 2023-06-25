@@ -26,7 +26,7 @@ AccountVps.getLayout = function getLayout(page) {
 export default function AccountVps() {
   const [amountContry, setAmountContry] = useState([]);
   const [currentCountry, setCurrentCountry] = useState([]);
-  const [selectedSystem, setSelectedSystem] = useState('');
+  const [selectedSystem, setSelectedSystem] = useState('Select');
   const [seachedItem, setSeachedItem] = useState('');
   const [systemList, setSystemList] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
@@ -50,14 +50,6 @@ export default function AccountVps() {
 
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
-
-    if (country === t('card-all-countries')) {
-      setCurrentCountry(vdsVps);
-    } else {
-      const items = vdsVps.filter(el => el.country === country);
-      setCurrentCountry(items);
-    }
-
     setActiveCountry(country);
   }
 
@@ -105,41 +97,72 @@ export default function AccountVps() {
 
   useEffect(() => {
     if (vdsVps) {
-      if (selectedSystem === 'Select') {
+      if (selectedSystem === 'Select' && activeCountry === t('card-all-countries') && seachedItem === '') {
         setCurrentCountry(vdsVps);
-      } else {
+
+      } else if (selectedSystem !== 'Select' && activeCountry === t('card-all-countries') && seachedItem === '') {
         const items = vdsVps.filter(el => {
           const names = [];
           el.os.forEach(el => names.push(el.name));
           if (names.includes(selectedSystem)) return el;
         });
         setCurrentCountry(items);
-      }
-    }
-  }, [selectedSystem]);
 
-  useEffect(() => {
-    if (vdsVps) {
-      if (activeCountry === t('card-all-countries')) {
-        setCurrentCountry(vdsVps);
-      } else {
+      } else if (selectedSystem !== 'Select' && activeCountry !== t('card-all-countries') && seachedItem === '') {
+        const itemsSystems = vdsVps.filter(el => {
+          const names = [];
+          el.os.forEach(el => names.push(el.name));
+          if (names.includes(selectedSystem)) return el;
+        });
+        const itemCountries = itemsSystems.filter(el => el.country === activeCountry);
+        setCurrentCountry(itemCountries);
+
+      } else if (selectedSystem === 'Select' && activeCountry !== t('card-all-countries') && seachedItem === '') {
         const items = vdsVps.filter(el => el.country === activeCountry);
         setCurrentCountry(items);
+
+      } else if (selectedSystem === 'Select' && activeCountry !== t('card-all-countries') && seachedItem !== '') {
+        const itemCountries = vdsVps.filter(el => el.country === activeCountry);
+        const search = seachedItem.toLowerCase();
+        const itemsSearch = itemCountries.filter(el =>
+          el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
+        );
+        setCurrentCountry(itemsSearch);
+
+      } else if (selectedSystem === 'Select' && activeCountry === t('card-all-countries') && seachedItem !== '') {
+        const search = seachedItem.toLowerCase();
+        const items = vdsVps.filter(el =>
+          el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
+        );
+        setCurrentCountry(items);
+
+      } else if (selectedSystem !== 'Select' && activeCountry === t('card-all-countries') && seachedItem !== '') {
+        const itemsSystems = vdsVps.filter(el => {
+          const names = [];
+          el.os.forEach(el => names.push(el.name));
+          if (names.includes(selectedSystem)) return el;
+        });
+        const search = seachedItem.toLowerCase();
+        const itemsSearch = itemsSystems.filter(el =>
+          el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
+        );
+        setCurrentCountry(itemsSearch);
+
+      } else {
+        const itemsSystems = vdsVps.filter(el => {
+          const names = [];
+          el.os.forEach(el => names.push(el.name));
+          if (names.includes(selectedSystem)) return el;
+        });
+        const itemCountries = itemsSystems.filter(el => el.country === activeCountry);
+        const search = seachedItem.toLowerCase();
+        const itemsSearch = itemCountries.filter(el =>
+          el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
+        );
+        setCurrentCountry(itemsSearch);
       }
     }
-  }, [activeCountry]);
-
-  useEffect(() => {
-    if (seachedItem === '') {
-      setCurrentCountry(vdsVps);
-    } else {
-      const search = seachedItem.toLowerCase();
-      const items = vdsVps.filter(el =>
-        el.title.toLowerCase().includes(search) || el.country.toLowerCase().includes(search)
-      );
-      setCurrentCountry(items);
-    }
-  }, [seachedItem]);
+  }, [selectedSystem, activeCountry, seachedItem]);
 
   useEffect(() => {
     !vdsVps ? setIsLoading(true) : setIsLoading(false);
