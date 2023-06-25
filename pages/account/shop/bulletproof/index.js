@@ -23,7 +23,7 @@ Bulletproof.getLayout = function getLayout(page) {
 }
 
 export default function Bulletproof() {
-  const [selectedSystem, setSelectedSystem] = useState('');
+  const [selectedSystem, setSelectedSystem] = useState('Select');
   const [seachedItem, setSeachedItem] = useState('');
   const [systemList, setSystemList] = useState([]);
   const [isTableActive, setIsTableActive] = useState(true);
@@ -47,10 +47,6 @@ export default function Bulletproof() {
 
   const handleCountryClick = (evt) => {
     const country = evt.target.textContent;
-
-    if (country === t('card-all-countries')) {
-      setCurrentCountry(vdsVpsBulletproof);
-    }
   }
 
   const handleSearchItem = (evt) => {
@@ -88,28 +84,34 @@ export default function Bulletproof() {
 
   useEffect(() => {
     if (vdsVpsBulletproof) {
-      if (selectedSystem === 'Select') {
+      if (selectedSystem === 'Select' && seachedItem === '') {
         setCurrentCountry(vdsVpsBulletproof);
-      } else {
+
+      } else if (selectedSystem !== 'Select' && seachedItem === '') {
         const items = vdsVpsBulletproof.filter(el => {
           const names = [];
           el.os.forEach(el => names.push(el.name));
           if (names.includes(selectedSystem)) return el;
         });
         setCurrentCountry(items);
+
+      } else if (selectedSystem === 'Select' && seachedItem !== '') {
+        const search = seachedItem.toLowerCase();
+        const items = vdsVpsBulletproof.filter(el => el.title.toLowerCase().includes(search));
+        setCurrentCountry(items);
+
+      } else {
+        const itemsSystems = vdsVpsBulletproof.filter(el => {
+          const names = [];
+          el.os.forEach(el => names.push(el.name));
+          if (names.includes(selectedSystem)) return el;
+        });
+        const search = seachedItem.toLowerCase();
+        const itemsSearch = itemsSystems.filter(el => el.title.toLowerCase().includes(search));
+        setCurrentCountry(itemsSearch);
       }
     }
-  }, [selectedSystem]);
-
-  useEffect(() => {
-    if (seachedItem === '') {
-      setCurrentCountry(vdsVpsBulletproof);
-    } else {
-      const search = seachedItem.toLowerCase();
-      const items = vdsVpsBulletproof.filter(el => el.title.toLowerCase().includes(search));
-      setCurrentCountry(items);
-    }
-  }, [seachedItem]);
+  }, [selectedSystem, seachedItem]);
 
   useEffect(() => {
     !vdsVpsBulletproof ? setIsLoading(true) : setIsLoading(false);
@@ -160,6 +162,7 @@ export default function Bulletproof() {
                   className={style['shop__search-input']}
                   name='search'
                   onChange={handleSearchItem}
+                  value={seachedItem || ''}
                 />
               </form>
               <ul className={style['shop__display']}>
