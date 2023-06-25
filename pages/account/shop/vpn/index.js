@@ -78,6 +78,7 @@ export default function AccountVpn() {
                   className={style['shop__search-input']}
                   name='search'
                   onChange={handleSearchItem}
+                  value={seachedItem || ''}
                 />
               </form>
             </div>
