@@ -1,12 +1,33 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import 'iconify-icon';
+
+import { getOrderHistory } from '../../api/getOrderHistory';
 
 import style from '../../styles/OrderCard.module.scss';
 
 const OrderCardPending = ({ order }) => {
   const { t } = useTranslation();
-  const { id, order_id, status, auto_refresh, title, bill_id, payment_type } = order;
+  const { id, order_id, status, auto_refresh, title, bill_id } = order;
+
+  const [isPaid, setIsPaid] = useState(true);
+
+  const fetchData = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const data = await getOrderHistory(token, bill_id);
+      const item = data.find(el => el.invoice_id === bill_id);
+
+      if (item) setIsPaid(false);
+    }
+  }
+
+  useEffect(() => {
+    if (order) {
+      fetchData();
+    }
+  }, [order]);
 
   return (
     <li className={style['card']}>
@@ -41,16 +62,16 @@ const OrderCardPending = ({ order }) => {
         </ul>
       </div>
       <div className={style['card__footer']}>
-        <Link className={style['card__button-link']} href='https://t.me/psbhosting'>
-          <iconify-icon icon="ion:rocket-outline"></iconify-icon>
-          &nbsp;{t('order-support')}
-        </Link>
-        {bill_id && payment_type === 2 &&
-          <Link className={style['card__button-pay']} href={`https://pay.cryptocloud.plus/${bill_id}`}>
+        {!isPaid &&
+          <Link className={style['card__button-pay']} href={`https://pay.cryptocloud.plus/${bill_id}`} target='_blank'>
             <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
             &nbsp;{t('order-pay')}
           </Link>
         }
+        <Link className={style['card__button-link']} href='https://t.me/psbhosting'>
+          <iconify-icon icon="ion:rocket-outline"></iconify-icon>
+          &nbsp;{t('order-support')}
+        </Link>
       </div>
     </li>
   );
