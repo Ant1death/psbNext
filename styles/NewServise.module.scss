@@ -120,6 +120,9 @@
       border: 1px solid #e9edf4;
       border-radius: 7px;
       cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
 
       &::after {
         content: '';
