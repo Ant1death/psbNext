@@ -3,7 +3,7 @@
   border: 2px solid #79c8c2;
   color: #fff;
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
   visibility: hidden;
   text-align: center;
@@ -19,6 +19,11 @@
   font-size: 22px;
   padding: 0;
   opacity: 0;
+
+  @media screen and (max-width: 990px) {
+    right: 8px;
+  }
+
 
   &_visible {
     visibility: visible;
