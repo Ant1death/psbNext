@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import style from '../../styles/NewServise.module.scss';
 
 export const DropDownList = ({ list, name, setOption, setName }) => {
   const [selectOpen, setSelectOpen] = useState(false);
+
+  const dropdownListRef = useRef();
 
   const handleSelectClick = () => {
     selectOpen ? setSelectOpen(false) : setSelectOpen(true);
@@ -15,8 +17,22 @@ export const DropDownList = ({ list, name, setOption, setName }) => {
     setSelectOpen(false);
   }
 
+  const handleClickOutside = (evt) => {
+    if (dropdownListRef.current && !dropdownListRef.current.contains(evt.target)) {
+      setSelectOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
   return (
-    <div className={style['card__select-wrap']}>
+    <div className={style['card__select-wrap']} ref={dropdownListRef}>
       <div
         className={`${style['card__form-select']} ${selectOpen ? style['card__form-select_open'] : ''}`}
         onClick={handleSelectClick}

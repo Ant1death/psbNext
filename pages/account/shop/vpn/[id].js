@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
@@ -42,6 +42,7 @@ const  VpnItem = (id) => {
   const vpn = useAppSelector(store => store.vpn.vpn);
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
+  const dropdownListRef = useRef();
 
   const handleChangePeriod = (evt) => {
     setPeriod(evt.currentTarget.id);
@@ -120,6 +121,20 @@ const  VpnItem = (id) => {
     setItem(product);
   }
 
+  const handleClickOutside = (evt) => {
+    if (dropdownListRef.current && !dropdownListRef.current.contains(evt.target)) {
+      setIsDropDownOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
   useEffect(() => {
     if (!vpn) fetchData();
   }, []);
@@ -161,7 +176,7 @@ const  VpnItem = (id) => {
         <label className={style['card__form-legend']} htmlFor='system'>
           {t('new-service-subscribe')}
         </label>
-        <div className={style['card__select-wrap']}>
+        <div className={style['card__select-wrap']} ref={dropdownListRef}>
           <p
             className={`${style['card__form-select']} ${isDropDownOpen ? style['card__form-select_open'] : ''}`}
             onClick={openDropDown}
