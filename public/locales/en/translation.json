@@ -56,7 +56,9 @@
   "advantages-vps-about": "SSD NVMe drives and placement of high-quality equipment in data-centers around the world: the Netherlands (DMCA ignored by 100%), Moldova (DMCA ignored by 100%), UK, USA, UK, Germany, Greece, Canada, Turkey",
   "advantages": "Benefits",
   "advantages-about": "Advantages of our hosting",
-  "advantages-coenf": "Anonymous registration. Cryptocurrency payment. Customer safety is our top priority.",
+  "advantages-coenf": "Anonymous registration.",
+  "advantages-coenf-two": "Cryptocurrency payment.",
+  "advantages-coenf-three": "Customer safety is our top priority.",
   "advantages-title-vpn": "Advantages of our VPN",
 
   "faq": "Frequently asked questions",
@@ -92,7 +94,8 @@
   "abuse-hosting": "Bulletproof Hosting",
   "abuse-hosting-about": "Dedicated hosting services list",
 
-  "company-about": "PSB was founded in 2019 and has been rapidly developing the range and quality of services we provide. Our team consists of international lawyers, it specialists and system administrators. The range of services provided:",
+  "company-about": "PSB was founded in 2019 and has been rapidly developing the range and quality of services we provide.",
+  "company-about-two": "Our team consists of international lawyers, it specialists and system administrators. The range of services provided:",
   "company-one": "Anonymous offshore hosting for your business",
   "company-two": "IT development",
   "company-three": "Administer your projects",
@@ -102,8 +105,8 @@
   "company-seven": "Licensing of crypto projects and online casinos",
   "company-eigth": "Verification of crypto currency accounts and payment systems",
 
-  "more": "You can read more about our services",
-  "site": "on site",
+  "more": "You can read more about our services:",
+  "site": "On site",
   "and": "and",
   "tg": "on the telegram bot",
 

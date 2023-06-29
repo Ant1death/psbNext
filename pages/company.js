@@ -23,6 +23,7 @@ const Company = () => {
         <div className={style['about__text']}>
           <h2 className={`${['h2-title']}`}>{t('company')}</h2>
           <p>{t('company-about')}</p>
+          <p>{t('company-about-two')}</p>
           <ul className={style['about__list']}>
             <li>{t('company-one')}</li>
             <li>{t('company-two')}</li>
@@ -34,14 +35,18 @@ const Company = () => {
             <li>{t('company-eigth')}</li>
           </ul>
           <p className={style['about__telegram']}>
-            {t('more')}&nbsp;
-            <Link href='https://psb-offshore.pro/'>
-              {t('site')}
-            </Link>
-            &nbsp;{t('and')}&nbsp;
-            <Link href='https://telegram.me/PSB_Wallet_Bot'>
-              {t('tg')}
-            </Link>
+            <span className={style['about__span']}>
+              {t('more')}&nbsp;
+            </span>
+            <span className={style['about__span']}>
+              <Link href='https://psb-offshore.pro/'>
+                {t('site')}
+              </Link>
+              &nbsp;{t('and')}&nbsp;
+              <Link href='https://telegram.me/PSB_Wallet_Bot'>
+                {t('tg')}
+              </Link>
+            </span>
           </p>
         </div>
       </section>
@@ -125,7 +130,15 @@ const Company = () => {
                 {t('advantages-one')}
               </h4>
               <p className={styleAdvantages['advantages__description']}>
-                {t('advantages-coenf')}
+                <span className={styleAdvantages['advantages__span']}>
+                  {t('advantages-coenf')}
+                </span>
+                <span className={styleAdvantages['advantages__span']}>
+                  {t('advantages-coenf-two')}
+                </span>
+                <span className={styleAdvantages['advantages__span']}>
+                  {t('advantages-coenf-three')}
+                </span>
               </p>
             </div>
           </SwiperSlide>
