@@ -64,6 +64,10 @@
     letter-spacing: 0.03em;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+
+    &:disabled {
+      color: #79c8c2;
+    }
   }
 
   &__table {
