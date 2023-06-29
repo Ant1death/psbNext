@@ -25,9 +25,12 @@ const Balance = () => {
 
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
+  const [isActiveButton, setIsActiveButton] = useState(true);
+  
   const handleTopUpBalance = async (evt) => {
     evt.preventDefault();
+
+    setIsActiveButton(false);
 
     const token = typeof window !== undefined && localStorage.getItem('token');
     const queries = `user_id=${user.id}&amount=${values.amount}`;
@@ -35,6 +38,7 @@ const Balance = () => {
 
     if (res && res.pay_url) {
       window.open(res.pay_url, '_blank');
+      setIsActiveButton(true);
     } else {
       setMessage(t('error'));
       setIsPopupOpen(true);
@@ -80,7 +84,7 @@ const Balance = () => {
             <button
               type='submit'
               className={style['section__button-submit']}
-              disabled={!isValid}
+              disabled={!isValid && !isActiveButton}
             >
               {t('balance-button')}
             </button>
