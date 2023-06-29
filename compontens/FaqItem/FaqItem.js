@@ -45,7 +45,7 @@ const FaqItem = ({ question, answer }) => {
             </span>
           </p>
           <ul
-            className={`${style['faq__answer']} ${style['faq__list']} ${isActive ? style['faq__answer_active'] : ''}`}
+            className={`${style['faq__answer']} ${style['faq__list']} ${isActive ? style['faq__list_active'] : ''}`}
           >
             <li>
               {answer[0]}
