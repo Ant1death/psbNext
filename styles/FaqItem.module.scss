@@ -61,8 +61,11 @@
     display: none;
 
     @media screen and (max-width: 530px) {
-      display: flex;
       flex-direction: column;
+
+      &_active {
+        display: flex;
+      }
 
       li {
         position: relative;
