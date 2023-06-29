@@ -147,7 +147,7 @@
   }
 
   .docList {
-    max-width: 1520px;
+    max-width: 1642px;
     width: 100%;
     margin: 0 auto;
     padding: 0 4%;
@@ -158,7 +158,11 @@
     font-size: 18px;
 
     a {
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+      }
+
+      @media screen and (max-width: 530px) {
         font-size: 12px;
       }
     }

@@ -242,7 +242,7 @@ const Vpn = () => {
       </section>
 
       <section className={style['instructions']}>
-        <h2 className={`${style['main-title']} ${style['instructions__title']}`}>
+        <h2 className={`${style['instructions__title']}`}>
           {t('instructions')}
         </h2>
         <ul className={style['instructions__list']}>
@@ -256,7 +256,7 @@ const Vpn = () => {
             <img alt='icon' src='/icon-two.svg' className={style['instructions__icon']} />
             <p className={`${style['instructions__text']}`}>
               {`${t('instruction-two')} `}
-              <Link href='https://www.wireguard.com/install/'>
+              <Link href='https://www.wireguard.com/install/' target='_blank'>
                 Wireguard
               </Link>
             </p>
@@ -271,7 +271,7 @@ const Vpn = () => {
       </section>
 
       <section className={styleAdvantages['advantages']}>
-      <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+      <h2 className={`${['h2-title']} ${styleAdvantages['section-title']} ${style.blockTitle}`}>
         {t('advantages-title-vpn')}
       </h2>
       <Swiper

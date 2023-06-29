@@ -2,7 +2,7 @@
   &-wrapper {
     width: 189px;
     position: relative;
-    padding: 12px 24px;
+    padding: 10px 24px;
     background-color: #F5F6F7;
     border-radius: 8px;
 
@@ -44,9 +44,18 @@
       border: transparent;
       border-radius: 8px;
 
+      @media screen and (max-width: 360px) {
+        width: 290px;
+      }
+
       &-reverse {
         flex-direction: row-reverse;
         border-radius: 0;
+        width: 310px;
+
+        @media screen and (max-width: 360px) {
+          width: 290px;
+        }
       }
     }
   }
@@ -100,6 +109,10 @@
 
       &-open {
         right: -90px;
+
+        @media screen and (max-width: 360px) {
+          right: -80px;
+        }
       }
     }
   }

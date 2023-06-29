@@ -50,7 +50,9 @@
 
 .review {
   &__title {
-    padding-bottom: 20px;
+    padding-bottom: 32px;
+    justify-self: center;
+    text-align: center;
 
     @media screen and (max-width: 500px) {
       text-align: center;
@@ -103,4 +105,9 @@
     font-size: 16px;
     color: #888;
   }
+}
+
+.blockTitle {
+  justify-self: center;
+  text-align: center;
 }

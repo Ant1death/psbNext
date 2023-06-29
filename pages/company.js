@@ -52,7 +52,7 @@ const Company = () => {
       </section>
 
       <section className={styleAdvantages['advantages']}>
-        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']} ${style.blockTitle}`}>
           {t('advantages-title-main')}
         </h2>
         <Swiper

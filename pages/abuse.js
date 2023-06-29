@@ -90,7 +90,7 @@ const Abuse = () => {
       </div>
 
       <section className={`${styleAdvantages['advantages']} ${style.advantages}`}>
-        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']} ${style.blockTitle}`}>
           {t('advantages-title-vds')}
         </h2>
         <Swiper

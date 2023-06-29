@@ -20,6 +20,11 @@
   }
 }
 
+.blockTitle {
+  justify-self: center;
+  text-align: center;
+}
+
 .products {
   display: grid;
   box-sizing: border-box;
@@ -41,7 +46,7 @@
       justify-content: space-between;
       height: min-content;
 
-      @media screen and (max-width: 1290px) {
+      @media screen and (max-width: 1307px) {
         justify-content: start;
       }
 

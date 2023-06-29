@@ -54,7 +54,6 @@
 
 .servises {
   &__wrapper {
-    margin-top: 20px;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: stretch;
@@ -102,6 +101,11 @@
       background-position-x: 130px;
     }
 
+    @media screen and (max-width: 360px) {
+      width: 290px;
+      background-position-x: 125px;
+    }
+
     &-title {
       font-weight: 700;
       font-size: 20px;
@@ -142,7 +146,7 @@
   &__wrapper {
     justify-content: space-around;
     list-style-type: none;
-    margin: 30px 0;
+    padding-top: 5px;
     column-gap: 40px;
     row-gap: 20px;
     display: flex;

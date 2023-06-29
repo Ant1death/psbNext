@@ -1,12 +1,14 @@
 .systems {
-  padding: 32px 0 22px;
+  padding: 32px 0;
   display: grid;
 
   &-title {
+    justify-self: center;
+    text-align: center;
+
     @media screen and (max-width: 1024px) {
       max-width: 635px;
       width: 100%;
-      justify-self: center;
     }
 
     @media screen and (max-width: 500px) {
@@ -28,7 +30,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 30px;
-    margin: 40px 0;
 
     @media screen and (max-width: 480px) {
       flex-wrap: wrap-reverse;
