@@ -212,6 +212,9 @@
   "new-service-button": "Создать заказ",
   "new-service-subscribe": "Длительности подписки",
   "new-service-price": "Цена в месяц",
+  "new-service-price-three": "Цена за 3 месяца",
+  "new-service-price-six": "Цена за 6 месяцев",
+  "new-service-price-twelve": "Цена за 12 месяцев",
 
   "profile": "Смена информации о пользователе",
   "profile-button": "Сохранить",

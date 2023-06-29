@@ -210,6 +210,9 @@
   "new-service-button": "Create an order",
   "new-service-subscribe": "Subscription duration",
   "new-service-price": "Price per month",
+  "new-service-price-three": "Price for 3 months",
+  "new-service-price-six": "Price for 6 months",
+  "new-service-price-twelve": "Price for 12 months",
 
   "profile": "Changing user information",
   "profile-button": "Save",

@@ -37,6 +37,7 @@ const  VpnItem = (id) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [currentFlag, setCurrentFlag] = useState('');
   const [activeButton, setActiveButton] = useState(true);
+  const [price, setPrice] = useState('');
 
   const { t } = useTranslation();
   const vpn = useAppSelector(store => store.vpn.vpn);
@@ -154,6 +155,27 @@ const  VpnItem = (id) => {
     }
   }, [item]);
 
+  useEffect(() => {
+    if (item) setPrice(`${t('new-service-price')}: ${item.price}$`);
+  }, [item]);
+
+  useEffect(() => {
+    if (item) {
+      if (Number(period) === 1) {
+        setPrice(`${t('new-service-price')}: ${item.price}$`);
+      } else if (Number(period) === 3) {
+        const sum = Number(item.price) * 3 - Number(item.price) * 3 * 0.05;
+        setPrice(`${t('new-service-price-three')}: ${sum}$`);
+      } else if (Number(period) === 6) {
+        const sum = Number(item.price) * 6 - Number(item.price) * 6 * 0.1;
+        setPrice(`${t('new-service-price-six')}: ${sum}$`);
+      } else if (Number(period) === 12) {
+        const sum = Number(item.price) * 12 - Number(item.price) * 12 * 0.15;
+        setPrice(`${t('new-service-price-twelve')}: ${sum}$`);
+      }
+    }
+  }, [period, item, t('faq-lang')]);
+
   return (
     item && item.country &&
     <>
@@ -171,7 +193,7 @@ const  VpnItem = (id) => {
           {`${item.title} - ${item.country}`}
         </h3>
         <p className={style['card__price']}>
-          {`${t('new-service-price')}: ${item.price}$`}
+          {price}
         </p>
         <label className={style['card__form-legend']} htmlFor='system'>
           {t('new-service-subscribe')}
