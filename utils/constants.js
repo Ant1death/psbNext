@@ -510,3 +510,82 @@ export const OS_LIST = [
 export const CYRILLIC_REG_EXP = /[а-яё]/gi;
 export const NUMBER_REG_EXP = /^\d+$/;
 export const EMAIL_REG_EXP = /^.*\.[a-z]{2,}$/;
+
+export const FAQ_LIST_VPN_RU = [
+  {
+    question: 'Как пользоваться VPN?',
+    answer: [
+      'Оплатите тариф, ',
+      'загрузите приложения для вашего устройства ',
+      'используйте данные для подключения, которые мы предоставили вам при покупке тарифного плана',
+    ]
+  },
+  {
+    question: 'На каких устройствах можно использовать VPN?',
+    answer: 'Windows, macOS, Android, iOS, Linux',
+  },
+  {
+    question: 'Чем WireGuard лучше OpenVPN?',
+    answer: 'WireGuard не использует большой объем кода, поэтому работает быстрее',
+  },
+  {
+    question: 'Какие способы оплаты вы принимаете?',
+    answer: 'Мы принимаем оплату BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    question: 'У вас есть скидки за аренду VPN на длительный срок?',
+    answer: [
+      'Да есть!',
+      '3 месяца -5%,',
+      '6 месяцев -10%,',
+      '12 месяцев -15%',
+    ],
+  },
+  {
+    question: 'Ваш VPN анонимный?',
+    answer: 'Да, мы не храним логи и используем современные протоколы шифрования',
+  },
+  {
+    question: 'Где мне скачать клиент для моего устройства?',
+    answer: 'https://www.wireguard.com/install/',
+  },
+];
+
+export const FAQ_LIST_VPN_EN = [
+  {
+    question: 'How to use a VPN?',
+    answer: [
+      'You need to pay the tariff, download apps for your device ',
+      ', use the connection data that we provided you with the purchase of the tariff plan',
+    ]
+  },
+  {
+    question: 'On which devices you can use a VPN?',
+    answer: 'Windows, macOS, Android, iOS, Linux',
+  },
+  {
+    question: 'How is WireGuard better than OpenVPN?',
+    answer: 'WireGuard does not use a large amount of code, so it works faster',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We accept BTC, ETH, LTC, USDT (TRC-20)',
+  },
+  {
+    question: 'You have discounts for long term VPN rentals?',
+    answer: [
+      'Yes, we have!',
+      '3 months -5%,',
+      '6 months -10%,',
+      '12 months -15%',
+    ],
+  },
+  {
+    question: 'Your VPN is anonymous?',
+    answer: 'Yes, we do not store logs and use modern encryption protocols',
+  },
+  {
+    question: 'Where do I download the client for my device?',
+    answer: 'https://www.wireguard.com/install/',
+  },
+];

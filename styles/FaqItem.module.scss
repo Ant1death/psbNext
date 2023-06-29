@@ -42,8 +42,57 @@
     display: none;
     padding-top: 24px;
 
+    @media screen and (max-width: 530px) {
+      font-size: 14px;
+    }
+
     &_active {
       display: block;
     }
+
+    &-list {
+      @media screen and (max-width: 530px) {
+        display: none;
+      }
+    }
+  }
+
+  &__list {
+    display: none;
+
+    @media screen and (max-width: 530px) {
+      display: flex;
+      flex-direction: column;
+
+      li {
+        position: relative;
+        padding-left: 15px;
+        font-size: 14px;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &__link {
+    color: #4E9AA5;
+    word-wrap: break-word;
+
+    @media screen and (max-width: 530px) {
+      font-size: 14px;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &__span {
+    display: block;
   }
 }

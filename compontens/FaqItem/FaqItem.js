@@ -25,9 +25,69 @@ const FaqItem = ({ question, answer }) => {
           className={`${style['faq__button']} ${isActive ? style['faq__button_open'] : ''}`}
         ></button>
       </div>
-      <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
-        {answer}
-      </p>
+      {typeof(answer) !== 'string' && answer.length === 3 &&
+        <>
+          <p
+            className={`${style['faq__answer']} ${style['faq__answer-list']} ${isActive ? style['faq__answer_active'] : ''}`}
+          >
+            <span>
+              {answer[0]}
+            </span>
+            <span>
+              {answer[1]}
+              <Link className={style['faq__link']} href="https://www.wireguard.com/install/" target='_blank'>
+                Wireguard
+              </Link>
+              ,&nbsp;
+            </span>
+            <span>
+              {answer[2]}
+            </span>
+          </p>
+          <ul
+            className={`${style['faq__answer']} ${style['faq__list']} ${isActive ? style['faq__answer_active'] : ''}`}
+          >
+            <li>
+              {answer[0]}
+            </li>
+            <li>
+              {answer[1]}
+              <Link className={style['faq__link']} href="https://www.wireguard.com/install/" target='_blank'>
+                Wireguard
+              </Link>
+              <span>,&nbsp;</span>
+            </li>
+            <li>
+              {answer[2]}
+            </li>
+          </ul>
+        </>
+      }
+      {typeof(answer) !== 'string' && answer.length === 4 &&
+        <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
+          {answer.map((el, ind) => {
+            return (
+              <span className={style['faq__span']} key={ind}>
+                {el}
+              </span>
+            );
+          })}
+        </p>
+      }
+      {typeof(answer) === 'string' && answer.includes('https') &&
+        <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
+          {`${t('faq-link')}`}
+          <span>{' '}</span>
+          <Link className={style['faq__link']} href={answer} target='_blank'>
+            {answer}
+          </Link>
+        </p>
+      }
+      {typeof(answer) === 'string' && !answer.includes('https') &&
+        <p className={`${style['faq__answer']} ${isActive ? style['faq__answer_active'] : ''}`}>
+          {answer}
+        </p>
+      }
     </li>
   );
 }

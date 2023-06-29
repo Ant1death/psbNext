@@ -321,3 +321,19 @@
     width: 170px;
   }
 }
+
+.faq {
+  &__list {
+    background-color: #F5F6F7;
+    border-radius: 18px;
+    padding: 42px 32px;
+    row-gap: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    text-align: center;
+    padding-bottom: 32px;
+  }
+}

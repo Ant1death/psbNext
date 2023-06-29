@@ -9,12 +9,13 @@ import 'iconify-icon';
 
 import Layout from '../compontens/Layout/Layout';
 import VpnCard from '../compontens/VpnCard/VpnCard';
+import FaqItem from '../compontens/FaqItem/FaqItem';
 
 import { wrapper } from '../store/store';
 import { getProducts } from '../api/getProducts';
 import { fetchVpn } from '../store/slices/vpn';
 import { useAppSelector } from '../store/hooks';
-import { VPN_COUNTRIES } from '../utils/constants';
+import { VPN_COUNTRIES, FAQ_LIST_VPN_RU, FAQ_LIST_VPN_EN } from '../utils/constants';
 
 import style from '../styles/Vpn.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
@@ -371,6 +372,33 @@ const Vpn = () => {
         </SwiperSlide>
       </Swiper>
       </section>
+
+      <section className={style['faq']}>
+        <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
+          {t('faq')}
+        </h2>
+        <ul className={style['faq__list']}>
+          {t('faq-lang') === 'ru' && FAQ_LIST_VPN_RU.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_VPN_EN.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+        </ul>
+      </section>
+
       <div className={`${style.overlay} ${isCountryListOpen ? style.overlayVisible : '' }`}></div>
     </main>
   );
