@@ -48,7 +48,6 @@ const  VpnItem = (id) => {
   const handleChangePeriod = (evt) => {
     setPeriod(evt.currentTarget.id);
     setIsDropDownOpen(false);
-    setValuePeriod(evt.currentTarget.textContent);
   }
 
   const openDropDown = () => {
@@ -145,8 +144,10 @@ const  VpnItem = (id) => {
   }, [vpn]);
 
   useEffect(() => {
-    t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
-  }, []);
+    if (item) {
+      t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
+    }
+  }, [item]);
 
   useEffect(() => {
     if (item.country) {
@@ -163,15 +164,19 @@ const  VpnItem = (id) => {
     if (item) {
       if (Number(period) === 1) {
         setPrice(`${t('new-service-price')}: ${item.price}$`);
+        t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[0].option) : setValuePeriod(VPN_PERIOD_EN[0].option);
       } else if (Number(period) === 3) {
         const sum = Number(item.price) * 3 - Number(item.price) * 3 * 0.05;
         setPrice(`${t('new-service-price-three')}: ${sum}$`);
+        t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[1].option) : setValuePeriod(VPN_PERIOD_EN[1].option);
       } else if (Number(period) === 6) {
         const sum = Number(item.price) * 6 - Number(item.price) * 6 * 0.1;
         setPrice(`${t('new-service-price-six')}: ${sum}$`);
+        t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[2].option) : setValuePeriod(VPN_PERIOD_EN[2].option);
       } else if (Number(period) === 12) {
         const sum = Number(item.price) * 12 - Number(item.price) * 12 * 0.15;
         setPrice(`${t('new-service-price-twelve')}: ${sum}$`);
+        t('faq-lang') === 'ru' ? setValuePeriod(VPN_PERIOD_RU[3].option) : setValuePeriod(VPN_PERIOD_EN[3].option);
       }
     }
   }, [period, item, t('faq-lang')]);
