@@ -36,9 +36,7 @@ const OrderCardPending = ({ order }) => {
       </Link>
       <div className={style['card__body']}>
         <h3 className={style['card__title']}>
-          <Link href={`/account/profile/order/${id}`} className={style['card__link']}>
-            {status}
-          </Link>
+          {status}
         </h3>
         <ul className={style['card__list']}>
           <li className={style['card__item']}>
