@@ -167,6 +167,14 @@
     &:hover {
       opacity: .8;
     }
+
+    &:disabled {
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &__options-list {
@@ -210,6 +218,14 @@
 
     &:hover {
       opacity: .8;
+    }
+
+    &:disabled {
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

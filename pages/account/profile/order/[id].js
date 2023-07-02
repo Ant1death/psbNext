@@ -35,13 +35,19 @@ const Order = (id) => {
   const { t } = useTranslation();
   const currentOrder = useAppSelector(store => store.currentOrder.currentOrder);
   const dispatch = useAppDispatch();
-  const { values, errors, isValid, handleChange, setIsValid } = useFormAndValidation();
+  const { values, errors, isValid, handleChange, setIsValid, resetForm } = useFormAndValidation();
 
   const [system, setSystem] = useState('Debian 11');
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorOnlyNumbers, setErrorOnlyNumbers] = useState('');
+  const [activeButtonSystem, setActiveButtonSystem] = useState(true);
+  const [activeButtonPassword, setActiveButtonPassword] = useState(true);
+  const [activeButtonAutoRefresh, setActiveButtonAutoRefresh] = useState(true);
+  const [activeButtonStopServer, setActiveButtonStopServer] = useState(true);
+  const [activeButtonStartServer, setActiveButtonStartServer] = useState(true);
+  const [activeButtonRestartServer, setActiveButtonRestartServer] = useState(true);
 
   const fetchData = async () => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
@@ -64,19 +70,23 @@ const Order = (id) => {
     if (system && token) {
       const queries = `order_id=${currentOrder[0].order_id}&os=${system}`;
       const res = await changeOperativeSystem(token, queries);
+      setActiveButtonSystem(false);
 
       if (res) {
         setMessage(t('error-system-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
         fetchData();
+        setActiveButtonSystem(true);
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonSystem(true);
       }
     } else {
       setMessage(t('error-system-unsuccess'));
       setIsPopupOpen(true);
+      setActiveButtonSystem(true);
     }
   }
 
@@ -87,15 +97,19 @@ const Order = (id) => {
     if (token) {
       const queries = `order_id=${currentOrder[0].order_id}&password=${values.password}`;
       const res = await changeServerPassword(token, queries);
+      setActiveButtonPassword(false);
 
       if (res) {
         setMessage(t('error-password-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
         fetchData();
+        setActiveButtonPassword(true);
+        resetForm();
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonPassword(true);
       }
     }
   }
@@ -104,15 +118,18 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await toggleAutoRefresh(token, currentOrder[1].bill_id);
+      setActiveButtonAutoRefresh(false);
 
       if (res) {
         setMessage(t('error-saved'));
         setIsPopupOpen(true);
         setIsSuccess(true);
         fetchData();
+        setActiveButtonAutoRefresh(true);
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonAutoRefresh(true);
       }
     }
   }
@@ -121,14 +138,17 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await startServer(token, currentOrder[0].order_id);
+      setActiveButtonStartServer(false);
 
       if (res) {
         setMessage(t('error-start-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
+        setActiveButtonStartServer(true);
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonStartServer(true);
       }
     }
   }
@@ -137,14 +157,17 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await restartServer(token, currentOrder[0].order_id);
+      setActiveButtonRestartServer(false);
 
       if (res) {
         setMessage(t('error-restart-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
+        setActiveButtonRestartServer(true);
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonRestartServer(true);
       }
     }
   }
@@ -153,14 +176,17 @@ const Order = (id) => {
     const token = typeof window !== 'undefined' && localStorage.getItem('token');
     if (token) {
       const res = await stopServer(token, currentOrder[0].order_id);
+      setActiveButtonStopServer(false);
 
       if (res) {
         setMessage(t('error-stop-server-success'));
         setIsPopupOpen(true);
         setIsSuccess(true);
+        setActiveButtonStopServer(true);
       } else {
         setMessage(t('error'));
         setIsPopupOpen(true);
+        setActiveButtonStopServer(true);
       }
     }
   }
@@ -168,6 +194,10 @@ const Order = (id) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    isValid ? setActiveButtonPassword(true) : setActiveButtonPassword(false);
+  }, [isValid]);
 
   useEffect(() => {
     if (values.password && NUMBER_REG_EXP.test(values.password)) {
@@ -230,6 +260,7 @@ const Order = (id) => {
               </p>
             }
           </section>
+
           <section className={`${style['order__settings']} ${style['card']}`}>
             <h3 className={style['order__section-title']}>
               {t('profile-order-settings')}
@@ -250,11 +281,12 @@ const Order = (id) => {
                 setOption={setSystem}
                 setName={setSystem}
               />
-              <button type='submit' className={style['order__button']}>
+              <button type='submit' className={style['order__button']} disabled={!activeButtonSystem}>
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
                 {t('profile-order-change-system')}
               </button>
             </form>
+
             <form
               className={`${style['order__form']} ${style['order__form_password']}`}
               noValidate
@@ -276,13 +308,14 @@ const Order = (id) => {
               <button
                 type='submit'
                 className={style['order__button']}
-                disabled={!isValid}
+                disabled={!activeButtonPassword}
               >
                 <iconify-icon icon="tabler:refresh"></iconify-icon>&nbsp;
                 {t('profile-order-button')}
               </button>
             </form>
           </section>
+
           <section className={`${style['order__options']} ${style['card']}`}>
             <h3 className={style['order__section-title']}>
               {t('profile-order-options')}
@@ -294,6 +327,7 @@ const Order = (id) => {
                   ${currentOrder[1].auto_refresh ? style['order__options-button_red'] : style['order__options-button_green']}`}
                   onClick={handleToggleAutoRefresh}
                   type='button'
+                  disabled={!activeButtonAutoRefresh}
                 >
                   <iconify-icon icon="simple-line-icons:energy"></iconify-icon>
                   {!currentOrder[1].auto_refresh ? t('profile-order-option-one') : t('profile-order-option-five')}
@@ -304,6 +338,7 @@ const Order = (id) => {
                   className={`${style['order__options-button']} ${style['order__options-button_green']}`}
                   type='button'
                   onClick={handleStartServer}
+                  disabled={!activeButtonStartServer}
                 >
                   <iconify-icon icon="material-symbols:power-rounded"></iconify-icon>
                   {t('profile-order-option-two')}
@@ -314,6 +349,7 @@ const Order = (id) => {
                   className={`${style['order__options-button']} ${style['order__options-button_orange']}`}
                   type='button'
                   onClick={handleRestartServer}
+                  disabled={!activeButtonRestartServer}
                 >
                   <iconify-icon icon="zondicons:reload"></iconify-icon>
                   {t('profile-order-option-three')}
@@ -324,6 +360,7 @@ const Order = (id) => {
                   className={`${style['order__options-button']} ${style['order__options-button_red']}`}
                   type='button'
                   onClick={handleStopServer}
+                  disabled={!activeButtonStopServer}
                 >
                   <iconify-icon icon="lucide:power-off"></iconify-icon>
                   {t('profile-order-option-four')}
