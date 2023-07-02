@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
@@ -44,6 +45,7 @@ const  VpnItem = (id) => {
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
   const dropdownListRef = useRef();
+  const router = useRouter();
 
   const handleChangePeriod = (evt) => {
     setPeriod(evt.currentTarget.id);
@@ -58,6 +60,12 @@ const  VpnItem = (id) => {
     const data = await getProducts('VPN', '/api/getProducts');
     const vpn = data && data.products ? data.products : [];
     dispatch(fetchVpn(vpn));
+  }
+
+  const redirectToHomePage = () => {
+    setTimeout(() => {
+      router.push('/account');
+    }, 4000);
   }
 
   const sentDataToOrder = async (payment) => {
@@ -85,6 +93,7 @@ const  VpnItem = (id) => {
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
           setActiveButton(true);
+          redirectToHomePage();
         } else if (res.status === 422) {
           setMessage(t('error-balance'));
           setIsSuccess(false);

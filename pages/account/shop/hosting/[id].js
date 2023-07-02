@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
@@ -35,11 +36,18 @@ const HostingItem = (id) => {
   const hosting = useAppSelector(store => store.hosting.hosting);
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const fetchData = async () => {
     const hostings = await getProducts('Hosting', '/api/getProducts');
     const hosting = hostings && hostings.products ? hostings.products : [];
     dispatch(fetchHosting(hosting));
+  }
+
+  const redirectToHomePage = () => {
+    setTimeout(() => {
+      router.push('/account');
+    }, 4000);
   }
 
   const sentDataToOrder = async (payment) => {
@@ -68,6 +76,7 @@ const HostingItem = (id) => {
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
           setActiveButton(true);
+          redirectToHomePage();
         } else if (res.status === 422) {
           setMessage(t('error-balance'));
           setIsSuccess(false);

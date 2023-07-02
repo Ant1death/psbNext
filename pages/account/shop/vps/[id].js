@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import NewServise from '../../../../compontens/NewService/NewServise';
@@ -43,6 +44,7 @@ const VpsItem = (id) => {
   const user = useAppSelector(store => store.user.user);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const findItem = () => {
     const product = vdsVps.find(el => el.id === Number(id.pageProps.id));
@@ -53,6 +55,12 @@ const VpsItem = (id) => {
     const vpsData = await getProducts('VPS', '/api/getProducts');
     const vps = vpsData && vpsData.products ? vpsData.products : [];
     dispatch(fetchVdsVps(vps));
+  }
+
+  const redirectToHomePage = () => {
+    setTimeout(() => {
+      router.push('/account');
+    }, 4000);
   }
 
   useEffect(() => {
@@ -108,6 +116,7 @@ const VpsItem = (id) => {
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
           setActiveButton(true);
+          redirectToHomePage();
         } else if (res.status === 422) {
           setMessage(t('error-balance'));
           setIsSuccess(false);

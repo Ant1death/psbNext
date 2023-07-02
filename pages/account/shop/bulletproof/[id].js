@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
@@ -40,6 +41,7 @@ const AbuseItem = (id) => {
   const vdsVpsBulletproof = useAppSelector(store => store.vdsVpsBulletproof.vdsVpsBulletproof);
   const user = useAppSelector(store => store.user.user);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const fetchData = async () => {
     const vpsData = await getProducts('Bulletproof VDS', '/api/getProducts');
@@ -52,6 +54,12 @@ const AbuseItem = (id) => {
   const findItem = () => {
     const product = vdsVpsBulletproof.find(el => el.id === Number(id.pageProps.id));
     setItem(product);
+  }
+
+  const redirectToHomePage = () => {
+    setTimeout(() => {
+      router.push('/account');
+    }, 4000);
   }
 
   useEffect(() => {
@@ -94,6 +102,7 @@ const AbuseItem = (id) => {
           setMessage(t('error-order-success'));
           setIsPopupOpen(true);
           setActiveButton(true);
+          redirectToHomePage();
         } else if (res.status === 422) {
           setMessage(t('error-balance'));
           setIsSuccess(false);
