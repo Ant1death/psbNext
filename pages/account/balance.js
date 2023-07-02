@@ -19,14 +19,14 @@ import style from '../../styles/Balance.module.scss';
 const Balance = () => {
   const { t } = useTranslation();
   const user = useAppSelector(store => store.user.user);
-  const { errors, values, handleChange, isValid } = useFormAndValidation();
+  const { errors, values, handleChange, isValid, setIsValid } = useFormAndValidation();
   const paymentHistory = useAppSelector(store => store.paymentHistory.paymentHistory);
   const dispatch = useAppDispatch();
 
   const [message, setMessage] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isActiveButton, setIsActiveButton] = useState(true);
-  
+
   const handleTopUpBalance = async (evt) => {
     evt.preventDefault();
 
@@ -42,6 +42,7 @@ const Balance = () => {
     } else {
       setMessage(t('error'));
       setIsPopupOpen(true);
+      setIsActiveButton(true);
     }
   }
 
@@ -54,6 +55,14 @@ const Balance = () => {
     const token = localStorage.getItem('token');
     if (token && !paymentHistory) fetchData(token);
   }, []);
+
+  useEffect(() => {
+    setIsValid(false);
+  }, []);
+
+  useEffect(() => {
+    isValid ? setIsActiveButton(true) : setIsActiveButton(false);
+  }, [isValid]);
 
   return (
     <>
@@ -71,7 +80,7 @@ const Balance = () => {
               {user && `${t('balance-current')} ${user.balance}$`}
             </p>
           </div>
-          <form className={style['section__form']} onSubmit={handleTopUpBalance}>
+          <form className={style['section__form']} onSubmit={handleTopUpBalance} noValidate>
             <input
               type='text'
               name='amount'
@@ -84,7 +93,7 @@ const Balance = () => {
             <button
               type='submit'
               className={style['section__button-submit']}
-              disabled={!isValid && !isActiveButton}
+              disabled={!isActiveButton}
             >
               {t('balance-button')}
             </button>

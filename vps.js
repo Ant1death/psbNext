@@ -7,19 +7,19 @@ import { Pagination } from 'swiper';
 import Image from 'next/image';
 import 'iconify-icon';
 
-import Layout from '../compontens/Layout/Layout';
-import AvailableSystems from '../compontens/AvailableSystems/AvailableSystems';
-import VpsCard from '../compontens/VpsCard/VpsCard';
-import { Filters } from '../compontens//Filters/Filters';
+import Layout from './compontens/Layout/Layout';
+import AvailableSystems from './compontens/AvailableSystems/AvailableSystems';
+import VpsCard from './compontens/VpsCard/VpsCard';
+import { Filters } from './compontens/Filters/Filters';
 
-import { getProducts } from '../api/getProducts';
-import { fetchVdsVps } from '../store/slices/vdsVps';
-import { wrapper } from '../store/store';
-import { useAppSelector } from '../store/hooks';
-import { sortVps } from '../utils/sortVps';
-import { sortByCountries } from '../utils/sortByCountries';
+import { getProducts } from './api/getProducts';
+import { fetchVdsVps } from './store/slices/vdsVps';
+import { wrapper } from './store/store';
+import { useAppSelector } from './store/hooks';
+import { sortVps } from './utils/sortVps';
+import { sortByCountries } from './utils/sortByCountries';
 
-import { VPS_COUNTRY_LIST } from '../utils/constants';
+import { VPS_COUNTRY_LIST } from './utils/constants';
 
 import style from '../styles/Vps.module.scss';
 import styleAdvantages from '../styles/Advantages.module.scss';
