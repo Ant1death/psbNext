@@ -46,6 +46,10 @@
 
     & a {
       font-size: 20px;
+
+      &:hover {
+        color: #79c8c2;
+      }
     }
   }
 
