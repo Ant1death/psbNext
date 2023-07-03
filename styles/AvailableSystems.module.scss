@@ -1,5 +1,4 @@
 .systems {
-  padding: 32px 0;
   display: grid;
 
   &-title {
@@ -47,7 +46,7 @@
       font-weight: 400;
       font-size: 32px;
 
-      @media screen and (max-width: 1280px) {
+      @media screen and (max-width: 1550px) {
         font-size: 24px;
       }
 
@@ -61,7 +60,7 @@
     height: 160px;
     width: 160px;
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1550px) {
       height: 100px;
       width: 100px;
     }

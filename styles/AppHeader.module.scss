@@ -12,6 +12,10 @@
     justify-content: space-between;
   }
 
+  @media screen and (max-width: 768px) {
+    padding: 12px 3.1%;
+  }
+
   .logo {
     img {
       height: 50px;
@@ -46,7 +50,7 @@
     left: 0;
     top: 100px;
     z-index: 100;
-    padding-left: 4%;
+    padding-left: 3%;
   }
 
   &__list {

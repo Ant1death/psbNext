@@ -156,14 +156,18 @@ button {
   }
 }
 
+@media screen and (max-width: 1500px) {
+  .main {
+    row-gap: 48px;
+    padding-bottom: 48px;
+    padding-top: 48px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .h2-title {
     font-size: 24px;
     padding-bottom: 24px;
-  }
-
-  .main {
-    padding-bottom: 0;
   }
 }
 

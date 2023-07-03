@@ -8,6 +8,7 @@
   row-gap: 32px;
   column-gap: 5.8%;
   grid-template-columns: 316px auto;
+  padding-top: 40px;
 
   @media screen and (max-width: 1345px) {
     grid-template-columns: 280px auto;
@@ -15,6 +16,7 @@
 
   @media screen and (max-width: 1180px) {
     grid-template-columns: 1fr;
+    padding-top: 28px;
   }
 }
 

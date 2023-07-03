@@ -29,6 +29,10 @@
     @media screen and (max-width: 1024px) {
       width: 300px;
     }
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   .img {
@@ -42,6 +46,10 @@
 
     @media screen and (max-width: 1024px) {
       width: 300px;
+    }
+
+    @media screen and (max-width: 768px) {
+      display: none;
     }
   }
 
@@ -74,7 +82,7 @@
     column-gap: 3%;
     row-gap: 32px;
 
-    @media screen and (max-width: 1130px) {
+    @media screen and (max-width: 1550px) {
       justify-content: center;
     }
   }
@@ -230,6 +238,10 @@
     flex-direction: column;
     row-gap: 22px;
     margin: 0 auto;
+
+    @media screen and (max-width: 1550px) {
+      width: 300px;
+    }
   }
 
   &__name {
