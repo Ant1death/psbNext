@@ -28,7 +28,7 @@
   &__list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 30px;
 
     @media screen and (max-width: 480px) {
@@ -40,7 +40,7 @@
   &__item {
     display: flex;
     flex-direction: column;
-    row-gap: 24px;
+    row-gap: 14px;
 
     &-title {
       text-align: center;

@@ -91,58 +91,60 @@ const Vds = () => {
   }, [vdsVps]);
 
   return (
-    <main className='main'>
+    <main className={`${['main']} ${style.main}`}>
       <div>
-        <h2 className={`${['h2-title']} ${style.title}`}>VPS</h2>
-        <p className={style.subtitle}>
-          {t('servises-vps')}
-        </p>
+        <div>
+          <h2 className={`${['h2-title']} ${style.title}`}>VPS</h2>
+          <p className={style.subtitle}>
+            {t('servises-vps')}
+          </p>
+        </div>
+
+        <section className={style.products}>
+          <Filters
+            price={price}
+            setPrice={setPrice}
+            cpu={cpu}
+            setCpu={setCpu}
+            ram={ram}
+            setRam={setRam}
+            ssd={ssd}
+            setSsd={setSsd}
+            initialPrice={[8, 220]}
+            initialCpu={[1, 32]}
+            initialRam={[1, 64]}
+            initialSsd={[15, 500]}
+          />
+
+          <ul className={style['offer__list-country']}>
+            {VPS_COUNTRY_LIST.map(el => {
+              return (
+                <li
+                  key={el.id}
+                  className={`${style['offer__country']} ${activeCountry === el.country ? style['offer__country_active'] : ''}`}
+                  onClick={handleCountryClick}
+                  id={el.country}
+                >
+                  <img src={el.flag} alt={el.country} className={style['offer__flag']} />
+                  <span>{el.country}</span>
+                </li>
+              );
+            })}
+          </ul>
+
+          <ul className={style['offer__wrapper']}>
+            {currentVpsList && currentVpsList.map((el, ind) => {
+              return (
+                <VpsCard
+                  key={ind}
+                  vpsItem={el}
+                  page='vps'
+                />
+              );
+            })}
+          </ul>
+        </section>
       </div>
-
-      <section className={style.products}>
-        <Filters
-          price={price}
-          setPrice={setPrice}
-          cpu={cpu}
-          setCpu={setCpu}
-          ram={ram}
-          setRam={setRam}
-          ssd={ssd}
-          setSsd={setSsd}
-          initialPrice={[8, 220]}
-          initialCpu={[1, 32]}
-          initialRam={[1, 64]}
-          initialSsd={[15, 500]}
-        />
-
-        <ul className={style['offer__list-country']}>
-          {VPS_COUNTRY_LIST.map(el => {
-            return (
-              <li
-                key={el.id}
-                className={`${style['offer__country']} ${activeCountry === el.country ? style['offer__country_active'] : ''}`}
-                onClick={handleCountryClick}
-                id={el.country}
-              >
-                <img src={el.flag} alt={el.country} className={style['offer__flag']} />
-                <span>{el.country}</span>
-              </li>
-            );
-          })}
-        </ul>
-
-        <ul className={style['offer__wrapper']}>
-          {currentVpsList && currentVpsList.map((el, ind) => {
-            return (
-              <VpsCard
-                key={ind}
-                vpsItem={el}
-                page='vps'
-              />
-            );
-          })}
-        </ul>
-      </section>
 
       <section className={styleAdvantages['advantages']}>
         <h2 className={`${['h2-title']} ${styleAdvantages['section-title']} ${style.blockTitle}`}>
