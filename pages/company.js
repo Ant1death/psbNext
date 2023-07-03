@@ -17,11 +17,13 @@ const Company = () => {
   const { t } = useTranslation();
 
   return (
-    <main className='main'>
+    <main className={`${['main']} ${style.main}`}>
       <section className={style['about']}>
-        <img alt='picture company' src='/about.jpg' className={style['about__img']} />
+        <div className={style.imgWrap}>
+          <img alt='picture company' src='/about.jpg' className={style['about__img']} />
+        </div>
         <div className={style['about__text']}>
-          <h2 className={`${['h2-title']}`}>{t('company')}</h2>
+          <h2 className={`${['h2-title']} ${style.title}`}>{t('company')}</h2>
           <p>{t('company-about')}</p>
           <p>{t('company-about-two')}</p>
           <ul className={style['about__list']}>

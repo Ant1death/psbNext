@@ -1,6 +1,6 @@
 .about {
   display: flex;
-  gap: 20px;
+  gap: 90px;
   align-items: center;
 
   @media screen and (max-width: 1024px) {
@@ -12,13 +12,17 @@
     padding-right: 5%;
   }
 
-  &__img {
+  .imgWrap {
     display: block;
     width: 50%;
 
     @media screen and (max-width: 1024px) {
       display: none;
     }
+  }
+
+  &__img {
+    width: 689px;
   }
 
   &__text {
@@ -36,8 +40,6 @@
   }
 
   &__telegram {
-    margin-top: 20px;
-
     a {
       color: #4e9aa5;
     }
@@ -53,6 +55,7 @@
     padding-bottom: 32px;
     justify-self: center;
     text-align: center;
+    padding-top: 54px;
 
     @media screen and (max-width: 500px) {
       text-align: center;
@@ -60,13 +63,13 @@
   }
 
   &__item {
-    width: 300px;
+    width: 350px;
     background-color: #F5F6F7;
     border-radius: 8px;
-    padding: 24px 0 30px 24px;
+    padding: 22px 0 24px 21px;
     display: flex;
     flex-direction: column;
-    row-gap: 22px;
+    row-gap: 13px;
     margin: 0 auto;
   }
 
@@ -110,4 +113,13 @@
 .blockTitle {
   justify-self: center;
   text-align: center;
+}
+
+.main {
+  padding-top: 40px;
+  row-gap: 20px;
+}
+
+.title {
+  padding-bottom: 19px;
 }
