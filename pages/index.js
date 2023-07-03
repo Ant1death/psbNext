@@ -42,8 +42,8 @@ export default function Home() {
           <Image
             src="/main_img.png"
             alt="PSB hosting image"
-            width='400'
-            height='362'
+            width='522'
+            height='472'
             className={style.img}
           />
         </div>
@@ -201,8 +201,8 @@ export default function Home() {
                   className={style["payment__wrapper-img"]}
                   src={el.img}
                   alt={el.name}
-                  width={160}
-                  height={160}
+                  width={80}
+                  height={80}
                 />
                 <p className={style["payment__wrapper-text"]}>{el.name}</p>
               </li>
