@@ -51,7 +51,7 @@ const Abuse = () => {
   }
 
   return (
-    <main className={`${['main']}`}>
+    <main className={`${['main']} ${style.mainPage}`}>
       <div className={`${style.main}`}>
         <div className={`${style.vpsTitle} ${activeBlock === 'Bulletproof VPS/VDS' ? style.visible : ''}`}>
           <h2 className={`${['h2-title']} ${style.title}`}>

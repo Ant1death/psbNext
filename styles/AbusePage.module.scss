@@ -5,9 +5,13 @@
 
 .products {
   display: grid;
-  grid-template-columns: 280px auto;
-  column-gap: 2%;
   row-gap: 32px;
+  column-gap: 5.8%;
+  grid-template-columns: 316px auto;
+
+  @media screen and (max-width: 1345px) {
+    grid-template-columns: 280px auto;
+  }
 
   @media screen and (max-width: 1180px) {
     grid-template-columns: 1fr;
