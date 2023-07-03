@@ -2,9 +2,49 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: '__Rubik_0c75c8', '__Rubik_Fallback_0c75c8';
   font-size: 16px;
-  color: #444;
+}
+
+/* swiper pagination */
+.swiper-pagination-bullet {
+  width: 16px!important;
+  height: 16px!important;
+  border-radius: 50%!important;
+  background-color: #D9D9D9!important;
+}
+
+.swiper-pagination-bullet:not(:last-child) {
+  margin-right: 55px!important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px!important;
+  height: 20px!important;
+  border-radius: 50%!important;
+  background-color: #4E9AA5!important;
+}
+
+.swiper-pagination {
+  position: relative!important;
+  margin-top: 24px;
+}
+
+/* range */
+.range-slider {
+  height: 2px!important;
+}
+
+.range-slider__range {
+  background: #4E9AA5!important;
+  height: 2px!important;
+}
+
+.range-slider__thumb {
+  background: #4E9AA5!important;
+}
+
+body {
+  color: #000;
 }
 a {
   color: inherit;
@@ -33,14 +73,19 @@ button {
   font-weight: bold;
 }
 .container {
-  max-width: 1280px;
   width: 100%;
-  margin: 0 auto;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s linear, visibility .15s linear;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 .h2-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  padding-bottom: 32px;
   font-weight: bold;
+  hyphens: auto;
 }
 .h3-title {
   font-size: 2rem;
@@ -50,6 +95,83 @@ button {
 .h4-title {
   font-size: 1.2rem;
 }
-section {
-  padding: 2rem 0;
+
+.page-account {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-color: #f0f0f5;
+  font-size: 14px;
+}
+
+.account-main {
+  flex: 1 0 auto;
+  padding: 75px calc(20px + .75rem) 0 calc(290px + .75rem);
+  color: #282f53;
+}
+
+.account-main_sidebar-mini {
+  padding: 75px calc(15px + .75rem) 0 calc(90px + .75rem);
+}
+
+.section-account {
+  padding: 0;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  background-clip: border-box;
+  border-radius: 7px;
+  box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);
+}
+
+.section-account-title {
+  border-radius: 7px 7px 0 0;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e9edf4;
+  letter-spacing: 0.2px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.main {
+  flex-shrink: 0;
+  flex-grow: 1;
+  max-width: 1642px;
+  margin: 0 auto;
+  padding: 64px 3.1%;
+  row-gap: 64px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 991px) {
+  .account-main {
+    padding: 75px calc(15px + .75rem) 0 calc(15px + .75rem);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main {
+    row-gap: 48px;
+    padding-bottom: 48px;
+    padding-top: 48px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .h2-title {
+    font-size: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }

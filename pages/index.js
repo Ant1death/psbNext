@@ -1,180 +1,317 @@
-import style from '../styles/Main.module.scss'
+import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+
+import Layout from '../compontens/Layout/Layout';
+import FaqItem from '../compontens/FaqItem/FaqItem';
+
+import { PAYMENTS, FAQ_LIST_RU, FAQ_LIST_EN, REVIEW_EN, REVIEW_RU } from '../utils/constants';
+
+import style from '../styles/Main.module.scss';
+import styleAdvantages from '../styles/Advantages.module.scss';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+Home.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  );
+}
 
 export default function Home() {
+  const { t } = useTranslation();
+
   return (
-    <>
+    <main className='main'>
       <section className={style.hero}>
-          <div className={style.hero__info}>
-            <h2 className={`${['h2-title']} ${style.hero__title}`}>PSB HOSTING</h2>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <p className={style.hero__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente assumenda repudiandae, voluptas fugit obcaecati iusto facere harum, nam minus, ab animi tempora saepe aliquid ratione reprehenderit deserunt officia quidem esse.
-            </p>
-            <button className={style.hero__btn}>
-              <a href="/company">О компании</a>
-            </button>
-          </div>
-          <div className={style.hero__img}>
-            <img src="/astronaut.jpg" alt="astronaut" />
-          </div>
-      </section>
-      <section className={style.country}>
-          <h2 className={`${['h2-title']} ${style.country__title}`}>Оффшорные VPS/VDS</h2>
-          <p className={style.country__title}>
-            PSB Hosting предлагает анонимные сервера по всему миру, выберите подходящий тарифный план для ваших задач
-          </p>
-          <div className={style.country__wrapper}>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-            <div className={style.country__item}>
-                <img src="/nl.svg" alt="netherlands" className={style['country__item-img']}/>
-                <h4 className={`${['h4-title']} ${style['country__item-title']}`}>Netherlands</h4>
-                <div className={style['country__item-info']}>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                  <p>DMCA 100% ignored</p>
-                </div>
-                <a href="/vds" className={style['country__item-btn']}>Show Plans</a>
-            </div>
-          </div>
-      </section>
-      <section className={style['about']}>
-        <div className={style['about__wrapper']}>
-          <div className={style['about__wrapper-text']}>
-            <h2 className={`${['h2-title']}`}>Приватный VPN с быстрой настройкой WireGuard</h2>
-            <p className={style['about__wrapper-info']}>
-              Современный и не требовательный к ресурсам протокол VPN-туннелей, использующий надёжные алгоритмы шифрования. WireGuard VPN предназначен для создания защищенных соединений и ориентирован на высокую производительность, безопасность и простоту в настройке.
-            </p>
-            <ul className={style['about__wrapper-icons']}>
-              <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
-              </li>
-              <li className={style['about__wrapper-icon']}>
-                <a href="#">
-                  <img src="/android.svg" alt="icon" />
-                </a>
-              </li>
-            </ul>
-            <button className={style['about__wrapper-btn']}>
-              <a href="#">Купить VPN</a>
-            </button>
-          </div>
-          <div className={style['about__wrapper-img']}>
-            <img src="/phone2.png" alt="phone" />
-          </div>
+        <div className={style.hero__info}>
+          <h2 className={`${['h2-title']} ${style.hero__title}`}>
+            PSB HOSTING
+          </h2>
+          <p className={style.hero__text}>{t('hero-one')}</p>
+          <p className={style.hero__text}>{t('hero-two')}</p>
+          <button className={style.hero__btn}>
+            <Link href="/company">{t('company')}</Link>
+          </button>
+        </div>
+        <div className={style.hero__img}>
+          <Image
+            src="/main_img.png"
+            alt="PSB hosting image"
+            width='522'
+            height='472'
+            className={style.img}
+          />
         </div>
       </section>
-      <section className={style["map"]}>
-        <h3 className={`${['h3-title']} ${style.map__title}`}>Наша сеть и центры обработки данных</h3>
-        <h4 className={`${['h4-title']} ${style.map__subtitle}`}> Сервера нашей компании находятся по всему миру</h4>
-        <div className={style["map-wrapper"]}>
-          <ul>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-            <li>Netherlands</li>
-          </ul>
-        </div>
-        <div className={style["map-img"]}>
-          <img src="/map.jpg" alt="map" />
-        </div>
+
+      <section className={styleAdvantages['advantages']}>
+        <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
+          {t('advantages-title-main')}
+        </h2>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiper'
+        >
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./equipment.svg'
+                alt='icon equipment'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-fix-one')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-fix-one-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./abuse.svg'
+                alt='icon Bulletproof'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-two')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-two-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./security.svg'
+                alt='icon security'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-one')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-one-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className={styleAdvantages['advantages__list-item']}>
+              <Image
+                src='./vpn_adv.svg'
+                alt='icon vpn'
+                width={81}
+                height={77}
+                className={styleAdvantages.icon}
+              />
+              <h4 className={`${['h4-title']} ${styleAdvantages['advantages__title']}`}>
+                {t('advantages-seven')}
+              </h4>
+              <p className={styleAdvantages['advantages__description']}>
+                {t('advantages-seven-about')}
+              </p>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </section>
-      <section className="payment">
-        <h3 className={`${['h3-title']} ${style.payment__title}`}>Способы оплаты</h3>
-        <div className={style.payment__wrapper}>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-          <div className={style['payment__wrapper-item']}>
-            <div className={style["payment__wrapper-img"]}>
-              <img src="/Bitcoin.png" alt="bitcoin" />
-            </div>
-            <div className={style["payment__wrapper-text"]}>Bitcoin</div>
-          </div>
-        </div>
+
+      <section className={style.servises}>
+        <h2 className={`${['h2-title']} ${style.servises__title}`}>
+          {t('servises')}
+        </h2>
+        <ul className={style.servises__wrapper}>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__vps}`} href='/vps'>
+              <h3 className={style['servises__item-title']}>
+                VPS
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-vps')}
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__abuse}`} href='/abuse'>
+            <h3 className={style['servises__item-title']}>
+                Bulletproof
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-bulletproof')}
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link className={`${style.servises__item} ${style.servises__vpn}`} href='/vpn'>
+              <h3 className={style['servises__item-title']}>
+                VPN
+              </h3>
+              <p className={style.servises__text}>
+                {t('servises-vpn')}
+              </p>
+            </Link>
+          </li>
+        </ul>
       </section>
-    </>
-  )
+      <section className={style['payment']}>
+        <h2 className={`${['h2-title']}`}>
+          {t('payment')}
+        </h2>
+        <ul className={style.payment__wrapper}>
+          {PAYMENTS.map((el, ind) => {
+            return (
+              <li key={ind} className={style['payment__wrapper-item']}>
+                <Image
+                  className={style["payment__wrapper-img"]}
+                  src={el.img}
+                  alt={el.name}
+                  width={80}
+                  height={80}
+                />
+                <p className={style["payment__wrapper-text"]}>{el.name}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <section className={style['faq']}>
+        <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
+          {t('faq')}
+        </h2>
+        <ul className={style['faq__list']}>
+          {t('faq-lang') === 'ru' && FAQ_LIST_RU.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+          {t('faq-lang') === 'en' && FAQ_LIST_EN.map((el, ind) => {
+            return (
+              <FaqItem
+                key={ind}
+                answer={el.answer}
+                question={el.question}
+              />
+            );
+          })}
+        </ul>
+      </section>
+
+      <section className={style['review']}>
+        <h2 className={`${['h2-title']}  ${style['faq__title']}`}>
+          {t('review')}
+        </h2>
+        <Swiper
+          modules={[ Pagination ]}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            660: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1350: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          pagination={{
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '"></span>';
+            },
+            clickable: true,
+          }}
+          className='mySwiperReview'
+        >
+          {t('faq-lang') === 'ru' && REVIEW_RU.map((el, ind) => {
+            return (
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+          {t('faq-lang') === 'en' && REVIEW_EN.map((el, ind) => {
+            return (
+              <SwiperSlide key={ind}>
+                <div className={style['review__item']}>
+                  <p className={style['review__name']}>
+                    {el.name}
+                  </p>
+                  <div className={style['review__rating']}>
+                    <p className={style['review__number']}>
+                      {el.number}
+                    </p>
+                    <img alt='review' src={el.img} className={style['review__img']} />
+                    <p className={style['review__text']}>
+                      {el.text}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </section>
+    </main>
+  );
 }
 

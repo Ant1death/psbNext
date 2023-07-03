@@ -1,0 +1,130 @@
+.title {
+  font-size: 32px;
+
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
+.subtitle {
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
+.blockTitle {
+  justify-self: center;
+  text-align: center;
+}
+
+.products {
+  display: grid;
+  box-sizing: border-box;
+  padding-top: 48px;
+  row-gap: 32px;
+  column-gap: 5.8%;
+  grid-template-columns: 316px auto;
+
+  @media screen and (max-width: 1345px) {
+    grid-template-columns: 280px auto;
+  }
+
+  @media screen and (max-width: 1180px) {
+    grid-template-columns: 1fr;
+  }
+
+  .offer {
+    &__list-country {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      flex-wrap: wrap;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      height: min-content;
+
+      @media screen and (max-width: 1307px) {
+        justify-content: start;
+      }
+
+      @media screen and (max-width: 1180px) {
+        grid-column: 1 / 2;
+      }
+
+      @media screen and (max-width: 970px) {
+        justify-content: left;
+      }
+    }
+
+    @media screen and (max-width: 1180px) {
+      text-align: center;
+    }
+
+    &__country {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 6px 10px;
+
+      &:hover {
+        background: #eee;
+      }
+
+      &_active {
+        border: 1px solid #4e9aa5;
+        background: #4e9aa5;
+        color: #fff;
+      }
+    }
+
+    &__flag {
+      display: inline-block;
+      object-fit: contain;
+      width: 20px;
+      height: 1rem;
+      margin-right: 6px;
+    }
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+      row-gap: 24px;
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      height: min-content;
+
+      @media screen and (max-width: 1180px) {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+      }
+    }
+  }
+}
+
+.card-title-main {
+  text-align: center;
+
+  @media screen and (max-width: 1024px) {
+    max-width: 635px;
+    width: 100%;
+    justify-self: center;
+  }
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.faq {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.main {
+  padding-bottom: 32px;
+}

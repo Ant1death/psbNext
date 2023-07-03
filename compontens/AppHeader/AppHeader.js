@@ -1,53 +1,76 @@
-import style from '../../styles/AppHeader.module.scss'
-function appHeader() {
-    return(
-        <header className={style.header}>
-            <div className={style.logo}>
-                <a href="/" className={style.header__logo}>
-                    <img src="/logo.png" alt="logo" />
-                </a>
-            </div>
-            <nav className={style.navbar}>
-                <ul>
-                    <li>
-                        <a href="/" className={style.navbar__link}>Главная</a>
-                    </li>
-                    <li>
-                        <a href="/vps" className={style.navbar__link}>VPS/VDS</a>
-                    </li>
-                    <li>
-                        <a href="#" className={style.navbar__link}>VPN</a>
-                    </li>
-                    <li>
-                        <a href="#" className={style.navbar__link}>Bulletproof VPS</a>
-                    </li>
-                    <li>
-                        <a href="#" className={style.navbar__link}>О компании</a>
-                    </li>
-                    <li>
-                        <div className={style['language-wrapper']}>
-                            <div className={style['language-input']}>
-                                <img src="/ru.svg" alt="country" />
-                                <span className="selected">Русский</span>
-                                <div className={style['language-caret']}>
-                                    <img src="/caret.svg" alt="caret" />
-                                </div>
-                                <ul className="language-menu">
-                                    <li>
+import { useState } from 'react';
+import Link from 'next/link';
+import 'iconify-icon';
+import { useTranslation } from 'react-i18next';
 
-                                    </li>
-                                    <li></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" className={style.header__login}>Личный кабинет</a>
-                    </li>
-                </ul>
-            </nav>
-            <div className={style.hamburger}></div>
-        </header>
-    )
+import Language from '../../compontens/Language/Language';
+
+import style from '../../styles/AppHeader.module.scss';
+
+function appHeader() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { t } = useTranslation();
+
+  const handleHamburgerClick = () => {
+    isMobileMenuOpen ? setIsMobileMenuOpen(false) : setIsMobileMenuOpen(true);
+  }
+
+  const handleClickLink = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+  }
+
+  return (
+    <header className={style.header}>
+      <div className={style.logo}>
+        <Link href="/" className={style.header__logo}>
+          <img src="/logo.png" alt="logo" />
+        </Link>
+      </div>
+      <nav className={style.navbar}>
+        <ul className={`${style['navbar__list']} ${isMobileMenuOpen ? style.navbar__list_show : ''}`}>
+          <li>
+            <Link href="/" className={style.navbar__link} onClick={handleClickLink}>
+              {t('home')}
+            </Link>
+          </li>
+          <li>
+            <Link href="/vps" className={style.navbar__link} onClick={handleClickLink}>
+              VPS
+            </Link>
+          </li>
+          <li>
+            <Link href="/abuse" className={style.navbar__link} onClick={handleClickLink}>
+              Bulletproof
+            </Link>
+          </li>
+          <li>
+            <Link href="/vpn" className={style.navbar__link} onClick={handleClickLink}>
+              VPN
+            </Link>
+          </li>
+          <li>
+            <Link href="/company" className={style.navbar__link} onClick={handleClickLink}>
+              {t('company')}
+            </Link>
+          </li>
+          <li>
+            <Language
+              isMobileMenuOpen={isMobileMenuOpen}
+            />
+          </li>
+          <li>
+            <Link href="/account" className={style.header__login}>
+              {t('account')}
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <div className={style.hamburger} onClick={handleHamburgerClick}>
+        <iconify-icon icon="charm:menu-hamburger" width="40" heigth="40"></iconify-icon>
+      </div>
+    </header>
+  )
 }
+
 export default appHeader;
