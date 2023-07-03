@@ -49,10 +49,15 @@
     border: none;
     border: 1px solid #4E9AA5;
     border-radius: 8px;
-    font-size: 1.2rem;
+    font-size: 20px;
     transition: .2s ease-in-out;
     background: #fff;
     color: #4E9AA5;
+    padding: 12px 24px;
+
+    a {
+      font-size: 20px;
+    }
 
     &:hover {
       opacity: .8;
@@ -75,7 +80,7 @@
   }
 
   &__item {
-    width: 380px;
+    width: 440px;
     height: 360px;
     display: flex;
     padding: 16px;
@@ -85,7 +90,7 @@
     border-radius: 8px;
     cursor: pointer;
     background-repeat: no-repeat;
-    background-position-x: 170px;
+    background-position-x: 217px;
     background-position-y: 145px;
 
     @media screen and (max-width: 1340px) {
@@ -152,7 +157,7 @@
   }
 
   &__wrapper {
-    justify-content: space-around;
+    justify-content: space-between;
     list-style-type: none;
     padding-top: 5px;
     column-gap: 40px;
@@ -217,10 +222,10 @@
 
 .review {
   &__item {
-    width: 300px;
+    width: 355px;
     background-color: #F5F6F7;
     border-radius: 8px;
-    padding: 24px 0 30px 24px;
+    padding: 12px 0 30px 24px;
     display: flex;
     flex-direction: column;
     row-gap: 22px;
